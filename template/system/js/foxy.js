@@ -17,7 +17,7 @@ function getCookie(c_name) {
     return "";
 }
 
-Dropzone.autoDiscover = false;
+if ($('.dropzone').length) { Dropzone.autoDiscover = false; }
 
 $(document).ready(function() {
 
@@ -31,14 +31,14 @@ $(document).ready(function() {
 	}
 
 	if ($('.editor').length) {
-	wysiwyg( '.editor', {
-		toolbar: 'demand',                        // 'top','bottom','demand',null
-		buttons: [buttons],                       // buttons on toolbar
-		selectionbuttons: [selectionbuttons],     // buttons on selection-toolbar
-		suggester: suggester( open_suggestion ),  // handle suggestions
-		interceptenter: interceptenter(),         // intercept 'enter'
-		hijackmenu: false                         // toolbar instead context menu
-	  });
+		wysiwyg( '.editor', {
+			toolbar: 'demand',                        // 'top','bottom','demand',null
+			buttons: [buttons],                       // buttons on toolbar
+			selectionbuttons: [selectionbuttons],     // buttons on selection-toolbar
+			suggester: suggester( open_suggestion ),  // handle suggestions
+			interceptenter: interceptenter(),         // intercept 'enter'
+			hijackmenu: false                         // toolbar instead context menu
+	 	 });
 	}
 
 	//tooltips

@@ -1,0 +1,33 @@
+#foxymessage {
+    position: fixed;
+    top: 3px;
+    left: 50%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
+.alert { border-radius: 0; }
+
+.alert-success {
+    background-color: #02B875;
+    border: none;
+}
+.alert-info {
+    background-color: #17a2b8;
+    border: none;
+}
+.alert-danger {
+    background-color: #d9534f;
+    border: none;
+}
+.alert-warning {
+    background-color: #f0ad4e;
+    border: none;
+}
+.alert-primary {
+    background-color: #4582EC;
+    border: none;
+}

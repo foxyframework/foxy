@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="<?= $config->site; ?>/template/blog/css/custom.css">
+    <link rel="stylesheet" href="<?= $config->site; ?>/template/system/css/foxy.css">
     <script src="https://kit.fontawesome.com/0deb70caff.js" crossorigin="anonymous"></script>
 
     <?php
@@ -48,7 +49,7 @@
     <script src='<?= $script; ?>'></script>
     <?php endforeach;
     endif; ?>
-    <script src="<?= $config->site; ?>/assets/js/app.js"></script>
+    <script src="<?= $config->site; ?>/template/system/js/foxy.js"></script>
   </body>
 
 </html>
