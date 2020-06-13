@@ -172,26 +172,6 @@ class model
         return false;
     }
 
-    /**
-     * Method to cut a long text
-     * @param string $string the input text
-     * @param int $number the number of words in output
-    */
-    public function textShorterer($string, $number)
-    {
-        $string = str_replace('<p>', '', $string);
-        $string = str_replace('</p>', '', $string);
-        $string = str_word_count($string, 1, '0..9ÁáÉéÍíÓóÚúñäëïöü');
-        $i = 0;
-        $phrase = "";
-        foreach($string as $str) {
-            if($i == $number) { break; }
-            $phrase .= $str . " ";
-            $i++;
-        }
-        return $phrase;
-    }
-
 	/**
      * Method to create a pagination
     */
@@ -234,11 +214,11 @@ class model
             //FIRTS
             $html[] = '<li class="page-item ';
             if($page <= 1 ) $html[] = 'disabled';
-            $html[] = '"><a class="page-link" href="index.php?'.$string.'&page=1">'.$first.'</a></li>';
+            $html[] = '"><a class="page-link" rel="nofollow" href="index.php?'.$string.'&page=1">'.$first.'</a></li>';
             //BEFORE
             $html[] = '<li class="page-item ';
             if($page <= 1 ) $html[] = 'disabled';
-            $html[] = '"><a class="page-link" href="index.php?'.$string.'&page='. $before5 .'">«</a></li>';
+            $html[] = '"><a class="page-link" rel="nofollow" href="index.php?'.$string.'&page='. $before5 .'">«</a></li>';
 
             //While PAGES
             $max5laps = 0;
@@ -246,7 +226,7 @@ class model
             while ($field <= $total_pages && $max5laps < 5) {
                 $html[] = '<li class="page-item ';
                 if($page == $field ) $html[] = 'active';
-                $html[] = '"><a class="page-link" href="index.php?'.$string.'&page='.$field.'">'.$field.'</a></li>';
+                $html[] = '"><a class="page-link" rel="nofollow" href="index.php?'.$string.'&page='.$field.'">'.$field.'</a></li>';
 
                 $field++;
                 $max5laps++;
@@ -255,11 +235,11 @@ class model
             //AFTER
             $html[] = '<li class="page-item ';
             if($page == $total_pages || $after5 == $total_pages) $html[] = 'disabled';
-            $html[] = '"><a class="page-link" href="index.php?'.$string.'&page='. $after5 .'">»</a></li>';
+            $html[] = '"><a class="page-link" rel="nofollow" href="index.php?'.$string.'&page='. $after5 .'">»</a></li>';
             //LAST
             $html[] = '<li class="page-item ';
             if($page < 1 || $page == $total_pages || $after5 == $total_pages) $html[] = 'disabled';
-            $html[] = '"><a class="page-link" href="index.php?'.$string.'&page='. $total_pages .'">'.$last.'</a></li>';
+            $html[] = '"><a class="page-link" rel="nofollow" href="index.php?'.$string.'&page='. $total_pages .'">'.$last.'</a></li>';
             $html[] = '</ul>';
             $html[] = '</nav>';
             //TOTAL PAGES
