@@ -1,0 +1,45 @@
+<form>
+    <field name="email">
+        <type>text</type>
+        <name>email</name>
+        <id>email</id>
+        <clase>input-lg</clase>
+        <label></label>
+        <message>FOXY_REGISTER_EMAIL_MSG</message>
+        <placeholder>FOXY_REGISTER_EMAIL</placeholder>
+        <onchange>checkEmail();checkEmailExists();</onchange>
+        <disabled>false</disabled>
+    </field>
+    <field name="password">
+        <type>password</type>
+        <name>password</name>
+        <id>password</id>
+        <clase>input-lg</clase>
+        <label></label>
+        <message>FOXY_REGISTER_PASSWORD_MSG</message>
+        <placeholder>FOXY_REGISTER_PASSWORD</placeholder>
+        <onchange>checkPassword();</onchange>
+        <disabled>false</disabled>
+    </field>
+    <field name="password2">
+        <type>password</type>
+        <name>password2</name>
+        <id>password2</id>
+        <clase>input-lg</clase>
+        <label></label>
+        <message>FOXY_REGISTER_PASSWORD2_MSG</message>
+        <placeholder>FOXY_REGISTER_PASSWORD2</placeholder>
+        <onchange>checkPasswordMatch();</onchange>
+        <disabled>false</disabled>
+    </field>
+    <field name="submit">
+        <type>submit</type>
+        <id>btnRegister</id>
+        <onclick></onclick>
+        <size>medium</size>
+        <clase>btn-block btn-lg</clase>
+        <color>success</color>
+        <value>FOXY_REGISTER_BTN</value>
+        <disabled>false</disabled>
+    </field>
+</form>

@@ -1,0 +1,50 @@
+<form>
+    <field name="email">
+        <type>email</type>
+        <name>email</name>
+        <clase>input-lg</clase>
+        <id>lemail</id>
+        <label></label>
+        <message></message>
+        <placeholder>FOXY_LOGIN_USERNAME</placeholder>
+        <onchange></onchange>
+        <disabled>false</disabled>
+    </field>
+    <field name="password">
+        <type>password</type>
+        <name>password</name>
+        <clase>input-lg</clase>
+        <id>lpassword</id>
+        <label></label>
+        <message></message>
+        <placeholder>FOXY_LOGIN_PASSWORD</placeholder>
+        <onchange></onchange>
+        <disabled>false</disabled>
+    </field>
+    <field name="lastvisitDate">
+        <type>hidden</type>
+        <name>lastvisitDate</name>
+        <id>lastvistDate</id>
+        <message></message>
+        <placeholder></placeholder>
+        <onchange></onchange>
+        <disabled>false</disabled>
+    </field>
+    <field name="language">
+        <type>hidden</type>
+        <name>language</name>
+        <id>language</id>
+        <message></message>
+        <placeholder></placeholder>
+        <onchange></onchange>
+        <disabled>false</disabled>
+    </field>
+    <field name="submit">
+        <id>btnLogin</id>
+        <onclick>this.form.submit();</onclick>
+        <clase>btn-block btn-lg</clase>
+        <color>dark</color>
+        <value>FOXY_LOGIN_BTN</value>
+        <disabled>false</disabled>
+    </field>
+</form>

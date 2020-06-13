@@ -1,0 +1,93 @@
+<form>
+    <field name="exercici">
+      <type>text</type>
+      <name>exercici</name>
+      <id>exercici</id>
+      <label>Exercici</label>
+      <message></message>
+      <placeholder>Exercici</placeholder>
+      <disabled>false</disabled>
+    </field>
+    <field name="numero">
+      <type>text</type>
+      <name>numero</name>
+      <id>numero</id>
+      <label>Número</label>
+      <message></message>
+      <placeholder>Número</placeholder>
+      <disabled>false</disabled>
+    </field>
+    <field name="dataObertura">
+      <type>calendar</type>
+      <name>dataObertura</name>
+      <id>dataObertura</id>
+      <label>Data Obertura</label>
+      <message></message>
+      <placeholder>Data Obertura</placeholder>
+      <disabled>false</disabled>
+    </field>
+    <field name="dataTancament">
+      <type>text</type>
+      <name>dataTancament</name>
+      <id>dataTancament</id>
+      <label>Data Tancament</label>
+      <message></message>
+      <placeholder>Data Tancament</placeholder>
+      <disabled>false</disabled>
+    </field>
+    <field name="dataSinistre">
+      <type>calendar</type>
+      <name>dataSinistre</name>
+      <id>dataSinistre</id>
+      <label>Data Sinistre</label>
+      <message></message>
+      <placeholder>Data Sinistre</placeholder>
+      <disabled>false</disabled>
+    </field>
+    <field name="nom_companyia">
+      <type>text</type>
+      <name>nom_companyia</name>
+      <id>nom_companyia</id>
+      <label>Nom companyia</label>
+      <message></message>
+      <placeholder>Nom companyia</placeholder>
+      <disabled>false</disabled>
+    </field>
+    <field name="numExpedient">
+      <type>text</type>
+      <name>numExpedient</name>
+      <id>numExpedient</id>
+      <label>Num. Expedient</label>
+      <message></message>
+      <placeholder>Num. Expedient</placeholder>
+      <disabled>false</disabled>
+      <readonly>true</readonly>
+    </field>
+    <field name="numOrdre">
+      <type>text</type>
+      <name>numOrdre</name>
+      <id>numOrdre</id>
+      <label>Num. Ordre</label>
+      <message></message>
+      <placeholder>Num. Ordre</placeholder>
+      <disabled>false</disabled>
+    </field>
+    <field name="observacions">
+      <type>textarea</type>
+      <name>observacions</name>
+      <id>observacions</id>
+      <label>Observacions</label>
+      <message></message>
+      <placeholder>Observacions</placeholder>
+      <disabled>false</disabled>
+    </field>
+    <field name="auth_token">
+      <type>hidden</type>
+      <name>auth_token</name>
+      <id>auth_token</id>
+      <message></message>
+      <placeholder></placeholder>
+      <onchange></onchange>
+      <disabled>false</disabled>
+    </field>
+</form>

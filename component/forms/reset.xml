@@ -1,0 +1,20 @@
+<form>
+    <field name="email">
+        <type>text</type>
+        <name>email</name>
+        <id>email</id>
+        <message>Invalid email format</message>
+        <placeholder>Please provide your E-mail</placeholder>
+        <onchange>checkEmail();</onchange>
+        <disabled>false</disabled>
+    </field>
+    <field name="secret">
+        <type>secret</type>
+        <name>secret</name>
+        <id>secret</id>
+        <message></message>
+        <placeholder>Please provide your secret  token</placeholder>
+        <onchange></onchange>
+        <disabled>false</disabled>
+    </field>
+</form>

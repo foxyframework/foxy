@@ -1,0 +1,12 @@
+{
+    "view": {
+        "title": "Menu",
+        "slug": "menu",
+		"permissions": {
+            "admin": {
+                "minlevel": "1",
+                "redirect": "index.php?view=home"
+            }
+        }
+    }
+}

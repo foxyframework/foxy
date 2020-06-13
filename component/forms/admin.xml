@@ -1,0 +1,41 @@
+<form>
+    <field name="show_register">
+      <type>radio</type>
+      <name>show_register</name>
+      <id>show_register</id>
+      <label>Show register</label>
+      <message></message>
+      <option value="0">FOXY_NO</option>
+      <option value="1">FOXY_YES</option>
+      <disabled>false</disabled>
+    </field>
+    <field name="debug">
+      <type>radio</type>
+      <name>debug</name>
+      <id>debug</id>
+      <label>Debug</label>
+      <message></message>
+      <option value="0">FOXY_NO</option>
+      <option value="1">FOXY_YES</option>
+      <disabled>false</disabled>
+    </field>
+    <field name="offline">
+      <type>radio</type>
+      <name>offline</name>
+      <id>offline</id>
+      <label>Site offline</label>
+      <message></message>
+      <option value="0">FOXY_NO</option>
+      <option value="1">FOXY_YES</option>
+      <disabled>false</disabled>
+    </field>
+    <field name="login_redirect">
+      <type>text</type>
+      <name>login_redirect</name>
+      <id>login_redirect</id>
+      <label>Login redirect</label>
+      <message></message>
+      <placeholder></placeholder>
+      <disabled>false</disabled>
+    </field>
+</form>

@@ -1,0 +1,46 @@
+<form>
+    <field name="titol">
+        <type>text</type>
+        <name>titol</name>
+        <id>titol</id>
+        <label>FOXY_BLOG_TITOL_LABEL</label>
+        <message>FOXY_BLOG_TITOL_MSG</message>
+        <placeholder>FOXY_BLOG_TITOL_PLACEHOLDER</placeholder>
+        <disabled>false</disabled>
+    </field>
+    <field name="tags">
+        <type>text</type>
+        <name>tags</name>
+        <id>tags</id>
+        <label>FOXY_BLOG_TAGS_LABEL</label>
+        <message>FOXY_BLOG_TAGS_MSG</message>
+        <placeholder>FOXY_BLOG_TAGS_PLACEHOLDER</placeholder>
+        <disabled>false</disabled>
+    </field>
+    <field name="autor">
+        <type>text</type>
+        <name>autor</name>
+        <id>tags</id>
+        <label>Autor</label>
+        <message></message>
+        <placeholder>Autor</placeholder>
+        <disabled>false</disabled>
+    </field>
+    <field name="autor_link">
+        <type>text</type>
+        <name>autor_link</name>
+        <id>tags</id>
+        <label>Autor link</label>
+        <message></message>
+        <placeholder>Autor link</placeholder>
+        <disabled>false</disabled>
+    </field>
+    <field name="texte">
+        <type>editor</type>
+        <name>texte</name>
+        <id>texte</id>
+        <label>FOXY_BLOG_TEXTE_LABEL</label>
+        <message>FOXY_BLOG_TEXTE_MSG</message>
+        <disabled>false</disabled>
+    </field>
+</form>

@@ -1,0 +1,17 @@
+html,body {
+    font-family: Raleway, sans-serif;
+}
+
+.bg-dark {
+    background-color: #718599 !important;
+}
+
+hr.featurette-divider {
+    margin: 5em 0;
+}
+
+.btn-dark {
+    color: #fff;
+    background-color: #718599;
+    border-color: #718599;
+}

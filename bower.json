@@ -1,0 +1,22 @@
+{
+  "name": "foxy",
+  "authors": [
+    "jprojects <kim@aficat.com>"
+  ],
+  "description": "Small PHP Framework for rapid development",
+  "main": "index.php",
+  "keywords": [
+    "php"
+  ],
+  "license": "GNU GPL v3",
+  "homepage": "https://aficat.com",
+  "private": true,
+  "dependencies": {
+    "bootstrap-datetimepicker": "0.0.10",
+    "lightbox2": "2.11.1",
+    "datatables": "1.10.21",
+    "moment": "2.26.0",
+    "dropzone": "5.7.1",
+    "jquery-validation": "1.19.3"
+  }
+}

@@ -1,0 +1,14 @@
+<system.webServer>
+    <rewrite>
+        <rules>
+		<rule name="rule 1L">
+			<match url="^([^/]*)/([^/]*)/([^/]*)\.html$"  />
+			<action type="Rewrite" url="index.php?view={R:1}&amp;layout={R:2}&amp;id={R:3}"  />
+		</rule>
+		<rule name="rule 2L">
+			<match url="^([^/]*)\.html$"  />
+			<action type="Rewrite" url="index.php?view={R:1}"  />
+		</rule>
+	</rules>
+    </rewrite>
+</system.webServer>
