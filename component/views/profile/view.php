@@ -4,9 +4,8 @@
  * @package     Foxy Framework
  * @copyright   Copyright © 2014 - All rights reserved.
  * @license	    GNU/GPL
- * @author	    kim
- * @author mail kim@afi.cat
- * @website	    http://www.afi.cat
+ * @author	    Foy Team
+ * @website	    https://foxyframework.github.io/foxysite/
  *
 */
 
