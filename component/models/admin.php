@@ -45,6 +45,7 @@ class admin extends model
 
   public function getAdminViews()
   {
+    //return component forms
     $folders = glob(FOXY_COMPONENT.DS.'views'.DS.'*' , GLOB_ONLYDIR);
     foreach($folders as $folder) {
       if(file_exists($folder.DS.'tmpl'.DS.'admin.php')) {
@@ -54,5 +55,27 @@ class admin extends model
       }
     }
     return $views;
+  }
+
+  public function getAdminModules()
+  {
+    //return component forms
+    $folders = glob(FOXY_MODULES.DS.'*' , GLOB_ONLYDIR);
+    foreach($folders as $folder) {
+      if(file_exists($folder.DS.'admin.php')) {
+        $mods[] = str_replace(FOXY_MODULES.DS, '', $folder);
+      }
+    }
+    return $mods;
+  }
+
+  public function getAdminPlugins()
+  {
+    //return component forms
+    $folders = glob(FOXY_PLUGINS.DS.'*' , GLOB_ONLYDIR);
+    foreach($folders as $folder) {
+      $plugins[] = str_replace(FOXY_PLUGINS.DS, '', $folder);
+    }
+    return $plugins;
   }
 }
