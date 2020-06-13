@@ -76,7 +76,7 @@ class Application
      * @param    string  $type        Type of script. Defaults to 'text/javascript'
      * @access   public
      */
-    function addScript($url) {
+    public function addScript($url) {
         $this->scripts[] = $url;
     }
 
@@ -87,7 +87,7 @@ class Application
      * @param    string  $type        Type of script. Defaults to 'text/javascript'
      * @access   public
      */
-    function addScriptCode($code) {
+    public function addScriptCode($code) {
         $this->scriptCode[] = $code;
     }
 
@@ -97,7 +97,7 @@ class Application
      * @param    string  $url        URL to the linked stylesheet
      * @access   public
      */
-    function addStylesheet($url) {
+    public function addStylesheet($url) {
         $this->stylesheets[] = $url;
     }
 
@@ -109,7 +109,7 @@ class Application
      * @param    string  $media  Media type that this stylesheet applies to
      * @access   public
      */
-    function setMessage($msg, $type)
+    public function setMessage($msg, $type)
     {
         $_SESSION['message'] = $msg;
         $_SESSION['messageType'] = $type;
@@ -117,8 +117,9 @@ class Application
 
     /**
      * Method to get application version
+     * @access   public
     */
-    function getVersion()
+    public function getVersion()
     {
         $local  = json_decode(file_get_contents(FOXY_BASE.DS.'foxy.json'), true);
 
@@ -127,16 +128,23 @@ class Application
 
     /**
      * Method to encrypt passwords
+     *
+     * @param    string  $password   raw password to hash
+     * @access   public
     */
-    function encryptPassword($password)
+    public function encryptPassword($password)
     {
         return password_hash($password, PASSWORD_DEFAULT);
     }
 
     /**
      * Method to decrypt passwords
+     * *
+     * @param    string  $password    hashed password
+     * @param    string  $hash        Hash to compare with
+     * @access   public
     */
-    function decryptPassword($password, $hash)
+    public function decryptPassword($password, $hash)
     {
       if (password_verify($password, $hash)) {
 			  return true;
@@ -145,9 +153,16 @@ class Application
   		}
     }
 
-    function trigger($type, $args=array())
+    /**
+     * Method to trigger plugins
+     * *
+     * @param    string  $type    name of the plugin
+     * @param    array   $args    Array of parameters to send
+     * @access   public
+    */
+    public function trigger($type, $args=array())
     {
-    	$path = 'plugins/'.$type.'/'.$type.'.php';
+    	$path = FOXY_PLUGINS.DS.$type.DS.$type.'.php';
 
   		if (file_exists($path))
   		{
@@ -256,6 +271,8 @@ class Application
 
     /**
      * Method to load a layout
+     * 
+     * @access   public
     */
     function getLayout()
     {
@@ -312,7 +329,7 @@ class Application
     */
     function getModel($model = null)
     {
-        $model == null ? $path  = 'component/models/'.$this->view.'.php' : $path = 'component/models/'.$model.'.php';
+        $model == null ? $path  = FOXY_COMPONENT.DS.'models'.DS.$this->view.'.php' : $path = FOXY_COMPONENT.DS.'models'.DS.$model.'.php';
         $model == null ? $class = $this->view : $class = $model;
         $instance = "";
 
@@ -334,7 +351,7 @@ class Application
     public function getModule($name)
     {
         $html = "";
-        $path = 'modules/'.$name.'/default.php';
+        $path = FOXY_MODULES.DS.$name.DS.'default.php';
         if (is_file($path)) {
             ob_start();
 			include_once $path;
@@ -372,15 +389,15 @@ class Application
   	*/
   	public function renderView($view, $layout='', $args=array())
   	{
-        $config = factory::get('config');
-        $app    = factory::get('application');
-        $db     = factory::get('database');
-        $user   = factory::get('user');
-        $lang   = factory::get('language');
-        $html   = factory::get('html');
-        $url    = factory::get('url');
+        $config  = factory::get('config');
+        $app     = factory::get('application');
+        $db      = factory::get('database');
+        $user    = factory::get('user');
+        $lang    = factory::get('language');
+        $html    = factory::get('html');
+        $url     = factory::get('url');
         $session = factory::get('session');
-        $custom = factory::get('custom');
+        $custom  = factory::get('custom');
 
   		// Get the layout path.
         $path = FOXY_COMPONENT.DS.'component'.DS.'views'.DS.$view.DS.'tmpl'.DS.$view.'.php';
