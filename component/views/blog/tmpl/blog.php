@@ -15,10 +15,11 @@ $model = $app->getModel();
 $tag   = $app->getVar('tag', '', 'get');
 $page  = $app->getVar('page', 1, 'get');
 $items = $model->getList();
+$params = $model->getParams('blog');
 ?>
 
 <!-- Main Content -->
-<section class="container<?php if($model->getParams()->fluid == 1) : ?>-container<?php endif; ?>">
+<section class="container<?php if($params->fluid == 1) : ?>-fluid<?php endif; ?>">
     <div class="row my-5">
 
         <div class="col-md-12">

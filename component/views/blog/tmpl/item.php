@@ -18,10 +18,11 @@ if($id == 0) {
 
 $model = $app->getModel();
 $item = $model->getItem();
+$params = $model->getParams('blog');
 ?>
 
 <!-- Main Content -->
-<section class="container<?php if($model->getParams()->fluid == 1) : ?>-container<?php endif; ?>">
+<section class="container<?php if($params->fluid == 1) : ?>-fluid<?php endif; ?>">
       <div class="row my-5">
         <div class="col-md-12">
 			<div class="blog-post">

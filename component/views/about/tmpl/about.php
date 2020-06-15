@@ -11,7 +11,7 @@
 
 defined('_Foxy') or die ('restricted access');
 $model = $app->getModel('admin');
-$params = $model->getParams();
+$params = $model->getParams('about');
 ?>
 
 <section class="container marketing">
