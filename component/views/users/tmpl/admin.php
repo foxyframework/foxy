@@ -15,8 +15,7 @@ defined('_Foxy') or die ('restricted access');
 $model 	= $app->getModel('users');
 ?>
 
-<section class="forms">
-  <div class="container-fluid">
+<section class="forms container-fluid my-5">
 
     <div class="row">
       <div class="col-lg-6">
@@ -25,8 +24,7 @@ $model 	= $app->getModel('users');
             <h4>Usuaris</h4>
           </div>
           <div class="card-body">
-            <p>Com administrador pots crear nous usuaris.</p>
-            <form method="post" action="index.php?task=users.saveUser">
+            <form method="post" action="index.php?task=users.saveItem">
               <?= $html->getTextField('users', 'username'); ?>
               <?= $html->getEmailField('users', 'email'); ?>
               <?= $html->getPasswordField('users', 'password'); ?>
@@ -40,42 +38,31 @@ $model 	= $app->getModel('users');
       </div>
 
     </div>
-  </div>
 </section>
 
-<section>
-  <div class="container-fluid">
-    <!-- Page Header-->
-    <div class="card">
-      <div class="card-header">
-        <h4>Usuaris</h4>
-      </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <table id="datatable1" style="width: 100%;" class="table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Usergroup</th>
-                <th>Last Visit</th>
-                <th>#</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach($model->getUsers() as $usr) : ?>
-              <tr>
-                <td><?= $usr->username; ?></td>
-                <td><?= $usr->email; ?></td>
-                <td><?= $usr->level == 1 ? 'Admin' : 'Registered'; ?></td>
-                <td><?= $usr->lastvisitDate; ?></td>
-                <td><a href="index.php?view=admin&task=removeUser&id=<?= $usr->id; ?>"><i class="fa fa-trash-o"></i></a></td>
-              </tr>
-              <?php endforeach; ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+<section class="container-fluid my-5">
+  <div class="table-responsive">
+    <table id="datatable1" style="width: 100%;" class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Usergroup</th>
+          <th>Last Visit</th>
+          <th>#</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach($model->getList() as $usr) : ?>
+        <tr>
+          <td><?= $usr->username; ?></td>
+          <td><?= $usr->email; ?></td>
+          <td><?= $usr->level == 1 ? 'Admin' : 'Registered'; ?></td>
+          <td><?= $usr->lastvisitDate; ?></td>
+          <td><a href="index.php?task=users.removeItem&id=<?= $usr->id; ?>"><i class="fa fa-trash-o"></i></a></td>
+        </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
   </div>
 </section>

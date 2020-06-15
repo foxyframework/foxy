@@ -312,7 +312,7 @@ class Html
      * @param $editor bool optional convert the textarea in a editor
      * @return $html string a complete input field html
     */
-    public function getTextareaField($form, $name, $default='', $editor=false)
+    public function getTextareaField($form, $name, $default='')
     {
         $app    = factory::get('application');
         $lang   = factory::get('language');
@@ -324,14 +324,41 @@ class Html
             if($field['name'] == $name) {
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
                 $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
-                $editor == true ? $class = 'editor' : $class = '';
-                $html .= "<div id='".$field[0]->name."-field' class='form-group ".$class."'>";
+                $html .= "<div id='".$field[0]->name."-field' class='form-group'>";
                 if($field[0]->label != "") $html .= "<label for='".$field[0]->id."'><a class='hasTip' title='".$lang->get($field[0]->placeholder)."'>".$lang->get($field[0]->label)."</a></label>";
                 if($field[0]->label != "") $html .= "<div class='controls'>";
                 $html .= "<textarea id='".$field[0]->id."' maxlength='".$field[0]->maxlength."' placeholder='".$field[0]->placeholder."' name='".$field[0]->name."' rows='".$field[0]->rows."' cols='".$field[0]->cols."' class='form-control' ".$disabled." ".$onchange.">".$default."</textarea>";
                 //$html .= "<span id='".$field[0]->name."-msg'></span>";
                 if($field[0]->label != "") $html .= "</div>";
                 $html .= "</div>";
+            }
+        }
+
+        return $html;
+    }
+
+    /**
+     * Method to render a input box
+     * @param $form string the form name
+     * @param $name string the field name
+     * @param $default mixed optional default value
+     * @param $editor bool optional convert the textarea in a editor
+     * @return $html string a complete input field html
+    */
+    public function getEditorField($form, $name, $default='')
+    {
+        $app    = factory::get('application');
+        $lang   = factory::get('language');
+
+        $html = "";
+
+        foreach($this->getForm($form) as $field) {
+            //text inputs...
+            if($field['name'] == $name) {
+                $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
+                $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
+                if($field[0]->label != "") $html .= "<label for='".$field[0]->id."'><a class='hasTip' title='".$lang->get($field[0]->placeholder)."'>".$lang->get($field[0]->label)."</a></label>";
+                $html .= "<textarea id='".$field[0]->id."' maxlength='".$field[0]->maxlength."' placeholder='".$lang->get($field[0]->placeholder)."' name='".$field[0]->name."' rows='".$field[0]->rows."' cols='".$field[0]->cols."' class='form-control editor' ".$disabled." ".$onchange.">".$default."</textarea>";
             }
         }
 

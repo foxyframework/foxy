@@ -17,22 +17,8 @@ $page  = $app->getVar('page', 1, 'get');
 $items = $model->getList();
 ?>
 
-<style>
-.pagination { 
-	width: 100%;
-	text-align: center;
-}
-li.disabled a {
-   pointer-events: none;
-   cursor: default;
-}
-li.prev, li.next {
- 	margin: 0 10px;
-}
-</style>
-
 <!-- Main Content -->
-<section class="container">
+<section class="container<?php if($model->getParams()->fluid == 1) : ?>-container<?php endif; ?>">
     <div class="row my-5">
 
         <div class="col-md-12">
@@ -43,12 +29,12 @@ li.prev, li.next {
 				<a href="index.php?view=blog&layout=item&id=<?= $item->id; ?>">
 					<h2 class="blog-post-title"><?= $item->title; ?></h2>
 				</a>
-				<p class="blog-post-meta">Creat per
+				<p class="blog-post-meta"><?= $lang->get('FOXY_BLOG_CREATED BY'); ?>
 					<a href="<?= $item->author_link; ?>" target="_blank"><?= $item->author; ?></a>
-					el <?= date('j F Y', strtotime($item->publishDate)); ?>  Vist <?= $item->hits; ?> cops
+					&dot; <?= date('j F Y', strtotime($item->publishDate)); ?>  <?= $lang->get('FOXY_BLOG_HITS'); ?> <?= $item->hits; ?>
 			    </p>
 							
-				<<?= $model->trimText($item->fulltext, 150); ?>
+				<?= $model->trimText($item->fulltext, 500); ?>
 				<hr>						
 						
 			<?php endforeach; ?>

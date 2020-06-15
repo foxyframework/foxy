@@ -4,7 +4,7 @@
         <name>title</name>
         <id>title</id>
         <label>FOXY_BLOG_TITOL_LABEL</label>
-        <message>FOXY_BLOG_TITOL_MSG</message>
+        <message></message>
         <placeholder>FOXY_BLOG_TITOL_PLACEHOLDER</placeholder>
         <disabled>false</disabled>
     </field>
@@ -13,7 +13,7 @@
         <name>tags</name>
         <id>tags</id>
         <label>FOXY_BLOG_TAGS_LABEL</label>
-        <message>FOXY_BLOG_TAGS_MSG</message>
+        <message></message>
         <placeholder>FOXY_BLOG_TAGS_PLACEHOLDER</placeholder>
         <disabled>false</disabled>
     </field>
@@ -21,26 +21,27 @@
         <type>text</type>
         <name>author</name>
         <id>author</id>
-        <label>Author</label>
+        <label>FOXY_BLOG_AUTHOR_LABEL</label>
         <message></message>
-        <placeholder>Author</placeholder>
+        <placeholder><placeholder>FOXY_BLOG_AUTHOR_PLACEHOLDER</placeholder></placeholder>
         <disabled>false</disabled>
     </field>
     <field name="autor_link">
         <type>text</type>
         <name>author_link</name>
         <id>author_link</id>
-        <label>Author link</label>
+        <label>FOXY_BLOG_AUTHOR_LINK_LABEL</label>
         <message></message>
-        <placeholder>Autor link</placeholder>
+        <placeholder>FOXY_BLOG_AUTHOR_LINK_PLACEHOLDER</placeholder>
         <disabled>false</disabled>
     </field>
     <field name="fulltext">
         <type>editor</type>
         <name>fulltext</name>
         <id>fulltext</id>
-        <label>FOXY_BLOG_TEXTE_LABEL</label>
-        <message>FOXY_BLOG_TEXTE_MSG</message>
+        <label>FOXY_BLOG_FULLTEXT_LABEL</label>
+        <message></message>
         <disabled>false</disabled>
+        <placeholder>FOXY_BLOG_FULLTEXT_PLACEHOLDER</placeholder>
     </field>
 </form>

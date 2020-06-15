@@ -16,6 +16,7 @@ if(!$user->getAuth()) {
 }
 
 $model = $app->getModel();
+$params = $model->getParams('blog');
 ?>
 
 <section class="forms">
@@ -28,9 +29,7 @@ $model = $app->getModel();
 						<h4>Blog</h4>
           			</div>
           			<div class="card-body">
-						<p>Crea una nova entrada al blog.</p>
-			
-						<form name="blogForm" id="blogForm" method="post" action="index.php?task=blog.saveArticle">
+						<form name="blogForm" id="blogForm" method="post" action="index.php?task=blog.saveItem">
 							<?php $item->publishDate == '' ? $publishDate = date('Y-m-d H:i:s') : $publishDate = $item->publishDate; ?>
 							<input type="hidden" name="publishDate" value="<?= $publishDate; ?>">			
 							<input type="hidden" name="id" value="<?= $app->getVar('id', 0); ?>">
@@ -45,7 +44,50 @@ $model = $app->getModel();
 						</form>
           			</div>
         		</div>
-      		</div>       	
+      		</div> 
+			<div class="col-lg-6">
+       	 		<div class="card">
+          			<div class="card-header d-flex align-items-center">
+            			<h4>Settings</h4>
+          			</div>
+          			<div class="card-body">
+            			<form method="post" action="index.php?task=admin.saveParams">
+              				<input type="hidden" name="view" value="blog">
+							<?= $html->getListField('params', 'auth', $params->auth); ?>
+							<?= $html->getTextField('params', 'redirect', $params->redirect); ?>
+							<?= $html->getRadioField('params', 'fluid', $params->fluid); ?>
+							<div class="form-group">
+								<input type="submit" value="Guardar" class="btn btn-primary">
+							</div>
+            			</form>
+          			</div>
+        		</div>
+      		</div>      	
         </div>
 	</div>
+</section>
+
+<section class="container-fluid my-5">
+	<div class="table-responsive">
+		<table id="datatable" style="width: 100%;" class="table">
+		<thead>
+			<tr>
+			<th>Title</th>
+			<th>Author</th>
+			<th>Publish Date</th>
+			<th>#</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach($model->getList() as $item) : ?>
+			<tr>
+			<td><?= $item->title; ?></td>
+			<td><?= $item->author; ?></td>
+			<td><?= $item->publishDate; ?></td>
+			<td><a href="index.php?task=blog.removeItem&id=<?= $item->id; ?>"><i class="fa fa-trash-o"></i></a></td>
+			</tr>
+			<?php endforeach; ?>
+		</tbody>
+		</table>
+    </div>
 </section>

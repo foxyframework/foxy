@@ -45,7 +45,7 @@ class blog extends model
 			$this->sql .= ' AND (FIND_IN_SET('.$db->quote($tag).', tags) > 0)';
 		}
 		
-		$this->sql .= ' ORDER BY id DESC LIMIT '.$offset.', '.$no_of_records_per_page;
+		$this->sql .= ' ORDER BY '.$this->order.' DESC LIMIT '.$offset.', '.$no_of_records_per_page;
 
 		$db->query($this->sql);
 		
@@ -88,96 +88,88 @@ class blog extends model
 		return $trimmed_text;
 	}
 
+	/**
+	 * Method to get and item by id
+	 * @return object 
+	*/
 	public function getItem()
 	{
 		$db  = factory::get('database');
 		$app = factory::get('application');
 
-		$id   = $app->getVar('id', 0, 'get');
+		$id  = $app->getVar('id', 0, 'get');
 
-		$db->query('UPDATE `#_articles` SET hits = hits + 1 WHERE id = '.$id);
+		$db->query('UPDATE '.$this->table.' SET hits = hits + 1 WHERE '.$this->key.' = '.$id);
 
 		return parent::getItem($this->table, $this->key);
 	}
 
-	public function delete()
+	/**
+	 * Method to remove and item by id
+	 * @return object 
+	*/
+	public function removeItem()
 	{
-		$db  = factory::get('database');
-		$app = factory::get('application');
-		$user = factory::get('user');
-		$config = factory::get('config');
+		$db  		= factory::get('database');
+		$app 		= factory::get('application');
+		$user 		= factory::get('user');
+		$config 	= factory::get('config');
+		$lang 		= factory::get('language');
 
-		$id   = $app->getVar('id', '', 'get');
+		$id   	= $app->getVar('id', '', 'get');
 
-		//comprobar si es propietario
-		$db->query('SELECT userid FROM #_articles WHERE id = '.$id);
-		$userid = $db->loadResult();
+		$result = $db->query('DELETE FROM '.$this->table.' WHERE '.$this->key.' = '.$id);
 
-		if($user->id == $userid) {
-
-			$result = $db->query('DELETE FROM #_articles WHERE id = '.$id);
-
-			if($result) {
-				$link = $config->site.'/index.php?view=blog&layout=panel';
-				$type = 'success';
-				$msg  = 'El article ha estat esborrat amb exit.';
-			} else {
-				$link = $config->site.'/index.php?view=blog&layout=edit&id='.$id;
-				$type = 'danger';
-				$msg  = 'Hi ha hagut un error al intentar esborrar aquest article.';
-			}
-
+		if($result) {
+			$link = $config->site.'/index.php?view=blog&layout=admin';
+			$app->setMessage($lang->get('FOXY_ITEM_REMOVE_SUCCESS'), 'success');
 		} else {
-			$link = $config->site.'/index.php?view=blog&layout=panel';
-			$type = 'danger';
-			$msg  = "No ets propietari d'aquest article.";
+			$link = $config->site.'/index.php?view=blog&layout=admin';
+			$app->setMessage($lang->get('FOXY_ITEM_REMOVE_ERROR'), 'danger');
 		}
-
-		$app->setMessage($msg, $type);
         $app->redirect($link);
 	}
 
-	public function saveArticle()
+	/**
+	 * Method to remove and item by id
+	 * @return object 
+	*/
+	public function saveItem()
 	{
-		$db  = factory::get('database');
-		$app = factory::get('application');
-		$user = factory::get('user');
+		$db  	= factory::get('database');
+		$app 	= factory::get('application');
+		$user 	= factory::get('user');
 		$config = factory::get('config');
-		$lang = factory::get('language');
+		$lang 	= factory::get('language');
 
 		$id     = $app->getVar('id', 0, 'post', 'int');
 
-		$_POST['category'] = 0;
-		$_POST['userid']   = $user->id;
-		$_POST['author_link'] = '#';
-		$_POST['language'] = 'ca-es';
-
+		$_POST['category'] 		= 0;
+		$_POST['userid']   		= $user->id;
+		$_POST['author_link'] 	= '#';
+		$_POST['language'] 		= 'ca-es';
+		$_POST['status'] 		= 1;
 
 		if($id == 0) {
 			$_POST['hits'] = 0;
-			$_POST['status'] = 1;
-			$result = $db->insertRow('#_articles', $_POST);
+			$result = $db->insertRow($this->table, $_POST);
 
-			$subject    = 'Nou artícle a '.$config->sitename;
-			$body       = "L'usuari ".$user->username." ha creat un nou artícle anomenat ".$_POST['titol'];
+			$subject    = $lang->replace('FOXY_BLOG_NEW_ARTICLE_SUBJECT', $config->sitename);
+			$body       = $lang->replace('FOXY_BLOG_NEW_ARTICLE_BODY', $user->username, $_POST['title']);
 			$this->sendMail($config->email, 'Admin', $subject, $body);
 
 		} else {
-			$_POST['status'] = 1;
-			$result = $db->updateRow('#_articles', $_POST, 'id', $id);
+			$result = $db->updateRow($this->table, $_POST, $this->key, $id);
 		}
 
 		if($result) {
 			$link = $config->site.'/index.php?view=blog&layout=admin';
-			$type = 'success';
-			$msg  = "L'article ha estat guardat amb exit.";
+			$app->setMessage($lang->get('FOXY_ITEM_SAVE_SUCCESS'), 'success');
 		} else {
 			$link = $config->site.'/index.php?view=blog&layout=admin&id='.$id;
-			$type = 'danger';
-			$msg  = 'Hi ha hagut un error al intentar guardar aquest article.';
+			$app->setMessage($lang->get('FOXY_ITEM_ERROR_ERROR'), 'danger');
 		}
 
-		$app->setMessage($msg, $type);
         $app->redirect($link);
 	}
 
@@ -234,8 +226,8 @@ class blog extends model
 		foreach($rows as $row) {
 
 			$rssfeed .= '<item>';
-			$rssfeed .= '<title><![CDATA['.$row->titol.']]></title>';
-			$rssfeed .= '<description><![CDATA['.$row->texte.']]></description>';
+			$rssfeed .= '<title><![CDATA['.$row->title.']]></title>';
+			$rssfeed .= '<description><![CDATA['.$row->fulltext.']]></description>';
 			$rssfeed .= '<link>'.$config->site.'/index.php?view=blog&amp;id='.$row->id.'</link>';
 			$rssfeed .= '<pubDate>'.date("D, d M Y H:i:s O", strtotime($row->publishDate)).'</pubDate>';
 			$rssfeed .= '</item>';

@@ -21,7 +21,7 @@ $item = $model->getItem();
 ?>
 
 <!-- Main Content -->
-<section class="container">
+<section class="container<?php if($model->getParams()->fluid == 1) : ?>-container<?php endif; ?>">
       <div class="row my-5">
         <div class="col-md-12">
 			<div class="blog-post">

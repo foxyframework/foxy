@@ -12,8 +12,7 @@
 defined('_Foxy') or die ('restricted access');
 
 $model 	= $app->getModel('admin');
-$params = $model->getParams();
-$view   = $app->getVar('view');
+$params = $model->getParams('home');
 ?>
 
 <section class="forms">
@@ -26,9 +25,8 @@ $view   = $app->getVar('view');
             <h4>Home</h4>
           </div>
           <div class="card-body">
-            <p>Homepage settings.</p>
             <form method="post" action="index.php?task=admin.saveParams">
-              <input type="hidden" name="view" value="<?= $view; ?>">
+              <input type="hidden" name="view" value="home">
               <?= $html->getListField('params', 'auth', $params->auth); ?>
               <?= $html->getTextField('params', 'redirect', $params->redirect); ?>
               <?= $html->getRadioField('params', 'fluid', $params->fluid); ?>
