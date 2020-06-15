@@ -30,9 +30,9 @@ $params = $model->getParams('blog');
 				<a href="index.php?view=blog&layout=item&id=<?= $item->id; ?>">
 					<h2 class="blog-post-title"><?= $item->title; ?></h2>
 				</a>
-				<p class="blog-post-meta"><?= $lang->get('FOXY_BLOG_CREATED BY'); ?>
+				<p class="blog-post-meta"><?= $lang->get('FOXY_BLOG_CREATED_BY'); ?>
 					<a href="<?= $item->author_link; ?>" target="_blank"><?= $item->author; ?></a>
-					&dot; <?= date('j F Y', strtotime($item->publishDate)); ?>  <?= $lang->get('FOXY_BLOG_HITS'); ?> <?= $item->hits; ?>
+					&dot; <?= date('j F Y', strtotime($item->publishDate)); ?> &dot;  <?= $lang->get('FOXY_BLOG_HITS'); ?> <?= $item->hits; ?> &dot; <?= $lang->get('FOXY_BLOG_TAGS'); ?> <?= $model->renderTags($item->tags); ?></p>
 			    </p>
 							
 				<?= $model->trimText($item->fulltext, 500); ?>
@@ -41,7 +41,7 @@ $params = $model->getParams('blog');
 			<?php endforeach; ?>
 						
 			<?php else : ?>
-			No hi han entrades al blog.
+			<?= $lang->get('FOXY_BLOG_NO_ENTRIES'); ?>
 			<?php endif; ?>
 
 			</div>
