@@ -65,11 +65,9 @@ class model
      * @access public
      * @return bool
     */
-    public function getParams()
+    public function getParams($view)
 	{
         $app  = factory::get('application');
-
-        $view = $app->getVar('view');
 
         $path = FOXY_COMPONENT.DS.'views'.DS.$view.DS.'params.json';
         if(file_exists($path)) {
