@@ -46,8 +46,9 @@ $lang   = factory::get('language');
           <div class="col-sm-4 offset-md-1 py-4">
             <h4 class="text-white">Contacto</h4>
             <ul class="list-unstyled">
-              <li><a href="https://twitter.com/Artic___Monkey" class="text-white" target="_blank"><i class="fa fa-twitter"></i> Follow on Twitter</a></li>
-              <li><a href="#" class="text-white"><i class="fa fa-envelope"></i> Email me</a></li>
+              <li><a href="https://twitter.com/Artic___Monkey" class="text-white" target="_blank"><i class="fab fa-twitter"></i> Follow on Twitter</a></li>
+              <li><a href="#" class="text-white"><i class="fas fa-envelope"></i> Email me</a></li>
+              <li><a href="https://www.patreon.com/foxyframework" target="_blank" class="text-white"><i class="fab fa-patreon"></i> Suppot me on Patreon</a></li>
             </ul>
           </div>
         </div>
