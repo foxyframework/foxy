@@ -33,16 +33,16 @@ $model = $app->getModel();
 						<form name="blogForm" id="blogForm" method="post" action="index.php?task=blog.saveArticle">
 							<?php $item->publishDate == '' ? $publishDate = date('Y-m-d H:i:s') : $publishDate = $item->publishDate; ?>
 							<input type="hidden" name="publishDate" value="<?= $publishDate; ?>">			
-							<input type="hidden" name="id" value="<?= $item->id; ?>">
+							<input type="hidden" name="id" value="<?= $app->getVar('id', 0); ?>">
 							<?=  $html->getTextField('blog', 'title', $item->title); ?>
 							<?=  $html->getTextField('blog', 'tags', $item->tags); ?>	
 							<?=  $html->getTextField('blog', 'author', $item->author); ?>
 							<?=  $html->getTextField('blog', 'author_link', $item->author_link); ?>		
-							<?=  $html->getTextareaField('blog', 'fulltext', $item->fulltext, true); ?>	
+							<?=  $html->getEditorField('blog', 'fulltext', $item->fulltext); ?>	
+							<div class="form-group">
+								<input type="submit" value="<?= $lang->get('FOXY_SAVE'); ?>" class="btn btn-primary">
+							</div>
 						</form>
-						<div class="form-group">
-							<input type="submit" value="<?= $lang->get('FOXY_SAVE'); ?>" class="btn btn-primary">
-						</div>
           			</div>
         		</div>
       		</div>       	

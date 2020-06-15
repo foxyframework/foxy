@@ -11,4 +11,5 @@
 
 defined('_Foxy') or die ('restricted access');
 
-$app->addScript('https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js');
+$app->addScript('https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/trumbowyg.min.js');
+$app->addStylesheet('https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.21.0/ui/trumbowyg.min.css');

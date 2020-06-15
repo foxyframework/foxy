@@ -17,6 +17,7 @@
     "datatables": "1.10.21",
     "moment": "2.26.0",
     "dropzone": "5.7.1",
-    "jquery-validation": "1.19.3"
+    "jquery-validation": "1.19.3",
+    "trumbowyg": "2.21.0"
   }
 }

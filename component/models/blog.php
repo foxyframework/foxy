@@ -96,7 +96,7 @@ class blog extends model
 		$id   = $app->getVar('id', 0, 'get');
 
 		$db->query('UPDATE `#_articles` SET hits = hits + 1 WHERE id = '.$id);
-		
+
 		return parent::getItem($this->table, $this->key);
 	}
 
@@ -146,42 +146,35 @@ class blog extends model
 		$lang = factory::get('language');
 
 		$id     = $app->getVar('id', 0, 'post', 'int');
-		$_POST['userid'] = $user->id;
 
-		//comprobar si es propietario
-		$db->query('SELECT userid FROM #_articles WHERE id = '.$id);
-		$userid = $db->loadResult();
+		$_POST['category'] = 0;
+		$_POST['userid']   = $user->id;
+		$_POST['author_link'] = '#';
+		$_POST['language'] = 'ca-es';
 
-		if($user->id == $userid) {
 
-			if($id == 0) {
-				$_POST['hits'] = 0;
-				$_POST['status'] = 0;
-				$result = $db->insertRow('#_articles', $_POST);
+		if($id == 0) {
+			$_POST['hits'] = 0;
+			$_POST['status'] = 1;
+			$result = $db->insertRow('#_articles', $_POST);
 
-				$subject    = 'Nou artícle a '.$config->sitename;
-		        $body       = "L'usuari ".$user->username." ha creat un nou artícle anomenat ".$_POST['titol'];
-		        $this->sendMail($config->email, 'Admin', $subject, $body);
-
-			} else {
-		    	$_POST['status'] = 1;
-		    	$result = $db->updateRow('#_articles', $_POST, 'id', $id);
-			}
-
-			if($result) {
-				$link = $config->site.'/index.php?view=blog&layout=admin';
-				$type = 'success';
-				$msg  = "L'article ha estat guardat amb exit.";
-			} else {
-				$link = $config->site.'/index.php?view=blog&layout=admin&id='.$id;
-				$type = 'danger';
-				$msg  = 'Hi ha hagut un error al intentar guardar aquest article.';
-			}
+			$subject    = 'Nou artícle a '.$config->sitename;
+			$body       = "L'usuari ".$user->username." ha creat un nou artícle anomenat ".$_POST['titol'];
+			$this->sendMail($config->email, 'Admin', $subject, $body);
 
 		} else {
-			$link = $config->site.'/index.php?view=blog&layout=panel';
+			$_POST['status'] = 1;
+			$result = $db->updateRow('#_articles', $_POST, 'id', $id);
+		}
+
+		if($result) {
+			$link = $config->site.'/index.php?view=blog&layout=admin';
+			$type = 'success';
+			$msg  = "L'article ha estat guardat amb exit.";
+		} else {
+			$link = $config->site.'/index.php?view=blog&layout=admin&id='.$id;
 			$type = 'danger';
-			$msg  = "No ets propietari d'aquest article.";
+			$msg  = 'Hi ha hagut un error al intentar guardar aquest article.';
 		}
 
 		$app->setMessage($msg, $type);

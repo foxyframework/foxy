@@ -48,7 +48,7 @@ li.prev, li.next {
 					el <?= date('j F Y', strtotime($item->publishDate)); ?>  Vist <?= $item->hits; ?> cops
 			    </p>
 							
-				<p><?= $model->trimText($item->fulltext, 150); ?></p>
+				<<?= $model->trimText($item->fulltext, 150); ?>
 				<hr>						
 						
 			<?php endforeach; ?>

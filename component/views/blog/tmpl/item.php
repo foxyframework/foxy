@@ -30,7 +30,7 @@ $item = $model->getItem();
               	<sppan class="blog-post-meta">Creat per <a href="<?= $item->author_link; ?>" target="_blank"><?= $item->author; ?></a> el <?= date('j F Y', strtotime($item->publishDate)); ?> · <?= $item->hits; ?> cops Arxivat a <?= $model->renderTags($item->tags); ?></p>
 
 				<!-- Post Content -->
-				<article><?= $item->fulltext; ?></article>
+				<?= $item->fulltext; ?>
 
 			</div>
         </div>
