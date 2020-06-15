@@ -32,8 +32,8 @@ $model = $app->getModel();
 			
 						<form name="blogForm" id="blogForm" method="post" action="index.php?task=blog.saveArticle">
 							<?php $item->publishDate == '' ? $publishDate = date('Y-m-d H:i:s') : $publishDate = $item->publishDate; ?>
-							<input type="hidden" name="publishDate" value="<?= $publishDate; ?>" />			
-							<input type="hidden" name="id" value="<?= $item->id; ?>" />
+							<input type="hidden" name="publishDate" value="<?= $publishDate; ?>">			
+							<input type="hidden" name="id" value="<?= $item->id; ?>">
 							<?=  $html->getTextField('blog', 'title', $item->title); ?>
 							<?=  $html->getTextField('blog', 'tags', $item->tags); ?>	
 							<?=  $html->getTextField('blog', 'author', $item->author); ?>

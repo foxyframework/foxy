@@ -21,15 +21,13 @@ $item = $model->getItem();
 ?>
 
 <!-- Main Content -->
-<div class="container">
-      <div class="row">
-        <div class="col-md-10 mx-auto">
-          	<div class="wrap blog-item">
+<section class="container">
+      <div class="row my-5">
+        <div class="col-md-12">
+			<div class="blog-post">
 
-          		<p class="post-heading">
-              		<h1>#<?= $item->title; ?></h1>
-              		<span class="meta">Creat per <a href="<?= $item->author_link; ?>" target="_blank"><?= $item->author; ?></a> el <?= date('j F Y', strtotime($item->publishDate)); ?> · <?= $item->hits; ?> cops Arxivat a <?= $model->renderTags($item->tags); ?></span>
-            	</p>
+          		<h2 class="blog-post-title"><?= $item->title; ?></h2>
+              	<sppan class="blog-post-meta">Creat per <a href="<?= $item->author_link; ?>" target="_blank"><?= $item->author; ?></a> el <?= date('j F Y', strtotime($item->publishDate)); ?> · <?= $item->hits; ?> cops Arxivat a <?= $model->renderTags($item->tags); ?></p>
 
 				<!-- Post Content -->
 				<article><?= $item->fulltext; ?></article>
@@ -37,4 +35,4 @@ $item = $model->getItem();
 			</div>
         </div>
       </div>
-</div>
+</section>
