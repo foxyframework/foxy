@@ -86,46 +86,24 @@ class Html
 
                 if($field[$i]->type == 'text') {
 
-                    $html .= "<div id='".$field[$i]->name."-field' class='form-group'>";
-                    $html .= "<div class='controls'>";
-                    $html .= "<input type='".$field[$i]->type."' id='".$field[$i]->id."' value='".$_GET[''.$field[$i]->name.'']."' name='".$field[$i]->name."' data-message='".$lang->get($field[$i]->message)."' placeholder='".$lang->get($field[$i]->placeholder)."' class='form-control ".$field[$i]->clase."' autocomplete='off'>";
-                    $html .= "</div>";
-                    $html .= "</div>";
+                    $field_name = (string)$field[$i]->name;
+                    $html .= $this->getTextField($form, $field_name, $_GET[''.$field_name.'']);
                 }
-                if($field[$i]->type == 'date') {
-                    $html .= "<div id='".$field[$i]->name."-field' class='form-group'>";
-                    $html .= "<div class='input-group date' id='".$field[$i]->id."-icon'>";
-                    $html .= "<input type='text' id='".$field[$i]->id."' value='".$_GET[''.$field[$i]->name.'']."' name='".$field[$i]['name']."' data-message='".$lang->get($field[$i]->message)."' class='form-control' autocomplete='off'>";
-                    $html .= "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span>";
-                    $html .= "</div>";
-                    $html .= "</div>";
-                    $html .= "<script>document.addEventListener('DOMContentLoaded', function(event) { $(function(){ $('#".$field[$i]->id."-icon').datetimepicker({sideBySide: false,format: '".$field[$i]->format."'}); }); });</script>";
+                if($field[$i]->type == 'date' || $field[$i]->type == 'calendar') {
+
+                    $field_name = (string)$field[$i]->name;
+                    $html .= $this->getDateField($form, $field_name, $_GET[''.$field_name.'']);
+                    $html .= "<script>document.addEventListener('DOMContentLoaded', function(event) { $(function(){ $('#".(string)$field[$i]->id."-icon').datetimepicker({sideBySide: false,format: '".(string)$field[$i]->format."'}); }); });</script>";
+                }
+                if($field[$i]->type == 'users') {
+
+                    $field_name = (string)$field[$i]->name;
+                    $html .= $this->getUsersField($form, $field_name, $_GET[''.$field_name.'']);
                 }
                 if($field[$i]->type == 'list') {
-                    $html .= "<div id='".$field[$i]->name."-field' class='form-group'>";
-                    $html .= "<div class='controls'>";
-                    $html .= "<select id='".$field[$i]->id."' name='".$field[$i]['name']."' class='form-control' autocomplete='off'>";
-
-                    foreach($field[$i]->option as $option) {
-                        $_GET[''.$field[$i]->name.''] == $option['value'] ? $selected = "selected='selected'" : $selected = "";
-                        $html .= "<option value='".$option['value']."' $selected>".$lang->get($option[0])."</option>";
-                    }
-
-                    if($field[$i]->query != '') {
-                        $query = str_replace('{userid}', $user->id, $field[$i]->query);
-                        $db->query($query);
-                        $options = $db->fetchObjectList();
-                        $value = $field[$i]->value;
-                        $key = $field[$i]->key;
-                        foreach($options as $option) {
-                            $_GET[''.$field[$i]->name.''] == $option->$key ? $selected = "selected='selected'" : $selected = "";
-                            $html .= "<option value='".$option->$key."' $selected>".$option->$value."</option>";
-                        }
-                    }
-
-                    $html .= "</select>";
-                    $html .= "</div>";
-                    $html .= "</div>";
+                    
+                    $field_name = (string)$field[$i]->name;
+                    $html .= $this->getListField($form, $field_name, $_GET[''.$field_name.'']);
                 }
 
             }
@@ -623,7 +601,17 @@ class Html
 							$html .= "<option value='".$option->$value."' $selected>".$option->$key."</option>";
 						}
 					}
-				}
+                }
+                if($field[$i]->query != '') {
+                    $db->query($field[$i]->query);
+                    $options    = $db->fetchObjectList();
+                    $value      = $field[$i]->value;
+                    $key        = $field[$i]->key;
+                    foreach($options as $option) {
+                        $field[$i]->name == $option->$key ? $selected = "selected='selected'" : $selected = "";
+                        $html .= "<option value='".$option->$key."' $selected>".$option->$value."</option>";
+                    }
+                }
                 $html .= "</select>";
                 if(isset($field[0]->button)){
                     $html .= "<div class='input-group-append'>

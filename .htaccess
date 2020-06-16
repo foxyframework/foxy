@@ -1,0 +1,29 @@
+
+## No directory listings
+IndexIgnore *
+
+## Mod_rewrite in use.
+RewriteEngine On
+
+##
+# Uncomment following line if your webserver's URL
+# is not directly related to physical file paths.
+##
+
+# RewriteBase /
+
+# new rule to handle index.php?view=cpanel&layout=edit&id=80
+RewriteRule ^([^/]*)/([^/]*)/([^/]*)\.html$ index.php?view=$1&layout=$2&id=$3 [L]
+
+# new rule to handle index.php?view=cpanel&layout=edit
+RewriteRule ^([^/]*)/([^/]*)\.html$ index.php?view=$1&layout=$2 [L]
+
+# your existing rule to handle index.php?view=cpanel
+RewriteRule ^([^/]*)\.html$ index.php?view=$1 [L]
+
+#Error handling
+ErrorDocument 400 /error.php?e=400
+ErrorDocument 401 /error.php?e=401
+ErrorDocument 403 /error.php?e=403
+ErrorDocument 404 /error.php?e=404
+ErrorDocument 500 /error.php?e=500
