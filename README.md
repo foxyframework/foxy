@@ -1,6 +1,6 @@
 [![Donate to this project using Patreon](https://img.shields.io/badge/patreon-donate-yellow.svg)](https://www.patreon.com/foxyframework)
 
-<img src="assets/img/icons/logo.png" alt="Foxy Framework" height="100" />
+<img src="assets/img/logo.png" alt="Foxy Framework" height="100" />
 
 # Foxy Framework
 Small PHP Framework made with ♥ from Barcelona
