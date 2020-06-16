@@ -1,7 +1,6 @@
 {
     "name": "foxy php framework",
     "require": {
-        "phpoffice/phpspreadsheet": "1.13.0",
-        "setasign/fpdi": "2.3.3"
+        "sonata-project/google-authenticator": "2.2.0"
     }
 }
