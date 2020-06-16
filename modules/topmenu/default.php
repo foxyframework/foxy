@@ -39,7 +39,7 @@ $lang   = factory::get('language');
               <?php endif; ?>
               <?php endforeach; ?>
               <?php if($user->getAuth() && $user->level == 1) : ?>
-              <li><a class="text-light" href="<?= $url->genUrl('index.php?view=admin'); ?>">Administrator</a></li>
+              <li><a class="text-light" href="<?= $url->genUrl('index.php?view=admin'); ?>" target="_blank">Administrator</a></li>
               <?php endif; ?>
             </ul>
           </div>
