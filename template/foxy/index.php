@@ -17,6 +17,13 @@
   	?>
     <link rel="canonical" href="<?= $url->selfUrl(); ?>">
 
+    <?php if($config->recaptcha == 1) : ?>
+    <script src="https://www.google.com/recaptcha/api.js?render=<?= $config->public_key; ?>"></script>
+    <script>
+    grecaptcha.ready(function(){grecaptcha.execute('<?= $config->public_key; ?>',{action: "homepage"}).then(function(token){});});
+    </script>
+    <?php endif; ?>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="<?= $config->site; ?>/template/foxy/css/custom.css">
@@ -33,6 +40,7 @@
 
     <link rel="apple-touch-icon-precomposed" href="<?= $config->site; ?>/assets/img/icons/icon64.png">
     <link rel="shortcut icon" href="<?= $config->site; ?>/assets/img/icons/icon16.png">
+
   </head>
 
   <body class="d-flex flex-column h-100">

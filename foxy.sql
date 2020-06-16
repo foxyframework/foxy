@@ -33,6 +33,7 @@ CREATE TABLE `foxy_articles` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `title` varchar(150) NOT NULL,
+  `alias` varchar(150) NOT NULL,
   `category` int(11) NOT NULL,
   `tags` varchar(150) NOT NULL,
   `fulltext` text NOT NULL,
@@ -68,10 +69,8 @@ CREATE TABLE `foxy_menu` (
 INSERT INTO `foxy_menu` (`id`, `title`, `translation`, `url`, `auth`, `type`, `module`, `template`) VALUES
 (1, 'Home', '', 'index.php?view=home', 0, 0, '', ''),
 (2, 'About', '', 'index.php?view=about', 0, 0, '', ''),
-(3, 'Blog', '', 'index.php?view=blog', 0, 0, '', ''),
-(4, 'Login', '', 'index.php?view=register&layout=login', 1, 1, 'login', ''),
-(5, 'Logout', '', 'index.php?task=register.logout', 2, 0, '', ''),
-(6, 'Admin', '', 'index.php?view=admin', 1, 0, '', 'admin');
+(3, 'Login', '', 'index.php?view=register&layout=login', 1, 1, 'login', ''),
+(4, 'Logout', '', 'index.php?task=register.logout', 2, 0, '', '');
 
 -- --------------------------------------------------------
 
