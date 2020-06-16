@@ -101,7 +101,7 @@ class Html
                     $html .= $this->getUsersField($form, $field_name, $_GET[''.$field_name.'']);
                 }
                 if($field[$i]->type == 'list') {
-                    
+
                     $field_name = (string)$field[$i]->name;
                     $html .= $this->getListField($form, $field_name, $_GET[''.$field_name.'']);
                 }
@@ -305,7 +305,7 @@ class Html
                 $html .= "<div id='".$field[0]->name."-field' class='form-group'>";
                 if($field[0]->label != "") $html .= "<label for='".$field[0]->id."'><a class='hasTip' title='".$lang->get($field[0]->placeholder)."'>".$lang->get($field[0]->label)."</a></label>";
                 if($field[0]->label != "") $html .= "<div class='controls'>";
-                $html .= "<textarea id='".$field[0]->id."' maxlength='".$field[0]->maxlength."' placeholder='".$field[0]->placeholder."' name='".$field[0]->name."' rows='".$field[0]->rows."' cols='".$field[0]->cols."' class='form-control' ".$disabled." ".$onchange.">".$default."</textarea>";
+                $html .= "<textarea id='".$field[0]->id."' maxlength='".$field[0]->maxlength."' placeholder='".$lang->get($field[0]->placeholder)."' name='".$field[0]->name."' rows='".$field[0]->rows."' cols='".$field[0]->cols."' class='form-control' ".$disabled." ".$onchange.">".$default."</textarea>";
                 //$html .= "<span id='".$field[0]->name."-msg'></span>";
                 if($field[0]->label != "") $html .= "</div>";
                 $html .= "</div>";
