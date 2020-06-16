@@ -10,3 +10,5 @@
 */
 
 defined('_Foxy') or die ('restricted access');
+
+$app->addScript($config->site.'/bower_components/jquery-validation/jquery.validate.min.js');
