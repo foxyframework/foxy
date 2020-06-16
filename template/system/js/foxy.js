@@ -31,18 +31,21 @@ $(document).ready(function() {
 	}
 
 	if ($('.editor').length) {
-		wysiwyg( '.editor', {
-			toolbar: 'demand',                        // 'top','bottom','demand',null
-			buttons: [buttons],                       // buttons on toolbar
-			selectionbuttons: [selectionbuttons],     // buttons on selection-toolbar
-			suggester: suggester( open_suggestion ),  // handle suggestions
-			interceptenter: interceptenter(),         // intercept 'enter'
-			hijackmenu: false                         // toolbar instead context menu
-	 	 });
+		$( '.editor' ).trumbowyg({
+			imageWidthModalEdit: true,
+			tagsToRemove: ['script', 'iframe'],
+			tagsToKeep: ['i'],
+			autogrow: true,
+			defaultLinkTarget: '_blank'
+		});
 	}
 
+	if ($('#datatable').length) {
+		$('#datatable').DataTable();
+	}
+	
 	//tooltips
-	$(".hasTip").tooltip();
+	//$(".hasTip").tooltip();
 
 	//save cookie with language
 	$('.lang').click(function() {

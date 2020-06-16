@@ -12,5 +12,5 @@
 defined('_Foxy') or die ('restricted access');
 
 if($app->getVar('layout') == 'admin') {
-    $app->addScript($config->site.'/bower_components/jquery-validation/jquery.validate.min.js');
+    $app->addScript($config->site.'/bower_components/jquery-validation/dist/jquery.validate.min.js');
 }
