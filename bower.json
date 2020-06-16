@@ -12,12 +12,13 @@
   "homepage": "https://aficat.com",
   "private": true,
   "dependencies": {
+    "repeatable-fields": "",
     "bootstrap-datetimepicker": "0.0.10",
     "lightbox2": "2.11.1",
     "datatables": "1.10.20",
     "moment": "2.26.0",
     "dropzone": "5.7.1",
-    "jquery-validation": "1.19.3",
+    "jquery-validation": "1.19.2",
     "trumbowyg": "2.21.0"
   }
 }
