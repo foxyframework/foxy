@@ -144,6 +144,7 @@ class blog extends model
 
 		$id     = $app->getVar('id', 0, 'post', 'int');
 
+		$_POST['alias']         = $this->clean($_POST['title']);
 		$_POST['category'] 		= 0;
 		$_POST['userid']   		= $user->id;
 		$_POST['author_link'] 	= '#';
@@ -173,6 +174,10 @@ class blog extends model
         $app->redirect($link);
 	}
 
+	/**
+	 * Method to render all tags separated by comma
+	 * @return string 
+	*/
 	public function renderTags($tags)
 	{
 		$tags = explode(',', $tags);
@@ -189,13 +194,24 @@ class blog extends model
 		return $result;
 	}
 
-	public function clean($string)
+	/**
+	 * Method to clean a string to be a friendly url
+	 * @return string 
+	*/
+	public function clean($title)
 	{
-   		$string = str_replace('<script>', '', $string);
-		$string = str_replace('</script>', '', $string);
-   		return $string; // Removes special chars.
+		$a = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ';
+		$b = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr';
+		$title  = strtr(utf8_decode($title), utf8_decode($a), $b);
+		$title  = utf8_encode(trim(strtolower($string)));
+		$title  = preg_replace('#[^a-z0-9\\-/]#i', '_', $title);
+		return trim(preg_replace('/-+/', '-', $title), '-/');
 	}
 
+	/**
+	 * Method to generate the rss feed
+	 * @return string 
+	*/
 	public function getFeed()
 	{
 		$db  = factory::get('database');

@@ -34,6 +34,7 @@ $params = $model->getParams('blog');
 							<input type="hidden" name="publishDate" value="<?= $publishDate; ?>">			
 							<input type="hidden" name="id" value="<?= $app->getVar('id', 0); ?>">
 							<?=  $html->getTextField('blog', 'title', $item->title); ?>
+							<?=  $html->getTextField('blog', 'alias', $item->alias); ?>
 							<?=  $html->getTextField('blog', 'tags', $item->tags); ?>	
 							<?=  $html->getTextField('blog', 'author', $item->author); ?>
 							<?=  $html->getTextField('blog', 'author_link', $item->author_link); ?>		

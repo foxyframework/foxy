@@ -3,9 +3,18 @@
         <type>text</type>
         <name>title</name>
         <id>title</id>
+        <label>FOXY_BLOG_TITLE_LABEL</label>
+        <message></message>
+        <placeholder>FOXY_BLOG_TITLE_PLACEHOLDER</placeholder>
+        <disabled>false</disabled>
+    </field>
+    <field name="alias">
+        <type>text</type>
+        <name>alias</name>
+        <id>alias</id>
         <label>FOXY_BLOG_TITOL_LABEL</label>
         <message></message>
-        <placeholder>FOXY_BLOG_TITOL_PLACEHOLDER</placeholder>
+        <placeholder>FOXY_BLOG_ALIAS_PLACEHOLDER</placeholder>
         <disabled>false</disabled>
     </field>
     <field name="tags">

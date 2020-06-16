@@ -12,6 +12,10 @@ RewriteEngine On
 
 # RewriteBase /
 
+
+# new rule to handle index.php?view=blog&layout=item&id=80&slug=example-post-title
+RewriteRule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)\.html$ index.php?view=$1&layout=$2&id=$3&slug=$4 [L]
+
 # new rule to handle index.php?view=cpanel&layout=edit&id=80
 RewriteRule ^([^/]*)/([^/]*)/([^/]*)\.html$ index.php?view=$1&layout=$2&id=$3 [L]
 

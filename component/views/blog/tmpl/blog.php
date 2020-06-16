@@ -27,7 +27,7 @@ $params = $model->getParams('blog');
 			<?php if(count($items)) : ?>
 			<?php foreach($items as $item) : ?>
 			<div class="blog-post">
-				<a href="index.php?view=blog&layout=item&id=<?= $item->id; ?>">
+				<a href="<?= $url->genUrl('index.php?view=blog&layout=item&id='.$item->id.'&slug='.$item->alias); ?>">
 					<h2 class="blog-post-title"><?= $item->title; ?></h2>
 				</a>
 				<p class="blog-post-meta"><?= $lang->get('FOXY_BLOG_CREATED_BY'); ?>
