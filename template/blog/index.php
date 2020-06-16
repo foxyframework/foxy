@@ -20,7 +20,7 @@
     <?php if($config->recaptcha == 1) : ?>
     <script src="https://www.google.com/recaptcha/api.js?render=<?= $config->public_key; ?>"></script>
     <script>
-    grecaptcha.ready(function(){grecaptcha.execute('<?= $config->public_key; ?>',{action: "homepage"}).then(function(token){});});
+    grecaptcha.ready(function(){grecaptcha.execute('<?= $config->public_key; ?>',{action: "contact"}).then(function(token){ document.getElementById('g-recaptcha-response').value = token; });});
     </script>
     <?php endif; ?>
 

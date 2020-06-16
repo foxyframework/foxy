@@ -69,8 +69,10 @@ CREATE TABLE `foxy_menu` (
 INSERT INTO `foxy_menu` (`id`, `title`, `translation`, `url`, `auth`, `type`, `module`, `template`) VALUES
 (1, 'Home', '', 'index.php?view=home', 0, 0, '', ''),
 (2, 'About', '', 'index.php?view=about', 0, 0, '', ''),
-(3, 'Login', '', 'index.php?view=register&layout=login', 1, 1, 'login', ''),
-(4, 'Logout', '', 'index.php?task=register.logout', 2, 0, '', '');
+(4, 'Blog', '', 'index.php?task=register.logout', 2, 0, '', ''),
+(4, 'Contact', '', 'index.php?task=contact', 2, 0, '', ''),
+(5, 'Login', '', 'index.php?view=register&layout=login', 1, 1, 'login', ''),
+(6, 'Logout', '', 'index.php?task=register.logout', 2, 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -212,7 +214,7 @@ ALTER TABLE `foxy_articles`
 -- AUTO_INCREMENT per la taula `foxy_menu`
 --
 ALTER TABLE `foxy_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT per la taula `foxy_sessions`

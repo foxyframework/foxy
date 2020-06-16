@@ -1,0 +1,38 @@
+<form>
+    <field name="name">
+        <type>text</type>
+        <name>name</name>
+        <id>name</id>
+        <label>FOXY_CONTACT_NAME_LABEL</label>
+        <message></message>
+        <placeholder>FOXY_CONTACT_NAME_PLACEHOLDER</placeholder>
+        <disabled>false</disabled>
+    </field>
+    <field name="phone">
+        <type>text</type>
+        <name>phone</name>
+        <id>phone</id>
+        <label>FOXY_CONTACT_PHONE_LABEL</label>
+        <message></message>
+        <placeholder>FOXY_CONTACT_PHONE_PLACEHOLDER</placeholder>
+        <disabled>false</disabled>
+    </field>
+    <field name="email">
+        <type>email</type>
+        <name>email</name>
+        <id>email</id>
+        <label>FOXY_CONTACT_EMAIL_LABEL</label>
+        <message></message>
+        <placeholder>FOXY_CONTACT_EMAIL_PLACEHOLDER</placeholder>
+        <disabled>false</disabled>
+    </field>
+    <field name="message">
+        <type>textarea</type>
+        <name>message</name>
+        <id>message</id>
+        <label>FOXY_CONTACT_MESSAGE_LABEL</label>
+        <message></message>
+        <disabled>false</disabled>
+        <placeholder>FOXY_CONTACT_MESSAGE_PLACEHOLDER</placeholder>
+    </field>
+</form>
