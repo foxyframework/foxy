@@ -41,6 +41,7 @@ class menu extends model
         $obj->url           = $app->getVar('url');
         $obj->auth          = $app->getVar('auth');
         $obj->type          = $app->getVar('type');
+        $obj->module        = $app->getVar('module');
 
         $result = $db->insertRow("#_menu", $obj);
 
