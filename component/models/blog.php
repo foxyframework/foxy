@@ -144,15 +144,15 @@ class blog extends model
 
 		$id     = $app->getVar('id', 0, 'post', 'int');
 
-		$_POST['alias']         = $this->clean($_POST['title']);
 		$_POST['category'] 		= 0;
 		$_POST['userid']   		= $user->id;
 		$_POST['author_link'] 	= '#';
 		$_POST['language'] 		= 'ca-es';
 		$_POST['status'] 		= 1;
+		if($_POST['alias'] == '') { $_POST['alias'] = $this->clean($_POST['title']); }
 
 		if($id == 0) {
-			$_POST['hits'] = 0;
+			$_POST['hits']  = 0;
 			$result = $db->insertRow($this->table, $_POST);
 
 			$subject    = $lang->replace('FOXY_BLOG_NEW_ARTICLE_SUBJECT', $config->sitename);
@@ -198,14 +198,15 @@ class blog extends model
 	 * Method to clean a string to be a friendly url
 	 * @return string 
 	*/
-	public function clean($title)
-	{
-		$a = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ';
-		$b = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr';
-		$title  = strtr(utf8_decode($title), utf8_decode($a), $b);
-		$title  = utf8_encode(trim(strtolower($string)));
-		$title  = preg_replace('#[^a-z0-9\\-/]#i', '_', $title);
-		return trim(preg_replace('/-+/', '-', $title), '-/');
+	public function clean($string) {
+
+		$string = trim($string); 
+		$string = strtolower($string);
+		$string = preg_replace("/[^a-z0-9_\s-]/", "", $string);
+		$string = preg_replace("/[\s-]+/", " ", $string);
+		$string = preg_replace("/[\s_]/", "-", $string);
+	
+		return $string;	
 	}
 
 	/**
