@@ -8,6 +8,13 @@
     <meta name="keywords" content="">
     <meta name="description" content="<?= $config->description; ?>">
     <meta name="author" content="<?= $config->sitename; ?>">
+    <?php
+  	if(count($app->metatags) > 0) :
+  	foreach($app->metatags as $tag) : ?>
+  	<?= $tag. PHP_EOL; ?>
+  	<?php endforeach;
+  	endif;
+  	?>
     <link rel="canonical" href="<?= $url->selfUrl(); ?>">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
@@ -18,9 +25,9 @@
 
     <?php
   	if(count($app->stylesheets) > 0) :
-  		foreach($app->stylesheets as $stylesheet) : ?>
-  		    <link href="<?= $stylesheet; ?>" rel="stylesheet">
-  		<?php endforeach;
+  	foreach($app->stylesheets as $stylesheet) : ?>
+  	<link href="<?= $stylesheet; ?>" rel="stylesheet">
+  	<?php endforeach;
   	endif;
   	?>
 

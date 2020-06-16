@@ -38,6 +38,14 @@ class Application
     var $stylesheets = array();
 
     /**
+     * Array of metatags placed in the header
+     *
+     * @var  array
+     * @access   private
+    */
+    var $metatags = array();
+
+    /**
      * View
      *
      * @var     string
@@ -99,6 +107,16 @@ class Application
      */
     public function addStylesheet($url) {
         $this->stylesheets[] = $url;
+    }
+
+    /**
+     * Adds custom metatags to the page
+     *
+     * @param    string  $tag       Tag to insert
+     * @access   public
+     */
+    public function addCustomTag($tag) {
+        $this->metatags[] = $tag;
     }
 
     /**
