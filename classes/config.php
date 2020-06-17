@@ -35,6 +35,7 @@ class Config {
 	public $login_redirect = 'index.php?view=home';
 	public $show_register = 0;
 	public $pagination  = 20;
+	public $twosteps    = 0;
 	public $recaptcha   = 0;
 	public $public_key  = '';
 	public $secretKey   = '';
