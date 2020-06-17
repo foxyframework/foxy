@@ -46,5 +46,8 @@ $params = $model->getParams('blog');
 
 			</div>
 		</div>
+
+		<?= $model->pagination($_GET); ?>
+
     </div>
 </section>
