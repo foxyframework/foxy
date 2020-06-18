@@ -1,0 +1,18 @@
+{
+    "jumbotron": {
+        "arg1": "Foxy PHP Framework",
+        "arg2": "A small PHP Framework for rapid development of web application",
+        "arg3": "assets/img/icons/icon264.png"
+    },
+    "marketing": {
+        "arg1": "Light as a feather. <span class='text-muted'>Lightweight.</span>",
+        "arg2": "Foxy weighs very little, the entire package once uploaded to your server is only 916Kb.",
+        "arg3": "assets/img/demo/fox1.jpg",
+        "arg4": "Extend the code. <span class='text-muted'>Plugins.</span>",
+        "arg5": "Foxy allows you to create the pages you want but also extend the functionality with small pieces of code called modules and plugins.",
+        "arg6": "assets/img/demo/fox2.jpg",
+        "arg7": "Speak to the world. <span class='text-muted'>Internationalization.",
+        "arg8": "Foxy allows you to create files with the translation of the text strings that you have in your application.",
+        "arg9": "assets/img/demo/fox3.jpg"
+    }
+}

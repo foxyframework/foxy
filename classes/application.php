@@ -157,7 +157,7 @@ class Application
 
     /**
      * Method to decrypt passwords
-     * *
+     * 
      * @param    string  $password    hashed password
      * @param    string  $hash        Hash to compare with
      * @access   public
@@ -173,7 +173,7 @@ class Application
 
     /**
      * Method to trigger plugins
-     * *
+     * 
      * @param    string  $type    name of the plugin
      * @param    array   $args    Array of parameters to send
      * @access   public
@@ -187,6 +187,37 @@ class Application
   			include_once $path;
   			$type::execute($args);
   		}
+    }
+
+    /**
+     * Method to render html blocks
+     * 
+     * @param    string  $type    name of the html block
+     * @access   public
+    */
+    public function render($view)
+    {
+        $html   = '';
+    	$path   = FOXY_COMPONENT.DS.'views'.DS.$view.DS.'config.json';
+
+  		if (file_exists($path))
+  		{
+            $params = json_decode(file_get_contents($path));
+            foreach($params as $key => $val) {
+                $blockpath = FOXY_ASSETS.DS.'blocks'.DS.$key.DS.$key.'.html';
+                if(file_exists($blockpath)) {
+                    $html .= file_get_contents($blockpath);
+                }
+                $i = 1;
+                foreach(((array)$params)[$key] as $arg) {
+                    $html = str_replace('{arg'.$i.'}', $arg, $html);
+                    $i++;
+                }
+            }
+
+          }
+          
+          return $html;
     }
 
     /**
