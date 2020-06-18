@@ -197,6 +197,7 @@ class Application
     */
     public function render($view)
     {
+        $lang   = factory::get('language');
         $html   = '';
     	$path   = FOXY_COMPONENT.DS.'views'.DS.$view.DS.'config.json';
 
@@ -210,6 +211,18 @@ class Application
                 }
                 $i = 1;
                 foreach(((array)$params)[$key] as $arg) {
+
+                    //get page params
+                    $config   = FOXY_COMPONENT.DS.'views'.DS.$view.DS.'params.json';
+                    $cfg      = json_decode(file_get_contents($path));
+                    if(file_exists($config)) {
+                        $cfg->fluid == 0 ? $container = 'container' : $container = 'container-fluid';
+                        $html = str_replace('{container}', $container, $html);
+                    }
+                    if (strpos($arg, 'TRANSLATE_') !== false) {
+                        $arg = str_replace('TRANSLATE_', '', $arg);
+                        $arg = $lang->get($arg);
+                    }
                     $html = str_replace('{arg'.$i.'}', $arg, $html);
                     $i++;
                 }
