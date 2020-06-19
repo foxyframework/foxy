@@ -20,7 +20,7 @@ class register extends model
     */
     public function checkEmail()
     {
-        if($_GET['task'] != 'register.checkEmail') { return false; }
+        parent::allowTask('register.checkEmail', $_GET['task']);
 
         $db         = factory::get('database');
         $email      = $_GET['email'];
@@ -38,7 +38,7 @@ class register extends model
     */
     public function register()
     {
-        if($_GET['task'] != 'register.register') { return false; }
+        parent::allowTask('register.register', $_GET['task']);
 
         $config = factory::get('config');
         $app    = factory::get('application');
@@ -61,8 +61,6 @@ class register extends model
             $app->redirect($url->genUrl('/index.php?view=register'));
             return false;
         }
-
-        $app->getToken($_POST['auth_token'], $config->token_time);
 
         if($_POST['password'] === $_POST['password2']) {
 
@@ -116,7 +114,7 @@ class register extends model
     */
     public function resendActivation()
     {
-        if($_GET['task'] != 'register.resendActivation') { return false; }
+        parent::allowTask('register.resendActivation', $_GET['task']);
 
         $config = factory::get('config');
         $app    = factory::get('application');
@@ -126,7 +124,7 @@ class register extends model
 
         //send a confirmation to the user...
         $subject    = $lang->replace('FOXY_REGISTER_WELCOME_SUBJECT', $config->sitename);
-        $link       = $config->site.'/index.php?view=register&task=validate&token='.$user->token;
+        $link       = $config->site.'/index.php?task=register.validate&token='.$user->token;
         $body       = $lang->replace('FOXY_REGISTER_WELCOME_BODY', $user->username,  $config->sitename, $link);
         $send       = $this->sendMail($user->email, $user->email, $subject, $body);
 
@@ -143,7 +141,7 @@ class register extends model
     */
     public function reset()
     {
-        if($_GET['task'] != 'register.reset') { return false; }
+        parent::allowTask('register.reset', $_GET['task']);
 
         $config = factory::get('config');
         $app    = factory::get('application');
@@ -187,9 +185,84 @@ class register extends model
     /**
      * Method to login into the application
     */
+    public function twosteps()
+    {
+        parent::allowTask('register.twosteps', $_GET['task']);
+
+        $config     = factory::get('config');
+        $app        = factory::get('application');
+        $db         = factory::get('database');
+        $user       = factory::get('user');
+        $lang       = factory::get('language');
+        $session    = factory::get('session');
+        $url        = factory::get('url');
+
+        $g = new \Google\Authenticator\GoogleAuthenticator();
+
+        if($app->getVar('otp') == '') {
+            $email      = $app->getVar('email', '', 'post', 'string');
+            $password   = $app->getVar('password', '', 'post', 'string');
+            $redirect   = $app->getVar('return', '', 'post', 'string');
+            $token      = $app->getVar('token', '', 'post', 'string');
+
+            //si un campo esta vacio abortamos...
+            if($email == "" || $password == "") {
+                $app->setMessage($lang->get('FOXY_ALL_FIELDS_ARE_MANDATORY'), 'danger');
+                $app->redirect($config->site.$config->login_redirect);
+                return false;
+            }
+
+            $db->query("SELECT password FROM `#_users` WHERE email = ".$db->quote($email)." AND block = 0");
+            $dbpass = $db->loadResult();
+            if($app->decryptPassword($password, $dbpass)) {
+                //get the user id and store it before authenticate
+                $db->query("SELECT id FROM `#_users` WHERE email = ".$db->quote($email)." AND block = 0");
+                if($id = $db->loadResult()) {
+                    $session->setVar('tmpid', $id);
+                }
+            } else {
+                $app->setMessage($lang->get('PFOXY_LOGIN_PASSWORD_NOT_MATCH_ERROR_MSG'), 'danger');
+                $app->redirect($url->genUrl('/index.php?view=register&layout=login'));
+                return false;
+            }
+        }
+
+        if ($session->getVar('tmpid') != '' && !$user->getAuth() && $app->getVar('otp') == '') {
+
+            //generate new token and save into database...
+            $secret = $user->genToken(random_bytes(10));
+            $session->setVar('secret', $secret);
+            $db->updateField('#_users', 'token', $secret, 'id', $session->getVar('tmpid'));
+            $app->redirect($url->genUrl('/index.php?view=register&layout=authcode'));
+
+        } else {
+            if($app->getVar('otp') != '') {
+                $tmpId = $app->getVar('tmpId'); 
+                if ($g->checkCode('Foxy'.$user->getToken($tmpId), $app->getVar('otp'))) {   
+                    
+                    $user->setAuth($tmpId);
+
+                    //register session
+                    $session->createSession();
+
+                    $db->updateField('#_users', 'lastvisitDate',  $app->getVar('lastvisitDate'), 'id', $tmpId);
+                    $app->setMessage($lang->replace('FOXY_LOGIN_SUCCESS_MSG',  $user->username), 'success');
+                    $redirect == '' ? $authUrl = $config->site.$config->login_redirect : $authUrl = base64_decode($redirect);
+                    $app->redirect($authUrl);
+                    return true;
+
+                }
+            }
+        }
+
+    }
+
+    /**
+     * Method to login into the application
+    */
     public function login()
     {
-        if($_GET['task'] != 'register.login') { return false; }
+        parent::allowTask('register.login', $_GET['task']);
 
         $config     = factory::get('config');
         $app        = factory::get('application');
@@ -246,7 +319,7 @@ class register extends model
     */
     public function logout()
     {
-        if($_GET['task'] != 'register.logout') { return false; }
+        parent::allowTask('register.logout', $_GET['task']);
 
         $config     = factory::get('config');
         $app        = factory::get('application');
@@ -269,7 +342,7 @@ class register extends model
     */
     public function validate()
     {
-        if($_GET['task'] != 'register.validate') { return false; }
+        parent::allowTask('register.validate', $_GET['task']);
 
         $config = factory::get('config');
         $app    = factory::get('application');

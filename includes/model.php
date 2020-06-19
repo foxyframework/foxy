@@ -38,8 +38,9 @@ class model
     }
 
     /**
+     * Mthod to save the view params
      * @access public
-     * @return bool
+     * @return void
     */
     public function saveParams()
 	{
@@ -62,8 +63,10 @@ class model
     }
 
     /**
+     * Method to get the view params
+     * @param string $view The view name
      * @access public
-     * @return bool
+     * @return object
     */
     public function getParams($view)
 	{
@@ -76,13 +79,41 @@ class model
         }
     }
 
+    /**
+     * Method to check if is the task that user needs
+     * @param string $task The task name
+     * @access public
+     * @return bool
+    */
+    public function allowTask($task, $get)
+	{
+        if (strpos($task, '.') !== false) { 
+            $parts = explode('.', $task);
+            $task  = $parts[1];
+        }
+
+        if($task != $get) { return false; }
+
+        return true;
+    }
+
+    /**
+     * Method to get all the database users
+     * @access public
+     * @return object
+    */
 	public static function getUsers()
 	{
 		$db = factory::get('database');
-		$db->query('select * from #_users');
+		$db->query('select * from #_users WHERE block = 0');
 		return $db->fetchObjectList();
 	}
 
+    /**
+     * Method to know if session user is an admin
+     * @access public
+     * @return bool
+    */
     function isAdmin() {
 
         $user = factory::get('user');
@@ -94,7 +125,7 @@ class model
 
     /**
      * Method to secure the wishlist
-     */
+    */
     public function tokenCheck()
     {
         $db     = factory::get('database');
@@ -108,36 +139,6 @@ class model
 
         return true;
     }
-
-    function timeElapsed($datetime, $full = false)
-	{
-		$now = new DateTime;
-		$ago = new DateTime($datetime);
-		$diff = $now->diff($ago);
-
-		$diff->w = floor($diff->d / 7);
-		$diff->d -= $diff->w * 7;
-
-		$string = array(
-		    'y' => 'any',
-		    'm' => 'mes',
-		    'w' => 'setmana',
-		    'd' => 'dia',
-		    'h' => 'hora',
-		    'i' => 'minut',
-		    's' => 'segon',
-		);
-		foreach ($string as $k => &$v) {
-		    if ($diff->$k) {
-		        $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
-		    } else {
-		        unset($string[$k]);
-		    }
-		}
-
-		if (!$full) $string = array_slice($string, 0, 1);
-		return $string ? 'fa '.implode(', ', $string) : 'just ara';
-	}
 
     /**
      * Send email to the user
@@ -171,6 +172,8 @@ class model
 
 	/**
      * Method to create a pagination
+     * @params array $filters all the GET vars
+     * @return string
     */
     public function pagination($filters)
     {
