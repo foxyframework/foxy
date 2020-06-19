@@ -210,6 +210,41 @@ class blog extends model
 	}
 
 	/**
+     * Method to elapse a date as a string
+	 * @param date $datetime the complete data of the article
+	 * @return string
+    */
+    public function timeElapsed($datetime, $full = false)
+	{
+		$now = new DateTime;
+		$ago = new DateTime($datetime);
+		$diff = $now->diff($ago);
+
+		$diff->w = floor($diff->d / 7);
+		$diff->d -= $diff->w * 7;
+
+		$string = array(
+		    'y' => 'any',
+		    'm' => 'mes',
+		    'w' => 'setmana',
+		    'd' => 'dia',
+		    'h' => 'hora',
+		    'i' => 'minut',
+		    's' => 'segon',
+		);
+		foreach ($string as $k => &$v) {
+		    if ($diff->$k) {
+		        $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+		    } else {
+		        unset($string[$k]);
+		    }
+		}
+
+		if (!$full) $string = array_slice($string, 0, 1);
+		return $string ? 'fa '.implode(', ', $string) : 'just ara';
+	}
+
+	/**
 	 * Method to generate the rss feed
 	 * @return string 
 	*/
