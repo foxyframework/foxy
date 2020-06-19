@@ -206,6 +206,10 @@ class Application
             $params = json_decode(file_get_contents($path));
             foreach($params as $key => $val) {
                 $blockpath = FOXY_ASSETS.DS.'blocks'.DS.$key.DS.$key.'.html';
+                if (strpos($key, '_') !== false) { 
+                    $parts = explode('_', $key); 
+                    $blockpath = FOXY_ASSETS.DS.'blocks'.DS.$parts[0].DS.$parts[0].'.html';
+                }
                 if(file_exists($blockpath)) {
                     $html .= file_get_contents($blockpath);
                 }
