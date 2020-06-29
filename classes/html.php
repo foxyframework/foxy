@@ -15,7 +15,8 @@ class Html
 {
     /**
      * Method to load a form
-     * @param $form string the form xml name
+     * @param string $form the form xml name
+     * @return object
     */
     public function getForm($form)
     {
@@ -25,6 +26,12 @@ class Html
 
     /**
      * Method to render a complete table
+     * @param string $id the table id to instantiate datatables via js
+     * @param int $key the table primary key
+     * @param object $data The result from database
+     * @param array $fields group of fields with formats
+     * @param array $columns The table columns to display as thead
+     * @return string
     */
     public function renderTable($id, $key, $data, $fields=array(), $columns=array())
     {
@@ -74,8 +81,10 @@ class Html
     }
 
     /**
-     * Method to load a form
-     * @param $form string the form xml name
+     * Method to render a group of filters from an xml file
+     * @param string $form the form xml name
+     * @param string $view the page view name
+     * @return string
     */
     public function renderFilters($form, $view)
     {
@@ -126,6 +135,12 @@ class Html
         return $html;
     }
 
+    /**
+     * Method to render a group of buttons from an xml file
+     * @param string $form the form xml name
+     * @param string $view the page view name
+     * @return string
+    */
     public function renderButtons($form, $view)
     {
     	$app    = factory::get('application');
@@ -153,10 +168,11 @@ class Html
 
     /**
      * Method to render a input box
-     * @param $form string the form name
-     * @param $name string the field name
-     * @param $default mixed optional default value
-     * @return $html string a complete input field html
+     * @param string $form the form name
+     * @param string $name the field name
+     * @param mixed $default optional default value
+     * @return string $html a complete input field html
+     * @return string
     */
     public function getTextField($form, $name, $default='')
     {
@@ -188,10 +204,10 @@ class Html
 
     /**
      * Method to render an email field
-     * @param $form string the form name
-     * @param $name string the field name
-     * @param $default mixed optional default value
-     * @return $html string a complete input field html
+     * @param string $form the form name
+     * @param string $name the field name
+     * @param mixed $default optional default value
+     * @return string $html a complete input field html
     */
     public function getEmailField($form, $name, $default='')
     {
@@ -225,10 +241,10 @@ class Html
 
     /**
      * Method to render a number input box
-     * @param $form string the form name
-     * @param $name string the field name
-     * @param $default mixed optional default value
-     * @return $html string a complete input field html
+     * @param string $form the form name
+     * @param string $name the field name
+     * @param mixed $default optional default value
+     * @return string $html a complete input field html
     */
     function getNumberField($form, $name, $default='')
     {
@@ -261,10 +277,10 @@ class Html
 
     /**
      * Method to render a password field
-     * @param $form string the form name
-     * @param $name string the field name
-     * @param $default mixed optional default value
-     * @return $html string a complete input field html
+     * @param string $form the form name
+     * @param string $name the field name
+     * @param mixed $default optional default value
+     * @return string $html a complete input field html
     */
     public function getPasswordField($form, $name, $default='')
     {
@@ -298,10 +314,10 @@ class Html
 
     /**
      * Method to render a input box
-     * @param $form string the form name
-     * @param $name string the field name
-     * @param $default mixed optional default value
-     * @return $html string a complete input field html
+     * @param string $form the form name
+     * @param string $name the field name
+     * @param mixed $default optional default value
+     * @return string $html a complete input field html
     */
     public function getDateField($form, $name, $default='')
     {
@@ -330,11 +346,11 @@ class Html
 
     /**
      * Method to render a input box
-     * @param $form string the form name
-     * @param $name string the field name
-     * @param $default mixed optional default value
-     * @param $editor bool optional convert the textarea in a editor
-     * @return $html string a complete input field html
+     * @param string $form the form name
+     * @param string $name the field name
+     * @param mixed $default optional default value
+     * @param bool $editor optional convert the textarea in a editor
+     * @return string $html a complete input field html
     */
     public function getTextareaField($form, $name, $default='')
     {
@@ -363,11 +379,11 @@ class Html
 
     /**
      * Method to render a input box
-     * @param $form string the form name
-     * @param $name string the field name
-     * @param $default mixed optional default value
-     * @param $editor bool optional convert the textarea in a editor
-     * @return $html string a complete input field html
+     * @param string $form the form name
+     * @param string $name the field name
+     * @param mixed $default optional default value
+     * @param bool $editor optional convert the textarea in a editor
+     * @return string $html a complete input field html
     */
     public function getEditorField($form, $name, $default='')
     {
@@ -392,9 +408,9 @@ class Html
 
     /**
      * Method to render a form button
-     * @param $form string the form name
-     * @param $name string the field name
-     * @return $html string a complete html button
+     * @param string $form the form name
+     * @param string $name the field name
+     * @return string $html a complete input field html
     */
     public function getButton($form, $name)
     {
@@ -415,8 +431,8 @@ class Html
 
     /**
      * Method to render a repeatable field require jquery ui
-     * @param $form string the form name
-     * @param $fields array of field names
+     * @param string $form the form name
+     * @param array $fields of field names
 	 * @param $tmpl array of default values
 	 * @param $list object to fill the list field
 	 * @param $value string the value field for list fields
