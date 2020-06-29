@@ -26,7 +26,7 @@ class Html
     /**
      * Method to render a complete table
     */
-    public function renderTable($id, $key, $linked, $data, $fields=array(), $columns=array())
+    public function renderTable($id, $key, $data, $fields=array(), $columns=array())
     {
         $view  = factory::get('application')->getVar('view');
         $url   = factory::get('url');
