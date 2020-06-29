@@ -224,6 +224,42 @@ class Html
     }
 
     /**
+     * Method to render a number input box
+     * @param $form string the form name
+     * @param $name string the field name
+     * @param $default mixed optional default value
+     * @return $html string a complete input field html
+    */
+    function getNumberField($form, $name, $default='')
+    {
+        $app    = factory::getApplication();
+        $lang   = factory::getLanguage();
+
+        $html = "";
+
+        foreach($this->getForm($form) as $field) {
+            //text inputs...
+            if($field['name'] == $name) {
+				$field[0]->readonly == 'true' ? $readonly = "readonly='true'" : $readonly = "";
+                $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
+                $field[0]->onchange != "" ? $onchange = 'onchange="'.$field[0]->onchange.'"' : $onchange = "";
+                $field[0]->onkeyup != "" ? $onkeyup = " onkeyup='".$field[0]->onkeyup."'" : $onkeyup = "";
+                if($field[0]->type != 'hidden') $html .= "<div id='".$field[0]->name."-field' class='form-group'>";
+                if($field[0]->type != 'hidden' && $field[0]->label != "") $html .= "<label for='".$field[0]->id."'><a class='hasTip' title='".$lang->get($field[0]->placeholder)."'>".$lang->get($field[0]->label)."</a></label>";
+                if($field[0]->type != 'hidden' && $field[0]->label != "") $html .= "<div class='controls'>";
+                $default != '' ? $default = $default : $default = $field[0]->default;
+                $html .= "<input type='".$field[0]->type."' id='".$field[0]->id."' value='".$default."' name='".$field[0]->name."' min='".$field[0]->min."' max='".$field[0]->max."' step='".$field[0]->step."'";
+                if($field[0]->type != 'hidden') $html .= $disabled." data-message='".$lang->get($field[0]->message)."' ".$onchange." ".$onkeyup." ".$readonly." placeholder='".$lang->get($field[0]->placeholder)."' class='form-control ".$field[0]->clase."' autocomplete='off'";
+                $html .= ">";
+                //if($field[0]->type != 'hidden') $html .= "<span id='".$field[0]->name."-msg'></span>";
+                if($field[0]->type != 'hidden' && $field[0]->label != "") $html .= "</div>";
+                if($field[0]->type != 'hidden') $html .= "</div>";
+            }
+        }
+        return $html;
+    }
+
+    /**
      * Method to render a password field
      * @param $form string the form name
      * @param $name string the field name
