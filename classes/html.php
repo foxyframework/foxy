@@ -49,8 +49,18 @@ class Html
 			$html .= '<input type="checkbox" name="cd" data-id="'.$d->{$key}.'">';
 			$html .= '</td>';
             foreach($fields as $field) {
-                $field == $linked ? $text = '<a href="'.$url->genUrl('index.php?view='.$view.'&layout=edit&id='.$d->{$key}).'">'.$d->{$field}.'</a>' : $text = $d->{$field};
-                $html .= '<td>'.$text.'</td>';
+                if(is_array($field)) {
+                    foreach($field as $k => $v) {
+                        if($k == 'field') { $field = $v; }
+                        if($k == 'format' && $v == 'date') { $field = date('d-m-Y', strtotime($d->{$field})); }
+                        if($k == 'format' && $v == 'price') { $field = number_format($d->{$field}, 2, '.', ',').'&euro;'; }
+                        if($k == 'format' && $v == 'bool') { if($d->{$field} == 1) { $field = 'Sí'; } else { $field = 'No'; } }
+                        if($k == 'format' && $v == 'link') { $field = '<a href="'.$url->genUrl('index.php?view='.$view.'&layout=edit&id='.$d->{$key}).'">'.$d->{$field}.'</a>'; }
+                    }    
+                } else {
+                    $field = $d->{$field};
+                }
+                $html .= '<td>'.$field.'</td>';
             }
             $html .= '</tr>';
         }
