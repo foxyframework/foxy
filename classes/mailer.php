@@ -15,25 +15,17 @@ class Mailer {
 	
 	const STRIP_RETURN_PATH = TRUE;
 	
-	private $to = NULL;
-	private $subject = NULL;
-	private $textMessage = NULL;
-	private $headers = NULL;
+	private static $to = NULL;
+	private static $subject = NULL;
+	private static $textMessage = NULL;
+	private static $headers = NULL;
 	
-	private $recipients = NULL;
-	private $cc = NULL;
-	private $cco = NULL;
-	private $from = NULL;
-	private $replyTo = NULL;
-	private $attachments = array();
-	
-	public function __construct($to = NULL, $subject = NULL, $textMessage = NULL, $headers = NULL) {
-		self::$to = $to;
-		self::$recipients = $to;
-		self::$subject = $subject;
-		self::$textMessage = $textMessage;
-		self::$headers = $headers;
-	}
+	private static $recipients = NULL;
+	private static $cc = NULL;
+	private static $cco = NULL;
+	private static $from = NULL;
+	private static $replyTo = NULL;
+	private static $attachments = array();
 	
 	public static function send() {
 		if (is_null(self::$to)) {
