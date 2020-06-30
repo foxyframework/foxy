@@ -347,6 +347,12 @@ class Application
 
         if(config::$offline == 1 && (!user::getAuth() && user::$level > 1)) { return 'offline.php'; }
 
+        //check if is an admin page and user is authenticated... 
+        if((self::$layout == 'admin' || self::$view == 'admin') && !user::getAuth()) {
+            self::redirect('index.php?view=home', 'You are not allowed to view this resource', 'info');
+            return false;
+        }
+
         //check permissions and redirect if not authenticated...
         $path   = FOXY_COMPONENT.DS.'views'.DS.self::$view.DS.'params.json';
         $params = json_decode(file_get_contents($path));
