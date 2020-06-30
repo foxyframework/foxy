@@ -1,4 +1,9 @@
-##version 1.1.0
+## version 1.2.0
+
+* Refactor all classes as a static
+* Autoload all classes
+
+## version 1.1.0
 
 * Each menuitem allow a different template load
 * New blogging component
