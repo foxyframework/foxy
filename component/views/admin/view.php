@@ -11,4 +11,6 @@
 
 defined('_Foxy') or die ('restricted access');
 
-$app->addScript($config->site.'/bower_components/jquery-validation/dist/jquery.validate.min.js');
+$model 	= application::getModel('admin');
+
+application::addScript(config::$site.'/bower_components/jquery-validation/dist/jquery.validate.min.js');

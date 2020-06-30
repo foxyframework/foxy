@@ -19,7 +19,7 @@ class Application
      * @var  array
      * @access   private
     */
-    var $scripts = array();
+    public static $scripts = array();
 
     /**
      * Array of scripts placed in the header
@@ -27,7 +27,7 @@ class Application
      * @var  array
      * @access   private
     */
-    var $scriptCode = array();
+    public static $scriptCode = array();
 
     /**
      * Array of stylesheets placed in the header
@@ -35,7 +35,7 @@ class Application
      * @var  array
      * @access   private
     */
-    var $stylesheets = array();
+    public static $stylesheets = array();
 
     /**
      * Array of metatags placed in the header
@@ -43,7 +43,7 @@ class Application
      * @var  array
      * @access   private
     */
-    var $metatags = array();
+    public static $metatags = array();
 
     /**
      * View
@@ -51,7 +51,7 @@ class Application
      * @var     string
      * @access  private
     */
-    var $view = '';
+    public static $view = '';
 
     /**
      * Layout
@@ -59,7 +59,7 @@ class Application
      * @var     string
      * @access  private
     */
-    var $layout = '';
+    public static $layout = '';
 
     /**
      * Task
@@ -67,7 +67,7 @@ class Application
      * @var     string
      * @access  private
     */
-    var $task = '';
+    public static $task = '';
 
     /**
      * Var
@@ -75,7 +75,7 @@ class Application
      * @var     mixed
      * @access  private
     */
-    var $var = "";
+    public static $var = "";
 
     /**
      * Adds a linked script to the page
@@ -84,8 +84,8 @@ class Application
      * @param    string  $type        Type of script. Defaults to 'text/javascript'
      * @access   public
      */
-    public function addScript($url) {
-        $this->scripts[] = $url;
+    public static function addScript($url) {
+        self::$scripts[] = $url;
     }
 
     /**
@@ -95,8 +95,8 @@ class Application
      * @param    string  $type        Type of script. Defaults to 'text/javascript'
      * @access   public
      */
-    public function addScriptCode($code) {
-        $this->scriptCode[] = $code;
+    public static function addScriptCode($code) {
+        self::$scriptCode[] = $code;
     }
 
     /**
@@ -105,8 +105,8 @@ class Application
      * @param    string  $url        URL to the linked stylesheet
      * @access   public
      */
-    public function addStylesheet($url) {
-        $this->stylesheets[] = $url;
+    public static function addStylesheet($url) {
+        self::$stylesheets[] = $url;
     }
 
     /**
@@ -115,8 +115,8 @@ class Application
      * @param    string  $tag       Tag to insert
      * @access   public
      */
-    public function addCustomTag($tag) {
-        $this->metatags[] = $tag;
+    public static function addCustomTag($tag) {
+        self::$metatags[] = $tag;
     }
 
     /**
@@ -127,7 +127,7 @@ class Application
      * @param    string  $media  Media type that this stylesheet applies to
      * @access   public
      */
-    public function setMessage($msg, $type)
+    public static function setMessage($msg, $type)
     {
         $_SESSION['message'] = $msg;
         $_SESSION['messageType'] = $type;
@@ -137,7 +137,7 @@ class Application
      * Method to get application version
      * @access   public
     */
-    public function getVersion()
+    public static function getVersion()
     {
         $local  = json_decode(file_get_contents(FOXY_BASE.DS.'foxy.json'), true);
 
@@ -150,7 +150,7 @@ class Application
      * @param    string  $password   raw password to hash
      * @access   public
     */
-    public function encryptPassword($password)
+    public static function encryptPassword($password)
     {
         return password_hash($password, PASSWORD_DEFAULT);
     }
@@ -162,7 +162,7 @@ class Application
      * @param    string  $hash        Hash to compare with
      * @access   public
     */
-    public function decryptPassword($password, $hash)
+    public static function decryptPassword($password, $hash)
     {
       if (password_verify($password, $hash)) {
 			  return true;
@@ -178,7 +178,7 @@ class Application
      * @param    array   $args    Array of parameters to send
      * @access   public
     */
-    public function trigger($type, $args=array())
+    public static function trigger($type, $args=array())
     {
     	$path = FOXY_PLUGINS.DS.$type.DS.$type.'.php';
 
@@ -195,9 +195,8 @@ class Application
      * @param    string  $type    name of the html block
      * @access   public
     */
-    public function render($view)
+    public static function render($view)
     {
-        $lang   = factory::get('language');
         $html   = '';
     	$path   = FOXY_COMPONENT.DS.'views'.DS.$view.DS.'config.json';
 
@@ -225,7 +224,7 @@ class Application
                     }
                     if (strpos($arg, 'TRANSLATE_') !== false) {
                         $arg = str_replace('TRANSLATE_', '', $arg);
-                        $arg = $lang->get($arg);
+                        $arg = language::get($arg);
                     }
                     $html = str_replace('{arg'.$i.'}', $arg, $html);
                     $i++;
@@ -273,7 +272,7 @@ class Application
      *
      * @return  mixed  Requested variable.
      */
-    function getVar($name, $default = null, $hash = 'REQUEST', $type = 'none')
+    public static function getVar($name, $default = null, $hash = 'REQUEST', $type = 'none')
     {
         // Ensure hash and type are uppercase
         $hash = strtoupper($hash);
@@ -340,42 +339,39 @@ class Application
      * 
      * @access   public
     */
-    function getLayout()
+    public static function getLayout()
     {
-        $this->task     = $this->getVar('task', null, 'get', 'string');
-        $this->view     = $this->getVar('view', 'home', 'get', 'string');
-        $this->layout   = $this->getVar('layout', null, 'get', 'string');
+        self::$task     = application::getVar('task', null, 'get', 'string');
+        self::$view     = application::getVar('view', 'home', 'get', 'string');
+        self::$layout   = application::getVar('layout', null, 'get', 'string');
 
-        $user   = factory::get('user');
-        $config = factory::get('config');
-
-        if($config->offline == 1 && (!$user->getAuth() && $user->level > 1)) { return 'offline.php'; }
+        if(config::$offline == 1 && (!user::getAuth() && user::$level > 1)) { return 'offline.php'; }
 
         //check permissions and redirect if not authenticated...
-        $path   = FOXY_COMPONENT.DS.'views'.DS.$this->view.DS.'params.json';
+        $path   = FOXY_COMPONENT.DS.'views'.DS.self::$view.DS.'params.json';
         $params = json_decode(file_get_contents($path));
         if(file_exists($path)) {
-            if($params->auth == 1 && !$user->getAuth()) {
-                $this->redirect($params->redirect);
+            if($params->auth == 1 && !user::getAuth()) {
+                self::redirect($params->redirect);
                 return false;
             }
         }
 
-        if($this->task != null) {
-            if(strpos($this->task, ".") !== false) {
+        if(self::$task != null) {
+            if(strpos(self::$task, ".") !== false) {
                 //task contains the model and the task separated by a dot
-                $parts = explode('.', $this->task);
-                $this->view = $parts[0];
-                $this->task = $parts[1];
+                $parts = explode('.', self::$task);
+                self::$view = $parts[0];
+                self::$task = $parts[1];
             }
-            $model = $this->getModel();
-            $model->{$this->task}();
+            $model = self::getModel();
+            $model->{self::$task}();
         } else {
 
-            $path = FOXY_COMPONENT.DS.'views'.DS.$this->view.DS.'tmpl'.DS.$this->view.'.php';
+            $path = FOXY_COMPONENT.DS.'views'.DS.self::$view.DS.'tmpl'.DS.self::$view.'.php';
         
-            if($this->layout != null) {
-                $path = FOXY_COMPONENT.DS.'views'.DS.$this->view.DS.'tmpl'.DS.$this->layout.'.php';
+            if(self::$layout != null) {
+                $path = FOXY_COMPONENT.DS.'views'.DS.self::$view.DS.'tmpl'.DS.self::$layout.'.php';
             }
 
             if (is_file($path)) {
@@ -393,10 +389,10 @@ class Application
      * @param $model string call to specific model
      * @return object
     */
-    function getModel($model = null)
+    public static function getModel($model = null)
     {
-        $model == null ? $path  = FOXY_COMPONENT.DS.'models'.DS.$this->view.'.php' : $path = FOXY_COMPONENT.DS.'models'.DS.$model.'.php';
-        $model == null ? $class = $this->view : $class = $model;
+        $model == null ? $path  = FOXY_COMPONENT.DS.'models'.DS.self::$view.'.php' : $path = FOXY_COMPONENT.DS.'models'.DS.$model.'.php';
+        $model == null ? $class = self::$view : $class = $model;
         $instance = "";
 
 		if (file_exists($path))
@@ -414,7 +410,7 @@ class Application
      * @access public
      * @return boolean, return module output
     */
-    public function getModule($name)
+    public static function getModule($name)
     {
         $html = "";
         $path = FOXY_MODULES.DS.$name.DS.'default.php';
@@ -431,14 +427,12 @@ class Application
      * @access public
      * @return boolean, return view output
     */
-    public function getView()
-    {
-        $user = factory::get('user');
-        
-        $this->view = $this->getVar('view', 'home', 'get', 'string');
-        $this->layout = $this->getVar('layout', '', 'get', 'string');
+    public static function getView()
+    { 
+        self::$view = application::getVar('view', 'home', 'get', 'string');
+        self::$layout = application::getVar('layout', '', 'get', 'string');
 
-        $path = FOXY_COMPONENT.DS.'views'.DS.$this->view.DS.'view.php';
+        $path = FOXY_COMPONENT.DS.'views'.DS.self::$view.DS.'view.php';
 
         if (is_file($path)) {
         	return $path;
@@ -453,18 +447,8 @@ class Application
   	 * @since   1.2.0
   	 * @throws  RuntimeException
   	*/
-  	public function renderView($view, $layout='', $args=array())
+  	public static function renderView($view, $layout='', $args=array())
   	{
-        $config  = factory::get('config');
-        $app     = factory::get('application');
-        $db      = factory::get('database');
-        $user    = factory::get('user');
-        $lang    = factory::get('language');
-        $html    = factory::get('html');
-        $url     = factory::get('url');
-        $session = factory::get('session');
-        $custom  = factory::get('custom');
-
   		// Get the layout path.
         $path = FOXY_COMPONENT.DS.'component'.DS.'views'.DS.$view.DS.'tmpl'.DS.$view.'.php';
 
@@ -500,11 +484,10 @@ class Application
      * @param $tmpl string call to specific template
      * @return string
     */
-    public function getTemplate()
+    public static function getTemplate()
     {
-        $config = factory::get('config');
-        $tmpl = $config->template;
-        $mode = $this->getVar('mode', '');
+        $tmpl = config::$template;
+        $mode = application::getVar('mode', '');
         if($mode == 'raw') {
             $path = FOXY_TEMPLATES.DS.'system'.DS.'index2.php';
         } else {
@@ -522,10 +505,10 @@ class Application
      * Method to redirect to other url
      * @param $url string
     */
-    public function redirect($url, $message='', $typeError='')
+    public static function redirect($url, $message='', $typeError='')
     {
         if($message != '') {
-            $this->setMessage($message, $typeError);
+            application::setMessage($message, $typeError);
         }
         /*
          * If the headers have been sent, then we cannot send an additional location header

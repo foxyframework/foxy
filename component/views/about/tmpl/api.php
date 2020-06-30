@@ -25,13 +25,13 @@ defined('_Foxy') or die ('restricted access');
          </div>
          <div class="card-body">
            <h3>API Rest</h3>
-           <p>AfiFramework té una API Rest que et permet obtenir llistes de resultats conjunts o individuals, més abaix tens algun exemple preparat. Per fer servir l'api necessites una apikey que pots generar en el teu <a href="index.php?view=profile">perfil</a>.</p>
+           <p>Foxy Framework té una API Rest que et permet obtenir llistes de resultats conjunts o individuals, més abaix tens algun exemple preparat. Per fer servir l'api necessites una apikey que pots generar en el teu <a href="index.php?view=profile">perfil</a>.</p>
            <hr>
            <h3>Exemples</h3>
            <p>Recuperar la llista d'expedients.</p>
-           <pre>http://afigest.aficat.com/index.php?task=api.getItems&apikey=[YOUR_APIKEY]&mode=raw</pre>
+           <pre>index.php?task=api.getItems&apikey=[YOUR_APIKEY]&mode=raw</pre>
            <p>Recuperar un expedient per la seva ID.</p>
-           <pre>http://afigest.aficat.com/index.php?task=api.getItemsById&apikey=[YOUR_APIKEY]&id=[ID]&mode=raw</pre>
+           <pre>index.php?task=api.getItemsById&apikey=[YOUR_APIKEY]&id=[ID]&mode=raw</pre>
          </div>
        </div>
 

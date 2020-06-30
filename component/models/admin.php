@@ -17,30 +17,24 @@ class admin extends model
 {
   public function getConfig()
   {
-    $db   = factory::get('database');
-    $db->query('SELECT * FROM `#_settings` WHERE id = 1');
-    return $db->fetchObject();
+    database::query('SELECT * FROM `#_settings` WHERE id = 1');
+    return database::fetchObject();
   }
 
   public function saveConfig()
   {
     if($_GET['task'] != 'register.saveConfig')  { return false; }
 
-    $app  = factory::get('application');
-    $db   = factory::get('database');
-    $user = factory::get('user');
-    $lang = factory::get('language');
-
-    $result = $db->updateRow("#_settings", $_POST, 'id', 1);
+    $result = database::updateRow("#_settings", $_POST, 'id', 1);
 
     if($result) {
-      $msg = $lang->get('CW_SETTINGS_SAVE_SUCCESS'); 
+      $msg = language::get('CW_SETTINGS_SAVE_SUCCESS'); 
       $type = 'success';
     } else {
-      $msg = $lang->get('CW_SETTINGS_SAVE_ERROR');
+      $msg = language::get('CW_SETTINGS_SAVE_ERROR');
       $type = 'danger';
     }
-    $app->redirect($config->site.'/index.php?view=admin', $msg, $type);
+    application::redirect(config::$site.'/index.php?view=admin', $msg, $type);
   }
 
   public function getAdminViews()

@@ -24,36 +24,33 @@ class blog extends model
 	private $sql    = 'SELECT * FROM `#_articles` AS i WHERE status = 1';
 
 	public function getList($tag = '')
-	{
-		$db  = factory::get('database');
-		$config = factory::get('config');
-		
+	{		
 		if (isset($_GET['page'])) {
             $page = $_GET['page'];
         } else {
             $page = 1;
         }
         
-        $no_of_records_per_page = $config->pagination;
+        $no_of_records_per_page = config::$pagination;
         
         $offset = ($page-1) * $no_of_records_per_page;
         
-        $db->query($this->rows);
-        $count_rows = $db->loadResult();
+        database::query($this->rows);
+        $count_rows = database::loadResult();
 		
 		if($tag != '') {
-			$this->sql .= ' AND (FIND_IN_SET('.$db->quote($tag).', tags) > 0)';
+			$this->sql .= ' AND (FIND_IN_SET('.database::quote($tag).', tags) > 0)';
 		}
 		
 		$this->sql .= ' ORDER BY '.$this->order.' DESC LIMIT '.$offset.', '.$no_of_records_per_page;
 
-		$db->query($this->sql);
+		database::query($this->sql);
 		
-		$this->total_pages = ceil($db->num_rows() / $no_of_records_per_page);
+		$this->total_pages = ceil(database::num_rows() / $no_of_records_per_page);
 		
 		$_SESSION['total_pages'] = ceil($count_rows / $no_of_records_per_page);	
 		
-		return $db->fetchObjectList();
+		return database::fetchObjectList();
 	}
 	
 	/**
@@ -92,14 +89,11 @@ class blog extends model
 	 * Method to get and item by id
 	 * @return object 
 	*/
-	public function getItem()
+	public function getItem($table, $key, $id = 0)
 	{
-		$db  = factory::get('database');
-		$app = factory::get('application');
+		$id  = application::getVar('id', 0, 'get');
 
-		$id  = $app->getVar('id', 0, 'get');
-
-		$db->query('UPDATE '.$this->table.' SET hits = hits + 1 WHERE '.$this->key.' = '.$id);
+		database::query('UPDATE '.$this->table.' SET hits = hits + 1 WHERE '.$this->key.' = '.$id);
 
 		return parent::getItem($this->table, $this->key);
 	}
@@ -110,24 +104,18 @@ class blog extends model
 	*/
 	public function removeItem()
 	{
-		$db  		= factory::get('database');
-		$app 		= factory::get('application');
-		$user 		= factory::get('user');
-		$config 	= factory::get('config');
-		$lang 		= factory::get('language');
+		$id   	= application::getVar('id', '', 'get');
 
-		$id   	= $app->getVar('id', '', 'get');
-
-		$result = $db->query('DELETE FROM '.$this->table.' WHERE '.$this->key.' = '.$id);
+		$result = database::query('DELETE FROM '.$this->table.' WHERE '.$this->key.' = '.$id);
 
 		if($result) {
-			$link = $config->site.'/index.php?view=blog&layout=admin';
-			$app->setMessage($lang->get('FOXY_ITEM_REMOVE_SUCCESS'), 'success');
+			$link = config::$site.'/index.php?view=blog&layout=admin';
+			application::setMessage(language::get('FOXY_ITEM_REMOVE_SUCCESS'), 'success');
 		} else {
-			$link = $config->site.'/index.php?view=blog&layout=admin';
-			$app->setMessage($lang->get('FOXY_ITEM_REMOVE_ERROR'), 'danger');
+			$link = config::$site.'/index.php?view=blog&layout=admin';
+			application::setMessage(language::get('FOXY_ITEM_REMOVE_ERROR'), 'danger');
 		}
-        $app->redirect($link);
+        application::redirect($link);
 	}
 
 	/**
@@ -136,13 +124,7 @@ class blog extends model
 	*/
 	public function saveItem()
 	{
-		$db  	= factory::get('database');
-		$app 	= factory::get('application');
-		$user 	= factory::get('user');
-		$config = factory::get('config');
-		$lang 	= factory::get('language');
-
-		$id     = $app->getVar('id', 0, 'post', 'int');
+		$id     = application::getVar('id', 0, 'post', 'int');
 
 		$_POST['category'] 		= 0;
 		$_POST['userid']   		= $user->id;
@@ -153,25 +135,25 @@ class blog extends model
 
 		if($id == 0) {
 			$_POST['hits']  = 0;
-			$result = $db->insertRow($this->table, $_POST);
+			$result = database::insertRow($this->table, $_POST);
 
-			$subject    = $lang->replace('FOXY_BLOG_NEW_ARTICLE_SUBJECT', $config->sitename);
-			$body       = $lang->replace('FOXY_BLOG_NEW_ARTICLE_BODY', $user->username, $_POST['title']);
-			$this->sendMail($config->email, 'Admin', $subject, $body);
+			$subject    = language::replace('FOXY_BLOG_NEW_ARTICLE_SUBJECT', config::$sitename);
+			$body       = language::replace('FOXY_BLOG_NEW_ARTICLE_BODY', $user->username, $_POST['title']);
+			$this->sendMail(config::$email, 'Admin', $subject, $body);
 
 		} else {
-			$result = $db->updateRow($this->table, $_POST, $this->key, $id);
+			$result = database::updateRow($this->table, $_POST, $this->key, $id);
 		}
 
 		if($result) {
-			$link = $config->site.'/index.php?view=blog&layout=admin';
-			$app->setMessage($lang->get('FOXY_ITEM_SAVE_SUCCESS'), 'success');
+			$link = config::$site.'/index.php?view=blog&layout=admin';
+			application::setMessage(language::get('FOXY_ITEM_SAVE_SUCCESS'), 'success');
 		} else {
-			$link = $config->site.'/index.php?view=blog&layout=admin&id='.$id;
-			$app->setMessage($lang->get('FOXY_ITEM_ERROR_ERROR'), 'danger');
+			$link = config::$site.'/index.php?view=blog&layout=admin&id='.$id;
+			application::setMessage(language::get('FOXY_ITEM_ERROR_ERROR'), 'danger');
 		}
 
-        $app->redirect($link);
+        application::redirect($link);
 	}
 
 	/**
@@ -250,27 +232,24 @@ class blog extends model
 	*/
 	public function getFeed()
 	{
-		$db  = factory::get('database');
-		$config = factory::get('config');
+	    database::query('SELECT * FROM #_articles WHERE status = 1 ORDER BY id DESC');
 
-	    $db->query('SELECT * FROM #_articles WHERE status = 1 ORDER BY id DESC');
-
-		$rows = $db->fetchObjectList();
+		$rows = database::fetchObjectList();
 
 		header("Content-Type: application/rss+xml; charset=utf-8");
 
 		$rssfeed  = '<?xml version="1.0" encoding="UTF-8"?>';
 		$rssfeed .= '<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">';
 		$rssfeed .= '<channel>';
-		$rssfeed .= '<title>'.$config->sitename.'</title>';
-		$rssfeed .= '<link>'.$config->site.'</link>';
-		$rssfeed .= '<description>'.$config->description.'</description>';
+		$rssfeed .= '<title>'.config::$sitename.'</title>';
+		$rssfeed .= '<link>'.config::$site.'</link>';
+		$rssfeed .= '<description>'.config::$description.'</description>';
 		$rssfeed .= '<language>ca-es</language>';
-		$rssfeed .= '<copyright>Copyleft 2018 '.$config->sitename.'</copyright>';
+		$rssfeed .= '<copyright>Copyleft 2018 '.config::$sitename.'</copyright>';
 		$rssfeed .= '<image>';
 		$rssfeed .= '<title>Surt del Cercle</title>';
-		$rssfeed .= '<url>http://surtdelcercle.cat/assets/img/icons/icon32.png</url>';
-		$rssfeed .= '<link>http://surtdelcercle.cat/assets/img/icons/icon32.png</link>';
+		$rssfeed .= '<url>'.config::$site.'/assets/img/icons/icon32.png</url>';
+		$rssfeed .= '<link>'.config::$site.'/assets/img/icons/icon32.png</link>';
 		$rssfeed .= '<width>128</width>';
 		$rssfeed .= '<height>128</height>';
 		$rssfeed .= '</image>';
@@ -280,7 +259,7 @@ class blog extends model
 			$rssfeed .= '<item>';
 			$rssfeed .= '<title><![CDATA['.$row->title.']]></title>';
 			$rssfeed .= '<description><![CDATA['.$row->fulltext.']]></description>';
-			$rssfeed .= '<link>'.$config->site.'/index.php?view=blog&amp;id='.$row->id.'</link>';
+			$rssfeed .= '<link>'.config::$site.'/index.php?view=blog&amp;id='.$row->id.'</link>';
 			$rssfeed .= '<pubDate>'.date("D, d M Y H:i:s O", strtotime($row->publishDate)).'</pubDate>';
 			$rssfeed .= '</item>';
 		}

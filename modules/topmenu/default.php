@@ -12,11 +12,6 @@
 defined('_Foxy') or die ('restricted access');
 include_once('helper.php');
 
-$app    = factory::get('application');
-$config = factory::get('config');
-$url    = factory::get('url');
-$user   = factory::get('user');
-$lang   = factory::get('language');
 ?>
 
 <header>
@@ -27,26 +22,26 @@ $lang   = factory::get('language');
             <h4 class="text-white">Menu</h4>
             <ul class="list-unstyled">
               <?php foreach(topmenuHelper::getItems() as $item) : ?>
-              <?php $item->translation != '' ? $title = $lang->get($item->translation) : $title = $item->title; ?>
+              <?php $item->translation != '' ? $title = language::get($item->translation) : $title = $item->title; ?>
               <?php if($item->auth == 0) : ?>
-              <li><a <?php if($item->type == 1): ?>data-toggle="modal" data-target="#modal<?= $item->id; ?>"<?php endif; ?> class="text-light" href="<?= $url->genUrl($item->url); ?>"><?= $title; ?></a></li>
+              <li><a <?php if($item->type == 1): ?>data-toggle="modal" data-target="#modal<?= $item->id; ?>"<?php endif; ?> class="text-light" href="<?= url::genUrl($item->url); ?>"><?= $title; ?></a></li>
               <?php endif; ?>
-              <?php if($item->auth == 1 && !$user->getAuth()) : ?>
-              <li><a <?php if($item->type == 1): ?>data-toggle="modal" data-target="#modal<?= $item->id; ?>"<?php endif; ?> class="text-light" href="<?= $url->genUrl($item->url); ?>"><?= $title; ?></a></li>
+              <?php if($item->auth == 1 && !user::getAuth()) : ?>
+              <li><a <?php if($item->type == 1): ?>data-toggle="modal" data-target="#modal<?= $item->id; ?>"<?php endif; ?> class="text-light" href="<?= url::genUrl($item->url); ?>"><?= $title; ?></a></li>
               <?php endif; ?>
-              <?php if($item->auth == 2 && $user->getAuth()) : ?>
-              <li><a <?php if($item->type == 1): ?>data-toggle="modal" data-target="#modal<?= $item->id; ?>"<?php endif; ?> class="text-light" href="<?= $url->genUrl($item->url); ?>"><?= $title; ?></a></li>
+              <?php if($item->auth == 2 && user::getAuth()) : ?>
+              <li><a <?php if($item->type == 1): ?>data-toggle="modal" data-target="#modal<?= $item->id; ?>"<?php endif; ?> class="text-light" href="<?= url::genUrl($item->url); ?>"><?= $title; ?></a></li>
               <?php endif; ?>
               <?php endforeach; ?>
-              <?php if($user->getAuth() && $user->level == 1) : ?>
-              <li><a class="text-light" href="<?= $url->genUrl('index.php?view=admin'); ?>" target="_blank">Administrator</a></li>
+              <?php if(user::getAuth() && user::$level == 1) : ?>
+              <li><a class="text-light" href="<?= url::genUrl('index.php?view=admin'); ?>" target="_blank">Admin</a></li>
               <?php endif; ?>
             </ul>
           </div>
           <div class="col-sm-4 offset-md-1 py-4">
             <h4 class="text-white">Contacto</h4>
             <ul class="list-unstyled">
-              <li><a href="https://twitter.com/Artic___Monkey" class="text-white" target="_blank"><i class="fab fa-twitter"></i> Follow on Twitter</a></li>
+              <li><a href="https://twitter.com/foxy_php" class="text-white" target="_blank"><i class="fab fa-twitter"></i> Follow on Twitter</a></li>
               <li><a href="#" class="text-white"><i class="fas fa-envelope"></i> Email me</a></li>
               <li><a href="https://www.patreon.com/foxyframework" target="_blank" class="text-white"><i class="fab fa-patreon"></i> Suppot me on Patreon</a></li>
             </ul>
@@ -56,8 +51,8 @@ $lang   = factory::get('language');
     </div>
     <div class="navbar navbar-dark bg-dark shadow-sm">
       <div class="container d-flex justify-content-between">
-        <a href="<?= $config->site; ?>" class="navbar-brand d-flex align-items-center">
-          <strong><?= $config->sitename; ?></strong>
+        <a href="<?= config::$site; ?>" class="navbar-brand d-flex align-items-center">
+          <strong><?= config::$sitename; ?></strong>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -77,7 +72,7 @@ $lang   = factory::get('language');
             </button>
           </div>
           <div class="modal-body">
-            <?= $app->getModule(''.$item->module.''); ?>
+            <?= application::getModule(''.$item->module.''); ?>
           </div>
         </div>
       </div>

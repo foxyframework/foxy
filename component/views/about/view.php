@@ -10,3 +10,5 @@
 */
 
 defined('_Foxy') or die ('restricted access');
+
+$model = application::getModel('admin');

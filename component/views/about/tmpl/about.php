@@ -10,7 +10,7 @@
 */
 
 defined('_Foxy') or die ('restricted access');
-$model = $app->getModel('admin');
+
 $params = $model->getParams('about');
 ?>
 

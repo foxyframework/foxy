@@ -11,7 +11,7 @@
 
 defined('_Foxy') or die ('restricted access');
 
-$model 	= $app->getModel('menu');
+$model 	= application::getModel('menu');
 ?>
 
 <section class="forms">
@@ -26,12 +26,12 @@ $model 	= $app->getModel('menu');
           <div class="card-body">
             <p>Com administrador pots gestionar el menú principal.</p>
             <form method="post" action="index.php?task=users.saveMenuItem">
-              <?= $html->getTextField('menu', 'title'); ?>
-              <?= $html->getTextField('menu', 'translation'); ?>
-              <?= $html->getTextField('menu', 'url'); ?>
-              <?= $html->getListField('menu', 'auth'); ?>
-              <?= $html->getListField('menu', 'type'); ?>
-              <?= $html->getTextField('menu', 'module'); ?>
+              <?= html::getTextField('menu', 'title'); ?>
+              <?= html::getTextField('menu', 'translation'); ?>
+              <?= html::getTextField('menu', 'url'); ?>
+              <?= html::getListField('menu', 'auth'); ?>
+              <?= html::getListField('menu', 'type'); ?>
+              <?= html::getTextField('menu', 'module'); ?>
               <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-primary">
               </div>

@@ -15,19 +15,15 @@ class topmenuHelper
 {
     public static function getItems() 
 	{
-		$db   = factory::get('database');
+	    database::query('SELECT * FROM `#_menu` ORDER BY id');
 
-	    $db->query('SELECT * FROM `#_menu` ORDER BY id');
-
-		return $db->fetchObjectList();
+		return database::fetchObjectList();
     }
     
     public static function getMenuModalItems() 
 	{
-		$db   = factory::get('database');
+	    database::query('SELECT * FROM `#_menu` WHERE type = 1 ORDER BY id ASC');
 
-	    $db->query('SELECT * FROM `#_menu` WHERE type = 1 ORDER BY id ASC');
-
-		return $db->fetchObjectList();
+		return database::fetchObjectList();
     }
 }

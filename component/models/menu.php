@@ -15,13 +15,11 @@ include('includes/model.php');
 
 class menu extends model
 {
-    public static function getMenuItems() 
+  public static function getMenuItems() 
 	{
-		$db   = factory::get('database');
+	  database::query('SELECT * FROM `#_menu` ORDER BY id ASC');
 
-	    $db->query('SELECT * FROM `#_menu` ORDER BY id ASC');
-
-		return $db->fetchObjectList();
+		return database::fetchObjectList();
     }
     
     /*
@@ -30,11 +28,6 @@ class menu extends model
     */
     public function saveMenuItem()
     {
-        $app  = factory::get('application');
-        $db   = factory::get('database');
-        $user = factory::get('user');
-        $lang = factory::get('language');
-
         $obj = new stdClass();
         $obj->title         = $app->getVar('title');
         $obj->translation   = $app->getVar('translation');
@@ -43,13 +36,13 @@ class menu extends model
         $obj->type          = $app->getVar('type');
         $obj->module        = $app->getVar('module');
 
-        $result = $db->insertRow("#_menu", $obj);
+        $result = database::insertRow("#_menu", $obj);
 
         if($result) {
-          $app->setMessage($lang->get('FOXY_MENU_SAVE_SUCCESS'), 'success');
+          application::setMessage(language::get('FOXY_MENU_SAVE_SUCCESS'), 'success');
         } else {
-          $app->setMessage($lang->get('FOXY_MENU_SAVE_ERROR'), 'danger');
+          application::setMessage(language::get('FOXY_MENU_SAVE_ERROR'), 'danger');
         }
-        $app->redirect($config->site.'/index.php?view=menu&layout=admin');
+        application::redirect(config::$site.'/index.php?view=menu&layout=admin');
     }
 }

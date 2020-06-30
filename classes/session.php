@@ -13,13 +13,22 @@ defined('_Foxy') or die ('restricted access');
 
 class Session {
 
-	public function setVar($name, $value) {
+	/**
+     * Method to set a session var
+	 * @param string $name The cookie name
+	 * @param mixed $value The cookie value
+    */
+	public static function setVar($name, $value) {
 
 		$_SESSION[$name] = $value;
 
 	}
 
-	public function getVar($name) {
+	/**
+     * Method to get a session var
+	 * @param string $name The cookie name
+    */
+	public static function getVar($name) {
 
 		if (isset ( $_SESSION[$name] ) && !empty(  $_SESSION[$name]  )) {
 			return $_SESSION[$name];
@@ -28,31 +37,38 @@ class Session {
 		}
 	}	
 
-	public function deleteVar($name) {
+	/**
+     * Method to remove a session var
+	 * @param string $name The cookie name
+    */
+	public static function deleteVar($name) {
 
 		unset ( $_SESSION[$name] );
 	}
 	
-	public function createSession() {
-
-		$db = factory::get('database');
-		$user = factory::get('user');
+	/**
+     * Method to create user session vars
+    */
+	public static function createSession() {
 
 		$s = new stdClass();
-		$s->userid = $user->id;
+		$s->userid = user::$id;
 		$s->ssid = session_id();
 		$s->lastvisitDate = date('Y-m-d H:i:s');
-		$db->insertRow('#_sessions', $s);
+		database::insertRow('#_sessions', $s);
 	}
 
-	public function destroySession() {
-
-		$db = factory::get('database');
-		$user = factory::get('user');
+	/**
+     * Method to destroy a session
+    */
+	public static function destroySession() {
 		
-		$db->query('DELETE FROM #_sessions WHERE userid = '.$user->id);
+		//Unset token and user data from session
+		unset($_SESSION['FOXY_userid'], $_SESSION['token']);
+
+		database::query('DELETE FROM `#_sessions` WHERE userid = '.user::$id);
 		$_SESSION = array();
-		session_destroy ();
+		session_destroy();
 		
 	}	
 

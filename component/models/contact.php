@@ -18,7 +18,7 @@ class contact extends model
 	public function sendForm() {
 
         $lang    = factory::get('language');
-        $url     = factory::get('url');
+        //$url     = factory::get('url');
         $app     = factory::get('application');
         $config  = factory::get('config');
 
@@ -44,9 +44,9 @@ class contact extends model
         }
 
         if($send) {
-            $app->redirect($url->genUrl('index.php?view=contact'), $lang->get('FOXY_CONTACT_SEND_SUCCESS'), 'success');
+            $app->redirect(url::genUrl('index.php?view=contact'), $lang->get('FOXY_CONTACT_SEND_SUCCESS'), 'success');
         } else {
-            $app->redirect($url->genUrl('index.php?view=contact'), $lang->get('FOXY_CONTACT_SEND_ERROR'), 'danger');
+            $app->redirect(url::genUrl('index.php?view=contact'), $lang->get('FOXY_CONTACT_SEND_ERROR'), 'danger');
         }
     }
 

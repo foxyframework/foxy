@@ -18,25 +18,23 @@ class Url
      * @param url string Not fiendly url
      * @return a friendly url
     */
-    public function genUrl($url)
+    public static function genUrl($url)
     {
-        $config = factory::get('config');
-
-        if(strpos($url, 'task') !== false) { return $config->site.$url; }
-        if(strpos($url, 'raw') !== false) { return $config->site.$url; }
+        if(strpos($url, 'task') !== false) { return config::$site.$url; }
+        if(strpos($url, 'raw') !== false) { return config::$site.$url; }
             
         $query = parse_url($url, PHP_URL_QUERY);
         parse_str($query, $params);
         $url = implode('/', $params);
-        $site = $config->site;
+        $site = config::$site;
         if(substr($site, -1) == '/') {
-            return $config->site.$url.'.html';
+            return config::$site.$url.'.html';
         } else {
-            return $config->site.DS.$url.'.html';
+            return config::$site.DS.$url.'.html';
         }
     }
 
-    function getDomain()
+    public static function getDomain()
     {
         $pageURL = 'http';
         if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
@@ -53,7 +51,7 @@ class Url
      * @access public
      * @return a the present url
     */
-    public function selfUrl()
+    public static function selfUrl()
     {
         $pageURL = "//";
         if ($_SERVER["SERVER_PORT"] != "80") {

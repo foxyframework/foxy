@@ -10,8 +10,8 @@
 */
 
 defined('_Foxy') or die ('restricted access');
-$model = $app->getModel('admin');
+$model = application::getModel('admin');
 $params = $model->getParams('home');
 ?>
 
-<?= $app->render('home'); ?>
+<?= application::render('home'); ?>

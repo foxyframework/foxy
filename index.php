@@ -18,33 +18,29 @@ date_default_timezone_set('Europe/Berlin');
 define('FOXY_BASE', dirname(__FILE__) );
 define('DS', DIRECTORY_SEPARATOR );
 
-require_once(FOXY_BASE.DS.'includes/defines.php');
-require_once(FOXY_CLASSES.DS.'factory.php');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-$db      = factory::get('database');
-$app     = factory::get('application');
-$config  = factory::get('config');
-$html    = factory::get('html');
-$lang    = factory::get('language');
-$session = factory::get('session');
-$url     = factory::get('url');
-$user    = factory::get('user');
+require_once(FOXY_BASE.DS.'includes/defines.php');
+require_once(FOXY_CLASSES.DS.'autoloader.php');
+require_once(FOXY_VENDOR.DS.'autoload.php');
 
 //trigger plugin onRender before the app is ready...
-$app->trigger('onRender', array());
+application::trigger('onRender', array());
 
 //print_r($_SESSION);
 //print_r(get_declared_classes());
 
 //set error level
-if($config->debug == 1) {
+if(config::$debug == 1) {
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
 }
 
 //render application
-include($app->getView());
-include($app->getTemplate());
+include(application::getView());
+include(application::getTemplate());
 
 ?>

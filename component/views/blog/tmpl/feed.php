@@ -11,7 +11,7 @@
 
 defined('_Foxy') or die ('restricted access');
 
-$model = $app->getModel();
+$model = application::getModel();
 
 echo $model->getFeed();
 

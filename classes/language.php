@@ -13,31 +13,29 @@ defined('_Foxy') or die ('restricted access');
 
 class Language
 {
-    public $code = 'en-gb';
+    public static $code = 'en-gb';
 
     /**
      * Constructor
     */
     public function __construct() 
     {
-        $user = factory::get('user');
-
-        if($user->getAuth() && !isset($_GET['lang'])) {
-            $this->code = $user->language;
+        if(user::getAuth() && !isset($_GET['lang'])) {
+          self::$code = user::$language;
         }
         if(isset($_GET['lang'])){
           switch($_GET['lang']) {
             case 'ca':
-              $this->code = 'ca-es'; 
+              self::$code = 'ca-es'; 
               break;
             case 'es':
-              $this->code = 'es-es';
+              self::$code = 'es-es';
               break;
             case 'en':
-              $this->code = 'en-gb';
+              self::$code = 'en-gb';
               break;
             default:
-              $this->code = 'en-gb';
+              self::$code = 'en-gb';
               break;
           }
         }
@@ -48,11 +46,11 @@ class Language
      * @param string $text
      * @return string if success false if not
     */
-    public function get($text)
+    public static function get($text)
     {
-        if($this->code == "") { $this->code = 'en-gb'; }
+        if(self::$code == "") { self::$code = 'en-gb'; }
 
-        $file = 'languages/'.$this->code.'.ini';
+        $file = 'languages/'.self::$code.'.ini';
 
         if (file_exists($file) && is_readable($file))
         {
@@ -82,13 +80,13 @@ class Language
      * @see http://www.php.net/manual/en/function.sprintf.php for especifications
      * @return string if success false if not
     */
-    public function replace($text)
+    public static function replace($text)
     {
         $args = @func_get_args();
         $count = count($args);
         if ($count > 0)
         {
-            $args[0] = $this->get($text);
+            $args[0] = self::get($text);
             return call_user_func_array('sprintf', $args);
         }
     }

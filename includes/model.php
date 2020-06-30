@@ -22,18 +22,14 @@ class model
     */
     public function getItem($table, $key, $id=0)
 	{
-		$db     = factory::get('database');
-		$app    = factory::get('application');
-		$config = factory::get('config');
-
-		$id = $app->getVar('id', $id);
+		$id = application::getVar('id', $id);
 
 		if($id > 0) {
 			$sql = "SELECT * FROM $table WHERE $key = $id";
-			if($config->debug == 1) { echo 'getItem: '.$sql.'\n'; }
-			$db->query($sql);
+			if(config::$debug == 1) { echo 'getItem: '.$sql.'\n'; }
+			database::query($sql);
 
-			return $db->fetchObject();
+			return database::fetchObject();
 		}
     }
 
@@ -44,10 +40,7 @@ class model
     */
     public function saveParams()
 	{
-        $app  = factory::get('application');
-        $lang = factory::get('language');
-
-        $view = $app->getVar('view');
+        $view = application::getVar('view');
         $json = array();
 
         foreach($_POST as $k => $v) {
@@ -58,8 +51,7 @@ class model
         fwrite($fp, json_encode($json));
         fclose($fp);  
         
-        $app->setMessage($lang->get('FOXY_SUCCESS_SAVE_PARAMS'), 'success');
-        $app->redirect('index.php?view='.$view.'&layout=admin');
+        application::redirect('index.php?view='.$view.'&layout=admin', language::get('FOXY_SUCCESS_SAVE_PARAMS'), 'success');
     }
 
     /**
@@ -70,8 +62,6 @@ class model
     */
     public function getParams($view)
 	{
-        $app  = factory::get('application');
-
         $path = FOXY_COMPONENT.DS.'views'.DS.$view.DS.'params.json';
         if(file_exists($path)) {
             $json = json_decode(file_get_contents($path));
@@ -81,18 +71,19 @@ class model
 
     /**
      * Method to check if is the task that user needs
-     * @param string $task The task name
+     * @param string $function The function name
+     * @param string $get The requested task
      * @access public
      * @return bool
     */
-    public function allowTask($task, $get)
+    public function allowTask($function, $get)
 	{
-        if (strpos($task, '.') !== false) { 
-            $parts = explode('.', $task);
-            $task  = $parts[1];
+        if (strpos($get, '.') !== false) { 
+            $parts = explode('.', $get);
+            $get  = $parts[1];
         }
 
-        if($task != $get) { return false; }
+        if($get !== $function) { return false; }
 
         return true;
     }
@@ -104,9 +95,8 @@ class model
     */
 	public static function getUsers()
 	{
-		$db = factory::get('database');
-		$db->query('select * from #_users WHERE block = 0');
-		return $db->fetchObjectList();
+		database::query('select * from #_users WHERE block = 0');
+		return database::fetchObjectList();
 	}
 
     /**
@@ -116,9 +106,7 @@ class model
     */
     function isAdmin() {
 
-        $user = factory::get('user');
-
-        if($user->level == 1) { return true; }
+        if(user::$level == 1) { return true; }
 
         return false;
     }
@@ -128,11 +116,9 @@ class model
     */
     public function tokenCheck()
     {
-        $db     = factory::get('database');
-
         //exit if its the token owner...
-        $db->query('SELECT token FROM `#_users` WHERE username = '.$_GET['username']);
-        $token = $db->loadResult();
+        database::query('SELECT token FROM `#_users` WHERE username = '.$_GET['username']);
+        $token = database::loadResult();
         if($token != $_GET['token']) {
             return false;
         }
@@ -150,21 +136,18 @@ class model
     */
     public static function sendMail($email, $name, $subject, $body)
     {
-        $mail   = factory::get('mailer');
-        $config = factory::get('config');
-
         @ob_start();
 		include 'assets/mail/mail.html';
 		$html = @ob_get_clean();
-		$htmlbody = str_replace('{{LOGO}}', $config->site.'/assets/img/mail_logo.png', $html);
+		$htmlbody = str_replace('{{LOGO}}', config::$site.'/assets/img/mail_logo.png', $html);
 		$htmlbody = str_replace('{{BODY}}', $body, $htmlbody);
 
-        $mail->setFrom($config->email, $config->sitename);
-        $mail->addRecipient($name, $email);
-        $mail->setReplyTo($config->email);
-        $mail->Subject($subject);
-        $mail->Body($htmlbody);
-        if($mail->send()) {
+        mailer::setFrom(config::$email, config::$sitename);
+        mailer::addRecipient($name, $email);
+        mailer::setReplyTo(config::$email);
+        mailer::Subject($subject);
+        mailer::Body($htmlbody);
+        if(mailer::send()) {
             return true;
         }
         return false;
@@ -177,9 +160,6 @@ class model
     */
     public function pagination($filters)
     {
-		$app  = factory::get('application');
-		$lang = factory::get('language');
-
     	$total_pages = $_SESSION['total_pages'];
 		$html = array();
         $string = '';
@@ -191,9 +171,9 @@ class model
 			$string .= '&'.$k.'='.$v;
 		}
 
-        $first = $lang->get('FOXY_FIRST');
-        $last  = $lang->get('FOXY_LAST');
-        $pages = $lang->get('FOXY_PAGES');
+        $first = language::get('FOXY_FIRST');
+        $last  = language::get('FOXY_LAST');
+        $pages = language::get('FOXY_PAGES');
 
         //no do not go over index
         $before5 = ($page - 5 < 1) ? 1 : $page - 5;

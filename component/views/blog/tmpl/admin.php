@@ -11,12 +11,6 @@
 
 defined('_Foxy') or die ('restricted access');
 
-if(!$user->getAuth()) {
-	$app->redirect('index.php');
-}
-
-$model = $app->getModel();
-$params = $model->getParams('blog');
 ?>
 
 <section class="forms">
@@ -33,12 +27,12 @@ $params = $model->getParams('blog');
 							<?php $item->publishDate == '' ? $publishDate = date('Y-m-d H:i:s') : $publishDate = $item->publishDate; ?>
 							<input type="hidden" name="publishDate" value="<?= $publishDate; ?>">			
 							<input type="hidden" name="id" value="<?= $app->getVar('id', 0); ?>">
-							<?=  $html->getTextField('blog', 'title', $item->title); ?>
-							<?=  $html->getTextField('blog', 'alias', $item->alias); ?>
-							<?=  $html->getTextField('blog', 'tags', $item->tags); ?>	
-							<?=  $html->getTextField('blog', 'author', $item->author); ?>
-							<?=  $html->getTextField('blog', 'author_link', $item->author_link); ?>		
-							<?=  $html->getEditorField('blog', 'fulltext', $item->fulltext); ?>	
+							<?=  html::getTextField('blog', 'title', $item->title); ?>
+							<?=  html::getTextField('blog', 'alias', $item->alias); ?>
+							<?=  html::getTextField('blog', 'tags', $item->tags); ?>	
+							<?=  html::getTextField('blog', 'author', $item->author); ?>
+							<?=  html::getTextField('blog', 'author_link', $item->author_link); ?>		
+							<?=  html::getEditorField('blog', 'fulltext', $item->fulltext); ?>	
 							<div class="form-group">
 								<input type="submit" value="<?= $lang->get('FOXY_SAVE'); ?>" class="btn btn-primary">
 							</div>
@@ -54,9 +48,9 @@ $params = $model->getParams('blog');
           			<div class="card-body">
             			<form method="post" action="index.php?task=admin.saveParams">
               				<input type="hidden" name="view" value="blog">
-							<?= $html->getListField('params', 'auth', $params->auth); ?>
-							<?= $html->getTextField('params', 'redirect', $params->redirect); ?>
-							<?= $html->getRadioField('params', 'fluid', $params->fluid); ?>
+							<?= html::getListField('params', 'auth', $params->auth); ?>
+							<?= html::getTextField('params', 'redirect', $params->redirect); ?>
+							<?= html::getRadioField('params', 'fluid', $params->fluid); ?>
 							<div class="form-group">
 								<input type="submit" value="Guardar" class="btn btn-primary">
 							</div>

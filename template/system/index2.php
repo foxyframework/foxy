@@ -9,5 +9,5 @@
  *
 */
 
-@include($app->getLayout()); 
+@include(application::getLayout()); 
 ?>

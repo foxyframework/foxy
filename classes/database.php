@@ -11,31 +11,29 @@
 
 defined('_Foxy') or die ('restricted access');
 
-class mysql {
+class Database {
 	
-  	public $last_query;
-  	public $result;
-  	public $connection_id;
-  	public $num_queries = 0;
+    public static $last_query;
+    public static $result;
+    public static $connection_id;
+    public static $num_queries = 0;
       
     /**
      * Constructor
     */
-    public function __construct() {
-    
-        $config = factory::get('config');
+    public static function connect() {
 
-        $this->connection_id = new mysqli ( $config->host, $config->user, $config->pass, $config->database );
+        self::$connection_id = new mysqli ( config::$host, config::$user, config::$pass, config::$database );
     	
-		if ($this->connection_id->connect_errno) {
-			die('Connect Error (' . $this->connection_id->connect_errno . ') '. mysqli_connect_error);
+		if (self::$connection_id->connect_errno) {
+			die('Connect Error (' . self::$connection_id->connect_errno . ') '. mysqli_connect_error);
 		}
 
-		if (!$this->connection_id->set_charset("utf8")) {
-			die('Connect Error (' . $this->connection_id->connect_errno . ') '. mysqli_connect_error);
+		if (!self::$connection_id->set_charset("utf8")) {
+			die('Connect Error (' . self::$connection_id->connect_errno . ') '. mysqli_connect_error);
 		}
 		
-		return $this->connection_id;
+		return self::$connection_id;
     }
 	
     /**
@@ -43,21 +41,20 @@ class mysql {
      * @param $query
      * @since 1.0
     */
-    public function query( $query ) {
-    
-        $config = factory::get('config');
-	    $this->last_query = str_replace('#_', $config->dbprefix, $query);
-	    $this->num_queries++;
-	    $this->result = mysqli_query( $this->connection_id, $this->last_query ) or die( $this->getError() );
-	    return $this->result;
+    public static function query( $query ) {
+        self::connect();
+	    self::$last_query = str_replace('#_', config::$dbprefix, $query);
+	    self::$num_queries++;
+	    self::$result = mysqli_query( self::$connection_id, self::$last_query ) or die( self::getError() );
+	    return self::$result;
     }
     
     /**
      * Returns the first row of a query
     */
-    public function loadResult() {
+    public static function loadResult() {
         
-        $row = mysqli_fetch_row($this->result);
+        $row = mysqli_fetch_row(self::$result);
 		return $row[0];        
     }
     
@@ -67,19 +64,18 @@ class mysql {
      * @param $array
      * @since 1.0
     */
-    public function insertRow($table, $array) {
-    
-        $config = factory::get('config');
-        $query = "INSERT INTO ".str_replace('#_', $config->dbprefix, $table);
+    public static function insertRow($table, $array) {
+        self::connect();
+        $query = "INSERT INTO ".str_replace('#_', config::$dbprefix, $table);
         $fis = array(); 
         $vars = array();
         foreach($array as $field=>$val) {
             $fis[]  = "`$field`";
-            $vars[] = "".$this->quote($val, false)."";
+            $vars[] = "".self::quote($val, false)."";
         }
         $query .= " (".implode(", ", $fis).") VALUES (".implode(", ", $vars).")";
-        if ($this->result = $this->query($query))
-        return $this->result;
+        if (self::$result = self::query($query))
+        return self::$result;
         else return false;
     }
     
@@ -91,17 +87,16 @@ class mysql {
      * @param $id
      * @since 1.0
     */
-    public function updateRow($table, $array, $idField, $id) {
-    
-        $config = factory::get('config');
-        $query = "UPDATE ".str_replace('#_', $config->dbprefix, $table)." SET ";
+    public static function updateRow($table, $array, $idField, $id) {
+        self::connect();
+        $query = "UPDATE ".str_replace('#_', config::$dbprefix, $table)." SET ";
         $vars = array();
         foreach($array as $field=>$val) {
-            $vars[] = "$field"." = ".$this->quote($val, false)."";
+            $vars[] = "$field"." = ".self::quote($val, false)."";
         }
         $query .= implode(", ", $vars)." WHERE $idField = ".(int)$id;
-        if ($this->result = $this->query($query))
-        return $this->result;
+        if (self::$result = self::query($query))
+        return self::$result;
         else return false;
     }
     
@@ -115,13 +110,12 @@ class mysql {
      * @since 1.0
     */
     public function updateField($table, $field, $value, $idField, $id) {
-    
-        $config = factory::get('config');
-        $query = "UPDATE ".str_replace('#_', $config->dbprefix, $table)." SET ";        
-        $value = "`$field`"." = ".$this->quote($value, false)."";
-        $query .= $value." WHERE $idField = ".$this->quote($id);
-        if ($this->result = $this->query($query))
-        return $this->result;
+        self::connect();
+        $query = "UPDATE ".str_replace('#_', config::$dbprefix, $table)." SET ";        
+        $value = "`$field`"." = ".self::quote($value, false)."";
+        $query .= $value." WHERE $idField = ".self::quote($id);
+        if (self::$result = self::query($query))
+        return self::$result;
         else return false;
     }
     
@@ -133,12 +127,11 @@ class mysql {
      * @since 1.0
     */
     public function deleteRow($table, $idField, $id) {
-    
-        $config = factory::get('config');
-        $table = str_replace('#_', $config->dbprefix, $table);
+        self::connect();
+        $table = str_replace('#_', config::$dbprefix, $table);
         $query = "DELETE FROM $table WHERE $idField = ".(int)$id;
-        $this->result = $this->query($query);
-        return $this->result;
+        self::$result = self::query($query);
+        return self::$result;
     }
     
     /**
@@ -146,8 +139,8 @@ class mysql {
      * @return int
      * @since 1.0
     */
-    public function lastId() {
-        return mysqli_insert_id($this->connection_id);
+    public static function lastId() {
+        return mysqli_insert_id(self::$connection_id);
     }
 	
     /**
@@ -155,9 +148,9 @@ class mysql {
      * @return object
      * @since 1.0
     */
-	public function fetchObject( )
+	public static function fetchObject( )
 	{
-	    return mysqli_fetch_object( $this->result );
+	    return mysqli_fetch_object( self::$result );
 	}
     
     /**
@@ -165,9 +158,9 @@ class mysql {
      * @return array
      * @since 1.0
     */
-	public function fetchArray( )
+	public static function fetchArray( )
 	{
-	    return mysqli_fetch_array( $this->result );
+	    return mysqli_fetch_array( self::$result );
 	}
 	
 	/**
@@ -175,15 +168,15 @@ class mysql {
      * @return object
      * @since 1.0
     */
-	public function fetchObjectList()
+	public static function fetchObjectList()
 	{
 	    $object = array();
 
-	    while ($row = $this->fetchObject( $this->result )) {
+	    while ($row = self::fetchObject( self::$result )) {
 	        $object[] = $row;
 	    }
 	    
-	    $this->free();
+	    self::free();
 	    return $object;
 	}
 
@@ -192,9 +185,9 @@ class mysql {
      * @return object
      * @since 1.0
     */
-	public function num_rows(  )
+	public static function num_rows(  )
 	{
-	    return mysqli_num_rows( $this->result );
+	    return mysqli_num_rows( self::$result );
 	}
     
     /**
@@ -204,7 +197,7 @@ class mysql {
 	 * @return  string  The quoted input string.
 	 * @since   1.0
 	*/
-	public function quote($text)
+	public static function quote($text)
 	{
 		if(is_numeric($text)) { return $text; } 
 		return '\''.str_replace("'", "''", $text).'\'';
@@ -215,7 +208,7 @@ class mysql {
      * @return int
      * @since 1.0
     */
-  	public function affected_rows(  )
+  	public static function affected_rows(  )
   	{
     	return mysqli_affected_rows( );
   	}
@@ -225,26 +218,26 @@ class mysql {
      * @return string
      * @since 1.0
     */
-    public function getError()
+    public static function getError()
     {
-        return mysqli_errno($this->connection_id)." : ".mysqli_error($this->connection_id);
+        return mysqli_errno(self::$connection_id)." : ".mysqli_error(self::$connection_id);
     }
     
     /**
      * Method to frees the memory associated with a result
     */
-    public function free()
+    public static function free()
     {
-        return mysqli_free_result($this->result);
+        return mysqli_free_result(self::$result);
     }
     
     /**
      * Method to close a connection
      * @since 1.0
     */
-    public function close()
+    public static function close()
     {
-        return mysqli_close($this->connection_id);
+        return mysqli_close(self::$connection_id);
     }
 }
 

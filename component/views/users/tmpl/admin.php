@@ -12,7 +12,7 @@
 
 defined('_Foxy') or die ('restricted access');
 
-$model 	= $app->getModel('users');
+$model 	= application::getModel('users');
 ?>
 
 <section class="forms container-fluid my-5">
@@ -25,10 +25,10 @@ $model 	= $app->getModel('users');
           </div>
           <div class="card-body">
             <form method="post" action="index.php?task=users.saveItem">
-              <?= $html->getTextField('users', 'username'); ?>
-              <?= $html->getEmailField('users', 'email'); ?>
-              <?= $html->getPasswordField('users', 'password'); ?>
-              <?= $html->getUsergroupsField('users', 'usergroup'); ?>
+              <?= html::getTextField('users', 'username'); ?>
+              <?= html::getEmailField('users', 'email'); ?>
+              <?= html::getPasswordField('users', 'password'); ?>
+              <?= html::getUsergroupsField('users', 'usergroup'); ?>
               <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-primary">
               </div>
