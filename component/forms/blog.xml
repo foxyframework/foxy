@@ -12,7 +12,7 @@
         <type>text</type>
         <name>alias</name>
         <id>alias</id>
-        <label>FOXY_BLOG_TITOL_LABEL</label>
+        <label>FOXY_BLOG_ALIAS_LABEL</label>
         <message></message>
         <placeholder>FOXY_BLOG_ALIAS_PLACEHOLDER</placeholder>
         <disabled>false</disabled>
