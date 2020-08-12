@@ -369,7 +369,7 @@ class Html
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
                 $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
                 if($field[0]->label != "") $html .= "<label for='".$field[0]->id."'><a class='hasTip' title='".language::get($field[0]->placeholder)."'>".language::get($field[0]->label)."</a></label>";
-                $html .= "<textarea id='".$field[0]->id."' maxlength='".$field[0]->maxlength."' placeholder='".language::get($field[0]->placeholder)."' name='".$field[0]->name."' rows='".$field[0]->rows."' cols='".$field[0]->cols."' class='form-control editor' ".$disabled." ".$onchange.">".$default."</textarea>";
+                $html .= "<textarea id='editor' maxlength='".$field[0]->maxlength."' placeholder='".language::get($field[0]->placeholder)."' name='".$field[0]->name."' rows='".$field[0]->rows."' cols='".$field[0]->cols."' class='form-control editor' ".$disabled." ".$onchange.">".$default."</textarea>";
             }
         }
 

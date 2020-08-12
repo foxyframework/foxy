@@ -32,39 +32,14 @@ function getParameterByName(name) {
 	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-var myTable = document.querySelector("#datatable");
-var table = new DataTable(myTable);
-
-if(document.getElementsByClassName('editor').lenght) {
-	const editor = SUNEDITOR.create((document.getElementsByClassName('editor')),{
-		// All of the plugins are loaded in the "window.SUNEDITOR" object in dist/suneditor.min.js file
-		// Insert options
-		// Language global object (default: en)
-	});
+var myTable = document.getElementById("datatable");
+if(myTable != 'undefined' && myTable != 'null') {
+	var table = new DataTable(myTable);
 }
 
-//save cookie with language
-if(document.getElementsByClassName('lang').lenght) {
-	document.querySelector('.lang').addEventListener("click", e => {
-		var lang = e.target.getAttribute('[data-lang]');
-		setCookie('language', lang, 10);
-	});
-}
-
-if(document.getElementsByClassName('checkAll').lenght) {
-	document.querySelector('.checkAll').addEventListener('click', e => {
-		if (e.target.value == 'Check All') {
-		document.getElementById('datatable').forEach(checkbox => {
-			checkbox.checked = true;
-		});
-		e.target.value = 'Uncheck All';
-		} else {
-		document.getElementById('datatable').forEach(checkbox => {
-			checkbox.checked = false;
-		});
-		e.target.value = 'Check All';
-		}
-	});
+var editor = document.getElementById("editor");
+if(editor != 'undefined' && editor != 'null') {
+    SUNEDITOR.create('editor');
 }
 
 //delete
