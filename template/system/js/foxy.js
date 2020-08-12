@@ -32,6 +32,9 @@ function getParameterByName(name) {
 	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+var myTable = document.querySelector("#datatable");
+var table = new DataTable(myTable);
+
 if(document.getElementsByClassName('editor').lenght) {
 	const editor = SUNEDITOR.create((document.getElementsByClassName('editor')),{
 		// All of the plugins are loaded in the "window.SUNEDITOR" object in dist/suneditor.min.js file
