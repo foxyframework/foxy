@@ -11,6 +11,5 @@
 
 defined('_Foxy') or die ('restricted access');
 
-if(application::getVar('layout') == 'admin') {
-    application::addScript(config::$site.'/bower_components/jquery-validation/dist/jquery.validate.min.js');
-}
+application::addScript(config::$site.'/bower_components/vanilla-datatables/dist/vanilla-dataTables.min.js');
+application::addStyleSheet(config::$site.'/bower_components/vanilla-datatables/dist/vanilla-dataTables.min.css');

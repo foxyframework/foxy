@@ -17,148 +17,96 @@ function getCookie(c_name) {
     return "";
 }
 
-if ($('.dropzone').length) { Dropzone.autoDiscover = false; }
-
-$(document).ready(function() {
-
-	if ($('.dropzone').length) {
-		var myDropzone = new Dropzone(".dropzone", { url: domain+"?task=expedients.upload&mode=raw"});
-		myDropzone.on("complete", function (file) {
-			if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
-				location.reload();
-			}
-		});
+function deleteAccount(username, domain) {
+	if(document.getElementById('proceed').value.toLowerCase() == username) {
+		document.location.href = domain+'?view=config&task=deleteAccount';
+	} else {
+		return false;
 	}
+}
 
-	if ($('.editor').length) {
-		$( '.editor' ).trumbowyg({
-			imageWidthModalEdit: true,
-			tagsToRemove: ['script', 'iframe'],
-			tagsToKeep: ['i'],
-			autogrow: true,
-			defaultLinkTarget: '_blank'
-		});
-	}
+function getParameterByName(name) {
+	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+	results = regex.exec(location.search);
+	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 
-	if ($('#datatable').length) {
-		$('#datatable').DataTable();
-	}
-	
-	//tooltips
-	//$(".hasTip").tooltip();
+if(document.getElementsByClassName('editor').lenght) {
+	const editor = SUNEDITOR.create((document.getElementsByClassName('editor')),{
+		// All of the plugins are loaded in the "window.SUNEDITOR" object in dist/suneditor.min.js file
+		// Insert options
+		// Language global object (default: en)
+	});
+}
 
-	//save cookie with language
-	$('.lang').click(function() {
-		var lang = $(this).attr('data-lang');
+var dataTable = new DataTable("#datatable");
+
+//save cookie with language
+if(document.getElementsByClassName('lang').lenght) {
+	document.querySelector('.lang').addEventListener("click", e => {
+		var lang = e.target.getAttribute('[data-lang]');
 		setCookie('language', lang, 10);
-  	});
-
-  	$('.saveandclose').click(function(e) {
-    	e.preventDefault();
-    	$('#sortir').val(1);
-    	$('.submit').click();
 	});
+}
 
-	//select all checkbox
-	$('#selectAll').change(function() {
-		var checkboxes = $(this).closest('form').find(':checkbox');
-		checkboxes.prop('checked', $(this).is(':checked'));
-	});
-
-  	if ($('.input-datepicker-autoclose').length) {
-		$('.input-datepicker-autoclose').datepicker({
-		autoclose: true,
-		format: 'yyyy-mm-dd'
+if(document.getElementsByClassName('checkAll').lenght) {
+	document.querySelector('.checkAll').addEventListener('click', e => {
+		if (e.target.value == 'Check All') {
+		document.getElementById('datatable').forEach(checkbox => {
+			checkbox.checked = true;
 		});
-  	}
+		e.target.value = 'Uncheck All';
+		} else {
+		document.getElementById('datatable').forEach(checkbox => {
+			checkbox.checked = false;
+		});
+		e.target.value = 'Check All';
+		}
+	});
+}
 
-	//delete
-	$('#btn_delete').click(function(e) {
+//delete
+if(document.getElementsByClassName('.btn_delete').lenght) {
+	document.querySelector('btn_delete').addEventListener("click",function(e) {
 
 		e.preventDefault();
 		var items = [];
 
-		$(':checkbox').each(function() {
+		$(':checkbox').each(function(el) {
 		if(this.checked) {
-				var id    = $(this).attr('data-id');
+				var id    = el.target.getAttribute('data-id');
 				items.push(id);
 			}
 		});
 
-		var view = $(this).attr('data-view');
-		var pageURL = $(this).attr("href");
+		var view = e.target.getAttribute('data-view');
+		var pageURL = e.target.getAttribute("href");
 
 		if(items == 0) { alert('Please check one item at least'); return false; } else { if(!confirm('Are you sure you want to delete this item?')) return false; }
 
 		var list = JSON.stringify(items);
 
-		$.ajax({
-			url: pageURL,
-			type: "post",
-			datatype: 'json',
-			data: {'items': list},
-			success: function(data){
+		var ajax = new XMLHttpRequest();
+
+		ajax.open("POST", pageURL, true);
+		ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		ajax.send("items="+list);
+
+		// Cria um evento para receber o retorno.
+		ajax.onreadystatechange = function() {
+		
+		// Caso o state seja 4 e o http.status for 200, é porque a requisiçõe deu certo.
+			if (ajax.readyState == 4 && ajax.status == 200) {
+			
+				var data = ajax.responseText;
 				Messenger().post({message: view+' success deleted', type: 'success', hideAfter: 10});
-					items.forEach(item => {
-						$(`tr[data-id="${item}"]`).remove();
-					})
-			},
-			error: function(data){
+				items.forEach(item => {
+					document.querySelector(`[data-id="${item}"]`).remove();
+				})
+			} else {
 				Messenger().post({message: 'Sembla que tenim algun problema', type: 'error', hideAfter: 10});
 			}
-      	});
+		}
 	});
-
-	//delete image
-	$('.deleteImage').click(function(e) {
-
-		e.preventDefault();
-
-		var id = $(this).attr('data-id');
-
-		$.ajax({
-			url: domain+'?task=expedients.deleteImage&mode=raw&id='+id,
-			type: "post",
-			datatype: 'json',
-			data: {},
-			success: function(data){
-				Messenger().post({message: 'Imatge esborrada correctament', type: 'success', hideAfter: 10});
-				$('.image'+id).remove();
-			},
-			error: function(data){
-				Messenger().post({message: 'Sembla que tenim algun problema', type: 'error', hideAfter: 10});
-			}
-      	});
-	 });
-
-	//new
-	$('#btn_new').click(function(e) {
-
-		e.preventDefault();
-
-		var pageURL = $(this).attr("href");
-		var projId = getParameterByName('filter_equal_projecteId');
-
-		if(projId == ''){
-			document.location.href = domain+'/'+pageURL;
-		} else {
-			document.location.href = domain+'/'+pageURL+'&projecteId='+projId;
-		}
- 	});
-
-	function deleteAccount(username, domain) {
-		if($('#proceed').val().toLowerCase() == username) {
-			document.location.href = domain+'?view=config&task=deleteAccount';
-		} else {
-			return false;
-		}
-	}
-
-	function getParameterByName(name) {
-		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-		results = regex.exec(location.search);
-		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-	}
-
-});
+}

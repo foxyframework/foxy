@@ -12,10 +12,8 @@
 defined('_Foxy') or die ('restricted access');
 
 if(application::getVar('layout') == 'admin') {
-    application::addScript(config::$site.'/bower_components/jquery-validation/dist/jquery.validate.min.js');
-    application::addScript(config::$site.'/bower_components/datatables/media/js/jquery.dataTables.min.js');
-    application::addScript(config::$site.'/bower_components/datatables/media/js/dataTables.bootstrap4.min.js');
-    application::addStyleSheet(config::$site.'/bower_components/datatables/media/css/dataTables.bootstrap4.min.css');
-    application::addScript(config::$site.'/bower_components/trumbowyg/dist/trumbowyg.min.js');
-    application::addStylesheet(config::$site.'/bower_components/trumbowyg/dist/ui/trumbowyg.min.css');
+    application::addScript(config::$site.'/bower_components/vanilla-datatables/dist/vanilla-dataTables.min.js');
+    application::addStyleSheet(config::$site.'/bower_components/vanilla-datatables/dist/vanilla-dataTables.min.css');
+    application::addScript(config::$site.'/bower_components/suneditor/dist/suneditor.min.js');
+    application::addStylesheet(config::$site.'/bower_components/suneditor/dist/css/suneditor.min.css');
 }
