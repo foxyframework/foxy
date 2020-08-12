@@ -19,5 +19,5 @@ if(application::getVar('layout') == 'admin') {
     if(!user::getAuth()) { application::redirect('index.php?view=home'); }
     application::addScript(config::$site.'/bower_components/vanilla-datatables/dist/vanilla-dataTables.min.js');
     application::addStyleSheet(config::$site.'/bower_components/vanilla-datatables/dist/vanilla-dataTables.min.css');
-    application::addScript('https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js');
+    application::addScript(config::$site.'/bower_components/ckeditor/ckeditor.js');
 }
