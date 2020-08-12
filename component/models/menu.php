@@ -29,12 +29,13 @@ class menu extends model
     public function saveMenuItem()
     {
         $obj = new stdClass();
-        $obj->title         = $app->getVar('title');
-        $obj->translation   = $app->getVar('translation');
-        $obj->url           = $app->getVar('url');
-        $obj->auth          = $app->getVar('auth');
-        $obj->type          = $app->getVar('type');
-        $obj->module        = $app->getVar('module');
+        $obj->title         = application::getVar('title', '', 'post');
+        $obj->translation   = application::getVar('translation', '', 'post');
+        $obj->url           = application::getVar('url', '', 'post');
+        $obj->auth          = application::getVar('auth', 0, 'post', 'int');
+        $obj->type          = application::getVar('type', 0, 'post', 'int');
+        $obj->module        = application::getVar('module', '', 'post');
+        $obj->template      = application::getVar('template', '', 'post');
 
         $result = database::insertRow("#_menu", $obj);
 

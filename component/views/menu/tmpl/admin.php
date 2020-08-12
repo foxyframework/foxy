@@ -25,7 +25,7 @@ $model 	= application::getModel('menu');
           </div>
           <div class="card-body">
             <p>Com administrador pots gestionar el menú principal.</p>
-            <form method="post" action="index.php?task=users.saveMenuItem">
+            <form method="post" action="index.php?task=menu.saveMenuItem">
               <?= html::getTextField('menu', 'title'); ?>
               <?= html::getTextField('menu', 'translation'); ?>
               <?= html::getTextField('menu', 'url'); ?>
@@ -76,7 +76,7 @@ $model 	= application::getModel('menu');
                 <td><?= $mi->auth; ?></td>
                 <td><?= $mi->type; ?></td>
                 <td><?= $mi->module; ?></td>
-                <td><a href="index.php?view=admin&task=removeMenuItem&id=<?= $usr->id; ?>"><i class="fa fa-trash-o"></i></a></td>
+                <td><a href="index.php?task=menu.removeMenuItem&id=<?= $usr->id; ?>"><i class="fa fa-trash-o"></i></a></td>
               </tr>
               <?php endforeach; ?>
             </tbody>
