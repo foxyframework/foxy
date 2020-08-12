@@ -309,11 +309,8 @@ class Html
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
                 $html .= "<div id='".$field[0]->name."-field' class='form-group'>";
                 if($field[0]->label != "") $html .= "<label for='".$field[0]->id."'><a class='hasTip' title='".language::get($field[0]->placeholder)."'>".language::get($field[0]->label)."</a></label>";
-                $html .= "<div class='input-group date' id='".$field[0]->id."-icon'>";
-                $html .= "<input type='text' id='".$field[0]->id."' value='".$default."' name='".$field[0]->name."'";
-                $html .= $disabled." data-message='".language::get($field[0]->message)."' ".$readonly." class='form-control input-datepicker-autoclose' autocomplete='off'>";
-                $html .= "<span class='input-group-addon'><span class='glyphicon glyphicon-calendar'></span></span>";
-                $html .= "</div>";
+                $html .= "<input type='date' id='".$field[0]->id."' value='".$default."' name='".$field[0]->name."'";
+                $html .= $disabled." data-message='".language::get($field[0]->message)."' ".$readonly." class='form-control' autocomplete='off'>";
                 $html .= "</div>";
             }
         }
@@ -395,98 +392,6 @@ class Html
                 $html .= "<button $type id='".$field[0]->id."' ".$disabled." ".$onclick." class='btn btn-".$field[0]->color." ".$field[0]->clase."'>".language::get($field[0]->value)."</button>";
             }
         }
-        return $html;
-    }
-
-    /**
-     * Method to render a repeatable field require jquery ui
-     * @param string $form the form name
-     * @param array $fields of field names
-	 * @param $tmpl array of default values
-	 * @param $list object to fill the list field
-	 * @param $value string the value field for list fields
-	 * @param $key string the key field for list fields
-	 * @param $target string the modal url formmodal fields
-	 * @param $placeholder string a placeholder for modal fields
-	 * @param $uniqid string a uniqid for modal fields
-	 * @see https://github.com/Rhyzz/repeatable-fields
-     * @return $html string a complete repeatable field
-    */
-    public static function getRepeatable($form, $fields, $tmpl=null, $list, $value, $key, $target, $placeholder, $uniqid)
-    {
-        $html = "<div class='repeatable'>";
-		$html .= "<table class='wrapper' width='100%'>";
-		$html .= "<thead><tr><td width='10%' valign='bottom' colspan='4'><span class='add btn btn-success'><i class='fa fa-plus'></i></span></td></tr></thead>";
-		$html .= "<tbody class='container'>";
-
-		$html .= "<tr class='template row'>";
-		$html .= "<td width='10%'><div class='form-group'></div></td>";
-
-		foreach($fields as $field) {
-			foreach(html::getForm($form) as $row) {
-				if($row['name'] == $field) {
-				$row[0]->width == '' ? $width = '40%' : $width = $row[0]->width;
-				if($row[0]->type == 'text') { $html .= "<td width='".$width."'>".html::getTextField($form, $field)."</td>"; }
-				if($row[0]->type == 'textarea') { $html .= "<td width='".$width."'>".html::getTextareaField($form, $field)."</td>"; }
-				if($row[0]->type == 'list') { $html .= "<td width='".$width."'>".html::getListField($form, $field, "", $list, $value, $key)."</td>"; }
-				if($row[0]->type == 'checkbox') { $html .= "<td width='".$width."'>".html::getCheckboxField($form, $field)."</td>"; }
-				if($row[0]->type == 'radio') { $html .= "<td width='".$width."'>".html::getRadioField($form, $field)."</td>"; }
-				if($row[0]->type == 'modal') { $html .= "<td width='".$width."'>".html::getModalField($form, $field, '', $target, $placeholder, $uniqid)."</td>"; }
-				}
-			}
-		}
-
-
-		$html .= '<td valign="bottom" width="10%" align="right"><div class="form-group"><span class="remove btn btn-danger"><i class="fa fa-minus"></i></span></div></td></tr>';
-
-		if($tmpl != null) {
-			foreach($tmpl as $item) {
-				$html .= "<tr class='row fromdb'>";
-				$html .= "<td width='10%'><div class='form-group'></div></td>";
-				foreach($fields as $field) {
-					foreach(html::getForm($form) as $row) {
-						if($row['name'] == $field) {
-						$row[0]->width == '' ? $width = '40%' : $width = $row[0]->width;
-						if($row[0]->type == 'text') { $html .= "<td width='".$width."'>".html::getTextField($form, $field, $item->$field)."</td>"; }
-						if($row[0]->type == 'textarea') { $html .= "<td width='".$width."'>".html::getTextareaField($form, $field, $item->$field)."</td>"; }
-						if($row[0]->type == 'list') { $html .= "<td width='".$width."'>".html::getListField($form, $field, $item->$field, $list, $value, $key)."</td>"; }
-						if($row[0]->type == 'checkbox') { $html .= "<td width='".$width."'>".html::getCheckboxField($form, $field, $item->$field)."</td>"; }
-						if($row[0]->type == 'radio') { $html .= "<td width='".$width."'>".html::getRadioField($form, $field, $item->$field)."</td>"; }
-						if($row[0]->type == 'modal') { $html .= "<td width='".$width."'>".html::getModalField($form, $field, '', $target, $placeholder, $uniqid)."</td>"; }
-						}
-					}
-				}
-				$html .= '<td width="10%" valign="bottom" align="right"><div class="form-group"><span class="remove btn btn-danger"><i class="fa fa-minus"></i></span></div></td></tr>';
-			}
-
-		} else {
-			$html .= "<tr class='row'>";
-			$html .= "<td width='10%'><div class='form-group'></div></td>";
-			foreach($fields as $field) {
-				foreach(html::getForm($form) as $row) {
-					if($row['name'] == $field) {
-					$row[0]->width == '' ? $width = '40%' : $width = $row[0]->width;
-					if($row[0]->type == 'text') { $html .= "<td width='".$width."'>".html::getTextField($form, $field)."</td>"; }
-					if($row[0]->type == 'textarea') { $html .= "<td width='".$width."'>".html::getTextareaField($form, $field)."</td>"; }
-					if($row[0]->type == 'list') { $html .= "<td width='".$width."'>".html::getListField($form, $field, "", $list, $value, $key)."</td>"; }
-					if($row[0]->type == 'checkbox') { $html .= "<td width='".$width."'>".html::getCheckboxField($form, $field)."</td>"; }
-					if($row[0]->type == 'radio') { $html .= "<td width='".$width."'>".html::getRadioField($form, $field)."</td>"; }
-					if($row[0]->type == 'modal') { $html .= "<td width='".$width."'>".html::getModalField($form, $field, '', $target, $placeholder, $uniqid)."</td>"; }
-					}
-				}
-			}
-
-			$html .= '<td width="10%" valign="bottom" align="right"><div class="form-group"><span class="remove btn btn-danger"><i class="fa fa-minus"></i></span></div></td>';
-		}
-		$html .= "<script>";
-		$html .= '$(document).ready(function () {';
-		$html .= '$(".repeatable").each(function() {';
-		$html .= '$(this).repeatable_fields();';
-		$html .= '});';
-		$html .= '});';
-		$html .= "</script>";
-		$html .= '</tr></tbody></table>';
-		$html .= '</div>';
         return $html;
     }
 
