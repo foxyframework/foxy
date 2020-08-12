@@ -89,7 +89,7 @@ class blog extends model
 	 * Method to get and item by id
 	 * @return object 
 	*/
-	public function getItem($table, $key, $id = 0)
+	public function getItemById()
 	{
 		$id  = application::getVar('id', 0, 'get');
 
@@ -127,7 +127,7 @@ class blog extends model
 		$id     = application::getVar('id', 0, 'post', 'int');
 
 		$_POST['category'] 		= 0;
-		$_POST['userid']   		= $user->id;
+		$_POST['userid']   		= user::$id;
 		$_POST['author_link'] 	= '#';
 		$_POST['language'] 		= 'ca-es';
 		$_POST['status'] 		= 1;

@@ -176,8 +176,8 @@ class Html
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
                 $field[0]->onchange != "" ? $onchange = 'onchange="'.$field[0]->onchange.'"' : $onchange = "";
                 $field[0]->onkeyup != "" ? $onkeyup = " onkeyup='".$field[0]->onkeyup."'" : $onkeyup = "";
-                if($field[0]->type != 'hidden') $html .= "<div id='".$field[0]->name."-field' class='form-group'>";
-                if($field[0]->type != 'hidden' && $field[0]->label != "") $html .= "<label for='".$field[0]->id."'><a class='hasTip' title='".language::get($field[0]->placeholder)."'>".language::get($field[0]->label)."</a></label>";
+                if($field[0]->type != 'hidden') $html .= "<div id='".$field[0]->name."-field' class='mb-3'>";
+                if($field[0]->type != 'hidden' && $field[0]->label != "") $html .= "<label for='".$field[0]->id."' class='form-label'>".language::get($field[0]->label)."</label>";
                 if($field[0]->type != 'hidden' && $field[0]->label != "") $html .= "<div class='controls'>";
                 $html .= "<input type='".$field[0]->type."' id='".$field[0]->id."' value='".str_replace("'","&#39;",$default)."' name='".$field[0]->name."'";
                 if($field[0]->type != 'hidden') $html .= $disabled." data-message='".language::get($field[0]->message)."' ".$onchange." ".$onkeyup." ".$readonly." placeholder='".language::get($field[0]->placeholder)."' class='form-control ".$field[0]->clase."' autocomplete='off'";
@@ -208,8 +208,8 @@ class Html
                 $field[0]->required == 'true' ? $required = "required='true'" : $required = "";
                 $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
                 $field[0]->onkeyup != "" ? $onkeyup = " onkeyup='".$field[0]->onkeyup."'" : $onkeyup = "";
-                $html .= "<div id='".$field[0]->name."-field' class='form-group'>";
-                if($field[0]->label != "") $html .= "<label for='".$field[0]->id."'><a class='hasTip' title='".language::get($field[0]->placeholder)."'>".language::get($field[0]->label)."</a></label>";
+                $html .= "<div id='".$field[0]->name."-field' class='mb-3'>";
+                if($field[0]->label != "") $html .= "<label for='".$field[0]->id."' class='form-label'>".language::get($field[0]->label)."</label>";
                 if($field[0]->label != "") $html .= "<div class='controls'>";
                 $html .= "<input type='".$field[0]->type."' name='".$field[0]->name."' style='display:none;' />";
                 $html .= "<input type='".$field[0]->type."' id='".$field[0]->id."' value='".$default."' name='".$field[0]->name."'";
@@ -242,8 +242,8 @@ class Html
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
                 $field[0]->onchange != "" ? $onchange = 'onchange="'.$field[0]->onchange.'"' : $onchange = "";
                 $field[0]->onkeyup != "" ? $onkeyup = " onkeyup='".$field[0]->onkeyup."'" : $onkeyup = "";
-                if($field[0]->type != 'hidden') $html .= "<div id='".$field[0]->name."-field' class='form-group'>";
-                if($field[0]->type != 'hidden' && $field[0]->label != "") $html .= "<label for='".$field[0]->id."'><a class='hasTip' title='".language::get($field[0]->placeholder)."'>".language::get($field[0]->label)."</a></label>";
+                if($field[0]->type != 'hidden') $html .= "<div id='".$field[0]->name."-field' class='mb-3'>";
+                if($field[0]->type != 'hidden' && $field[0]->label != "") $html .= "<label for='".$field[0]->id."' class='form-label'>".language::get($field[0]->label)."</label>";
                 if($field[0]->type != 'hidden' && $field[0]->label != "") $html .= "<div class='controls'>";
                 $default != '' ? $default = $default : $default = $field[0]->default;
                 $html .= "<input type='".$field[0]->type."' id='".$field[0]->id."' value='".$default."' name='".$field[0]->name."' min='".$field[0]->min."' max='".$field[0]->max."' step='".$field[0]->step."'";
@@ -275,8 +275,8 @@ class Html
                 $field[0]->required == 'true' ? $required = "required='true'" : $required = "";
                 $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
                 $field[0]->onkeyup != "" ? $onkeyup = " onkeyup='".$field[0]->onkeyup."'" : $onkeyup = "";
-                $html .= "<div id='".$field[0]->name."-field' class='form-group'>";
-                if($field[0]->label != "") $html .= "<label for='".$field[0]->id."'><a class='hasTip' title='".language::get($field[0]->placeholder)."'>".language::get($field[0]->label)."</a></label>";
+                $html .= "<div id='".$field[0]->name."-field' class='mb-3'>";
+                if($field[0]->label != "") $html .= "<label for='".$field[0]->id."' class='form-label'>".language::get($field[0]->label)."</label>";
                 if($field[0]->label != "") $html .= "<div class='controls'>";
                 $html .= "<input type='".$field[0]->type."' name='".$field[0]->name."' style='display:none;' />";
                 $html .= "<input type='".$field[0]->type."' data-minlength='".$field[0]->minlength."' id='".$field[0]->id."' value='".$default."' name='".$field[0]->name."'";
@@ -307,8 +307,8 @@ class Html
             if($field['name'] == $name) {
 				$field[0]->readonly == 'true' ? $readonly = "readonly='true'" : $readonly = "";
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
-                $html .= "<div id='".$field[0]->name."-field' class='form-group'>";
-                if($field[0]->label != "") $html .= "<label for='".$field[0]->id."'><a class='hasTip' title='".language::get($field[0]->placeholder)."'>".language::get($field[0]->label)."</a></label>";
+                $html .= "<div id='".$field[0]->name."-field' class='mb-3'>";
+                if($field[0]->label != "") $html .= "<label for='".$field[0]->id."' class='form-label'>".language::get($field[0]->label)."</label>";
                 $html .= "<input type='date' id='".$field[0]->id."' value='".$default."' name='".$field[0]->name."'";
                 $html .= $disabled." data-message='".language::get($field[0]->message)."' ".$readonly." class='form-control' autocomplete='off'>";
                 $html .= "</div>";
@@ -334,8 +334,8 @@ class Html
             if($field['name'] == $name) {
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
                 $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
-                $html .= "<div id='".$field[0]->name."-field' class='form-group'>";
-                if($field[0]->label != "") $html .= "<label for='".$field[0]->id."'><a class='hasTip' title='".language::get($field[0]->placeholder)."'>".language::get($field[0]->label)."</a></label>";
+                $html .= "<div id='".$field[0]->name."-field' class='mb-3'>";
+                if($field[0]->label != "") $html .= "<label for='".$field[0]->id."' class='form-label'>".language::get($field[0]->label)."</label>";
                 if($field[0]->label != "") $html .= "<div class='controls'>";
                 $html .= "<textarea id='".$field[0]->id."' maxlength='".$field[0]->maxlength."' placeholder='".language::get($field[0]->placeholder)."' name='".$field[0]->name."' rows='".$field[0]->rows."' cols='".$field[0]->cols."' class='form-control' ".$disabled." ".$onchange.">".$default."</textarea>";
                 //$html .= "<span id='".$field[0]->name."-msg'></span>";
@@ -365,8 +365,8 @@ class Html
             if($field['name'] == $name) {
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
                 $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
-                if($field[0]->label != "") $html .= "<label for='".$field[0]->id."'><a class='hasTip' title='".language::get($field[0]->placeholder)."'>".language::get($field[0]->label)."</a></label>";
-                $html .= "<textarea id='editor' maxlength='".$field[0]->maxlength."' placeholder='".language::get($field[0]->placeholder)."' name='".$field[0]->name."' rows='".$field[0]->rows."' cols='".$field[0]->cols."' class='form-control editor' ".$disabled." ".$onchange.">".$default."</textarea>";
+                if($field[0]->label != "") $html .= "<label for='".$field[0]->id."' class='form-label'>".language::get($field[0]->label)."</label>";
+                $html .= "<textarea id='editor' name='".$field[0]->name."' maxlength='".$field[0]->maxlength."' placeholder='".language::get($field[0]->placeholder)."' rows='".$field[0]->rows."' cols='".$field[0]->cols."' class='form-control editor' ".$disabled." ".$onchange.">".$default."</textarea>";
             }
         }
 
@@ -409,8 +409,8 @@ class Html
             if($field['name'] == $name) {
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
                 $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
-                $html .= "<div id='".$field[0]->name."-field' class='form-group'>";
-                if($field[0]->label != "") $html .= "<label class='control-label' for='".$field[0]->id."'><a class='hasTip' title='".language::get($field[0]->placeholder)."'>".language::get($field[0]->label)."</a></label>";
+                $html .= "<div id='".$field[0]->name."-field' class='mb-3'>";
+                if($field[0]->label != "") $html .= "<label class='form-label' for='".$field[0]->id."'>".language::get($field[0]->label)."</label>";
                 $html .= "<select id='".$field[0]->id."' name='".$field[0]->name."' data-message='".language::get($field[0]->message)."' ".$onchange." class='".$class." form-control' ".$disabled.">";
 
                 database::query('SELECT * FROM #_usergroups');
@@ -445,8 +445,8 @@ class Html
             if($field['name'] == $name) {
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
                 $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
-                $html .= "<div id='".$field[0]->name."-field' class='form-group'>";
-                if($field[0]->label != "") $html .= "<label class='control-label' for='".$field[0]->id."'><a class='hasTip' title='".language::get($field[0]->placeholder)."'>".language::get($field[0]->label)."</a></label>";
+                $html .= "<div id='".$field[0]->name."-field' class='mb-3'>";
+                if($field[0]->label != "") $html .= "<label class='form-label' for='".$field[0]->id."'>".language::get($field[0]->label)."</label>";
                 $html .= "<select id='".$field[0]->id."' name='".$field[0]->name."' data-message='".language::get($field[0]->message)."' ".$onchange." class='".$class." form-control' ".$disabled.">";
 
                 database::query('SELECT id, username FROM #_users');
@@ -487,7 +487,7 @@ class Html
                     $input[0] = "input-group mb-3";
                     $input[1] = "custom-select";
                 }else{
-                    $input[0] = "form-group";
+                    $input[0] = "mb-3";
                     $input[1] = "";
                 }
                 $iconButton = isset($field[0]->iconButton) ? $field[0]->iconButton : "fa fa-plus";
@@ -506,7 +506,7 @@ class Html
                 $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
 				$combobox == true ? $class = 'combobox ' : $class = '';
                 $html .= "<div id='".$field[0]->name."-field' class='".$input[0]."'>";
-                if($field[0]->label != "") $html .= "<label class='control-label' for='".$field[0]->id."'><a class='hasTip' title='".language::get($field[0]->placeholder)."'>".language::get($field[0]->label)."</a></label>";
+                if($field[0]->label != "") $html .= "<label class='form-label' for='".$field[0]->id."'>".language::get($field[0]->label)."</label>";
                 $html .= "<select id='".$field[0]->id."' name='".$field[0]->name . $multiple[1] ."' ". $onchange . $multiple[0] ." class='custom-select". $class ." ". $input[1] ." ".$field[0]->classe. " ".  $multiple[2] ." form-control' ".$disabled. $multiple[3] .">";
 
 				foreach($field[0]->option as $option) {
@@ -550,61 +550,6 @@ class Html
         return $html;
     }
 
-	/**
-     * Method to render a modal field
-     * @param $form string the form name
-     * @param $name string the field name
-     * @param $default mixed optional default value
-     * @return $html string a complete checkbox field html
-    */
-    public static function getModalField($form, $name, $default='', $target='', $placeholder='', $uniqid='')
-    {
-        $uniqid == '' ? $uniqid = uniqid() : $uniqid = $uniqid;
-        $html = "";
-        foreach(html::getForm($form) as $field) {
-            if($field['name'] == $name) {
-				$target == '' ? $target = $field[0]->target : $target = $target;
-				$placeholder == '' ? $placeholder = $field[0]->placeholder : $placeholder = $placeholder;
-                $field[0]->onclick != "" ? $onclick = "onclick='".$field[0]->onclick."'" : $onclick = "";
-                $html .= "<div id='".$field[0]->name."-field' class='form-group'>";
-                $html .= "<div class='input-group'>";
-				$html .= "<input type='text' class='form-control SearchBar' name='".$field[0]->name."' value='".$default."' id='input-".$uniqid."' placeholder='".$placeholder."'>";
-				$html .= "<span class='input-group-btn'>";
-				$html .= "<button class='btn btn-defaul SearchButton' id='searchBtn-".$uniqid."' type='button'>";
-				$html .= "<span class='glyphicon glyphicon-search SearchIcon' ></span>";
-				$html .= "</button>";
-				$html .= "</span>";
-				$html .= "</div>";
-				$html .= "<!-- modal  -->";
-				$html .= "<div class='modal fade' id='myModal-".$uniqid."' tabindex='-1' role='dialog' aria-labelledby='myModalLabel-".$uniqid."' aria-hidden='true'>";
-				$html .= "<div class='modal-dialog'>";
-				$html .= "<div class='modal-content'>";
-				$html .= "<div class='modal-header'>";
-				$html .= "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
-				$html .= "<h4 class='modal-title' id='myModalLabel-".$uniqid."'>".$placeholder."</h4>";
-				$html .= "</div>";
-				$html .= "<div class='modal-body' id='modal-body-".$uniqid."'>";
-				$html .= "</div>";
-				$html .= "<div class='modal-footer'>";
-				$html .= "<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>";
-				$html .= "</div>";
-				$html .= "</div>";
-				$html .= "</div>";
-				$html .= "</div>";
-				$html .= "<script>";
-				$html .= "$(document).ready(function () {";
-				$html .= "$('#searchBtn-".$uniqid."').on('click', function() {";
-				$html .= "$('#myModal-".$uniqid."').modal('show'); ";
-				$html .= "$('#modal-body-".$uniqid."').load('".$target."&btn=".$uniqid."');";
-				$html .= "});";
-				$html .= "});";
-				$html .= "</script>";
-                $html .= "</div>";
-            }
-        }
-        return $html;
-    }
-
  	/**
      * Method to render a checkbox
      * @param $form string the form name
@@ -619,7 +564,7 @@ class Html
         foreach(html::getForm($form) as $field) {
             if($field['name'] == $name) {
                 $field[0]->onclick != "" ? $onclick = "onclick='".$field[0]->onclick."'" : $onclick = "";
-                $html .= "<div class='form-group'>";
+                $html .= "<div class='mb-3'>";
                 $html .= "<div id='".$field[0]->name."-field' class='checkbox'>";
                 $html .= "<label class='checkbox'>";
                 foreach($field[0]->option as $option) {
@@ -649,7 +594,7 @@ class Html
         foreach(html::getForm($form) as $field) {
             if($field['name'] == $name) {
                 $field[0]->onclick != "" ? $onclick = "onclick='".$field[0]->onclick."'" : $onclick = "";
-                $html .= "<div id='".$field[0]->name."-field' class='form-group'>";
+                $html .= "<div id='".$field[0]->name."-field' class='mb-3'>";
 				if($field[0]->label != "") $html .= "<label class='btn-group-label'><a class='hasTip' title='".language::get($field[0]->placeholder)."'>".language::get($field[0]->label)."</a></label> ";
 
         	//$html .= "<div class='col-sm-9'>";
@@ -695,8 +640,8 @@ class Html
             if($field['name'] == $name) {
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
                 $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
-                $html .= "<div id='".$field[0]->name."-field' class='form-group'>";
-                if($field[0]->label != "") $html .= "<label class='control-label' for='".$field[0]->id."'><a class='hasTip' title='".language::get($field[0]->placeholder)."'>".language::get($field[0]->label)."</a></label>";
+                $html .= "<div id='".$field[0]->name."-field' class='mb-3'>";
+                if($field[0]->label != "") $html .= "<label class='form-label' for='".$field[0]->id."'>".language::get($field[0]->label)."</label>";
                 $html .= "<select class='form-control' id='".$field[0]->id."' name='".$field[0]->name."' data-message='".language::get($field[0]->message)."' ".$onchange." ".$disabled.">";
                 $html .= "<option value=''>".language::get('FOXY_SELECT_AN_OPTION')."</option>";
 				foreach($ficheros as $fichero) {
@@ -730,8 +675,8 @@ class Html
             if($field['name'] == $name) {
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
                 $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
-                $html .= "<div id='".$field[0]->name."-field' class='form-group'>";
-                if($field[0]->label != "") $html .= "<label class='control-label' for='".$field[0]->id."'><a class='hasTip' title='".language::get($field[0]->placeholder)."'>".language::get($field[0]->label)."</a></label>";
+                $html .= "<div id='".$field[0]->name."-field' class='mb-3'>";
+                if($field[0]->label != "") $html .= "<label class='form-label' for='".$field[0]->id."'>".language::get($field[0]->label)."</label>";
                 $html .= "<select class='form-control' id='".$field[0]->id."' name='".$field[0]->name."' data-message='".language::get($field[0]->message)."' ".$onchange." ".$disabled.">";
                 $html .= "<option value=''>".language::get('FOXY_SELECT_AN_OPTION')."</option>";
 				foreach($sub_directories as $directory) {

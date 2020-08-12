@@ -17,7 +17,7 @@ if($id == 0) {
 }
 
 $model = application::getModel();
-$item = $model->getItem();
+$item = $model->getItemById();
 $params = $model->getParams('blog');
 ?>
 

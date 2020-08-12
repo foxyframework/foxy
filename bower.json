@@ -13,6 +13,6 @@
   "private": true,
   "dependencies": {
     "vanilla-datatables": "1.6.16",
-    "suneditor": "2.32.1"
+    "ckeditor": "4.14.1"
   }
 }
