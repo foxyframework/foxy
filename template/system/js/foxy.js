@@ -40,8 +40,6 @@ if(document.getElementsByClassName('editor').lenght) {
 	});
 }
 
-var dataTable = new DataTable("#datatable");
-
 //save cookie with language
 if(document.getElementsByClassName('lang').lenght) {
 	document.querySelector('.lang').addEventListener("click", e => {
