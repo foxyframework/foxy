@@ -37,11 +37,10 @@ if(myTable != 'undefined' && myTable != 'null') {
 	var table = new DataTable(myTable);
 }
 
-// var editor = document.getElementById("editor");
-// if(editor != 'undefined' && editor != 'null') {
-//     const editor = SUNEDITOR.create('editor');
-// }
-CKEDITOR.replace( 'editor' );
+var editor = document.getElementById("editor");
+if(editor != 'undefined' && editor != 'null') {
+    CKEDITOR.replace( 'editor' );
+}
 
 //delete
 if(document.getElementsByClassName('.btn_delete').lenght) {
