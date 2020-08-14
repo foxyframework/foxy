@@ -174,13 +174,14 @@ class Html
             if($field['name'] == $name) {
 				$field[0]->readonly == 'true' ? $readonly = "readonly='true'" : $readonly = "";
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
+                $field[0]->required == 'true' ? $required = "required='true'" : $required = "";
                 $field[0]->onchange != "" ? $onchange = 'onchange="'.$field[0]->onchange.'"' : $onchange = "";
                 $field[0]->onkeyup != "" ? $onkeyup = " onkeyup='".$field[0]->onkeyup."'" : $onkeyup = "";
                 if($field[0]->type != 'hidden') $html .= "<div id='".$field[0]->name."-field' class='mb-3'>";
                 if($field[0]->type != 'hidden' && $field[0]->label != "") $html .= "<label for='".$field[0]->id."' class='form-label'>".language::get($field[0]->label)."</label>";
                 if($field[0]->type != 'hidden' && $field[0]->label != "") $html .= "<div class='controls'>";
                 $html .= "<input type='".$field[0]->type."' id='".$field[0]->id."' value='".str_replace("'","&#39;",$default)."' name='".$field[0]->name."'";
-                if($field[0]->type != 'hidden') $html .= $disabled." ".$onchange." ".$onkeyup." ".$readonly." placeholder='".language::get($field[0]->placeholder)."' class='form-control ".$field[0]->clase."' autocomplete='off'";
+                if($field[0]->type != 'hidden') $html .= $disabled." ".$required." ".$onchange." ".$onkeyup." ".$readonly." placeholder='".language::get($field[0]->placeholder)."' class='form-control ".$field[0]->clase."' autocomplete='off'";
                 $html .= ">";
                 if($field[0]->type != 'hidden') $html .= "<div class='invalid-feedback'>".language::get($field[0]->message)."</div>";
                 if($field[0]->type != 'hidden' && $field[0]->label != "") $html .= "</div>";

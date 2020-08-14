@@ -5,10 +5,10 @@
         <clase>input-lg</clase>
         <id>lemail</id>
         <label></label>
-        <message></message>
+        <message>FOXY_INVALID_FIELD</message>
         <placeholder>FOXY_LOGIN_USERNAME</placeholder>
         <onchange></onchange>
-        <disabled>false</disabled>
+        <required>true</required>
     </field>
     <field name="password">
         <type>password</type>
@@ -16,10 +16,10 @@
         <clase>input-lg</clase>
         <id>lpassword</id>
         <label></label>
-        <message></message>
+        <message>FOXY_INVALID_FIELD</message>
         <placeholder>FOXY_LOGIN_PASSWORD</placeholder>
         <onchange></onchange>
-        <disabled>false</disabled>
+        <required>true</required>
     </field>
     <field name="lastvisitDate">
         <type>hidden</type>

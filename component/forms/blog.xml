@@ -4,16 +4,16 @@
         <name>title</name>
         <id>title</id>
         <label>FOXY_BLOG_TITLE_LABEL</label>
-        <message></message>
+        <message>FOXY_INVALID_FIELD</message>
         <placeholder>FOXY_BLOG_TITLE_PLACEHOLDER</placeholder>
-        <disabled>false</disabled>
+        <required>true</required>
     </field>
     <field name="alias">
         <type>text</type>
         <name>alias</name>
         <id>alias</id>
         <label>FOXY_BLOG_ALIAS_LABEL</label>
-        <message></message>
+        <message>FOXY_INVALID_FIELD</message>
         <placeholder>FOXY_BLOG_ALIAS_PLACEHOLDER</placeholder>
         <disabled>false</disabled>
     </field>
@@ -22,7 +22,7 @@
         <name>tags</name>
         <id>tags</id>
         <label>FOXY_BLOG_TAGS_LABEL</label>
-        <message></message>
+        <message>FOXY_INVALID_FIELD</message>
         <placeholder>FOXY_BLOG_TAGS_PLACEHOLDER</placeholder>
         <disabled>false</disabled>
     </field>
@@ -31,16 +31,16 @@
         <name>author</name>
         <id>author</id>
         <label>FOXY_BLOG_AUTHOR_LABEL</label>
-        <message></message>
+        <message>FOXY_INVALID_FIELD</message>
         <placeholder><placeholder>FOXY_BLOG_AUTHOR_PLACEHOLDER</placeholder></placeholder>
-        <disabled>false</disabled>
+        <required>true</required>
     </field>
     <field name="autor_link">
         <type>text</type>
         <name>author_link</name>
         <id>author_link</id>
         <label>FOXY_BLOG_AUTHOR_LINK_LABEL</label>
-        <message></message>
+        <message>FOXY_INVALID_FIELD</message>
         <placeholder>FOXY_BLOG_AUTHOR_LINK_PLACEHOLDER</placeholder>
         <disabled>false</disabled>
     </field>
@@ -49,8 +49,8 @@
         <name>fulltext</name>
         <id>fulltext</id>
         <label>FOXY_BLOG_FULLTEXT_LABEL</label>
-        <message></message>
-        <disabled>false</disabled>
+        <message>FOXY_INVALID_FIELD</message>
+        <required>true</required>
         <placeholder>FOXY_BLOG_FULLTEXT_PLACEHOLDER</placeholder>
     </field>
 </form>

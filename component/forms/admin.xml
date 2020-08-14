@@ -4,7 +4,7 @@
       <name>show_register</name>
       <id>show_register</id>
       <label>Show register</label>
-      <message></message>
+      <message>FOXY_INVALID_FIELD</message>
       <option value="0">FOXY_NO</option>
       <option value="1">FOXY_YES</option>
       <disabled>false</disabled>
@@ -14,7 +14,7 @@
       <name>debug</name>
       <id>debug</id>
       <label>Debug</label>
-      <message></message>
+      <message>FOXY_INVALID_FIELD</message>
       <option value="0">FOXY_NO</option>
       <option value="1">FOXY_YES</option>
       <disabled>false</disabled>
@@ -24,7 +24,7 @@
       <name>offline</name>
       <id>offline</id>
       <label>Site offline</label>
-      <message></message>
+      <message>FOXY_INVALID_FIELD</message>
       <option value="0">FOXY_NO</option>
       <option value="1">FOXY_YES</option>
       <disabled>false</disabled>
@@ -34,7 +34,7 @@
       <name>login_redirect</name>
       <id>login_redirect</id>
       <label>Login redirect</label>
-      <message></message>
+      <message>FOXY_INVALID_FIELD</message>
       <placeholder></placeholder>
       <disabled>false</disabled>
     </field>

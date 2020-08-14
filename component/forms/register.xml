@@ -7,8 +7,7 @@
         <label></label>
         <message>FOXY_REGISTER_EMAIL_MSG</message>
         <placeholder>FOXY_REGISTER_EMAIL</placeholder>
-        <onchange>checkEmail();checkEmailExists();</onchange>
-        <disabled>false</disabled>
+        <required>true</required>
     </field>
     <field name="password">
         <type>password</type>
@@ -18,8 +17,7 @@
         <label></label>
         <message>FOXY_REGISTER_PASSWORD_MSG</message>
         <placeholder>FOXY_REGISTER_PASSWORD</placeholder>
-        <onchange>checkPassword();</onchange>
-        <disabled>false</disabled>
+        <required>true</required>
     </field>
     <field name="password2">
         <type>password</type>
@@ -29,8 +27,7 @@
         <label></label>
         <message>FOXY_REGISTER_PASSWORD2_MSG</message>
         <placeholder>FOXY_REGISTER_PASSWORD2</placeholder>
-        <onchange>checkPasswordMatch();</onchange>
-        <disabled>false</disabled>
+        <required>true</required>
     </field>
     <field name="submit">
         <type>submit</type>

@@ -4,33 +4,34 @@
       <name>username</name>
       <id>username</id>
       <label>FOXY_SETTINGS_USERNAME_LABEL</label>
-      <message>FOXY_SETTINGS_USERNAME_MSG</message>
+      <message>FOXY_INVALID_FIELD</message>
       <placeholder>GW_SETTINGS_USERNAME</placeholder>
-      <disabled>false</disabled>
+      <required>true</required>
     </field>
     <field name="email">
       <type>text</type>
       <name>email</name>
       <id>email</id>
       <label>FOXY_SETTINGS_EMAIL_LABEL</label>
-      <message>Invalid email format</message>
+      <message>FOXY_INVALID_FIELD</message>
       <placeholder>FOXY_SETTINGS_EMAIL</placeholder>
-      <disabled>false</disabled>
+      <required>true</required>
     </field>
     <field name="password">
       <type>password</type>
       <name>password</name>
       <id>password</id>
       <label>FOXY_SETTINGS_PASSWORD_LABEL</label>
-      <message></message>
       <placeholder>FOXY_SETTINGS_PASSWORD</placeholder>
-      <onchange>checkPassword();</onchange>
-      <disabled>false</disabled>
+      <message>FOXY_INVALID_FIELD</message>
+      <required>true</required>
     </field>
     <field name="usergroup">
       <type>usergroup</type>
       <name>usergroup</name>
       <id>usergroup</id>
       <label>Usergroup</label>
+      <message>FOXY_INVALID_FIELD</message>
+      <required>true</required>
     </field>
 </form>

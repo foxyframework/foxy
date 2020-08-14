@@ -5,8 +5,8 @@
         <id>email</id>
         <message>Invalid email format</message>
         <placeholder>Please provide your E-mail</placeholder>
-        <onchange>checkEmail();</onchange>
-        <disabled>false</disabled>
+        <message>FOXY_INVALID_FIELD</message>
+        <required>true</required>
     </field>
     <field name="secret">
         <type>secret</type>
