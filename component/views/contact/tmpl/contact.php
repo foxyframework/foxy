@@ -21,7 +21,7 @@ defined('_Foxy') or die ('restricted access');
         		
 				<h2>Contact</h2>
           		
-                <form name="blogForm" id="blogForm" method="post" action="index.php?task=contact.sendForm">
+                <form name="blogForm" id="blogForm" method="post" class="needs-validation" action="index.php?task=contact.sendForm">
                     <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
                     <?=  html::getTextField('contact', 'name'); ?>
                     <?=  html::getTextField('contact', 'phone'); ?>

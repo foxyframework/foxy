@@ -24,7 +24,7 @@ if(user::getAuth() || config::$show_register == 0) {
        <div class="form-inner w-100">
          <div class="logo text-uppercase px-5"><img src="assets/img/logo.png" class="img-fluid" alt="<?= config::$sitename; ?>" style="width:65%"></div>
          <?php if(!user::getAuth()) : ?>
-         <form action="index.php?task=register.register" method="post" data-toggle="validator" class="text-left form-validate">
+         <form action="index.php?task=register.register" method="post" class="text-left needs-validation">
            <?= html::getEmailField('register', 'email', ''); ?>
            <?= html::getPasswordField('register', 'password', ''); ?>
            <?= html::getPasswordField('register', 'password2', ''); ?>
