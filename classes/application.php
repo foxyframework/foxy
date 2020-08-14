@@ -349,7 +349,8 @@ class Application
 
         //check if is an admin page and user is authenticated... 
         if((self::$layout == 'admin' || self::$view == 'admin') && !user::getAuth()) {
-            self::redirect('index.php?view=home', 'You are not allowed to view this resource', 'info');
+            $url = config::$site.'index.php?view=register&layout=login&return='.base64_encode(config::$site.'index.php?view=admin');
+            self::redirect($url, 'You are not allowed to view this resource', 'info');
             return false;
         }
 
