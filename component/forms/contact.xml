@@ -4,9 +4,9 @@
         <name>name</name>
         <id>name</id>
         <label>FOXY_CONTACT_NAME_LABEL</label>
-        <message></message>
         <placeholder>FOXY_CONTACT_NAME_PLACEHOLDER</placeholder>
-        <disabled>false</disabled>
+        <message>FOXY_REQUIRED_FIELD</message>
+        <required>true</required>
     </field>
     <field name="phone">
         <type>text</type>
@@ -22,17 +22,16 @@
         <name>email</name>
         <id>email</id>
         <label>FOXY_CONTACT_EMAIL_LABEL</label>
-        <message></message>
         <placeholder>FOXY_CONTACT_EMAIL_PLACEHOLDER</placeholder>
-        <disabled>false</disabled>
+        <message>FOXY_REQUIRED_FIELD</message>
+        <required>true</required>
     </field>
     <field name="message">
         <type>textarea</type>
         <name>message</name>
         <id>message</id>
         <label>FOXY_CONTACT_MESSAGE_LABEL</label>
-        <message></message>
-        <disabled>false</disabled>
+        <message>FOXY_REQUIRED_FIELD</message>
         <placeholder>FOXY_CONTACT_MESSAGE_PLACEHOLDER</placeholder>
     </field>
 </form>
