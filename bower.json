@@ -13,6 +13,8 @@
   "private": true,
   "dependencies": {
     "vanilla-datatables": "1.6.16",
-    "ckeditor": "4.14.1"
+    "ckeditor": "4.14.1",
+    "macy": "2.5.1",
+    "dropzone": "5.7.2"
   }
 }

@@ -64,6 +64,8 @@ function getParameterByName(name) {
 	  })
   })()
 
+  if (document.getElementsByClassName('.dropzone').lenght) { Dropzone.autoDiscover = false; }
+
 document.addEventListener("DOMContentLoaded", function() {
 
 	var myTable = document.getElementById("datatable");
@@ -74,6 +76,32 @@ document.addEventListener("DOMContentLoaded", function() {
 	var editor = document.getElementById("editor");
 	if(typeof(editor) != 'undefined' && editor != null) {
 	    const editor = CKEDITOR.replace( 'editor' );
+	}
+
+	var media = document.getElementById("media");
+	if(typeof(media) != 'undefined' && media != null) {
+		var macy = Macy({
+			container: '#media',
+			trueOrder: false,
+			waitForImages: false,
+			margin: 24,
+			columns: 6,
+			breakAt: {
+				1200: 5,
+				940: 3,
+				520: 2,
+				400: 1
+			}
+		});
+	}
+
+	if (document.getElementsByClassName('.dropzone').lenght) {
+		var myDropzone = new Dropzone(".dropzone", { url: domain+"?task=media.upload&mode=raw"});
+		myDropzone.on("complete", function (file) {
+			if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+				document.location.reload();
+			}
+		});
 	}
 
 	//delete
