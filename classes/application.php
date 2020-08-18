@@ -493,7 +493,7 @@ class Application
     */
     public static function getTemplate()
     {
-        $tmpl = config::$template;
+        self::$view == 'admin' || self::$layout == 'admin' ? $tmpl = 'admin' : $tmpl = config::$template;
         $mode = application::getVar('mode', '');
         if($mode == 'raw') {
             $path = FOXY_TEMPLATES.DS.'system'.DS.'index2.php';
