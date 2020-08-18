@@ -1,3 +1,5 @@
+<?php
+
 /**
  * @version     1.0.0 Foxy Framework $
  * @package     Foxy Framework
