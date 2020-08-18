@@ -65,7 +65,14 @@ class Language
               if($translation != "") {
                   return nl2br($translation);
               } else {
-                  return $text;
+                $file = 'component/views/'.$view.'/'.self::$code.'.'.$view.'.ini';
+                $strings = parse_ini_file($file);
+                $translation = @$strings[strtoupper($text)];
+                if($translation != "") {
+                    return nl2br($translation);
+                } else {
+                    return $text;
+                }
               }
             }
         } else {
