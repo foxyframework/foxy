@@ -67,12 +67,12 @@ function getParameterByName(name) {
 document.addEventListener("DOMContentLoaded", function() {
 
 	var myTable = document.getElementById("datatable");
-	if(typeof(myTable) != 'undefined' && myTable != 'null') {
+	if(typeof(myTable) != 'undefined' && myTable != null) {
 		var table = new DataTable(myTable);
 	}
 
 	var editor = document.getElementById("editor");
-	if(typeof(editor) != 'undefined' && editor != 'null') {
+	if(typeof(editor) != 'undefined' && editor != null) {
 	    const editor = CKEDITOR.replace( 'editor' );
 	}
 
