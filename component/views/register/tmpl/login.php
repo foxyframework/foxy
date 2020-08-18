@@ -22,9 +22,9 @@ if(user::getAuth()) {
 
       <form class="form-signin" action="<?= config::$site; ?>/index.php?task=register.login" method="post" class="needs-validation">
           <img class="mb-4" src="assets/img/logo.png" alt="">
-          <h1 class="h3 mb-3 font-weight-normal">Please log in</h1>
-          <input type="hidden" name="token" value="<?= $_GET['token']; ?>">
-          <input type="hidden" name="return" value="<?= $_GET['return']; ?>">
+          <h1 class="h3 mb-3 font-weight-normal"><?= language::replace('FOXY_LOGIN_TITLE', config::$sitename); ?></h1>
+          <input type="hidden" name="token" value="<?= application::getVar('token', ''); ?>">
+          <input type="hidden" name="return" value="<?= application::getVar('return', ''); ?>">
 
           <?= html::getEmailField('login', 'email'); ?>
           <?= html::getPasswordField('login', 'password'); ?>
