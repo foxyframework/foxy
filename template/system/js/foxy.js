@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		var myDropzone = new Dropzone(".dropzone", { url: domain+"?task=media.upload&mode=raw"});
 		myDropzone.on("complete", function (file) {
 			if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
-				document.location.reload();
+				macy.recalculate();
 			}
 		});
 	}

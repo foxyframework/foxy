@@ -47,7 +47,45 @@ $dir   = application::getVar('folder', '');
             </div>
             <div class="card-body">
                 <p>Com administrador pots administrar arxius multimedia.</p>
-                    
+                <form id="upload" action="<?= config::$site; ?>index.php?task=media.upload&mode=raw" class="dropzone" enctype="multipart/form-data">
+                    <div class="fallback">
+                      <input name="file" type="file" multiple />
+                    </div>
+                    <input type="hidden" name="dir" value="<?= $dir; ?>" />
+                    <div class="dz-message">
+                      <p>Arrossega arxius per pujar-los en aquest directori.</p>
+                    </div>
+                    <div class="mb-3">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="resize" id="resize1" value="1">
+                        <label class="form-check-label" for="resize1">Resize (only images)</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="resize" id="resize2" value="0" checked>
+                        <label class="form-check-label" for="resize2">Not resize</label>
+                      </div>
+                    </div> 
+                    <div class="mb-3">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="watermark" id="watermark1" value="1">
+                        <label class="form-check-label" for="watermark1">Watermark (only in resize mode)</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="watermark" id="watermark2" value="0" checked>
+                        <label class="form-check-label" for="watermark2">Not watermark</label>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="rename" id="rename1" value="1" checked>
+                        <label class="form-check-label" for="rename1">Rename file</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="rename" id="rename2" value="0">
+                        <label class="form-check-label" for="rename2">Not rename</label>
+                      </div>
+                    </div>
+                </form>   
             </div>
             </div>
         </div>
