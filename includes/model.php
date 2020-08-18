@@ -26,7 +26,6 @@ class model
 
 		if($id > 0) {
 			$sql = "SELECT * FROM $table WHERE $key = $id";
-			if(config::$debug == 1) { echo 'getItem: '.$sql.'\n'; }
 			database::query($sql);
 
 			return database::fetchObject();
