@@ -12,6 +12,7 @@
 defined('_Foxy') or die ('restricted access');
 
 $model 	= application::getModel('menu');
+$id = application::getVar('id', 0);
 ?>
 
 <section class="forms">
@@ -26,6 +27,7 @@ $model 	= application::getModel('menu');
           <div class="card-body">
             <p>Com administrador pots gestionar el menú principal.</p>
             <form method="post" action="index.php?task=menu.saveMenuItem">
+              <input type="hidden" name="id" value="<?= $id; ?>">
               <?= html::getTextField('menu', 'title'); ?>
               <?= html::getTextField('menu', 'translation'); ?>
               <?= html::getTextField('menu', 'url'); ?>
@@ -70,13 +72,13 @@ $model 	= application::getModel('menu');
               <?php foreach($model->getMenuItems() as $mi) : ?>
               <tr>
                 <td><?= $mi->id; ?></td>
-                <td><?= $mi->title; ?></td>
+                <td><a href="index.php?view=menu&layout=admin&id=<?= $usr->id; ?>"><?= $mi->title; ?></a></td>
                 <td><?= $mi->translation; ?></td>
                 <td><?= $mi->url; ?></td>
                 <td><?= $mi->auth; ?></td>
                 <td><?= $mi->type; ?></td>
                 <td><?= $mi->module; ?></td>
-                <td><a href="index.php?task=menu.removeMenuItem&id=<?= $usr->id; ?>"><i class="fa fa-trash-o"></i></a></td>
+                <td><a href="index.php?task=menu.removeMenuItem&id=<?= $mi->id; ?>"><i class="fa fa-trash-o"></i></a></td>
               </tr>
               <?php endforeach; ?>
             </tbody>
