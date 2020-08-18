@@ -721,11 +721,11 @@ class Html
 
                 $html .= "<label for='".$field[0]->id."' class='form-label'>".language::get($field[0]->label)."</label>";
                 $html .= "<div class='input-group mb-3'>";
-                $html .= "<input type='text' class='form-control' aria-describedby='button-addon2'>";
-                $html .= "<button class='btn btn-outline-secondary' type='button' id='button-addon2' data-toggle='modal' data-target='#".$name."Modal'>Select</button>";
+                $html .= "<input type='text' id='".$field[0]->id."' class='form-control' aria-describedby='button-addon2'>";
+                $html .= "<button class='btn btn-outline-secondary' type='button' id='button-addon2' data-toggle='modal' data-target='#".$field[0]->id."Modal'>Select</button>";
                 $html .= "</div>";
 
-                $html .= "<div class='modal' id='".$name."Modal' tabindex='-1'>";
+                $html .= "<div class='modal' id='".$field[0]->id."Modal' tabindex='-1'>";
                 $html .= "<div class='modal-dialog modal-xl'>";
                 $html .= "<div class='modal-content'>";
                 $html .= "<div class='modal-header'>";
@@ -738,7 +738,7 @@ class Html
                 $html .= "<div class='d-flex flex-row'>";
 
                 foreach($ficheros as $fichero) {
-                    $html .= "<img src='assets/img/".$folder."/".$fichero."' alt='...'>";
+                    $html .= "<img class='img-selector' data-id='".$field[0]->id."' src='assets/img/".$folder."/".$fichero."' alt='...'>";
                 }
                  
                 $html .= "</div>";

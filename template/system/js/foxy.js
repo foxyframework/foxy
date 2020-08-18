@@ -44,6 +44,27 @@ function getParameterByName(name) {
 	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+function closeAllModals() {
+
+    // get modals
+    const modals = document.getElementsByClassName('modal');
+
+    // on every modal change state like in hidden modal
+    for(let i=0; i<modals.length; i++) {
+      modals[i].classList.remove('show');
+      modals[i].setAttribute('aria-hidden', 'true');
+      modals[i].setAttribute('style', 'display: none');
+    }
+
+     // get modal backdrops
+     const modalsBackdrops = document.getElementsByClassName('modal-backdrop');
+
+     // remove every modal backdrop
+     for(let i=0; i<modalsBackdrops.length; i++) {
+       document.body.removeChild(modalsBackdrops[i]);
+     }
+  }
+
 (function () {
 	'use strict'
   
@@ -104,9 +125,16 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	}
 
+	document.querySelector('.img-selector').addEventListener("click",function(e) {
+		var src = e.target.src;
+		var id = e.target.getAttribute('data-id');
+		document.getElementById(id).value = src;
+		closeAllModals();
+	});
+
 	//delete
 	if(document.getElementsByClassName('.btn_delete').lenght) {
-		document.querySelector('btn_delete').addEventListener("click",function(e) {
+		document.querySelector('.btn_delete').addEventListener("click",function(e) {
 
 			e.preventDefault();
 			var items = [];
