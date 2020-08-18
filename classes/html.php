@@ -695,4 +695,61 @@ class Html
         }
         return $html;
     }
+
+    /**
+     * Method to render a folderlist field
+     * @param $form string the form name
+     * @param $name string the field name
+     * @param $name string the folder path
+     * @param $default mixed optional default value
+     * @return $html string a complete filelist field html
+    */
+    public static function getMediaField($form, $name, $folder)
+    {
+        $html = "";
+        
+        $dir = opendir('assets/img/'.$folder);
+		while (false !== ($file = readdir($dir))) {
+			if( $file != "." && $file != "..") {
+				$ficheros[] = $file;
+			}
+		}
+		closedir($dir);
+
+        foreach(html::getForm($form) as $field) {
+            if($field['name'] == $name) {
+
+                $html .= "<label for='".$field[0]->id."' class='form-label'>".language::get($field[0]->label)."</label>";
+                $html .= "<div class='input-group mb-3'>";
+                $html .= "<input type='text' class='form-control' aria-describedby='button-addon2'>";
+                $html .= "<button class='btn btn-outline-secondary' type='button' id='button-addon2' data-toggle='modal' data-target='#".$name."Modal'>Select</button>";
+                $html .= "</div>";
+
+                $html .= "<div class='modal' id='".$name."Modal' tabindex='-1'>";
+                $html .= "<div class='modal-dialog modal-xl'>";
+                $html .= "<div class='modal-content'>";
+                $html .= "<div class='modal-header'>";
+                $html .= "<h5 class='modal-title'>Select image</h5>";
+                $html .= "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
+                $html .= "<span aria-hidden='true'>&times;</span>";
+                $html .= "</button>";
+                $html .= "</div>";
+                $html .= "<div class='modal-body'>";
+                $html .= "<div class='d-flex flex-row'>";
+
+                foreach($ficheros as $fichero) {
+                    $html .= "<img src='assets/img/".$folder."/".$fichero."' alt='...'>";
+                }
+                 
+                $html .= "</div>";
+                $html .= "</div>";
+                $html .= "</div>";
+                $html .= "</div>";
+                $html .= "</div>";
+
+                
+            }
+        }
+        return $html;
+    }
 }
