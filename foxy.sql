@@ -48,10 +48,10 @@ CREATE TABLE `foxy_articles` (
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `foxy_menu`
+-- Estructura de la taula `foxy_pages`
 --
 
-CREATE TABLE `foxy_menu` (
+CREATE TABLE `foxy_pages` (
   `id` int(11) NOT NULL,
   `title` varchar(150) NOT NULL,
   `translation` varchar(150) NOT NULL,
@@ -64,10 +64,10 @@ CREATE TABLE `foxy_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Bolcament de dades per a la taula `foxy_menu`
+-- Bolcament de dades per a la taula `foxy_pages`
 --
 
-INSERT INTO `foxy_menu` (`id`, `title`, `translation`, `url`, `auth`, `type`, `module`, `template`, `inMenu`) VALUES
+INSERT INTO `foxy_pages` (`id`, `title`, `translation`, `url`, `auth`, `type`, `module`, `template`, `inMenu`) VALUES
 (1, 'Home', '', 'index.php?view=home', 0, 0, '', '', 1),
 (2, 'About', '', 'index.php?view=about', 0, 0, '', '', 1),
 (4, 'Blog', '', 'index.php?task=register.logout', 2, 0, '', '', 1),

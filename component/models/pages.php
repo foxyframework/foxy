@@ -13,15 +13,15 @@ defined('_Foxy') or die ('restricted access');
 
 include('includes/model.php');
 
-class menu extends model
+class pages extends model
 {
-  private $table  = '#_menu';
-	private $view   = 'menu';
+  private $table  = '#_pages';
+	private $view   = 'pages';
 	private $key    = 'id';
 	private $order  = 'id';
 	private $dir    = 'DESC';
-	private $rows   = 'SELECT COUNT(i.id) FROM `#_menu` AS i';
-  private $sql    = 'SELECT * FROM `#_menu` AS i';
+	private $rows   = 'SELECT COUNT(i.id) FROM `#_pages` AS i';
+  private $sql    = 'SELECT * FROM `#_pages` AS i';
   
   public function getList() 
 	{
@@ -63,6 +63,7 @@ class menu extends model
         $obj->type          = application::getVar('type', 0, 'post', 'int');
         $obj->module        = application::getVar('module', '', 'post');
         $obj->template      = application::getVar('template', '', 'post');
+        $obj->inMenu        = application::getVar('inMenu', '', 'post');
 
         $result = database::insertRow("#_menu", $obj);
 
@@ -71,6 +72,6 @@ class menu extends model
         } else {
           application::setMessage(language::get('FOXY_MENU_SAVE_ERROR'), 'danger');
         }
-        application::redirect(config::$site.'/index.php?view=menu&layout=admin');
+        application::redirect(config::$site.'/index.php?view=pages&layout=admin');
     }
 }

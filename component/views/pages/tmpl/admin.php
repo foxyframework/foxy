@@ -11,7 +11,7 @@
 
 defined('_Foxy') or die ('restricted access');
 
-$model 	= application::getModel('menu');
+$model 	= application::getModel('pages');
 ?>
 
 <section class="forms">
@@ -21,18 +21,18 @@ $model 	= application::getModel('menu');
       <div class="col-lg-6">
         <div class="card">
           <div class="card-header d-flex align-items-center">
-            <h4>Menu</h4>
+            <h4>Pages</h4>
           </div>
           <div class="card-body">
             <p>Com administrador pots gestionar el menú principal.</p>
-            <form method="post" action="index.php?task=menu.saveMenuItem">
-              <?= html::getTextField('menu', 'title'); ?>
-              <?= html::getTextField('menu', 'translation'); ?>
-              <?= html::getTextField('menu', 'url'); ?>
-              <?= html::getListField('menu', 'auth'); ?>
-              <?= html::getListField('menu', 'type'); ?>
-              <?= html::getTextField('menu', 'module'); ?>
-              <?= html::getListField('menu', 'inMenu'); ?>
+            <form method="post" action="index.php?task=pages.saveMenuItem">
+              <?= html::getTextField('pages', 'title'); ?>
+              <?= html::getTextField('pages', 'translation'); ?>
+              <?= html::getTextField('pages', 'url'); ?>
+              <?= html::getListField('pages', 'auth'); ?>
+              <?= html::getListField('pages', 'type'); ?>
+              <?= html::getTextField('pages', 'module'); ?>
+              <?= html::getListField('pages', 'inMenu'); ?>
               <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-primary">
               </div>
