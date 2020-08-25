@@ -457,10 +457,10 @@ class Application
   	public static function renderView($view, $layout='', $args=array())
   	{
   		// Get the layout path.
-        $path = FOXY_COMPONENT.DS.'component'.DS.'views'.DS.$view.DS.'tmpl'.DS.$view.'.php';
+        $path = FOXY_COMPONENT.DS.'views'.DS.$view.DS.'tmpl'.DS.$view.'.php';
 
         if($layout != '') {
-            $path = FOXY_COMPONENT.DS.'component'.DS.'views'.DS.$view.DS.'tmpl'.DS.$layout.'.php';
+            $path = FOXY_COMPONENT.DS.'views'.DS.$view.DS.'tmpl'.DS.$layout.'.php';
         }
 
   		// Check if the layout path was found.

@@ -1,18 +1,19 @@
 <form>
     <!-- Filters -->
-    <field name="filter_like_nom">
+    <field name="title">
         <type>text</type>
-        <name>filter_like_nom</name>
-        <id>filter_nom</id>
-        <placeholder>Nom</placeholder>
+        <name>title</name>
+        <id>title</id>
+        <label></label>
+        <placeholder>Title</placeholder>
     </field>
     <!-- buttons -->
-     <button name="btn_new">
-        <id>btn_new</id>
+     <button name="btn_edit">
+        <id>btn_edit</id>
         <class></class>
-        <label>Example label</label>
+        <label>Edit</label>
         <icon>fa-plus</icon>
-        <href>index.php?view=example&amp;layout=edit</href>
+        <href>index.php?view=pages&amp;layout=edit</href>
     </button>
     <button name="btn_delete">
         <id>btn_delete</id>
@@ -21,9 +22,8 @@
         <icon>fa-trash-o</icon>
         <color>danger</color>
         <view>example</view>
-        <href>index.php?view=task=example.deleteItems&amp;mode=raw</href>
+        <href>index.php?view=task=pages.deleteItems&amp;mode=raw</href>
     </button>
-    <!-- Button type modal -->
     <button name="btn_blocs">
         <id>btn_assoc</id>
         <class></class>
@@ -31,7 +31,6 @@
         <icon>fa-plus</icon>
         <modal>true</modal>
         <modal_title>Blocs</modal_title>
-        <page>pages</page>
-        <layout>blocs</layout>
+        <href>index.php?view=pages&amp;layout=blocs</href>
     </button>
 </form>

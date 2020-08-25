@@ -39,8 +39,8 @@ class Html
         $model = application::getModel($view);
 
         $html  = '';
-        $html .= self::renderFilters($view, $view);
-        $html .= self::renderButtons($view, $view);
+        $html .= '<div class="w-100 text-right">'.self::renderButtons($view, $view).'</div>';
+        $html .= '<div class="w-100">'.self::renderFilters($view, $view).'</div>';
         $html .= '<div class="table-responsive">';
         $html .= '<table id="'.$id.'" class="table table-striped table-bordered">';
         $html .= '<thead>';
@@ -152,8 +152,29 @@ class Html
                 $field[$i]->view == "" ? $view = "" : $view = "data-view='". $field[$i]->view. "'";
                 $color = isset($field[$i]->color) ? $field[$i]->color : 'success';
 
-                if($field[$i]->onclick != '') { $click = 'onclick="'.$field[$i]->onclick.'"'; } else { $click = ''; }
-                $html .= '&nbsp;<a href="'. $field[$i]->href .'" id="'. $field[$i]->id .'" '.$click.' '.$view.'  class="btn btn-' . $color . ' ' . $field[$i]->class . '" >' . $icon . $field[$i]->label . '</a>';
+                if($field[$i]->modal == true) { $modal = 'href="#" data-toggle="modal" data-target="#'. $field[$i]->id .'"'; } else { $modal = 'href="'. $field[$i]->href .'" id="'. $field[$i]->id .'"'; }
+                $html .= '&nbsp;<a '.$modal.' '.$view.'  class="btn btn-' . $color . ' ' . $field[$i]->class . '" >' . $icon . $field[$i]->label . '</a>';
+                if($field[$i]->modal == true) {
+                    $html .= '<div class="modal fade" id="'. $field[$i]->id .'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+                    $html .= '<div class="modal-dialog modal-xl">';
+                    $html .= '<div class="modal-content">';
+                    $html .= '<div class="modal-header">';
+                    $html .= '<h5 class="modal-title" id="exampleModalLabel">'.$fiel[$i]->modal_title.'</h5>';
+                    $html .= '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+                    $html .= '<span aria-hidden="true">&times;</span>';
+                    $html .= '</button>';
+                    $html .= '</div>';
+                    $html .= '<div class="modal-body">';
+                    $html .= application::renderView($field[$i]->page, $field[$i]->layout);
+                    $html .= '</div>';
+                    $html .= '<div class="modal-footer">';
+                    $html .= '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
+                    $html .= '<button type="button" class="btn btn-primary">Save changes</button>';
+                    $html .= '</div>';
+                    $html .= '</div>';
+                    $html .= '</div>';
+                    $html .= '</div>';
+                }
             }
 
         	$i++;

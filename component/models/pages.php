@@ -19,7 +19,7 @@ class pages extends model
 	private $view   = 'pages';
 	private $key    = 'id';
 	private $order  = 'id';
-	private $dir    = 'DESC';
+	private $dir    = 'ASC';
 	private $rows   = 'SELECT COUNT(i.id) FROM `#_pages` AS i';
   private $sql    = 'SELECT * FROM `#_pages` AS i';
   

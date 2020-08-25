@@ -112,6 +112,7 @@
         </div>
         
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js" integrity="sha512-UzofO1xJCmOl9xNdbqkMIaaW5raQxAE8WyMa977+mY2fT001KydNwvqSTJlHy70edjCN0nb20BXIgBgO/oj6MQ==" crossorigin="anonymous"></script>
     <?php
     if(count(application::$scripts) > 0) :
     foreach(application::$scripts as $script) : ?>
