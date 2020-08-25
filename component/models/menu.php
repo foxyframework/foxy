@@ -15,11 +15,38 @@ include('includes/model.php');
 
 class menu extends model
 {
-  public static function getMenuItems() 
+  private $table  = '#_menu';
+	private $view   = 'menu';
+	private $key    = 'id';
+	private $order  = 'id';
+	private $dir    = 'DESC';
+	private $rows   = 'SELECT COUNT(i.id) FROM `#_menu` AS i';
+  private $sql    = 'SELECT * FROM `#_menu` AS i';
+  
+  public function getList() 
 	{
-	  database::query('SELECT * FROM `#_menu` ORDER BY id ASC');
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+    } else {
+        $page = 1;
+    }
+    
+    $no_of_records_per_page = config::$pagination;
+    
+    $offset = ($page-1) * $no_of_records_per_page;
+    
+    database::query($this->rows);
+    $count_rows = database::loadResult();
 
-		return database::fetchObjectList();
+      $this->sql .= ' ORDER BY '.$this->order.' DESC LIMIT '.$offset.', '.$no_of_records_per_page;
+
+      database::query($this->sql);
+
+      $this->total_pages = ceil(database::num_rows() / $no_of_records_per_page);
+
+      $_SESSION['total_pages'] = ceil($count_rows / $no_of_records_per_page);	
+
+      return database::fetchObjectList();
     }
     
     /*

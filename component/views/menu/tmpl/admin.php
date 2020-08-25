@@ -12,7 +12,6 @@
 defined('_Foxy') or die ('restricted access');
 
 $model 	= application::getModel('menu');
-$id = application::getVar('id', 0);
 ?>
 
 <section class="forms">
@@ -26,8 +25,7 @@ $id = application::getVar('id', 0);
           </div>
           <div class="card-body">
             <p>Com administrador pots gestionar el menú principal.</p>
-            <form method="post" action="index.php?task=menu.saveMenuItem">
-              <input type="hidden" name="id" value="<?= $id; ?>">
+            <form method="post" action="index.php?task=users.saveMenuItem">
               <?= html::getTextField('menu', 'title'); ?>
               <?= html::getTextField('menu', 'translation'); ?>
               <?= html::getTextField('menu', 'url'); ?>
@@ -46,45 +44,10 @@ $id = application::getVar('id', 0);
   </div>
 </section>
 
-<section>
-  <div class="container-fluid">
-    <!-- Page Header-->
-    <div class="card">
-      <div class="card-header">
-        <h4>Items</h4>
-      </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <table id="datatable1" style="width: 100%;" class="table">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Translation</th>
-                <th>Url</th>
-                <th>Auth</th>
-                <th>Type</th>
-                <th>Module</th>
-                <th>#</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach($model->getMenuItems() as $mi) : ?>
-              <tr>
-                <td><?= $mi->id; ?></td>
-                <td><a href="index.php?view=menu&layout=admin&id=<?= $usr->id; ?>"><?= $mi->title; ?></a></td>
-                <td><?= $mi->translation; ?></td>
-                <td><?= $mi->url; ?></td>
-                <td><?= $mi->auth; ?></td>
-                <td><?= $mi->type; ?></td>
-                <td><?= $mi->module; ?></td>
-                <td><a href="index.php?task=menu.removeMenuItem&id=<?= $mi->id; ?>"><i class="fa fa-trash-o"></i></a></td>
-              </tr>
-              <?php endforeach; ?>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
+<section class="container-fluid">
+	<?php
+		$fields = ['id', 'title', 'translaton', 'url', 'auth', 'type', 'module'];
+		$columns = ['Id', 'Title', 'Translation', 'Url', 'Auth', 'Type', 'Module'];
+	?>
+	<?= html::renderTable('datatable', 'id', $model->getList(), $fields, $columns); ?>
 </section>
