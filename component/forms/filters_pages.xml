@@ -31,6 +31,7 @@
         <icon>fa-plus</icon>
         <modal>true</modal>
         <modal_title>Blocs</modal_title>
-        <href>index.php?view=pages&amp;layout=blocs</href>
+        <page>pages</page>
+        <layout>blocs</layout>
     </button>
 </form>
