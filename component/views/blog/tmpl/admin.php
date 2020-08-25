@@ -29,6 +29,7 @@ defined('_Foxy') or die ('restricted access');
 							<input type="hidden" name="id" value="<?= application::getVar('id', 0); ?>">
 							<?=  html::getTextField('blog', 'title', $item->title); ?>
 							<?=  html::getTextField('blog', 'alias', $item->alias); ?>
+							<?=  html::getMediaField('blog', 'image', 'demo'); ?>
 							<?=  html::getTextField('blog', 'tags', $item->tags); ?>	
 							<?=  html::getTextField('blog', 'author', $item->author); ?>
 							<?=  html::getTextField('blog', 'author_link', $item->author_link); ?>		
@@ -63,26 +64,9 @@ defined('_Foxy') or die ('restricted access');
 </section>
 
 <section class="container-fluid my-5">
-	<div class="table-responsive">
-		<table id="datatable" style="width: 100%;" class="table">
-		<thead>
-			<tr>
-			<th>Title</th>
-			<th>Author</th>
-			<th>Publish Date</th>
-			<th>#</th>
-			</tr>
-		</thead>
-		<tbody>
-			<?php foreach($model->getList() as $item) : ?>
-			<tr>
-			<td><?= $item->title; ?></td>
-			<td><?= $item->author; ?></td>
-			<td><?= $item->publishDate; ?></td>
-			<td><a href="index.php?task=blog.removeItem&id=<?= $item->id; ?>"><i class="fa fa-trash-o"></i></a></td>
-			</tr>
-			<?php endforeach; ?>
-		</tbody>
-		</table>
-    </div>
+	<?php
+		$fields = ['title', 'author', 'publishDate'];
+		$columns = ['Title', 'Author', 'Publish Date'];
+	?>
+	<?= html::renderTable('datatable', 'id', $model->getList(), $fields, $columns); ?>
 </section>

@@ -36,8 +36,11 @@ class Html
     public static function renderTable($id, $key, $data, $fields=array(), $columns=array())
     {
         $view  = application::getVar('view');
+        $model = application::getModel($view);
 
         $html  = '';
+        $html .= self::renderFilters($view, $view);
+        $html .= self::renderButtons($view, $view);
         $html .= '<div class="table-responsive">';
         $html .= '<table id="'.$id.'" class="table table-striped table-bordered">';
         $html .= '<thead>';
@@ -50,7 +53,8 @@ class Html
         $html .= '</thead>';
         $html .= '<tbody>';
         foreach($data as $d) {
-            $html .= '<tr class="item" data-id="'.$d->{$key}.'">';
+            $html .= '<tr class="item" data-id="'.$d->{$key}.' draggable="true" ondragstart="return dragStart(event)" ondragenter="return dragEnter(event)" 
+            ondragover="return dragOver(event)" ondragleave="return dragLeave(event)" ondrop="return dragDrop(event)" data-ordering="'. isset($d->ordering) ? $d->ordering : 0 .'"">';
             $html .= '<td>';
 			$html .= '<input type="checkbox" name="cd" data-id="'.$d->{$key}.'">';
 			$html .= '</td>';
@@ -61,7 +65,7 @@ class Html
                         if($k == 'format' && $v == 'date') { $field = date('d-m-Y', strtotime($d->{$field})); }
                         if($k == 'format' && $v == 'price') { $field = number_format($d->{$field}, 2, '.', ',').'&euro;'; }
                         if($k == 'format' && $v == 'bool') { if($d->{$field} == 1) { $field = 'Sí'; } else { $field = 'No'; } }
-                        if($k == 'format' && $v == 'link') { $field = '<a href="'.url::genUrl('index.php?view='.$view.'&layout=edit&id='.$d->{$key}).'">'.$d->{$field}.'</a>'; }
+                        if($k == 'format' && $v == 'link') { $field = '<a href="'.url::genUrl('index.php?view='.$view.'&layout=admin&id='.$d->{$key}).'">'.$d->{$field}.'</a>'; }
                     }    
                 } else {
                     $field = $d->{$field};
@@ -72,8 +76,8 @@ class Html
         }
         $html .= '</tbody>';
         $html .= '</table>';
-        $html .= '<script>$(document).ready(function() { var dataTable = $("#'.$id.'").DataTable({ "order": [[1, "asc"]], "paging": false, rowReorder: true, responsive: { details: false } });';
-        $html .= '});</script>';
+        $html .= $model->pagination($_GET);
+        $html .= '<script>document.addEventListener("DOMContentLoaded", function() { var dataTable = new DataTable(document.querySelector("#'.$id.'"), { layout: { top: "", bottom: "" }}); });</script>';
         $html .= '</div>';
 
         return $html;
@@ -88,6 +92,7 @@ class Html
     public static function renderFilters($form, $view)
     {
         $fields = simplexml_load_file('component/forms/filters_'.$form.'.xml');
+        
         $html   = '<div class="form-inline my-3">';
         $html  .= '<input type="hidden" name="view" value="'.$view.'">';
 

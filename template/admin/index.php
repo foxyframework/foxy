@@ -36,12 +36,8 @@
                     <a class="navbar-brand" href="index.php?view=admin">
                         <!-- Logo icon -->
                         <b class="logo-icon">
-                            <img src="<?= config::$site; ?>assets/img/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="<?= config::$site; ?>assets/img/icons/icon32.png" alt="<?= config::$sitename; ?>" class="light-logo" />
                         </b>
-
-                        <span class="logo-text">
-                             <img src="<?= config::$site; ?>assets/images/logo-text.png" alt="homepage" class="dark-logo" />
-                        </span>
                     </a>
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
                 </div>
@@ -72,7 +68,6 @@
                         <li>
                             <!-- User Profile-->
                             <div class="user-profile d-flex no-block dropdown m-t-20">
-                                <div class="user-pic"><img src="<?= config::$site; ?>assets/img/users/1.jpg" alt="<?= user::$username; ?>" class="rounded-circle" width="40" /></div>
                                 <div class="user-content hide-menu m-l-10">
                                     <a href="javascript:void(0)" class="" id="Userdd" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <h5 class="m-b-0 user-name font-medium"><?= user::$username; ?> <i class="fa fa-angle-down"></i></h5>
