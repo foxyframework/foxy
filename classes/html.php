@@ -167,10 +167,6 @@ class Html
                     $html .= '<div class="modal-body">';
                     $html .= application::renderView($field[$i]->page, $field[$i]->layout);
                     $html .= '</div>';
-                    $html .= '<div class="modal-footer">';
-                    $html .= '<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>';
-                    $html .= '<button type="button" class="btn btn-primary">Save changes</button>';
-                    $html .= '</div>';
                     $html .= '</div>';
                     $html .= '</div>';
                     $html .= '</div>';

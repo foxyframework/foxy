@@ -13,7 +13,10 @@
         <class></class>
         <label>Edit</label>
         <icon>fa-plus</icon>
-        <href>index.php?view=pages&amp;layout=edit</href>
+        <modal>true</modal>
+        <modal_title>Edit</modal_title>
+        <page>pages</page>
+        <layout>edit</layout>
     </button>
     <button name="btn_delete">
         <id>btn_delete</id>
@@ -23,15 +26,5 @@
         <color>danger</color>
         <view>example</view>
         <href>index.php?view=task=pages.deleteItems&amp;mode=raw</href>
-    </button>
-    <button name="btn_blocs">
-        <id>btn_assoc</id>
-        <class></class>
-        <label>Blocs</label>
-        <icon>fa-plus</icon>
-        <modal>true</modal>
-        <modal_title>Blocs</modal_title>
-        <page>pages</page>
-        <layout>blocs</layout>
     </button>
 </form>
