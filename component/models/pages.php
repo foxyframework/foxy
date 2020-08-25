@@ -53,7 +53,7 @@ class pages extends model
     * Method to save a new users into database
     *
     */
-    public function saveMenuItem()
+    public function savePage()
     {
         $obj = new stdClass();
         $obj->title         = application::getVar('title', '', 'post');

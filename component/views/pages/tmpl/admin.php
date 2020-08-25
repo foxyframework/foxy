@@ -24,8 +24,7 @@ $model 	= application::getModel('pages');
             <h4>Pages</h4>
           </div>
           <div class="card-body">
-            <p>Com administrador pots gestionar el menú principal.</p>
-            <form method="post" action="index.php?task=pages.saveMenuItem">
+            <form method="post" action="index.php?task=pages.savePage">
               <?= html::getTextField('pages', 'title'); ?>
               <?= html::getTextField('pages', 'translation'); ?>
               <?= html::getTextField('pages', 'url'); ?>
