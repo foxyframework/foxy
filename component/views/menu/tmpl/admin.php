@@ -32,6 +32,7 @@ $model 	= application::getModel('menu');
               <?= html::getListField('menu', 'auth'); ?>
               <?= html::getListField('menu', 'type'); ?>
               <?= html::getTextField('menu', 'module'); ?>
+              <?= html::getListField('menu', 'inMenu'); ?>
               <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-primary">
               </div>
@@ -46,8 +47,8 @@ $model 	= application::getModel('menu');
 
 <section class="container-fluid">
 	<?php
-		$fields = ['id', 'title', 'translaton', 'url', 'auth', 'type', 'module'];
-		$columns = ['Id', 'Title', 'Translation', 'Url', 'Auth', 'Type', 'Module'];
+		$fields = ['id', 'title', 'translaton', 'url', 'auth', 'type', 'module', 'inMenu'];
+		$columns = ['Id', 'Title', 'Translation', 'Url', 'Auth', 'Type', 'Module', 'Menu'];
 	?>
 	<?= html::renderTable('datatable', 'id', $model->getList(), $fields, $columns); ?>
 </section>

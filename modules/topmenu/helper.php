@@ -15,14 +15,14 @@ class topmenuHelper
 {
     public static function getItems() 
 	{
-	    database::query('SELECT * FROM `#_menu` ORDER BY id');
+	    database::query('SELECT * FROM `#_menu` WHERE inMenu = 1 ORDER BY ordering ASC');
 
 		return database::fetchObjectList();
     }
     
     public static function getMenuModalItems() 
 	{
-	    database::query('SELECT * FROM `#_menu` WHERE type = 1 ORDER BY id ASC');
+	    database::query('SELECT * FROM `#_menu` WHERE type = 1 AND inMenu = 1 ORDER BY ordering ASC');
 
 		return database::fetchObjectList();
     }

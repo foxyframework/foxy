@@ -4,35 +4,35 @@
       <name>title</name>
       <id>title</id>
       <label>Title</label>
-      <message>FOXY_INVALID_FIELD</message>
+      <message></message>
       <placeholder>Title</placeholder>
-      <required>true</required>
+      <disabled>false</disabled>
     </field>
     <field name="translation">
       <type>text</type>
       <name>translation</name>
       <id>translation</id>
       <label>translation</label>
-      <message>FOXY_INVALID_FIELD</message>
+      <message></message>
       <placeholder>Translation string</placeholder>
-      <required>true</required>
+      <disabled>false</disabled>
     </field>
     <field name="url">
       <type>text</type>
       <name>url</name>
       <id>url</id>
       <label>Url</label>
-      <message>FOXY_INVALID_FIELD</message>
+      <message></message>
       <placeholder>Url</placeholder>
-      <required>true</required>
+      <disabled>false</disabled>
     </field>
     <field name="auth">
       <type>list</type>
       <name>auth</name>
       <id>auth</id>
       <label>Auth</label>
-      <message>FOXY_INVALID_FIELD</message>
-      <required>true</required>
+      <message></message>
+      <disabled>false</disabled>
       <option value="0">All</option>
       <option value="1">Authenticated</option>
       <option value="2">No authenticated</option>
@@ -42,8 +42,8 @@
       <name>type</name>
       <id>type</id>
       <label>Type</label>
-      <message>FOXY_INVALID_FIELD</message>
-      <required>true</required>
+      <message></message>
+      <disabled>false</disabled>
       <option value="0">Link</option>
       <option value="1">Modal</option>
     </field>
@@ -52,8 +52,18 @@
       <name>module</name>
       <id>module</id>
       <label>Module</label>
-      <message>FOXY_INVALID_FIELD</message>
+      <message></message>
       <placeholder>Module to render inside the modal</placeholder>
-      <required>true</required>
+      <disabled>false</disabled>
+    </field>
+    <field name="inMenu">
+      <type>list</type>
+      <name>inMenu</name>
+      <id>inMenu</id>
+      <label>Menu</label>
+      <message></message>
+      <disabled>false</disabled>
+      <option value="0">FOXY_NO</option>
+      <option value="1">FOXY_YES</option>
     </field>
 </form>

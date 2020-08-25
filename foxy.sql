@@ -56,23 +56,24 @@ CREATE TABLE `foxy_menu` (
   `title` varchar(150) NOT NULL,
   `translation` varchar(150) NOT NULL,
   `url` varchar(150) NOT NULL,
-  `auth` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 no login;1login',
+  `auth` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 no login;1 login',
   `type` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 Link;1 modal',
   `module` varchar(150) NOT NULL,
-  `template` varchar(50) NOT NULL
+  `template` varchar(50) NOT NULL,
+  `inMenu` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 no;1 yes'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Bolcament de dades per a la taula `foxy_menu`
 --
 
-INSERT INTO `foxy_menu` (`id`, `title`, `translation`, `url`, `auth`, `type`, `module`, `template`) VALUES
-(1, 'Home', '', 'index.php?view=home', 0, 0, '', ''),
-(2, 'About', '', 'index.php?view=about', 0, 0, '', ''),
-(4, 'Blog', '', 'index.php?task=register.logout', 2, 0, '', ''),
-(4, 'Contact', '', 'index.php?task=contact', 2, 0, '', ''),
-(5, 'Login', '', 'index.php?view=register&layout=login', 1, 1, 'login', ''),
-(6, 'Logout', '', 'index.php?task=register.logout', 2, 0, '', '');
+INSERT INTO `foxy_menu` (`id`, `title`, `translation`, `url`, `auth`, `type`, `module`, `template`, `inMenu`) VALUES
+(1, 'Home', '', 'index.php?view=home', 0, 0, '', '', 1),
+(2, 'About', '', 'index.php?view=about', 0, 0, '', '', 1),
+(4, 'Blog', '', 'index.php?task=register.logout', 2, 0, '', '', 1),
+(4, 'Contact', '', 'index.php?task=contact', 2, 0, '', '', 1),
+(5, 'Login', '', 'index.php?view=register&layout=login', 1, 1, 'login', '', 1),
+(6, 'Logout', '', 'index.php?task=register.logout', 2, 0, '', '', 1);
 
 -- --------------------------------------------------------
 
