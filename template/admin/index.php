@@ -1,3 +1,4 @@
+<?php $model = application::getModel(); ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -81,12 +82,18 @@
                             <!-- End User Profile-->
                         </li>
                         <!-- User Profile-->
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="pages-profile.html" aria-expanded="false"><i class="mdi mdi-account-network"></i><span class="hide-menu">Profile</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="table-basic.html" aria-expanded="false"><i class="mdi mdi-border-all"></i><span class="hide-menu">Table</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="icon-material.html" aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu">Icon</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="starter-kit.html" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">Blank</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="error-404.html" aria-expanded="false"><i class="mdi mdi-alert-outline"></i><span class="hide-menu">404</span></a></li>
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.php?view=admin" aria-expanded="false">
+                                <span class="hide-menu">Dashboard</span>
+                            </a>
+                        </li>
+                        <?php foreach($model->getAdminViews() as $view) : ?>
+                        <li class="sidebar-item"> 
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.php?view=<?= $view; ?>&layout=admin" aria-expanded="false">
+                                <span class="hide-menu"><?= ucfirst($view); ?></span>
+                            </a>
+                        </li>
+                        <?php endforeach; ?>
                         <li class="text-center p-40 upgrade-btn">
                             <a href="#" class="btn btn-block btn-danger text-white" target="_blank">Store</a>
                         </li>
