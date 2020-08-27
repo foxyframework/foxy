@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `foxy_articles` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `userid` int(11) NOT NULL,
   `title` varchar(150) NOT NULL,
   `alias` varchar(150) NOT NULL,
@@ -42,8 +42,9 @@ CREATE TABLE `foxy_articles` (
   `author_link` varchar(150) NOT NULL,
   `status` smallint(1) NOT NULL,
   `language` varchar(50) NOT NULL,
-  `hits` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `hits` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 -- --------------------------------------------------------
 
@@ -52,7 +53,7 @@ CREATE TABLE `foxy_articles` (
 --
 
 CREATE TABLE `foxy_pages` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(150) NOT NULL,
   `translation` varchar(150) NOT NULL,
   `url` varchar(150) NOT NULL,
@@ -60,8 +61,9 @@ CREATE TABLE `foxy_pages` (
   `type` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 Link;1 modal',
   `module` varchar(150) NOT NULL,
   `template` varchar(50) NOT NULL,
-  `inMenu` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 no;1 yes'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `inMenu` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 no;1 yes',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=7;
 
 --
 -- Bolcament de dades per a la taula `foxy_pages`
@@ -82,11 +84,12 @@ INSERT INTO `foxy_pages` (`id`, `title`, `translation`, `url`, `auth`, `type`, `
 --
 
 CREATE TABLE `foxy_sessions` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `userid` int(11) NOT NULL,
   `ssid` varchar(150) NOT NULL,
-  `lastvisitDate` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `lastvisitDate` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 -- --------------------------------------------------------
 
@@ -95,12 +98,13 @@ CREATE TABLE `foxy_sessions` (
 --
 
 CREATE TABLE `foxy_settings` (
-  `id` int(1) NOT NULL,
+  `id` int(1) NOT NULL AUTO_INCREMENT,
   `show_register` tinyint(1) NOT NULL DEFAULT 0,
   `login_redirect` varchar(150) NOT NULL DEFAULT 'index.php?view=home',
   `debug` tinyint(1) NOT NULL DEFAULT 0,
-  `offline` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `offline` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
 
 --
 -- Bolcament de dades per a la taula `foxy_settings`
@@ -116,9 +120,10 @@ INSERT INTO `foxy_settings` (`id`, `show_register`, `login_redirect`, `debug`, `
 --
 
 CREATE TABLE `foxy_usergroups` (
-  `id` int(11) NOT NULL,
-  `usergroup` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `usergroup` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=4;
 
 --
 -- Bolcament de dades per a la taula `foxy_usergroups`
@@ -136,7 +141,7 @@ INSERT INTO `foxy_usergroups` (`id`, `usergroup`) VALUES
 --
 
 CREATE TABLE `foxy_users` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(100) NOT NULL,
   `password` varchar(150) NOT NULL,
   `email` varchar(150) NOT NULL,
@@ -151,8 +156,9 @@ CREATE TABLE `foxy_users` (
   `bio` text NOT NULL,
   `address` varchar(150) NOT NULL,
   `template` varchar(50) NOT NULL,
-  `apikey` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `apikey` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=99;
 
 --
 -- Bolcament de dades per a la taula `foxy_users`
@@ -161,86 +167,6 @@ CREATE TABLE `foxy_users` (
 INSERT INTO `foxy_users` (`id`, `username`, `password`, `email`, `registerDate`, `lastvisitDate`, `level`, `language`, `token`, `block`, `image`, `cargo`, `bio`, `address`, `template`, `apikey`) VALUES
 (98, 'kim', '$2y$10$8FzX4NUrUz5YmpdokbyPgOVq5MPqzvo9AH83tyxqb5goT1Pw1xNrm', 'kim@aficat.com', '2017-11-15 12:18:41', '0000-00-00 00:00:00', 1, 'ca-es', '5a0c229196568', 0, 'nouser.png', '', '', '', 'green', '05982d8c-93d7-4f83-9083-c51f6a46beff');
 
---
--- Índexs per a les taules bolcades
---
-
---
--- Índexs per a la taula `foxy_articles`
---
-ALTER TABLE `foxy_articles`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índexs per a la taula `foxy_menu`
---
-ALTER TABLE `foxy_menu`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índexs per a la taula `foxy_sessions`
---
-ALTER TABLE `foxy_sessions`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índexs per a la taula `foxy_settings`
---
-ALTER TABLE `foxy_settings`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índexs per a la taula `foxy_usergroups`
---
-ALTER TABLE `foxy_usergroups`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índexs per a la taula `foxy_users`
---
-ALTER TABLE `foxy_users`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT per les taules bolcades
---
-
---
--- AUTO_INCREMENT per la taula `foxy_articles`
---
-ALTER TABLE `foxy_articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT per la taula `foxy_menu`
---
-ALTER TABLE `foxy_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT per la taula `foxy_sessions`
---
-ALTER TABLE `foxy_sessions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT per la taula `foxy_settings`
---
-ALTER TABLE `foxy_settings`
-  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT per la taula `foxy_usergroups`
---
-ALTER TABLE `foxy_usergroups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT per la taula `foxy_users`
---
-ALTER TABLE `foxy_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
