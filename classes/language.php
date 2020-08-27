@@ -50,7 +50,7 @@ class Language
     {
         if(self::$code == "") { self::$code = 'en-gb'; }
 
-        $file = 'languages/'.self::$code.'.ini';
+        $file = FOXY_BASE.DS.'languages'.DS.self::$code.'.ini';
 
         if (file_exists($file) && is_readable($file))
         {
@@ -59,19 +59,24 @@ class Language
             if($translation != "") {
                 return nl2br($translation);
             } else {
-              $file = 'languages/en-gb.ini';
+              $file = FOXY_BASE.DS.'languages'.DS.'en-gb.ini';
               $strings = parse_ini_file($file);
               $translation = @$strings[strtoupper($text)];
               if($translation != "") {
                   return nl2br($translation);
               } else {
-                $file = 'component/views/'.$view.'/'.self::$code.'.'.$view.'.ini';
-                $strings = parse_ini_file($file);
-                $translation = @$strings[strtoupper($text)];
-                if($translation != "") {
-                    return nl2br($translation);
-                } else {
-                    return $text;
+                $view = application::getVar('view', '');
+                if($view != '') {
+                  $file = FOXY_COMPONENT.DS.'views'.DS.strtolower($view).DS.self::$code.'.'.strtolower($view).'.ini';
+                  if (file_exists($file) && is_readable($file)) {
+                    $strings = parse_ini_file($file);
+                    $translation = @$strings[strtoupper($text)];
+                    if($translation != "") {
+                        return nl2br($translation);
+                    } else {
+                        return $text;
+                    }
+                  }
                 }
               }
             }
