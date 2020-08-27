@@ -152,6 +152,12 @@ class model
         return false;
     }
 
+    public function getMenuId($view)
+    {
+        database::query('SELECT id FROM `#_pages` WHERE title = '.database::quote($view));
+        return database::loadResult();
+    }
+
     public function getAdminViews()
     {
         //return component forms

@@ -195,45 +195,41 @@ class Application
      * @param    string  $type    name of the html block
      * @access   public
     */
-    public static function render($view)
+    public static function render($menuId)
     {
-        $html   = '';
-    	$path   = FOXY_COMPONENT.DS.'views'.DS.$view.DS.'config.json';
+        database::query('SELECT * FROM `#_blocs` WHERE pageId = '.$menuId.' ORDER BY ordering ASC');
+        $rows = database::fetchObjectList();
 
-  		if (file_exists($path))
-  		{
-            $params = json_decode(file_get_contents($path));
-            foreach($params as $key => $val) {
-                $blockpath = FOXY_ASSETS.DS.'blocks'.DS.$key.DS.$key.'.html';
-                if (strpos($key, '_') !== false) { 
-                    $parts = explode('_', $key); 
-                    $blockpath = FOXY_ASSETS.DS.'blocks'.DS.$parts[0].DS.$parts[0].'.html';
-                }
+        $html = '';
+
+  		if (count($rows) > 0)
+  		{             
+            foreach($rows as $row) {
+
+                $params = json_decode($row->params);
+                $blockpath = FOXY_ASSETS.DS.'blocks'.DS.strtolower($row->title).DS.strtolower($row->title).'.html';
+                
                 if(file_exists($blockpath)) {
                     $html .= file_get_contents($blockpath);
                 }
-                $i = 1;
-                foreach(((array)$params)[$key] as $arg) {
 
-                    //get page params
-                    $config   = FOXY_COMPONENT.DS.'views'.DS.$view.DS.'params.json';
-                    $cfg      = json_decode(file_get_contents($path));
-                    if(file_exists($config)) {
-                        $cfg->fluid == 0 ? $container = 'container' : $container = 'container-fluid';
-                        $html = str_replace('{container}', $container, $html);
-                    }
-                    if (strpos($arg, 'TRANSLATE_') !== false) {
-                        $arg = str_replace('TRANSLATE_', '', $arg);
-                        $arg = language::get($arg);
-                    }
-                    $html = str_replace('{arg'.$i.'}', $arg, $html);
-                    $i++;
+                //get page params
+                $config   = FOXY_COMPONENT.DS.'views'.DS.$view.DS.'params.json';
+                $cfg      = json_decode(file_get_contents($path));
+                        
+                if(file_exists($config)) {
+                    $cfg->fluid == 0 ? $container = 'container' : $container = 'container-fluid';
+                    $html = str_replace('{container}', $container, $html);
                 }
-            }
+                  
+                foreach($params as $k => $v) {
+                    $html = str_replace('{'.$k.'}', $v, $html);
+                }
 
-          }
+            }
+        }
           
-          return $html;
+        return $html;
     }
 
     /**
