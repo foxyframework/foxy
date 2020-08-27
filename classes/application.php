@@ -197,10 +197,10 @@ class Application
     */
     public static function render($menuId)
     {
-        database::query('SELECT * FROM `#_blocs` WHERE pageId = '.$menuId.' ORDER BY ordering ASC');
+        database::query('SELECT * FROM `#_blocks` WHERE pageId = '.$menuId.' ORDER BY ordering ASC');
         $rows = database::fetchObjectList();
 
-        $html = '';
+        $html  = '';
 
   		if (count($rows) > 0)
   		{             
@@ -210,7 +210,7 @@ class Application
                 $blockpath = FOXY_ASSETS.DS.'blocks'.DS.strtolower($row->title).DS.strtolower($row->title).'.html';
                 
                 if(file_exists($blockpath)) {
-                    $html .= file_get_contents($blockpath);
+                    $block = file_get_contents($blockpath);
                 }
 
                 //get page params
@@ -219,12 +219,14 @@ class Application
                         
                 if(file_exists($config)) {
                     $cfg->fluid == 0 ? $container = 'container' : $container = 'container-fluid';
-                    $html = str_replace('{container}', $container, $html);
+                    $block = str_replace('{container}', $container, $block);
                 }
                   
                 foreach($params as $k => $v) {
-                    $html = str_replace('{'.$k.'}', $v, $html);
+                    $block = str_replace('{'.$k.'}', $v, $block);
                 }
+
+                $html .= $block;
 
             }
         }

@@ -1,0 +1,32 @@
+<form>
+    <field name="title">
+        <type>text</type>
+        <name>title</name>
+        <id>title</id>
+        <label>FOXY_BLOCKS_TITLE_LABEL</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <placeholder>FOXY_BLOCKS_TITLE_PLACEHOLDER</placeholder>
+        <required>true</required>
+    </field>
+    <field name="pageId">
+        <type>text</type>
+        <name>pageId</name>
+        <id>pageId</id>
+        <label>FOXY_BLOCKS_PAGEID_LABEL</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <placeholder>FOXY_BLOCKS_PAGEID_PLACEHOLDER</placeholder>
+        <required>true</required>
+    </field>
+    <field name="language">
+        <type>list</type>
+        <name>language</name>
+        <id>language</id>
+        <label>FOXY_BLOCKS_PAGEID_LABEL</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <required>true</required>
+        <option value="">FOXY_SELECT_AN_OPTION</option>
+        <option value="ca-es">Català</option>
+        <option value="es-es">Español</option>
+        <option value="en-gb">English</option>
+    </field>
+</form>

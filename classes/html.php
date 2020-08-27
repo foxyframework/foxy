@@ -14,17 +14,6 @@ defined('_Foxy') or die ('restricted access');
 class Html
 {
     /**
-     * Method to load a form
-     * @param string $form the form xml name
-     * @return object
-    */
-    public static function getForm($form)
-    {
-        $output = simplexml_load_file('component/forms/'.$form.'.xml');
-        return $output;
-    }
-
-    /**
      * Method to render a complete table
      * @param string $id the table id to instantiate datatables via js
      * @param int $key the table primary key
@@ -180,6 +169,45 @@ class Html
     }
 
     /**
+     * Method to render a block form
+     * @param string $form the form name
+     * @return string
+    */
+    public static function renderBlockForm($id) 
+    {
+        database::query('SELECT * FROM `#_blocks` WHERE id = '.$id);
+        $row = database::fetchObject();
+
+        $form = strtolower($row->title);
+        $params = json_decode($row->params);
+
+        $fields = simplexml_load_file('assets/blocks/'.$form.'/'.$form.'.xml');
+        $html = '';
+        $i = 0;
+        foreach($fields as $field) {
+ 
+            if($field[$i]->type == 'text') {
+                $blockid = $field[0]->id;
+                $html .= "<div id='".$field[0]->name."-field' class='mb-3'>";
+                $html .= "<label for='".$field[0]->id."' class='form-label'>".language::get($field[0]->label)."</label>";
+                $html .= "<div class='controls'>";
+                $html .= "<input type='".$field[0]->type."' id='".$field[0]->id."' value='".str_replace("'","&#39;",$params->{$blockid})."' name='".$field[0]->name."'";
+                $html .= " placeholder='".language::get($field[0]->placeholder)."' class='form-control ".$field[0]->clase."' autocomplete='off'>";
+                $html .= "<div class='invalid-feedback'>".language::get($field[0]->message)."</div>";
+                $html .= "</div>";
+                $html .= "</div>";
+            }
+
+            $i++;
+        }
+
+        $html .= '<div class="form-group"><button class="btn btn-success" type="submit">'.language::get('FOXY_SEARCH').'</button></div>';
+
+
+        return $html;
+    }
+
+    /**
      * Method to render a input box
      * @param string $form the form name
      * @param string $name the field name
@@ -189,9 +217,10 @@ class Html
     */
     public static function getTextField($form, $name, $default='')
     {
+        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
         $html = "";
 
-        foreach(html::getForm($form) as $field) {
+        foreach($fields as $field) {
             //text inputs...
             if($field['name'] == $name) {
 				$field[0]->readonly == 'true' ? $readonly = "readonly='true'" : $readonly = "";
@@ -222,9 +251,10 @@ class Html
     */
     public static function getEmailField($form, $name, $default='')
     {
+        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
         $html = "";
 
-        foreach(html::getForm($form) as $field) {
+        foreach($fields as $field) {
             //text inputs...
             if($field['name'] == $name) {
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
@@ -256,9 +286,10 @@ class Html
     */
     public static function getNumberField($form, $name, $default='')
     {
+        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
         $html = "";
 
-        foreach(html::getForm($form) as $field) {
+        foreach($fields as $field) {
             //text inputs...
             if($field['name'] == $name) {
 				$field[0]->readonly == 'true' ? $readonly = "readonly='true'" : $readonly = "";
@@ -289,9 +320,10 @@ class Html
     */
     public static function getPasswordField($form, $name, $default='')
     {
+        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
         $html = "";
 
-        foreach(html::getForm($form) as $field) {
+        foreach($fields as $field) {
             //text inputs...
             if($field['name'] == $name) {
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
@@ -323,9 +355,10 @@ class Html
     */
     public static function getDateField($form, $name, $default='')
     {
+        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
         $html = "";
 
-        foreach(html::getForm($form) as $field) {
+        foreach($fields as $field) {
             //text inputs...
             if($field['name'] == $name) {
 				$field[0]->readonly == 'true' ? $readonly = "readonly='true'" : $readonly = "";
@@ -352,9 +385,10 @@ class Html
     */
     public static function getTextareaField($form, $name, $default='')
     {
+        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
         $html = "";
 
-        foreach(html::getForm($form) as $field) {
+        foreach($fields as $field) {
             //text inputs...
             if($field['name'] == $name) {
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
@@ -383,10 +417,10 @@ class Html
     */
     public static function getEditorField($form, $name, $default='')
     {
-
+        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
         $html = "";
 
-        foreach(html::getForm($form) as $field) {
+        foreach($fields as $field) {
             //text inputs...
             if($field['name'] == $name) {
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
@@ -409,9 +443,10 @@ class Html
     */
     public static function getButton($form, $name)
     {
+        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
         $html = "";
 
-        foreach(html::getForm($form) as $field) {
+        foreach($fields as $field) {
             if($field['name'] == $name) {
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
                 $field[0]->onclick != "" ? $onclick = "onclick='".$field[0]->onclick."'" : $onclick = "";
@@ -430,9 +465,10 @@ class Html
     */
     public static function getUsergroupsField($form, $name, $default='')
     {
+        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
         $html = "";
 
-        foreach(html::getForm($form) as $field) {
+        foreach($fields as $field) {
             if($field['name'] == $name) {
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
                 $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
@@ -467,9 +503,10 @@ class Html
     */
     public static function getUsersField($form, $name, $default='')
     {
+        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
         $html = "";
 
-        foreach(html::getForm($form) as $field) {
+        foreach($fields as $field) {
             if($field['name'] == $name) {
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
                 $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
@@ -478,15 +515,54 @@ class Html
                 if($field[0]->label != "") $html .= "<label class='form-label' for='".$field[0]->id."'>".language::get($field[0]->label)."</label>";
                 $html .= "<select id='".$field[0]->id."' name='".$field[0]->name."' ".$required." ".$onchange." class='".$class." form-select' ".$disabled.">";
 
-                database::query('SELECT id, username FROM #_users');
+                database::query('SELECT id, username FROM `#_users`');
                 $rows = database::fetchObjectList();
 
-                $html .= "<option value=''>".language::get('FOXY_SELECT_USER')."</option>";
+                $html .= "<option value=''>".language::get('FOXY_SELECT_AN_OPTION')."</option>";
 
 				foreach($rows as $row) {
 					  $default == '' ? $default = user::$id : $default = $default;
 					  $default == $row->id ? $selected = "selected='selected'" : $selected = "";
 					  $html .= "<option value='".$row->id."' $selected>".$row->username."</option>";
+				}
+
+                $html .= "</select>";
+                $html .= "<div class='invalid-feedback'>".language::get($field[0]->message)."</div>";
+                $html .= "</div>";
+            }
+        }
+        return $html;
+    }
+
+    /**
+     * Method to render a menuitems select box
+     * @param $form string the form name
+     * @param $name string the field name
+     * @param $default mixed optional default value
+    */
+    public static function getPagesField($form, $name, $default='')
+    {
+        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $html = "";
+
+        foreach($fields as $field) {
+            if($field['name'] == $name) {
+                $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
+                $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
+                $field[0]->required == 'true' ? $required = "required='true'" : $required = "";
+                $html .= "<div id='".$field[0]->name."-field' class='mb-3'>";
+                if($field[0]->label != "") $html .= "<label class='form-label' for='".$field[0]->id."'>".language::get($field[0]->label)."</label>";
+                $html .= "<select id='".$field[0]->id."' name='".$field[0]->name."' ".$required." ".$onchange." class='form-control' ".$disabled.">";
+
+                database::query('SELECT id, title FROM `#_pages`');
+                $rows = database::fetchObjectList();
+
+                $html .= "<option value=''>".language::get('FOXY_SELECT_AN_OPTION')."</option>";
+
+				foreach($rows as $row) {
+					  $default == '' ? $default = user::$id : $default = $default;
+					  $default == $row->id ? $selected = "selected='selected'" : $selected = "";
+					  $html .= "<option value='".$row->id."' $selected>".$row->title."</option>";
 				}
 
                 $html .= "</select>";
@@ -507,9 +583,10 @@ class Html
     */
     public static function getListField($form, $name, $default='', $options=null, $key='', $value='', $combobox=false)
     {
+        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
         $html = "";
 
-        foreach(html::getForm($form) as $field) {
+        foreach($fields as $field) {
             if($field['name'] == $name) {
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
                 if(isset($field[0]->button)){
@@ -589,9 +666,10 @@ class Html
     */
     public function getCheckboxField($form, $name, $default='')
     {
+        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
         $html = "";
 
-        foreach(html::getForm($form) as $field) {
+        foreach($fields as $field) {
             if($field['name'] == $name) {
                 $field[0]->onclick != "" ? $onclick = "onclick='".$field[0]->onclick."'" : $onclick = "";
                 $field[0]->required == 'true' ? $required = "required='true'" : $required = "";
@@ -619,9 +697,10 @@ class Html
     */
     public static function getRadioField($form, $name, $default='')
     {
+        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
         $html = "";
 
-        foreach(html::getForm($form) as $field) {
+        foreach($fields as $field) {
             if($field['name'] == $name) {
                 $field[0]->onclick != "" ? $onclick = "onclick='".$field[0]->onclick."'" : $onclick = "";
                 $field[0]->required == 'true' ? $required = "required='true'" : $required = "";
@@ -650,6 +729,7 @@ class Html
     */
     public static function getFilesField($form, $name, $folder, $default='')
     {
+        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
         $html = "";
 
 		$dir = opendir($folder);
@@ -660,7 +740,7 @@ class Html
 		}
 		closedir($dir);
 
-        foreach(html::getForm($form) as $field) {
+        foreach($fields as $field) {
             if($field['name'] == $name) {
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
                 $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
@@ -692,11 +772,12 @@ class Html
     */
     public static function getFoldersField($form, $name, $directory_path, $default='')
     {
+        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
         $html = "";
 
 		$sub_directories = array_map('basename', glob($directory_path . '/*', GLOB_ONLYDIR));
 
-        foreach(html::getForm($form) as $field) {
+        foreach($fields as $field) {
             if($field['name'] == $name) {
                 $field[0]->disabled == 'true' ? $disabled = "disabled='disabled'" : $disabled = "";
                 $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
@@ -728,6 +809,7 @@ class Html
     */
     public static function getMediaField($form, $name, $folder)
     {
+        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
         $html = "";
         
         $dir = opendir('assets/img/'.$folder);
@@ -738,7 +820,7 @@ class Html
 		}
 		closedir($dir);
 
-        foreach(html::getForm($form) as $field) {
+        foreach($fields as $field) {
             if($field['name'] == $name) {
 
                 $html .= "<label for='".$field[0]->id."' class='form-label'>".language::get($field[0]->label)."</label>";

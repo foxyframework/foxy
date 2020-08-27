@@ -1,0 +1,30 @@
+<form>
+    <!-- Filters -->
+    <field name="title">
+        <type>text</type>
+        <name>title</name>
+        <id>title</id>
+        <label></label>
+        <placeholder>Title</placeholder>
+    </field>
+    <!-- buttons -->
+     <button name="btn_edit">
+        <id>btn_edit</id>
+        <class></class>
+        <label>Edit</label>
+        <icon>fa-plus</icon>
+        <modal>true</modal>
+        <modal_title>Edit</modal_title>
+        <page>blocks</page>
+        <layout>edit</layout>
+    </button>
+    <button name="btn_delete">
+        <id>btn_delete</id>
+        <class>delete</class>
+        <label>Delete</label>
+        <icon>fa-trash-o</icon>
+        <color>danger</color>
+        <view>blocks</view>
+        <href>index.php?view=task=blocks.deleteItems&amp;mode=raw</href>
+    </button>
+</form>

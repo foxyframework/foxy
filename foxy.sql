@@ -84,13 +84,13 @@ INSERT INTO `foxy_pages` (`id`, `title`, `translation`, `url`, `auth`, `type`, `
 -- Estructura de la taula `foxy_blocs`
 --
 
-CREATE TABLE `foxy_blocs` (
+CREATE TABLE `foxy_blocks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(150) NOT NULL,
-  `params` text NOT NULL,
+  `params` text NOT NULL DEFAULT = '',
   `pageId` int(11) NOT NULL,
-  `language` varchar(5) NOT NULL DEFAULT 'en-GB',
-  `ordering` int(11) NOT NULL,
+  `language` varchar(5) NOT NULL DEFAULT 'en-gb',
+  `ordering` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
 
@@ -98,9 +98,9 @@ CREATE TABLE `foxy_blocs` (
 -- Bolcament de dades per a la taula `foxy_blocs`
 --
 
-INSERT INTO `foxy_blocs` (`id`, `title`, `params`, `pageId`, `language`, `ordering`) VALUES
-(1, 'Jumbotron', '{"arg1":"FOXY PHP FRAMEWORK","arg2":"A small PHP Framework for rapid development of web application","arg3":"assets\/img\/icons\/icon264.png"}', 1, 'en-GB', 1),
-(2, 'Marketing', '{"arg1":"Light as a feather. Lightweight.","arg2":"Foxy weighs very little, the entire package once uploaded to your server is only 916Kb.","arg3":"assets\/img\/demo\/fox1.jpg","arg4":"Extend the code. Plugins.","arg5":"Foxy allows you to create the pages you want but also extend the functionality with small pieces of code called modules and plugins.", "arg6":"assets\/img\/demo\/fox2.jpg", "arg7":"Speak to the world. Internationalization.", "arg8":"Foxy allows you to create files with the translation of the text strings that you have in your application.", "arg9":"assets\/img\/demo\/fox3.jpg"}', 1, 'en-GB', 2);
+INSERT INTO `foxy_blocks` (`id`, `title`, `params`, `pageId`, `language`, `ordering`) VALUES
+(1, 'Jumbotron', '{"arg1":"FOXY PHP FRAMEWORK","arg2":"A small PHP Framework for rapid development of web application","arg3":"assets\/img\/icons\/icon264.png"}', 1, 'en-gb', 1),
+(2, 'Marketing', '{"arg1":"Light as a feather. Lightweight.","arg2":"Foxy weighs very little, the entire package once uploaded to your server is only 916Kb.","arg3":"assets\/img\/demo\/fox1.jpg","arg4":"Extend the code. Plugins.","arg5":"Foxy allows you to create the pages you want but also extend the functionality with small pieces of code called modules and plugins.", "arg6":"assets\/img\/demo\/fox2.jpg", "arg7":"Speak to the world. Internationalization.", "arg8":"Foxy allows you to create files with the translation of the text strings that you have in your application.", "arg9":"assets\/img\/demo\/fox3.jpg"}', 1, 'en-gb', 2);
 
 -- --------------------------------------------------------
 
