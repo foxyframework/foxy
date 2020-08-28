@@ -46,5 +46,7 @@ defined('_Foxy') or die ('restricted access');
 		$fields = ['id', 'title', 'pageId', 'language'];
 		$columns = ['Id', 'Title', 'Page', 'Language'];
 	?>
+	<form name="tableForm" id="tableForm" action="" method="post">
 	<?= html::renderTable('datatable', 'id', $model->getList(), $fields, $columns); ?>
+	</form>
 </section>

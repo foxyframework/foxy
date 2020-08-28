@@ -18,11 +18,7 @@ $id = application::getVar('id', 0);
 
     	<div class="row my-4">
       		<div class="col-lg-12">
-                <form name="blogForm" id="blogForm" method="post" action="index.php?task=blocks.saveBlockItem">			
-                    <input type="hidden" name="id" value="<?= $id; ?>">
                     <?= html::renderBlockForm($id); ?>
-                </form>
-
             </div> 
         </div>
 

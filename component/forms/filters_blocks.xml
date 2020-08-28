@@ -10,13 +10,10 @@
     <!-- buttons -->
      <button name="btn_edit">
         <id>btn_edit</id>
-        <class></class>
+        <class>btn_edit</class>
         <label>Edit</label>
         <icon>fa-plus</icon>
-        <modal>true</modal>
-        <modal_title>Edit</modal_title>
-        <page>blocks</page>
-        <layout>edit</layout>
+        <href>index.php?view=blocks&amp;layout=edit</href>
     </button>
     <button name="btn_delete">
         <id>btn_delete</id>
@@ -25,6 +22,6 @@
         <icon>fa-trash-o</icon>
         <color>danger</color>
         <view>blocks</view>
-        <href>index.php?view=task=blocks.deleteItems&amp;mode=raw</href>
+        <href>index.php?task=blocks.deleteItems&amp;mode=raw</href>
     </button>
 </form>

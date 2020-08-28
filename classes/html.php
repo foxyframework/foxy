@@ -45,7 +45,7 @@ class Html
             $html .= '<tr class="item" data-id="'.$d->{$key}.' draggable="true" ondragstart="return dragStart(event)" ondragenter="return dragEnter(event)" 
             ondragover="return dragOver(event)" ondragleave="return dragLeave(event)" ondrop="return dragDrop(event)" data-ordering="'. isset($d->ordering) ? $d->ordering : 0 .'"">';
             $html .= '<td>';
-			$html .= '<input type="checkbox" name="cd" data-id="'.$d->{$key}.'">';
+			$html .= '<input type="checkbox" class="tableCheck" name="cd" data-id="'.$d->{$key}.'">';
 			$html .= '</td>';
             foreach($fields as $field) {
                 if(is_array($field)) {
@@ -183,6 +183,10 @@ class Html
 
         $fields = simplexml_load_file('assets/blocks/'.$form.'/'.$form.'.xml');
         $html = '';
+
+        $html .= '<form name="blockForm" id="blockForm" method="post" action="index.php?task=blocks.saveBlockItem">';		
+        $html .= '<input type="hidden" name="id" value="'.$id.'">';
+
         $i = 0;
         foreach($fields as $field) {
  
@@ -202,6 +206,7 @@ class Html
         }
 
         $html .= '<div class="form-group"><button class="btn btn-success" type="submit">'.language::get('FOXY_SEARCH').'</button></div>';
+        $html .= '</form>';
 
 
         return $html;
