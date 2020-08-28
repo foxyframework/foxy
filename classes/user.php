@@ -23,7 +23,7 @@ class User
     public static $language        = "";
     public static $token           = "";
     public static $block           = 0;
-    public static $image           = 'nouser.png';
+    public static $image           = 'assets/img/nouser.png';
     public static $cargo           = '';
     public static $address         = '';
     public static $bio             = '';

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
     <title><?= config::$sitename; ?></title>
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= config::$site; ?>assets/img/icons/icon16.png">
     <?php
   	if(count(application::$metatags) > 0) :
   	foreach(application::$metatags as $tag) : ?>
