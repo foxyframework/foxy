@@ -19,7 +19,7 @@ function getCookie(c_name) {
 
 function ajaxCall(url, callback, method='GET') {
 	var xhttp;
-	xhttp=new XMLHttpRequest();
+	xhttp= new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 	  if (this.readyState == 4 && this.status == 200) {
 		callback(this);
@@ -27,7 +27,7 @@ function ajaxCall(url, callback, method='GET') {
 	};
 	xhttp.open(method, url, true);
 	xhttp.send();
-  }
+}
 
 function deleteAccount(username, domain) {
 	if(document.getElementById('proceed').value.toLowerCase() == username) {
@@ -163,41 +163,35 @@ document.addEventListener("DOMContentLoaded", function() {
 
 			e.preventDefault();
 
-			// $(':checkbox').each(function(el) {
-			// if(this.checked) {
-			// 		var id    = el.target.getAttribute('data-id');
-			// 		items.push(id);
-			// 	}
-			// });
+			let items = getAllSelectedCheckboxes();
 
-			// var view = e.target.getAttribute('data-view');
-			// var pageURL = e.target.getAttribute("href");
+			let pageURL = e.target.getAttribute("href");
 
-			// if(items == 0) { alert('Please check one item at least'); return false; } else { if(!confirm('Are you sure you want to delete this item?')) return false; }
+			if(items.length == 0) { alert('Please check one item at least'); return false; } else { if(!confirm('Are you sure you want to delete this item?')) return false; }
 
-			// var list = JSON.stringify(items);
+			let list = JSON.stringify(items);
 
-			// var ajax = new XMLHttpRequest();
+			var ajax = new XMLHttpRequest();
 
-			// ajax.open("POST", pageURL, true);
-			// ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			// ajax.send("items="+list);
+			ajax.open("POST", pageURL, true);
+			ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			ajax.send("items="+list);
 
-			// // Cria um evento para receber o retorno.
-			// ajax.onreadystatechange = function() {
+			// Cria um evento para receber o retorno.
+			ajax.onreadystatechange = function() {
 			
-			// // Caso o state seja 4 e o http.status for 200, é porque a requisiçõe deu certo.
-			// 	if (ajax.readyState == 4 && ajax.status == 200) {
+			// Caso o state seja 4 e o http.status for 200, é porque a requisiçõe deu certo.
+				if (ajax.readyState == 4 && ajax.status == 200) {
 				
-			// 		var data = ajax.responseText;
-			// 		//Todo: display success message
-			// 		items.forEach(item => {
-			// 			document.querySelector(`[data-id="${item}"]`).remove();
-			// 		})
-			// 	} else {
-			// 		//display error message
-			// 	}
-			// }
+					var data = ajax.responseText;
+					//Todo: display success message
+					items.forEach(item => {
+						document.querySelector(`[data-id="${item}"]`).remove();
+					})
+				} else {
+					//display error message
+				}
+			}
 		});
 	}
 });
