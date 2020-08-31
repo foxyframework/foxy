@@ -50,6 +50,7 @@ class Html
             foreach($fields as $field) {
                 if(is_array($field)) {
                     foreach($field as $k => $v) {
+                        //example format $fields = array('myfield' => array('field' => 'myfield', 'format' => 'link')
                         if($k == 'field') { $field = $v; }
                         if($k == 'format' && $v == 'date') { $field = date('d-m-Y', strtotime($d->{$field})); }
                         if($k == 'format' && $v == 'price') { $field = number_format($d->{$field}, 2, '.', ',').'&euro;'; }
