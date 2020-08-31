@@ -66,7 +66,7 @@ class Html
         $html .= '</tbody>';
         $html .= '</table>';
         $html .= $model->pagination($_GET);
-        $html .= '<script>document.addEventListener("DOMContentLoaded", function() { var dataTable = new DataTable(document.querySelector("#'.$id.'"), { layout: { top: "", bottom: "" }}); });</script>';
+        $html .= '<script>document.addEventListener("DOMContentLoaded", function() { var dataTable = new DataTable(document.querySelector("#'.$id.'"), { layout: { top: "", bottom: "" }, columns: [{ select: [0], sortable: false }]}); });</script>';
         $html .= '</div>';
 
         return $html;
@@ -100,7 +100,6 @@ class Html
 
                     $field_name = (string)$field[$i]->name;
                     $html .= html::getDateField($form, $field_name, $_GET[''.$field_name.'']);
-                    $html .= "<script>document.addEventListener('DOMContentLoaded', function(event) { $(function(){ $('#".(string)$field[$i]->id."-icon').datetimepicker({sideBySide: false,format: '".(string)$field[$i]->format."'}); }); });</script>";
                 }
                 if($field[$i]->type == 'users') {
 
