@@ -207,7 +207,7 @@ class Application
             foreach($rows as $row) {
 
                 $params = json_decode($row->params);
-                $blockpath = FOXY_ASSETS.DS.'blocks'.DS.strtolower($row->title).DS.strtolower($row->title).'.html';
+                $blockpath = FOXY_BASE.DS.'blocks'.DS.strtolower($row->title).DS.strtolower($row->title).'.html';
                 
                 if(file_exists($blockpath)) {
                     $block = file_get_contents($blockpath);

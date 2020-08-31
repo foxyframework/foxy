@@ -24,7 +24,7 @@ defined('_Foxy') or die ('restricted access');
           			</div>
           			<div class="card-body">
 						<form name="blockForm" id="blockForm" method="post" action="index.php?task=blocks.saveBlock">			
-                            <?= html::getFoldersField('blocks', 'title', FOXY_ASSETS.DS.'blocks'); ?>
+                            <?= html::getFoldersField('blocks', 'title', FOXY_BASE.DS.'blocks'); ?>
                             <?= html::getPagesField('blocks', 'pageId'); ?>
                             <?= html::getListField('blocks', 'language'); ?>
 							<div class="form-group">

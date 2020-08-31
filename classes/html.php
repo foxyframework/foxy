@@ -181,7 +181,7 @@ class Html
         $form = strtolower($row->title);
         $params = json_decode($row->params);
 
-        $fields = simplexml_load_file('assets/blocks/'.$form.'/'.$form.'.xml');
+        $fields = simplexml_load_file('blocks/'.$form.'/'.$form.'.xml');
         $html = '';
 
         $html .= '<form name="blockForm" id="blockForm" method="post" action="index.php?task=blocks.saveBlockItem">';		
