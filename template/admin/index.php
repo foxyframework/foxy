@@ -9,6 +9,12 @@
     <meta name="robots" content="noindex,nofollow">
     <title><?= config::$sitename; ?></title>
     <link rel="icon" type="image/png" sizes="16x16" href="<?= config::$site; ?>assets/img/icons/icon16.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="<?= config::$site; ?>/template/system/css/foxy.css">
+    <script src="https://kit.fontawesome.com/0deb70caff.js" crossorigin="anonymous"></script>
+
     <?php
   	if(count(application::$metatags) > 0) :
   	foreach(application::$metatags as $tag) : ?>
