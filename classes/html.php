@@ -117,7 +117,7 @@ class Html
         	$i++;
         }
 
-        $html .= '&nbsp;<button class="btn btn-success" type="submit">'.language::get('FOXY_SEARCH').'</button>';
+        $html .= '&nbsp;<button class="btn btn-success mb-3" type="submit">'.language::get('FOXY_SEARCH').'</button>';
         $html .= '</div>';
 
         return $html;
