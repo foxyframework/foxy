@@ -16,6 +16,7 @@ if(user::getAuth() || config::$show_register == 0) {
   application::redirect(config::$site.'/index.php?view=home');
 }
 
+$form = FOXY_COMPONENT.DS.'forms'.DS.'register.xml';
 ?>
 
  <div class="page login-page">
@@ -25,10 +26,10 @@ if(user::getAuth() || config::$show_register == 0) {
          <div class="logo text-uppercase px-5"><img src="assets/img/logo.png" class="img-fluid" alt="<?= config::$sitename; ?>" style="width:65%"></div>
          <?php if(!user::getAuth()) : ?>
          <form action="index.php?task=register.register" method="post" class="text-left needs-validation">
-           <?= html::getEmailField('register', 'email', ''); ?>
-           <?= html::getPasswordField('register', 'password', ''); ?>
-           <?= html::getPasswordField('register', 'password2', ''); ?>
-           <?= html::getButton('register', 'submit'); ?>
+           <?= html::getEmailField($form, 'email', ''); ?>
+           <?= html::getPasswordField($form, 'password', ''); ?>
+           <?= html::getPasswordField($form, 'password2', ''); ?>
+           <?= html::getButton($form, 'submit'); ?>
            <p style="margin-top:5px;">
            <a href="index.php?view=register&layout=login" class="btn btn-success btn-block btn-lg">Login</a>
            </p>

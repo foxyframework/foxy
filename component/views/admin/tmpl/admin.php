@@ -16,6 +16,7 @@ $cfg->show_register == '' ? $show_register = config::$show_register : $show_regi
 $cfg->login_redirect == '' ? $login_redirect = config::$login_redirect : $login_redirect = $cfg->login_redirect;
 $cfg->debug == '' ? $debug = config::$debug : $debug = $cfg->debug;
 $cfg->offline == '' ? $offline = config::$offline : $offline = $cfg->offline;
+$form = FOXY_COMPONENT.DS.'forms'.DS.'admin.xml';
 ?>
 
 <section class="forms">
@@ -30,10 +31,10 @@ $cfg->offline == '' ? $offline = config::$offline : $offline = $cfg->offline;
           <div class="card-body">
             <p>Com administrador pots configurar l'aplicació.</p>
             <form method="post" action="<?= $config->site; ?>index.php?task=admin.saveConfig">
-              <?= html::getListField('admin', 'show_register', $show_register); ?>
-              <?= html::getTextField('admin', 'login_redirect', $login_redirect); ?>
-              <?= html::getListField('admin', 'debug', $debug); ?>
-              <?= html::getListField('admin', 'offline', $offline); ?>
+              <?= html::getListField($form, 'show_register', $show_register); ?>
+              <?= html::getTextField($form, 'login_redirect', $login_redirect); ?>
+              <?= html::getListField($form, 'debug', $debug); ?>
+              <?= html::getListField($form, 'offline', $offline); ?>
               <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-primary">
               </div>

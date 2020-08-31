@@ -10,7 +10,7 @@
 */
 
 defined('_Foxy') or die ('restricted access');
-
+$form = FOXY_COMPONENT.DS.'forms'.DS.'blocks.xml';
 ?>
 
 <section class="forms">
@@ -24,9 +24,9 @@ defined('_Foxy') or die ('restricted access');
           			</div>
           			<div class="card-body">
 						<form name="blockForm" id="blockForm" method="post" action="index.php?task=blocks.saveBlock">			
-                            <?= html::getFoldersField('blocks', 'title', FOXY_BASE.DS.'blocks'); ?>
-                            <?= html::getPagesField('blocks', 'pageId'); ?>
-                            <?= html::getListField('blocks', 'language'); ?>
+                            <?= html::getFoldersField($form, 'title', FOXY_BASE.DS.'blocks'); ?>
+                            <?= html::getPagesField($form, 'pageId'); ?>
+                            <?= html::getListField($form, 'language'); ?>
 							<div class="form-group">
 								<input type="submit" value="<?= language::get('FOXY_SAVE'); ?>" class="btn btn-primary">
 							</div>

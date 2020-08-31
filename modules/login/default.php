@@ -10,7 +10,7 @@
 */
 
 defined('_Foxy') or die ('restricted access');
-
+$form = FOXY_COMPONENT.DS.'forms'.DS.'login.xml';
 ?>
 
 <div class="page login-page">
@@ -21,13 +21,13 @@ defined('_Foxy') or die ('restricted access');
         <form action="<?= config::$site; ?>index.php?task=register.login" method="post" class="text-left form-validate">
           <input type="hidden" name="token" value="<?= application::getVar('token', ''); ?>">
 
-          <?= html::getEmailField('login', 'email'); ?>
-          <?= html::getPasswordField('login', 'password'); ?>
-          <?= html::getTextField('login', 'lastvisitDate', date('Y-m-d H:i:s')); ?>
-          <?= html::getTextField('login', 'language', 'en-gb'); ?>
+          <?= html::getEmailField($form, 'email'); ?>
+          <?= html::getPasswordField($form, 'password'); ?>
+          <?= html::getTextField($form, 'lastvisitDate', date('Y-m-d H:i:s')); ?>
+          <?= html::getTextField($form, 'language', 'en-gb'); ?>
 
           <div class="form-group text-center">
-            <?= html::getButton('login', 'submit'); ?>
+            <?= html::getButton($form, 'submit'); ?>
           </div>
         </form>
       </div>

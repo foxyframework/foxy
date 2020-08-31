@@ -11,7 +11,9 @@
 
 defined('_Foxy') or die ('restricted access');
 
-$model 	= application::getModel('pages');
+$model 	= application::getModel($form);
+$form = FOXY_COMPONENT.DS.'forms'.DS.'pages.xml';
+
 ?>
 
 <section class="forms">
@@ -25,13 +27,13 @@ $model 	= application::getModel('pages');
           </div>
           <div class="card-body">
             <form method="post" action="index.php?task=pages.savePage">
-              <?= html::getTextField('pages', 'title'); ?>
-              <?= html::getTextField('pages', 'translation'); ?>
-              <?= html::getTextField('pages', 'url'); ?>
-              <?= html::getListField('pages', 'auth'); ?>
-              <?= html::getListField('pages', 'type'); ?>
-              <?= html::getTextField('pages', 'module'); ?>
-              <?= html::getListField('pages', 'inMenu'); ?>
+              <?= html::getTextField($form, 'title'); ?>
+              <?= html::getTextField($form, 'translation'); ?>
+              <?= html::getTextField($form, 'url'); ?>
+              <?= html::getListField($form, 'auth'); ?>
+              <?= html::getListField($form, 'type'); ?>
+              <?= html::getTextField($form, 'module'); ?>
+              <?= html::getListField($form, 'inMenu'); ?>
               <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-primary">
               </div>

@@ -28,8 +28,8 @@ class Html
         $model = application::getModel($view);
 
         $html  = '';
-        $html .= '<div class="w-100 text-right">'.self::renderButtons($view, $view).'</div>';
-        $html .= '<div class="w-100">'.self::renderFilters($view, $view).'</div>';
+        $html .= '<div class="w-100 text-right">'.self::renderButtons($view).'</div>';
+        $html .= '<div class="w-100">'.self::renderFilters($view).'</div>';
         $html .= '<div class="table-responsive">';
         $html .= '<table id="'.$id.'" class="table table-striped table-bordered">';
         $html .= '<thead>';
@@ -79,9 +79,10 @@ class Html
      * @param string $view the page view name
      * @return string
     */
-    public static function renderFilters($form, $view)
+    public static function renderFilters($view)
     {
-        $fields = simplexml_load_file('component/forms/filters_'.$form.'.xml');
+        $form = FOXY_COMPONENT.DS.'forms'.DS.'filters_'.$view.'.xml';
+        $fields = simplexml_load_file($form);
         
         $html   = '<div class="form-inline my-3">';
         $html  .= '<input type="hidden" name="view" value="'.$view.'">';
@@ -129,9 +130,10 @@ class Html
      * @param string $view the page view name
      * @return string
     */
-    public static function renderButtons($form, $view)
+    public static function renderButtons($view)
     {
-        $fields = simplexml_load_file('component/forms/filters_'.$form.'.xml');
+        $form = FOXY_COMPONENT.DS.'forms'.DS.'filters_'.$view.'.xml';
+        $fields = simplexml_load_file($form);
         $html = "";
         $i = 0;
 
@@ -178,10 +180,11 @@ class Html
         database::query('SELECT * FROM `#_blocks` WHERE id = '.$id);
         $row = database::fetchObject();
 
-        $form = strtolower($row->title);
+        $block  = strtolower($row->title);
         $params = json_decode($row->params);
 
-        $fields = simplexml_load_file('blocks/'.$form.'/'.$form.'.xml');
+        $form   = FOXY_BASE.DS.'blocks'.DS.$block.DS.$block.'.xml';
+        $fields = simplexml_load_file($form);
         $html = '';
 
         $html .= '<form name="blockForm" id="blockForm" method="post" action="index.php?task=blocks.saveBlockItem">';		
@@ -189,17 +192,31 @@ class Html
 
         $i = 0;
         foreach($fields as $field) {
- 
+
             if($field[$i]->type == 'text') {
-                $blockid = $field[0]->id;
-                $html .= "<div id='".$field[0]->name."-field' class='mb-3'>";
-                $html .= "<label for='".$field[0]->id."' class='form-label'>".language::get($field[0]->label)."</label>";
-                $html .= "<div class='controls'>";
-                $html .= "<input type='".$field[0]->type."' id='".$field[0]->id."' value='".str_replace("'","&#39;",$params->{$blockid})."' name='".$field[0]->name."'";
-                $html .= " placeholder='".language::get($field[0]->placeholder)."' class='form-control ".$field[0]->clase."' autocomplete='off'>";
-                $html .= "<div class='invalid-feedback'>".language::get($field[0]->message)."</div>";
-                $html .= "</div>";
-                $html .= "</div>";
+
+                $field_name = (string)$field[$i]->name;
+                $html .= html::getTextField($form, $field_name, $params->{$field_name});
+            }
+            if($field[$i]->type == 'date' || $field[$i]->type == 'calendar') {
+
+                $field_name = (string)$field[$i]->name;
+                $html .= html::getDateField($form, $field_name, $params->{$field_name});
+            }
+            if($field[$i]->type == 'users') {
+
+                $field_name = (string)$field[$i]->name;
+                $html .= html::getUsersField($form, $field_name, $params->{$field_name});
+            }
+            if($field[$i]->type == 'list') {
+
+                $field_name = (string)$field[$i]->name;
+                $html .= html::getListField($form, $field_name, $params->{$field_name});
+            }
+            if($field[$i]->type == 'media') {
+
+                $field_name = (string)$field[$i]->name;
+                $html .= html::getMediaField($form, $field_name, $field[$i]->folder, $params->{$field_name});
             }
 
             $i++;
@@ -222,7 +239,7 @@ class Html
     */
     public static function getTextField($form, $name, $default='')
     {
-        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $fields = simplexml_load_file($form);
         $html = "";
 
         foreach($fields as $field) {
@@ -256,7 +273,7 @@ class Html
     */
     public static function getEmailField($form, $name, $default='')
     {
-        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $fields = simplexml_load_file($form);
         $html = "";
 
         foreach($fields as $field) {
@@ -291,7 +308,7 @@ class Html
     */
     public static function getNumberField($form, $name, $default='')
     {
-        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $fields = simplexml_load_file($form);
         $html = "";
 
         foreach($fields as $field) {
@@ -325,7 +342,7 @@ class Html
     */
     public static function getPasswordField($form, $name, $default='')
     {
-        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $fields = simplexml_load_file($form);
         $html = "";
 
         foreach($fields as $field) {
@@ -360,7 +377,7 @@ class Html
     */
     public static function getDateField($form, $name, $default='')
     {
-        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $fields = simplexml_load_file($form);
         $html = "";
 
         foreach($fields as $field) {
@@ -390,7 +407,7 @@ class Html
     */
     public static function getTextareaField($form, $name, $default='')
     {
-        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $fields = simplexml_load_file($form);
         $html = "";
 
         foreach($fields as $field) {
@@ -422,7 +439,7 @@ class Html
     */
     public static function getEditorField($form, $name, $default='')
     {
-        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $fields = simplexml_load_file($form);
         $html = "";
 
         foreach($fields as $field) {
@@ -448,7 +465,7 @@ class Html
     */
     public static function getButton($form, $name)
     {
-        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $fields = simplexml_load_file($form);
         $html = "";
 
         foreach($fields as $field) {
@@ -470,7 +487,7 @@ class Html
     */
     public static function getUsergroupsField($form, $name, $default='')
     {
-        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $fields = simplexml_load_file($form);
         $html = "";
 
         foreach($fields as $field) {
@@ -508,7 +525,7 @@ class Html
     */
     public static function getUsersField($form, $name, $default='')
     {
-        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $fields = simplexml_load_file($form);
         $html = "";
 
         foreach($fields as $field) {
@@ -547,7 +564,7 @@ class Html
     */
     public static function getPagesField($form, $name, $default='')
     {
-        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $fields = simplexml_load_file($form);
         $html = "";
 
         foreach($fields as $field) {
@@ -588,7 +605,7 @@ class Html
     */
     public static function getListField($form, $name, $default='', $options=null, $key='', $value='', $combobox=false)
     {
-        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $fields = simplexml_load_file($form);
         $html = "";
 
         foreach($fields as $field) {
@@ -671,7 +688,7 @@ class Html
     */
     public function getCheckboxField($form, $name, $default='')
     {
-        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $fields = simplexml_load_file($form);
         $html = "";
 
         foreach($fields as $field) {
@@ -702,7 +719,7 @@ class Html
     */
     public static function getRadioField($form, $name, $default='')
     {
-        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $fields = simplexml_load_file($form);
         $html = "";
 
         foreach($fields as $field) {
@@ -734,7 +751,7 @@ class Html
     */
     public static function getFilesField($form, $name, $folder, $default='')
     {
-        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $fields = simplexml_load_file($form);
         $html = "";
 
 		$dir = opendir($folder);
@@ -777,7 +794,7 @@ class Html
     */
     public static function getFoldersField($form, $name, $directory_path, $default='')
     {
-        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $fields = simplexml_load_file($form);
         $html = "";
 
 		$sub_directories = array_map('basename', glob($directory_path . '/*', GLOB_ONLYDIR));
@@ -812,9 +829,9 @@ class Html
      * @param $default mixed optional default value
      * @return $html string a complete filelist field html
     */
-    public static function getMediaField($form, $name, $folder)
+    public static function getMediaField($form, $name, $folder, $default='')
     {
-        $fields = simplexml_load_file('component/forms/'.$form.'.xml');
+        $fields = simplexml_load_file($form);
         $html = "";
         
         $dir = opendir('assets/img/'.$folder);
@@ -830,7 +847,8 @@ class Html
 
                 $html .= "<label for='".$field[0]->id."' class='form-label'>".language::get($field[0]->label)."</label>";
                 $html .= "<div class='input-group mb-3'>";
-                $html .= "<input type='text' id='".$field[0]->id."' class='form-control' aria-describedby='button-addon2'>";
+                $default != '' ? $value = "value='$default'" : $value = "";
+                $html .= "<input type='text' id='".$field[0]->id."' $value class='form-control' aria-describedby='button-addon2'>";
                 $html .= "<button class='btn btn-outline-secondary' type='button' id='button-addon2' data-toggle='modal' data-target='#".$field[0]->id."Modal'>Select</button>";
                 $html .= "</div>";
 

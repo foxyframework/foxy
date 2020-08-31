@@ -10,7 +10,7 @@
 */
 
 defined('_Foxy') or die ('restricted access');
-
+$form = FOXY_COMPONENT.DS.'forms'.DS.'contact.xml';
 ?>
 
 <section class="forms">
@@ -23,10 +23,10 @@ defined('_Foxy') or die ('restricted access');
           		
                 <form name="blogForm" id="blogForm" method="post" class="needs-validation" action="index.php?task=contact.sendForm">
                     <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
-                    <?=  html::getTextField('contact', 'name'); ?>
-                    <?=  html::getTextField('contact', 'phone'); ?>
-                    <?=  html::getEmailField('contact', 'email'); ?>	
-                    <?=  html::getTextareaField('contact', 'message'); ?>	
+                    <?=  html::getTextField($form, 'name'); ?>
+                    <?=  html::getTextField($form, 'phone'); ?>
+                    <?=  html::getEmailField($form, 'email'); ?>	
+                    <?=  html::getTextareaField($form, 'message'); ?>	
                     <div class="form-group">
                         <input type="submit" value="<?= language::get('FOXY_SEND'); ?>" class="btn btn-primary">
                     </div>

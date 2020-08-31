@@ -10,7 +10,7 @@
 */
 
 defined('_Foxy') or die ('restricted access');
-
+$form = FOXY_COMPONENT.DS.'forms'.DS.'reset.xml';
 ?>
 
 <div class="page login-page">
@@ -20,7 +20,7 @@ defined('_Foxy') or die ('restricted access');
         <div class="logo text-uppercase px-5"><img src="assets/img/logo.png" class="img-fluid" alt="<?= config::$sitename; ?>" style="width:65%"></div>
         <p><?= language::get('CW_RESET_DESC'); ?></p>
         <form action="<?= config::$site; ?>/index.php?task=register.reset" method="post" class="text-left needs-validation">
-          <?= html::getEmailField('reset', 'email'); ?>
+          <?= html::getEmailField($form, 'email'); ?>
           <div class="form-group text-center">
             <button type="submit" id="resetBtn" class="btn btn-success"><?= language::get('FOXY_SEND'); ?></button>
           </div>

@@ -14,6 +14,8 @@ defined('_Foxy') or die ('restricted access');
 if(user::getAuth()) {
     application::redirect(config::$site);
 }
+
+$form = FOXY_COMPONENT.DS.'forms'.DS.'login.xml';
 ?>
 
 <section class="container marketing">
@@ -26,13 +28,13 @@ if(user::getAuth()) {
           <input type="hidden" name="token" value="<?= application::getVar('token', ''); ?>">
           <input type="hidden" name="return" value="<?= application::getVar('return', ''); ?>">
 
-          <?= html::getEmailField('login', 'email'); ?>
-          <?= html::getPasswordField('login', 'password'); ?>
-          <?= html::getTextField('login', 'lastvisitDate', date('Y-m-d H:i:s')); ?>
-          <?= html::getTextField('login', 'language', 'en-gb'); ?>
+          <?= html::getEmailField($form, 'email'); ?>
+          <?= html::getPasswordField($form, 'password'); ?>
+          <?= html::getTextField($form, 'lastvisitDate', date('Y-m-d H:i:s')); ?>
+          <?= html::getTextField($form, 'language', 'en-gb'); ?>
           
           <div class="form-group text-center">
-            <?= html::getButton('login', 'submit'); ?>
+            <?= html::getButton($form, 'submit'); ?>
           </div>
       </form>
 

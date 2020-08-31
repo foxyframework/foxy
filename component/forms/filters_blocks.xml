@@ -8,7 +8,7 @@
         <placeholder>Title</placeholder>
     </field>
     <!-- buttons -->
-     <button name="btn_edit">
+    <button name="btn_edit">
         <id>btn_edit</id>
         <class>btn_edit</class>
         <label>Edit</label>
