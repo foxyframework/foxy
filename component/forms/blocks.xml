@@ -21,7 +21,7 @@
         <type>list</type>
         <name>language</name>
         <id>language</id>
-        <label>FOXY_BLOCKS_PAGEID_LABEL</label>
+        <label>FOXY_BLOCKS_LANGUAGE_LABEL</label>
         <message>FOXY_INVALID_FIELD</message>
         <required>true</required>
         <option value="">FOXY_SELECT_AN_OPTION</option>

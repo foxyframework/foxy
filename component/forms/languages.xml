@@ -5,7 +5,6 @@
         <id>title</id>
         <label>FOXY_LANGUAGES_TITLE_LABEL</label>
         <message>FOXY_INVALID_FIELD</message>
-        <placeholder>FOXY_LANGUGES_TITLE_PLACEHOLDER</placeholder>
         <required>true</required>
     </field>
     <field name="code">
@@ -14,7 +13,6 @@
         <id>code</id>
         <label>FOXY_LANGUAGES_CODE_LABEL</label>
         <message>FOXY_INVALID_FIELD</message>
-        <placeholder>FOXY_LANGUAGES_CODE_PLACEHOLDER</placeholder>
         <required>true</required>
     </field>
     <field name="status">

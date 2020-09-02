@@ -5,7 +5,6 @@
       <id>username</id>
       <label>FOXY_SETTINGS_USERNAME_LABEL</label>
       <message>FOXY_INVALID_FIELD</message>
-      <placeholder>GW_SETTINGS_USERNAME</placeholder>
       <required>true</required>
     </field>
     <field name="email">
