@@ -1,0 +1,31 @@
+<form>
+    <field name="title">
+        <type>text</type>
+        <name>title</name>
+        <id>title</id>
+        <label>FOXY_LANGUAGES_TITLE_LABEL</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <placeholder>FOXY_LANGUGES_TITLE_PLACEHOLDER</placeholder>
+        <required>true</required>
+    </field>
+    <field name="code">
+        <type>text</type>
+        <name>code</name>
+        <id>code</id>
+        <label>FOXY_LANGUAGES_CODE_LABEL</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <placeholder>FOXY_LANGUAGES_CODE_PLACEHOLDER</placeholder>
+        <required>true</required>
+    </field>
+    <field name="status">
+        <type>list</type>
+        <name>status</name>
+        <id>status</id>
+        <label>FOXY_LANGUAGES_STATUS_LABEL</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <required>true</required>
+        <option value="">FOXY_SELECT_AN_OPTION</option>
+        <option value="0">Inactive</option>
+        <option value="1">Active</option>
+    </field>
+</form>
