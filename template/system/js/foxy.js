@@ -100,10 +100,10 @@ function closeAllModals() {
   
 		  form.classList.add('was-validated')
 		}, false)
-	  })
-  })()
+	})
+})()
 
-  if (document.getElementsByClassName('.dropzone').lenght) { Dropzone.autoDiscover = false; }
+if (document.getElementsByClassName('.dropzone').lenght) { Dropzone.autoDiscover = false; }
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -125,6 +125,21 @@ document.addEventListener("DOMContentLoaded", function() {
 					940: 3,
 					520: 2,
 					400: 1
+			}
+		});
+	}
+
+	//select all checkbox
+	if(document.getElementById('selectAll')) {
+		document.getElementById('selectAll').addEventListener("click",function(e) {
+			var checkboxes = document.getElementsByClassName('tableCheck');
+			
+			for (var i=0; i<checkboxes.length; i++)  {
+				if (checkboxes[i].checked == false)   {
+					checkboxes[i].checked = true;
+				} else {
+					checkboxes[i].checked = false;
+				}
 			}
 		});
 	}
