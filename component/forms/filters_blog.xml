@@ -8,20 +8,24 @@
         <placeholder>Title</placeholder>
     </field>
     <!-- buttons -->
-    <button name="btn_edit">
-        <id>btn_edit</id>
-        <class>btn_edit</class>
-        <label>Edit</label>
+    <button name="btn_new">
+        <id>btn_new</id>
+        <class>btn_new</class>
+        <label>New</label>
         <icon>fa-plus</icon>
-        <href>index.php?view=blocks&amp;layout=edit</href>
+        <modal>true</modal>
+        <modal_title>New Post</modal_title>
+        <page>blog</page>
+        <layout>new</layout>
     </button>
-    <button name="btn_delete">
-        <id>btn_delete</id>
-        <class>delete</class>
-        <label>Delete</label>
-        <icon>fa-trash-o</icon>
-        <color>danger</color>
-        <view>blocks</view>
-        <href>index.php?task=blocks.deleteItems&amp;mode=raw</href>
+    <button name="btn_params">
+        <id>btn_params</id>
+        <class>btn_params</class>
+        <label>Settings</label>
+        <icon>fa-cog</icon>
+        <modal>true</modal>
+        <modal_title>Settings</modal_title>
+        <page>blog</page>
+        <layout>params</layout>
     </button>
 </form>
