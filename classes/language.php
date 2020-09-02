@@ -16,38 +16,13 @@ class Language
     public static $code = 'en-gb';
 
     /**
-     * Constructor
-    */
-    public function __construct() 
-    {
-        if(user::getAuth() && !isset($_GET['lang'])) {
-          self::$code = user::$language;
-        }
-        if(isset($_GET['lang'])){
-          switch($_GET['lang']) {
-            case 'ca':
-              self::$code = 'ca-es'; 
-              break;
-            case 'es':
-              self::$code = 'es-es';
-              break;
-            case 'en':
-              self::$code = 'en-gb';
-              break;
-            default:
-              self::$code = 'en-gb';
-              break;
-          }
-        }
-    }
-
-    /**
      * Method to get a translatable string from the language file
      * @param string $text
      * @return string if success false if not
     */
     public static function get($text)
     {
+        if(isset($_COOKIE['lang'])) { self::$code = $_COOKIE['lang']; }
         if(self::$code == "") { self::$code = 'en-gb'; }
 
         $file = FOXY_BASE.DS.'languages'.DS.self::$code.'.ini';
@@ -57,32 +32,22 @@ class Language
             $strings = parse_ini_file($file);
             $translation = @$strings[strtoupper($text)];
             if($translation != "") {
-                return nl2br($translation);
-            } else {
-              $file = FOXY_BASE.DS.'languages'.DS.'en-gb.ini';
-              $strings = parse_ini_file($file);
-              $translation = @$strings[strtoupper($text)];
-              if($translation != "") {
-                  return nl2br($translation);
-              } else {
-                $view = application::getVar('view', '');
-                if($view != '') {
-                  $file = FOXY_COMPONENT.DS.'views'.DS.strtolower($view).DS.self::$code.'.'.strtolower($view).'.ini';
-                  if (file_exists($file) && is_readable($file)) {
-                    $strings = parse_ini_file($file);
-                    $translation = @$strings[strtoupper($text)];
-                    if($translation != "") {
-                        return nl2br($translation);
-                    } else {
-                        return $text;
-                    }
-                  }
-                }
-              }
+              return nl2br($translation);
             }
-        } else {
-            return false;
+        } 
+
+        $file_view = FOXY_COMPONENT.DS.'views'.DS.strtolower($view).DS.self::$code.'.'.strtolower($view).'.ini';
+        
+        if(file_exists($file_view) && is_readable($file_view )) {
+            $file = FOXY_BASE.DS.'languages'.DS.'en-gb.ini';
+            $strings = parse_ini_file($file);
+            $translation = @$strings[strtoupper($text)];
+            if($translation != "") {
+              return nl2br($translation);
+            }
         }
+          
+        return $text;
     }
 
     /**
