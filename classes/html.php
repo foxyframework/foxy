@@ -84,14 +84,13 @@ class Html
         $form = FOXY_COMPONENT.DS.'forms'.DS.'filters_'.$view.'.xml';
         $fields = simplexml_load_file($form);
         
-        $html   = '<div class="form-inline my-3">';
+        $html   = '<div class="row row-cols-md-auto g-3 align-items-center my-3">';
         $html  .= '<input type="hidden" name="view" value="'.$view.'">';
 
         $i = 0;
         foreach($fields as $field) {
 
             if($field->getName() == "field"){
-                if($i > 0) { $html .= '&nbsp;'; }
 
                 if($field[$i]->type == 'text') {
 
