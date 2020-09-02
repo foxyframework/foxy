@@ -94,7 +94,7 @@ class blocks extends model
 			application::setMessage(language::get('FOXY_ITEM_ERROR_ERROR'), 'danger');
         }
         
-        $link = config::$site.'/index.php?view='.$this->view.'&layout=admin&id='.$id;
+        $link = config::$site.'/index.php?view='.$this->view.'&layout=admin';
 
         application::redirect($link);
 	}

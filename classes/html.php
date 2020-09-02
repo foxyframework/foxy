@@ -29,6 +29,7 @@ class Html
 
         $html  = '';
         $html .= '<div class="w-100 text-right">'.self::renderButtons($view).'</div>';
+        $html .= '<form name="tableForm" id="tableForm" action="" method="post">';
         $html .= '<div class="w-100">'.self::renderFilters($view).'</div>';
         $html .= '<div class="table-responsive">';
         $html .= '<table id="'.$id.'" class="table table-hover table-bordered">';
@@ -38,6 +39,7 @@ class Html
         foreach($columns as $column) {
             $html .= '<th>'.$column.'</th>';
         }
+        $html .= '<th>#</th>';
         $html .= '</tr>';
         $html .= '</thead>';
         $html .= '<tbody>';
@@ -62,6 +64,25 @@ class Html
                 }
                 $html .= '<td>'.$field.'</td>';
             }
+            $html .= '<td>';
+            $html .= '<a href="index.php?task='.$view.'.removeItem&id='.$d->{$key}.'" class="btn btn-danger"><i class="fa fa-trash"></i></a>&nbsp;';
+            $html .= '<a href="#" data-toggle="modal" data-target="#editable'.$d->{$key}.'" class="btn btn-success"><i class="fa fa-edit"></i></a>';
+            $html .= '<div class="modal fade" id="editable'.$d->{$key}.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
+            $html .= '<div class="modal-dialog modal-xl">';
+            $html .= '<div class="modal-content">';
+            $html .= '<div class="modal-header">';
+            $html .= '<h5 class="modal-title" id="exampleModalLabel">Edit</h5>';
+            $html .= '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+            $html .= '<span aria-hidden="true">&times;</span>';
+            $html .= '</button>';
+            $html .= '</div>';
+            $html .= '<div class="modal-body">';
+            $html .= application::renderView($view, 'edit', array('id' => $d->{$key}));
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '</div>';
+            $html .= '</td>';
             $html .= '</tr>';
         }
         $html .= '</tbody>';
@@ -69,6 +90,7 @@ class Html
         $html .= $model->pagination($_GET);
         $html .= '<script>document.addEventListener("DOMContentLoaded", function() { var dataTable = new DataTable(document.querySelector("#'.$id.'"), { layout: { top: "", bottom: "" }, columns: [{ select: [0], sortable: false }]}); });</script>';
         $html .= '</div>';
+        $html .= '</form>';
 
         return $html;
     }
@@ -153,7 +175,7 @@ class Html
                     $html .= '<div class="modal-dialog modal-xl">';
                     $html .= '<div class="modal-content">';
                     $html .= '<div class="modal-header">';
-                    $html .= '<h5 class="modal-title" id="exampleModalLabel">'.$fiel[$i]->modal_title.'</h5>';
+                    $html .= '<h5 class="modal-title" id="exampleModalLabel">'.$field[$i]->modal_title.'</h5>';
                     $html .= '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
                     $html .= '<span aria-hidden="true">&times;</span>';
                     $html .= '</button>';

@@ -171,44 +171,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			document.location.href = href+'&id='+item;
 		});
 	}
-
-	//delete
-	if(document.getElementsByClassName('.btn_delete').lenght) {
-		document.querySelector('.btn_delete').addEventListener("click",function(e) {
-
-			e.preventDefault();
-
-			let items = getAllSelectedCheckboxes();
-
-			let pageURL = e.target.getAttribute("href");
-
-			if(items.length == 0) { alert('Please check one item at least'); return false; } else { if(!confirm('Are you sure you want to delete this item?')) return false; }
-
-			let list = JSON.stringify(items);
-
-			var ajax = new XMLHttpRequest();
-
-			ajax.open("POST", pageURL, true);
-			ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			ajax.send("items="+list);
-
-			// Cria um evento para receber o retorno.
-			ajax.onreadystatechange = function() {
-			
-			// Caso o state seja 4 e o http.status for 200, é porque a requisiçõe deu certo.
-				if (ajax.readyState == 4 && ajax.status == 200) {
-				
-					var data = ajax.responseText;
-					//Todo: display success message
-					items.forEach(item => {
-						document.querySelector(`[data-id="${item}"]`).remove();
-					})
-				} else {
-					//display error message
-				}
-			}
-		});
-	}
 });
 
 //reorder table 

@@ -10,7 +10,7 @@
 */
 
 defined('_Foxy') or die ('restricted access');
-$id = application::getVar('id', 0);
+$id = application::getVar('id', 0, 'post');
 ?>
 
 <section class="forms">
