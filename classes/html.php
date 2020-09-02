@@ -31,7 +31,7 @@ class Html
         $html .= '<div class="w-100 text-right">'.self::renderButtons($view).'</div>';
         $html .= '<div class="w-100">'.self::renderFilters($view).'</div>';
         $html .= '<div class="table-responsive">';
-        $html .= '<table id="'.$id.'" class="table table-striped table-bordered">';
+        $html .= '<table id="'.$id.'" class="table table-hover table-bordered">';
         $html .= '<thead>';
         $html .= '<tr>';
         $html .= '<th width="1%" data-orderable="false"><input type="checkbox" id="selectAll"></th>';
