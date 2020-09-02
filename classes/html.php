@@ -84,8 +84,10 @@ class Html
         $form = FOXY_COMPONENT.DS.'forms'.DS.'filters_'.$view.'.xml';
         $fields = simplexml_load_file($form);
         
-        $html   = '<div class="row row-cols-md-auto g-3 align-items-center my-3">';
-        $html  .= '<input type="hidden" name="view" value="'.$view.'">';
+        if(file_exists($form) && is_readable($form )) {
+            $html   = '<div class="row row-cols-md-auto g-3 align-items-center my-3">';
+            $html  .= '<input type="hidden" name="view" value="'.$view.'">';
+        }
 
         $i = 0;
         foreach($fields as $field) {
@@ -117,8 +119,10 @@ class Html
         	$i++;
         }
 
-        $html .= '&nbsp;<button class="btn btn-success mb-3" type="submit">'.language::get('FOXY_SEARCH').'</button>';
-        $html .= '</div>';
+        if(file_exists($form) && is_readable($form )) {
+            $html .= '&nbsp;<button class="btn btn-success mb-3" type="submit">'.language::get('FOXY_SEARCH').'</button>';
+            $html .= '</div>';
+        }
 
         return $html;
     }
