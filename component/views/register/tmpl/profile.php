@@ -61,7 +61,7 @@ $(document).ready(function() {
         </div>
       </div>
       <div class="col-lg-8">
-        <form class="card" method="post" action="index.php?view=profile&task=saveProfile" autocomplete="off">
+        <form class="card" method="post" action="index.php?view=register&task=saveProfile" autocomplete="off">
           <div class="card-body">
             <h3 class="card-title">Edit Profile</h3>
             <div class="row">
