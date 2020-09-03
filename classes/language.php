@@ -23,7 +23,8 @@ class Language
     public static function get($text)
     {
         if(isset($_COOKIE['lang'])) { self::$code = $_COOKIE['lang']; }
-        if(self::$code == "") { self::$code = 'en-gb'; }
+
+        $view = application::getVar('view');
 
         $file = FOXY_BASE.DS.'languages'.DS.self::$code.'.ini';
 
@@ -36,11 +37,10 @@ class Language
             }
         } 
 
-        $file_view = FOXY_COMPONENT.DS.'views'.DS.strtolower($view).DS.self::$code.'.'.strtolower($view).'.ini';
+        $file_view = FOXY_COMPONENT.DS.'views'.DS.strtolower($view).DS.'languages'.DS.self::$code.'.'.strtolower($view).'.ini';
         
-        if(file_exists($file_view) && is_readable($file_view )) {
-            $file = FOXY_BASE.DS.'languages'.DS.'en-gb.ini';
-            $strings = parse_ini_file($file);
+        if(file_exists($file_view) && is_readable($file_view)) {
+            $strings = parse_ini_file($file_view);
             $translation = @$strings[strtoupper($text)];
             if($translation != "") {
               return nl2br($translation);

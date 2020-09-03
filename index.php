@@ -18,16 +18,14 @@ date_default_timezone_set('Europe/Berlin');
 define('FOXY_BASE', dirname(__FILE__) );
 define('DS', DIRECTORY_SEPARATOR );
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 require_once(FOXY_BASE.DS.'includes/defines.php');
 require_once(FOXY_CLASSES.DS.'autoloader.php');
 require_once(FOXY_VENDOR.DS.'autoload.php');
 
 //trigger plugin onRender before the app is ready...
 application::trigger('onRender', array());
+
+if(!isset($_COOKIE['lang'])) { setcookie('lang', 'en-gb'); }
 
 //print_r($_SESSION);
 //print_r(get_declared_classes());

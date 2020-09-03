@@ -874,6 +874,8 @@ class Html
                 $html .= "<div class='input-group mb-3'>";
                 $default != '' ? $value = "value='$default'" : $value = "";
                 $html .= "<input type='text' id='".$field[0]->id."' $value class='form-control' aria-describedby='button-addon2'>";
+                $content = addslashes("<img width='200' src='document.getElementById("+$field[0]->id+").src;'>");
+                $html .= "<button data-toggle='popover' title=Preview' data-html='true' data-content='' data-placement='left' class='btn btn-outline-secondary' type='button'>Preview</button>";
                 $html .= "<button class='btn btn-outline-secondary' type='button' id='button-addon2' data-toggle='modal' data-target='#".$field[0]->id."Modal'>Select</button>";
                 $html .= "</div>";
 
@@ -882,7 +884,7 @@ class Html
                 $html .= "<div class='modal-content'>";
                 $html .= "<div class='modal-header'>";
                 $html .= "<h5 class='modal-title'>Select image</h5>";
-                $html .= "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
+                $html .= "<button type='button' class='close closeImageModal' data-id='".$field[0]->id."Modal' aria-label='Close'>";
                 $html .= "<span aria-hidden='true'>&times;</span>";
                 $html .= "</button>";
                 $html .= "</div>";

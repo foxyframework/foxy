@@ -62,27 +62,6 @@ function getAllSelectedCheckboxes() {
 	return items;
 }
 
-function closeAllModals() {
-
-    // get modals
-    const modals = document.getElementsByClassName('modal');
-
-    // on every modal change state like in hidden modal
-    for(let i=0; i<modals.length; i++) {
-      modals[i].classList.remove('show');
-      modals[i].setAttribute('aria-hidden', 'true');
-      modals[i].setAttribute('style', 'display: none');
-    }
-
-     // get modal backdrops
-     const modalsBackdrops = document.getElementsByClassName('modal-backdrop');
-
-     // remove every modal backdrop
-     for(let i=0; i<modalsBackdrops.length; i++) {
-       document.body.removeChild(modalsBackdrops[i]);
-     }
-  }
-
 (function () {
 	'use strict'
   
@@ -144,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	}
 
-	if (document.getElementsByClassName('.dropzone').lenght) {
+	if (document.querySelector('.dropzone') !== null) {
 		let myDropzone = new Dropzone(".dropzone", { url: domain+"?task=media.upload&mode=raw"});
 		myDropzone.on("complete", function (file) {
 			if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
@@ -153,24 +132,29 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	}
 
-	if(document.getElementsByClassName('.img-selector').lenght) {
+	if(document.querySelector('.img-selector') !== null) {
 		document.querySelector('.img-selector').addEventListener("click",function(e) {
 			let src = e.target.src;
 			let id = e.target.getAttribute('data-id');
 			document.getElementById(id).value = src;
-			closeAllModals();
+			var myModal = new bootstrap.Modal(document.getElementById(id+'Modal'));
+			myModal.hide();
 		});
 	}
 
-	//edit
-	if(document.getElementById('btn_edit')) {
-		document.getElementById('btn_edit').addEventListener("click",function(e) {
-			e.preventDefault();
-			let href = e.target.getAttribute('href');
-			let item = getFirstSelectedCheckbox();
-			document.location.href = href+'&id='+item;
+	if(document.querySelector('.closeImageModal') !== null) {
+		document.querySelector('.closeImageModal').addEventListener("click",function(e) {
+			let id = e.target.getAttribute('data-id');
+			document.getElementById(id).style.display = "none";
 		});
 	}
+
+	var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="popover"]'))
+	var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+		return new bootstrap.Popover(popoverTriggerEl)
+	})
+
+	  
 });
 
 //reorder table 
