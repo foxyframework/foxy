@@ -69,6 +69,19 @@ class model
     }
 
     /**
+     * Method to set the lang cookie
+     * @param string $name The cookie name
+     * @param string $value The cookie value
+     * @access public
+     * @return object
+    */
+    public function setCookie()
+	{
+        $value = application::getVar('lang', 'en-gb', 'get');
+        setcookie('lang', $value);
+    }
+
+    /**
      * Method to check if is the task that user needs
      * @param string $function The function name
      * @param string $get The requested task

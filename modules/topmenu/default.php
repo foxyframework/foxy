@@ -45,6 +45,7 @@ include_once('helper.php');
               <li><a href="#" class="text-white"><i class="fas fa-envelope"></i> Email me</a></li>
               <li><a href="https://www.patreon.com/foxyframework" target="_blank" class="text-white"><i class="fab fa-patreon"></i> Suppot me on Patreon</a></li>
             </ul>
+            <?= application::getModule('language'); ?>
           </div>
         </div>
       </div>

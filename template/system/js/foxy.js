@@ -1,10 +1,10 @@
 var domain   = location.origin+location.pathname;
 
-function setCookie(c_name,value,exdays) {
-    var exdate=new Date();
-    exdate.setDate(exdate.getDate() + exdays);
-    var c_value=escape(value) + ((exdays===null) ? "" : "; expires="+exdate.toUTCString());
-    document.cookie=c_name + "=" + c_value;
+function setCookie(cname, cvalue, exdays) {
+	var d = new Date();
+	d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	var expires = "expires="+ d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
 function getCookie(c_name) {
@@ -123,31 +123,49 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	}
 
-	if (document.querySelector('.dropzone') !== null) {
-		let myDropzone = new Dropzone(".dropzone", { url: domain+"?task=media.upload&mode=raw"});
-		myDropzone.on("complete", function (file) {
-			if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
-				macy.recalculate();
-			}
-		});
-	}
+	document.querySelectorAll('.dropzone').forEach(item => {
+		item.addEventListener('click', evt => {
+			let myDropzone = new Dropzone(".dropzone", { url: domain+"?task=media.upload&mode=raw"});
+			myDropzone.on("complete", function (file) {
+				if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+					macy.recalculate();
+				}
+			});
+		})
+	});
 
-	if(document.querySelector('.img-selector') !== null) {
-		document.querySelector('.img-selector').addEventListener("click",function(e) {
-			let src = e.target.src;
-			let id = e.target.getAttribute('data-id');
+	document.querySelectorAll('.img-selector').forEach(item => {
+		item.addEventListener('click', evt => {
+			let src = evt.target.src;
+			let id = evt.target.getAttribute('data-id');
 			document.getElementById(id).value = src;
 			var myModal = new bootstrap.Modal(document.getElementById(id+'Modal'));
 			myModal.hide();
-		});
-	}
+		})
+	});
 
-	if(document.querySelector('.closeImageModal') !== null) {
-		document.querySelector('.closeImageModal').addEventListener("click",function(e) {
-			let id = e.target.getAttribute('data-id');
+	document.querySelectorAll('.lang').forEach(item => {
+		item.addEventListener('click', evt => {
+			evt.preventDefault();
+			let lang = evt.target.dataset.lang;
+			var xhttp;
+			xhttp= new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					window.location.reload();
+				}
+			};
+			xhttp.open('GET', domain+'?task=register.setCookie&lang='+lang+'&mode=raw', true);
+			xhttp.send();
+		})
+	});
+
+	document.querySelectorAll('.closeImageModal').forEach(item => {
+		item.addEventListener('click', evt => {
+			let id = evt.target.getAttribute('data-id');
 			document.getElementById(id).style.display = "none";
-		});
-	}
+		})
+	});
 
 	var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="popover"]'))
 	var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
