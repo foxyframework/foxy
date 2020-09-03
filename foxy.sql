@@ -43,6 +43,7 @@ CREATE TABLE `foxy_articles` (
   `status` smallint(1) NOT NULL,
   `language` varchar(50) NOT NULL,
   `hits` int(11) NOT NULL,
+  `ordering` int(11) NOT NULL DEFAULT 0 AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
@@ -62,6 +63,7 @@ CREATE TABLE `foxy_pages` (
   `module` varchar(150) NOT NULL,
   `template` varchar(50) NOT NULL,
   `inMenu` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 no;1 yes',
+  `ordering` int(11) NOT NULL DEFAULT 0 AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=7;
 
@@ -69,13 +71,13 @@ CREATE TABLE `foxy_pages` (
 -- Bolcament de dades per a la taula `foxy_pages`
 --
 
-INSERT INTO `foxy_pages` (`id`, `title`, `translation`, `url`, `auth`, `type`, `module`, `template`, `inMenu`) VALUES
-(1, 'Home', '', 'index.php?view=home', 0, 0, '', '', 1),
-(2, 'About', '', 'index.php?view=about', 0, 0, '', '', 1),
-(3, 'Blog', '', 'index.php?task=register.logout', 2, 0, '', '', 1),
-(4, 'Contact', '', 'index.php?task=contact', 2, 0, '', '', 1),
-(5, 'Login', '', 'index.php?view=register&layout=login', 1, 1, 'login', '', 1),
-(6, 'Logout', '', 'index.php?task=register.logout', 2, 0, '', '', 1);
+INSERT INTO `foxy_pages` (`id`, `title`, `translation`, `url`, `auth`, `type`, `module`, `template`, `inMenu`, `ordering`) VALUES
+(1, 'Home', '', 'index.php?view=home', 0, 0, '', '', 1), 1,
+(2, 'About', '', 'index.php?view=about', 0, 0, '', '', 1, 2),
+(3, 'Blog', '', 'index.php?task=register.logout', 2, 0, '', '', 1, 3),
+(4, 'Contact', '', 'index.php?task=contact', 2, 0, '', '', 1, 4),
+(5, 'Login', '', 'index.php?view=register&layout=login', 1, 1, 'login', '', 1, 5),
+(6, 'Logout', '', 'index.php?task=register.logout', 2, 0, '', '', 1, 6);
 
 
 -- --------------------------------------------------------
@@ -90,7 +92,7 @@ CREATE TABLE `foxy_blocks` (
   `params` text NOT NULL DEFAULT = '',
   `pageId` int(11) NOT NULL,
   `language` varchar(5) NOT NULL DEFAULT 'en-gb',
-  `ordering` int(11) NOT NULL AUTO_INCREMENT,
+  `ordering` int(11) NOT NULL DEFAULT 0 AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
 
@@ -114,6 +116,7 @@ CREATE TABLE `foxy_languages` (
   `title` varchar(150) NOT NULL,
   `code` varchar(10) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 no;1 yes',
+  `ordering` int(11) NOT NULL DEFAULT 0 AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=4;
 
@@ -121,10 +124,10 @@ CREATE TABLE `foxy_languages` (
 -- Bolcament de dades per a la taula `foxy_languages`
 --
 
-INSERT INTO `foxy_languages` (`id`, `title`, `code`, `status`) VALUES
-(1, 'English', 'en-gb', 1),
-(2, 'Spanish', 'es-es', 0),
-(3, 'Catalan', 'ca-es', 0);
+INSERT INTO `foxy_languages` (`id`, `title`, `code`, `status`, `ordering`) VALUES
+(1, 'English', 'en-gb', 1, 1),
+(2, 'Spanish', 'es-es', 0, 2),
+(3, 'Catalan', 'ca-es', 0, 3);
 
 
 -- --------------------------------------------------------
