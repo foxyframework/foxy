@@ -56,14 +56,17 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <ul class="navbar-nav px-3">
+        <?php if(user::getAuth()) : ?>
         <li class="nav-item text-nowrap">
         <a class="nav-link" href="index.php?task=register.logout">Sign out</a>
         </li>
+        <?php endif; ?>
     </ul>
     </nav>
 
     <div class="container-fluid">
     <div class="row">
+        <?php if(user::getAuth()) : ?>
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
         <div class="position-sticky pt-3">
             <ul class="nav flex-column">
@@ -77,8 +80,9 @@
             </ul>
         </div>
         </nav>
+        <?php endif; ?>
 
-        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <main class="<?php if(user::getAuth()) : ?>col-md-9 ml-sm-auto col-lg-10<?php else: ?>col-12<?php endif; ?> px-md-4">
 
             <?php include('template/system/message.php'); ?>
             <?php @include(application::getLayout()); ?>
