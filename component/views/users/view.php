@@ -16,4 +16,5 @@ if(application::getVar('layout') == 'admin') {
     application::addStyleSheet(config::$site.'/bower_components/vanilla-datatables/dist/vanilla-dataTables.min.css');
     application::addScript(config::$site.'/bower_components/suneditor/dist/suneditor.min.js');
     application::addStylesheet(config::$site.'/bower_components/suneditor/dist/css/suneditor.min.css');
+    application::addScript(config::$site.'/bower_components/table-dragger/dist/table-dragger.min.js');
 }

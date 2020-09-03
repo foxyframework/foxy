@@ -44,8 +44,7 @@ class Html
         $html .= '</thead>';
         $html .= '<tbody>';
         foreach($data as $d) {
-            $html .= '<tr class="item" data-id="'.$d->{$key}.' draggable="true" ondragstart="return dragStart(event)" ondragenter="return dragEnter(event)" 
-            ondragover="return dragOver(event)" ondragleave="return dragLeave(event)" ondrop="return dragDrop(event)" data-ordering="'. isset($d->ordering) ? $d->ordering : 0 .'"">';
+            $html .= '<tr>';
             $html .= '<td>';
 			$html .= '<input type="checkbox" class="tableCheck" name="cd" data-id="'.$d->{$key}.'">';
 			$html .= '</td>';
@@ -66,7 +65,8 @@ class Html
             }
             $html .= '<td>';
             $html .= '<a href="index.php?task='.$view.'.removeItem&id='.$d->{$key}.'" class="btn btn-danger"><i class="fa fa-trash"></i></a>&nbsp;';
-            $html .= '<a href="#" data-toggle="modal" data-target="#editable'.$d->{$key}.'" class="btn btn-success"><i class="fa fa-edit"></i></a>';
+            $html .= '<a href="#" data-toggle="modal" data-target="#editable'.$d->{$key}.'" class="btn btn-success"><i class="fa fa-edit"></i></a>&nbsp;';
+            $html .= '<a href="#" data-id="'.$d->{$key}.' data-ordering="'.$d->ordering.'" class="btn btn-info handle"><i class="fa fa-bars"></i></a>';
             $html .= '<div class="modal fade" id="editable'.$d->{$key}.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
             $html .= '<div class="modal-dialog modal-xl">';
             $html .= '<div class="modal-content">';
