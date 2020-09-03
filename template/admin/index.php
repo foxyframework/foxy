@@ -55,9 +55,12 @@
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <ul class="navbar-nav px-3">
-        <?php if(user::getAuth()) : ?>
+    <ul class="navbar-nav px-3" style="flex-direction:initial;">
         <li class="nav-item text-nowrap">
+          <a class="nav-link" target="_blank" href="index.php?view=home">Site</a>
+        </li>
+        <?php if(user::getAuth()) : ?>
+        <li class="nav-item text-nowrap px-3">
         <a class="nav-link" href="index.php?task=register.logout">Sign out</a>
         </li>
         <?php endif; ?>
