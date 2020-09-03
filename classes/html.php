@@ -474,7 +474,7 @@ class Html
                 $field[0]->onchange != "" ? $onchange = "onchange='".$field[0]->onchange."'" : $onchange = "";
                 $field[0]->required == 'true' ? $required = "required='true'" : $required = "";
                 if($field[0]->label != "") $html .= "<label for='".$field[0]->id."' class='form-label'>".language::get($field[0]->label)."</label>";
-                $html .= "<textarea id='editor' name='".$field[0]->name."' maxlength='".$field[0]->maxlength."' placeholder='".language::get($field[0]->placeholder)."' rows='".$field[0]->rows."' cols='".$field[0]->cols."' class='form-control editor' ".$disabled." ".$required." ".$onchange.">".$default."</textarea>";
+                $html .= "<textarea class='editor' name='".$field[0]->name."' maxlength='".$field[0]->maxlength."' placeholder='".language::get($field[0]->placeholder)."' rows='".$field[0]->rows."' cols='".$field[0]->cols."' class='form-control editor' ".$disabled." ".$required." ".$onchange.">".$default."</textarea>";
             }
         }
 

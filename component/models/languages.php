@@ -55,9 +55,9 @@ class languages extends model
 	*/
 	public function getItemById()
 	{
-		$id  = application::getVar('id', 0, 'get');
+		$id  = application::getVar('id', 0, 'post');
 
-		return parent::getItem($this->table, $this->key);
+		return parent::getItem($this->table, $this->key, $id);
 	}
 
 	/**

@@ -82,14 +82,10 @@ function getAllSelectedCheckboxes() {
 	})
 })()
 
-if (document.getElementsByClassName('.dropzone').lenght) { Dropzone.autoDiscover = false; }
-
 document.addEventListener("DOMContentLoaded", function() {
 
-	var editor = document.getElementById("editor");
-	if(typeof(editor) != 'undefined' && editor != null) {
-	    const editor = CKEDITOR.replace( 'editor' );
-	}
+	const editor = CKEDITOR.replaceAll( 'editor' );
+	Dropzone.autoDiscover = false;
 
 	var media = document.getElementById("media");
 		if(typeof(media) != 'undefined' && media != null) {

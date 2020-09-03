@@ -91,11 +91,11 @@ class blog extends model
 	*/
 	public function getItemById()
 	{
-		$id  = application::getVar('id', 0, 'get');
+		$id  = application::getVar('id', 0, 'post');
 
 		database::query('UPDATE '.$this->table.' SET hits = hits + 1 WHERE '.$this->key.' = '.$id);
 
-		return parent::getItem($this->table, $this->key);
+		return parent::getItem($this->table, $this->key, $id);
 	}
 
 	/**

@@ -1,0 +1,21 @@
+<form>
+    <!-- Filters -->
+    <field name="title">
+        <type>text</type>
+        <name>title</name>
+        <id>title</id>
+        <label></label>
+        <placeholder>Title</placeholder>
+    </field>
+    <!-- buttons -->
+    <button name="btn_new">
+        <id>btn_new</id>
+        <class>btn_new</class>
+        <label>New</label>
+        <icon>fa-plus</icon>
+        <modal>true</modal>
+        <modal_title>New Post</modal_title>
+        <page>languages</page>
+        <layout>new</layout>
+    </button>
+</form>
