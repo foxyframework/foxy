@@ -11,15 +11,17 @@
 
 defined('_Foxy') or die ('restricted access');
 include_once(dirname(__FILE__).DS.'helper.php');
-
+$languages = languageHelper::getLanguages();
 ?>
 
+<?php if(count($languages) > 1) : ?>
 <div id="lang" class="d-flex">
 
-    <?php foreach(languageHelper::getLanguages() as $lang) : ?>
+    <?php foreach($languages as $lang) : ?>
 
         <div class="pr-2"><a href="#" class="lang"><img data-lang="<?= $lang->code; ?>" src="assets/img/flags/<?= $lang->code; ?>.gif" alt="<?= $lang->title; ?>"></a></div>
 
     <?php endforeach; ?>
 
 </div>
+<?php endif; ?>

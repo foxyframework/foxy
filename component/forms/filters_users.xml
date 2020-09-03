@@ -15,7 +15,7 @@
         <icon>fa-plus</icon>
         <modal>true</modal>
         <modal_title>Edit</modal_title>
-        <page>pages</page>
+        <page>users</page>
         <layout>new</layout>
     </button>
 </form>

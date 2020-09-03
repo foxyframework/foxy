@@ -48,6 +48,17 @@ class pages extends model
 
       return database::fetchObjectList();
     }
+
+    /**
+	  * Method to get and item by id
+	  * @return object 
+    */
+    public function getItemById()
+    {
+      $id  = application::getVar('id', 0, 'post');
+
+      return parent::getItem($this->table, $this->key, $id);
+    }
     
     /*
     * Method to save a new users into database
