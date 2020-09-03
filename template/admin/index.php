@@ -20,7 +20,7 @@
   	<?php endforeach;
   	endif;
   	?>
-    <link href="template/admin/css/admin.css" rel="stylesheet">
+
     <?php
   	if(count(application::$stylesheets) > 0) :
   	foreach(application::$stylesheets as $stylesheet) : ?>
@@ -47,9 +47,6 @@
       }
     </style>
 
-    
-    <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
   </head>
   <body>
     
