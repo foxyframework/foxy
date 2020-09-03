@@ -99,4 +99,14 @@ class languages extends model
         application::redirect($link);
 	}
 
+	/**
+	 * Method to get file strings
+	 * @return object 
+	*/
+	public function getStrings($file)
+	{
+		$ini  = parse_ini_file(FOXY_BASE.DS.'languages'.DS.$file.'.ini');
+		return $ini;
+	}
+
 }
