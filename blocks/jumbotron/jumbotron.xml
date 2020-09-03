@@ -1,0 +1,30 @@
+<form>
+    <field name="arg1">
+        <type>text</type>
+        <name>arg1</name>
+        <id>arg1</id>
+        <label>Title</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <placeholder>Title</placeholder>
+        <required>true</required>
+    </field>
+    <field name="arg2">
+        <type>textarea</type>
+        <name>arg2</name>
+        <id>arg2</id>
+        <label>Text</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <placeholder>Text</placeholder>
+        <required>true</required>
+    </field>
+    <field name="arg3">
+        <type>media</type>
+        <name>arg3</name>
+        <id>arg3</id>
+        <label>Image</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <placeholder>Image</placeholder>
+        <folder>demo</folder>
+        <required>true</required>
+    </field>
+</form>

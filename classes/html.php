@@ -243,6 +243,11 @@ class Html
                 $field_name = (string)$field[$i]->name;
                 $html .= html::getMediaField($form, $field_name, $field[$i]->folder, $params->{$field_name});
             }
+            if($field[$i]->type == 'textarea') {
+
+                $field_name = (string)$field[$i]->name;
+                $html .= html::getTextareaField($form, $field_name, $params->{$field_name});
+            }
 
             $i++;
         }
