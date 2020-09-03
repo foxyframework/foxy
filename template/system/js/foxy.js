@@ -84,8 +84,8 @@ function getAllSelectedCheckboxes() {
 
 document.addEventListener("DOMContentLoaded", function() {
 
-	const editor = CKEDITOR.replaceAll( 'editor' );
-	Dropzone.autoDiscover = false;
+	if(document.getElementById('editor')) { const editor = CKEDITOR.replaceAll( 'editor' ); }
+	if(document.getElementById('upload')) { Dropzone.autoDiscover = false; }
 
 	var media = document.getElementById("media");
 		if(typeof(media) != 'undefined' && media != null) {
@@ -119,16 +119,14 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	}
 
-	document.querySelectorAll('.dropzone').forEach(item => {
-		item.addEventListener('click', evt => {
-			let myDropzone = new Dropzone(".dropzone", { url: domain+"?task=media.upload&mode=raw"});
-			myDropzone.on("complete", function (file) {
-				if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
-					macy.recalculate();
-				}
-			});
-		})
-	});
+	if(document.getElementById('upload')) {
+		let myDropzone = new Dropzone(".dropzone", { url: domain+"?task=media.upload&mode=raw"});
+		myDropzone.on("complete", function (file) {
+			if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+				macy.recalculate();
+			}
+		});
+	}
 
 	document.querySelectorAll('.img-selector').forEach(item => {
 		item.addEventListener('click', evt => {

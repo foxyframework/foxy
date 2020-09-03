@@ -13,4 +13,6 @@ defined('_Foxy') or die ('restricted access');
 
 $model 	= application::getModel('media');
 
+application::addScript(config::$site.'/bower_components/dropzone/dist/dropzone.js');
+application::addStylesheet(config::$site.'/bower_components/dropzone/dist/dropzone.css');
 application::addScript(config::$site.'/bower_components/macy/dist/macy.js');
