@@ -14,7 +14,7 @@ defined('_Foxy') or die ('restricted access');
 $model 	= application::getModel('pages');
 ?>
 
-<section class="container-fluid">
+<section class="container-fluid my-5">
 	<?php
 		$fields = ['id', 'title', 'translaton', 'url', 'auth', 'type', 'module', 'inMenu'];
 		$columns = ['Id', 'Title', 'Translation', 'Url', 'Auth', 'Type', 'Module', 'Menu'];
