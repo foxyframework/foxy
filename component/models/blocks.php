@@ -85,7 +85,7 @@ class blocks extends model
 	 * @return object 
 	*/
 	public function saveBlock()
-	{
+	{		
 		$result = database::insertRow($this->table, $_POST);
 
 		if($result) {

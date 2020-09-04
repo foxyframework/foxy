@@ -85,4 +85,19 @@ class pages extends model
         }
         application::redirect(config::$site.'/index.php?view=pages&layout=admin');
     }
+
+    /**
+     * Method to grab order in tables
+     * @access public
+     * @return void
+    */
+    public function reorder()
+	{
+        $view  = application::getVar('view', '', 'get');
+        $id    = json_decode(application::getVar('id', '', 'get'), true);
+        $order = json_decode(application::getVar('order', '', 'get'), true);
+        
+		database::query("UPDATE `".$this->table."` SET ordering = ".$order[1]." WHERE ".$this->key." = ".$id[0]);
+		database::query("UPDATE `".$this->table."` SET ordering = ".$order[0]." WHERE ".$this->key." = ".$id[1]);
+    }
 }
