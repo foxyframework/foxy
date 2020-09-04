@@ -13,8 +13,8 @@ $view  = application::getVar('view');
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= config::$site; ?>/template/admin/css/admin.css"> 
-    <link rel="stylesheet" href="<?= config::$site; ?>/template/system/css/foxy.css">
+    <link rel="stylesheet" href="<?= config::$site; ?>template/admin/css/admin.css"> 
+    <link rel="stylesheet" href="<?= config::$site; ?>template/system/css/foxy.css">
     <script src="https://kit.fontawesome.com/0deb70caff.js" crossorigin="anonymous"></script>
 
     <?php

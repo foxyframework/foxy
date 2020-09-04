@@ -1,34 +1,29 @@
-#foxymessage {
-    position: fixed;
-    top: 3px;
-    left: 50%;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
-    z-index: 5000;
+.toast {
+    width: 500px;
+    position: absolute; 
+    top: 10px; 
+    right: 10px;
+    opacity: 1;
+    z-index: 10000;
+    border-radius: 0; 
 }
 
-.alert { border-radius: 0; }
-
-.alert-success {
+.toast-success {
     background-color: #02B875;
-    border: none;
+    color: #fff;
 }
-.alert-info {
+.toast-info {
     background-color: #17a2b8;
-    border: none;
+    color: #fff;
 }
-.alert-danger {
+.toast-danger {
     background-color: #d9534f;
-    border: none;
+    color: #fff;
 }
-.alert-warning {
+.toast-warning {
     background-color: #f0ad4e;
-    border: none;
 }
-.alert-primary {
+.toast-primary {
     background-color: #4582EC;
-    border: none;
+    color: #fff;
 }
