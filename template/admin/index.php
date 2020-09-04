@@ -1,4 +1,7 @@
-<?php $model = application::getModel(); ?>
+<?php 
+$model = application::getModel(); 
+$view  = application::getVar('view');
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -30,24 +33,6 @@
   	endif;
   	?>
 
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
   </head>
   <body>
     
@@ -75,14 +60,14 @@
         <div class="position-sticky pt-3">
             <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link" href="index.php?view=admin" aria-expanded="false">
+        <a class="nav-link <?php if($view == 'admin') : ?>active<?php endif; ?>" href="index.php?view=admin" aria-expanded="false">
                 <span>Dashboard</span>
               </a>
             </li>
-            <?php foreach($model->getAdminViews() as $view) : ?>
-                <li class="nav-item">
-                  <a class="nav-link" href="index.php?view=<?= $view; ?>&layout=admin" aria-expanded="false">
-                      <span><?= ucfirst($view); ?></span>
+            <?php foreach($model->getAdminViews() as $page) : ?>
+                <li class="nav-item <?php if($view == $page) : ?>active<?php endif; ?>">
+                  <a class="nav-link" href="index.php?view=<?= $page; ?>&layout=admin" aria-expanded="false">
+                      <span><?= ucfirst($page); ?></span>
                   </a>
                 </li>
             <?php endforeach; ?>
