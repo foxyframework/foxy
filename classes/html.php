@@ -65,23 +65,9 @@ class Html
             }
             $html .= '<td>';
             $html .= '<a href="index.php?task='.$view.'.removeItem&id='.$d->{$key}.'" class="btn btn-danger"><i class="fa fa-trash"></i></a>&nbsp;';
-            $html .= '<a href="#" data-toggle="modal" data-target="#editable'.$d->{$key}.'" class="btn btn-success"><i class="fa fa-edit"></i></a>&nbsp;';
+            $html .= '<a href="#" data-view="'.$view.'" data-id="'.$d->{$key}.'" class="btn btn-success editable"><i class="fa fa-edit"></i></a>&nbsp;';
             $html .= '<a href="#" data-id="'.$d->{$key}.'" data-view="'.$view.'" data-ordering="'.$d->ordering.'" class="btn btn-info handle"><i class="fa fa-bars"></i></a>';
-            $html .= '<div class="modal fade" id="editable'.$d->{$key}.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
-            $html .= '<div class="modal-dialog modal-xl">';
-            $html .= '<div class="modal-content">';
-            $html .= '<div class="modal-header">';
-            $html .= '<h5 class="modal-title" id="exampleModalLabel">Edit</h5>';
-            $html .= '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
-            $html .= '<span aria-hidden="true">&times;</span>';
-            $html .= '</button>';
-            $html .= '</div>';
-            $html .= '<div class="modal-body">';
-            $html .= application::renderView($view, 'edit', array('id' => $d->{$key}));
-            $html .= '</div>';
-            $html .= '</div>';
-            $html .= '</div>';
-            $html .= '</div>';
+            
             $html .= '</td>';
             $html .= '</tr>';
         }
@@ -91,6 +77,22 @@ class Html
         $html .= '<script>document.addEventListener("DOMContentLoaded", function() { var dataTable = new DataTable(document.querySelector("#'.$id.'"), { layout: { top: "", bottom: "" }, columns: [{ select: [0], sortable: false }]}); });</script>';
         $html .= '</div>';
         $html .= '</form>';
+
+        $html .= '<div class="modal fade" id="editable" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">';
+        $html .= '<div class="modal-dialog modal-xl">';
+        $html .= '<div class="modal-content">';
+        $html .= '<div class="modal-header">';
+        $html .= '<h5 class="modal-title" id="editModalLabel">Edit</h5>';
+        $html .= '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+        $html .= '<span aria-hidden="true">&times;</span>';
+        $html .= '</button>';
+        $html .= '</div>';
+        $html .= '<div class="modal-body" id="mbody">';
+        //$html .= application::renderView($view, 'edit', array('id' => $d->{$key}));
+        $html .= '</div>';
+        $html .= '</div>';
+        $html .= '</div>';
+        $html .= '</div>';
 
         return $html;
     }
@@ -252,7 +254,7 @@ class Html
             $i++;
         }
 
-        $html .= '<div class="form-group"><button class="btn btn-success" type="submit">'.language::get('FOXY_SEARCH').'</button></div>';
+        $html .= '<div class="form-group"><button class="btn btn-success" type="submit">'.language::get('FOXY_SAVE').'</button></div>';
         $html .= '</form>';
 
 
@@ -870,7 +872,8 @@ class Html
 				$ficheros[] = $file;
 			}
 		}
-		closedir($dir);
+        closedir($dir);
+        $uniqid = substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), 0, 5);
 
         foreach($fields as $field) {
             if($field['name'] == $name) {
@@ -881,15 +884,15 @@ class Html
                 $html .= "<input type='text' id='".$field[0]->id."' $value class='form-control' aria-describedby='button-addon2'>";
                 $content = addslashes("<img width='200' src='document.getElementById("+$field[0]->id+").src;'>");
                 $html .= "<button data-toggle='popover' title=Preview' data-html='true' data-content='' data-placement='left' class='btn btn-outline-secondary' type='button'>Preview</button>";
-                $html .= "<button class='btn btn-outline-secondary' type='button' id='button-addon2' data-toggle='modal' data-target='#".$field[0]->id."Modal'>Select</button>";
+                $html .= "<button class='btn btn-outline-secondary' type='button' id='button-addon2' data-toggle='modal' data-target='#".$uniqid."Modal'>Select</button>";
                 $html .= "</div>";
 
-                $html .= "<div class='modal' id='".$field[0]->id."Modal' tabindex='-1'>";
+                $html .= "<div class='modal' id='".$uniqid."Modal' tabindex='-1'>";
                 $html .= "<div class='modal-dialog modal-xl'>";
                 $html .= "<div class='modal-content'>";
                 $html .= "<div class='modal-header'>";
                 $html .= "<h5 class='modal-title'>Select image</h5>";
-                $html .= "<button type='button' class='close closeImageModal' data-id='".$field[0]->id."Modal' aria-label='Close'>";
+                $html .= "<button type='button' class='close closeModal' data-id='".$uniqid."Modal' aria-label='Close'>";
                 $html .= "<span aria-hidden='true'>&times;</span>";
                 $html .= "</button>";
                 $html .= "</div>";
@@ -897,7 +900,7 @@ class Html
                 $html .= "<div class='d-flex flex-row'>";
 
                 foreach($ficheros as $fichero) {
-                    $html .= "<img class='img-selector' data-id='".$field[0]->id."' src='assets/img/".$folder."/".$fichero."' alt='...'>";
+                    $html .= "<img class='img-selector' data-uniqid='".$uniqid."' data-id='".$field[0]->id."' src='assets/img/".$folder."/".$fichero."' alt='...'>";
                 }
                  
                 $html .= "</div>";

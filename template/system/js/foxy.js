@@ -17,6 +17,14 @@ function getCookie(c_name) {
     return "";
 }
 
+function load(url, method, element) {
+    req = new XMLHttpRequest();
+    req.open(method, url, false);
+    req.send(null);
+    
+    document.getElementById(element).innerHTML = req.responseText; 
+}
+
 function ajaxCall(url, callback, method='GET') {
 	var xhttp;
 	xhttp= new XMLHttpRequest();
@@ -132,11 +140,25 @@ document.addEventListener("DOMContentLoaded", function() {
 	//click image in media field
 	document.querySelectorAll('.img-selector').forEach(item => {
 		item.addEventListener('click', evt => {
-			let src = evt.target.src;
-			let id = evt.target.getAttribute('data-id');
+			let src = evt.currentTarget.src;
+			let id = evt.currentTarget.getAttribute('data-id');
+			let uniqid = evt.currentTarget.getAttribute('data-uniqid');
 			document.getElementById(id).value = src;
-			var myModal = new bootstrap.Modal(document.getElementById(id+'Modal'));
+			var myModal = new bootstrap.Modal(document.getElementById(uniqid+'Modal'));
 			myModal.hide();
+		})
+	});
+
+	//click edit buttons
+	document.querySelectorAll('.editable').forEach(item => {
+		item.addEventListener('click', evt => {
+			evt.preventDefault();
+			let id   = evt.currentTarget.dataset.id;
+			let view = evt.currentTarget.dataset.view;
+			load(domain+'?view='+view+'&layout=edit&id='+id+'&mode=raw', 'POST', 'mbody');
+			const editor = CKEDITOR.replaceAll( 'editor' );
+			var myModal = new bootstrap.Modal(document.getElementById('editable'));
+			myModal.show();
 		})
 	});
 
@@ -157,10 +179,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		})
 	});
 
-	document.querySelectorAll('.closeImageModal').forEach(item => {
+	document.querySelectorAll('.closeModal').forEach(item => {
 		item.addEventListener('click', evt => {
-			let id = evt.target.getAttribute('data-id');
-			document.getElementById(id).style.display = "none";
+			let id = evt.currentTarget.getAttribute('data-id');
+			var myModal = new bootstrap.Modal(document.getElementById(id));
+			myModal.hide();
 		})
 	});	
 	

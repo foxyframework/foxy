@@ -10,7 +10,7 @@
 */
 
 defined('_Foxy') or die ('restricted access');
-$id = application::getVar('id', 0, 'post');
+$id = application::getVar('id', 0, 'get');
 ?>
 
 <section class="forms">
@@ -18,7 +18,7 @@ $id = application::getVar('id', 0, 'post');
 
     	<div class="row my-4">
       		<div class="col-lg-12">
-                    <?= html::renderBlockForm($id); ?>
+                <?= html::renderBlockForm($id); ?>
             </div> 
         </div>
 
