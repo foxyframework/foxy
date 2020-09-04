@@ -23,7 +23,7 @@ $form = FOXY_COMPONENT.DS.'forms'.DS.'admin.xml';
   <div class="container-fluid">
 
     <div class="row my-4">
-      <div class="col-lg-6">
+      <div class="col-lg-5">
         <div class="card">
           <div class="card-header d-flex align-items-center">
             <h4>Configuració global</h4>
@@ -42,7 +42,7 @@ $form = FOXY_COMPONENT.DS.'forms'.DS.'admin.xml';
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-7">
         <div class="row">
           <?php foreach($model->getAdminViews() as $view) : ?>
           <div class="col-2">
