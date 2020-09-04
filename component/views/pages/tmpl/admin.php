@@ -16,7 +16,7 @@ $model 	= application::getModel('pages');
 
 <section class="container-fluid my-5">
 	<?php
-		$fields = ['id', 'title', 'translaton', 'url', 'auth', 'type', 'module', 'inMenu'];
+		$fields = ['id', 'title', 'translaton', 'url', 'auth', 'type', 'module', 'inMenu' => array('field' => 'inMenu', 'format' => 'bool')];
 		$columns = ['Id', 'Title', 'Translation', 'Url', 'Auth', 'Type', 'Module', 'Menu'];
 	?>
 	<?= html::renderTable('datatable', 'id', $model->getList(), $fields, $columns); ?>
