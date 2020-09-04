@@ -18,7 +18,7 @@ class users extends model
   private $table  = '#_users';
 	private $view   = 'users';
 	private $key    = 'id';
-	private $order  = 'id';
+	private $order  = 'ordering';
 	private $dir    = 'DESC';
 	private $rows   = 'SELECT COUNT(i.id) FROM `#_users` AS i';
 	private $sql    = 'SELECT * FROM `#_users` AS i';

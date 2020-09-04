@@ -18,7 +18,7 @@ class blog extends model
 	private $table  = '#_articles';
 	private $view   = 'blog';
 	private $key    = 'id';
-	private $order  = 'id';
+	private $order  = 'ordering';
 	private $dir    = 'DESC';
 	private $rows   = 'SELECT COUNT(i.id) FROM `#_articles` AS i WHERE status = 1';
 	private $sql    = 'SELECT * FROM `#_articles` AS i WHERE status = 1';

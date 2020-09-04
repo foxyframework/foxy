@@ -18,7 +18,7 @@ class languages extends model
 	private $table  = '#_languages';
 	private $view   = 'languages';
 	private $key    = 'id';
-	private $order  = 'id';
+	private $order  = 'ordering';
 	private $dir    = 'ASC';
 	private $rows   = 'SELECT COUNT(i.id) FROM `#_languages` AS i';
 	private $sql    = 'SELECT * FROM `#_languages` AS i';

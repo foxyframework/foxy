@@ -18,7 +18,7 @@ class blocks extends model
 	private $table  = '#_blocks';
 	private $view   = 'blocks';
 	private $key    = 'id';
-	private $order  = 'id';
+	private $order  = 'ordering';
 	private $dir    = 'ASC';
 	private $rows   = 'SELECT COUNT(i.id) FROM `#_blocks` AS i';
 	private $sql    = 'SELECT * FROM `#_blocks` AS i';
@@ -98,5 +98,20 @@ class blocks extends model
 
         application::redirect($link);
 	}
+
+	/**
+     * Method to grab order in tables
+     * @access public
+     * @return void
+    */
+    public function reorder()
+	{
+        $view  = application::getVar('view', '', 'get');
+        $id    = json_decode(application::getVar('id', '', 'get'), true);
+        $order = json_decode(application::getVar('order', '', 'get'), true);
+        
+		database::query("UPDATE `".$this->table."` SET ordering = ".$order[1]." WHERE ".$this->key." = ".$id[0]);
+		database::query("UPDATE `".$this->table."` SET ordering = ".$order[0]." WHERE ".$this->key." = ".$id[1]);
+    }
 
 }
