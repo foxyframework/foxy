@@ -14,7 +14,7 @@ defined('_Foxy') or die ('restricted access');
 
 <section class="container-fluid my-5">
 	<?php
-		$fields = ['id', 'title', 'pageId', 'language'];
+		$fields = ['id', 'title', 'page', 'language'];
 		$columns = ['Id', 'Title', 'Page', 'Language'];
 	?>
 	<?= html::renderTable('datatable', 'id', $model->getList(), $fields, $columns); ?>

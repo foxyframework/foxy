@@ -21,7 +21,7 @@ class blocks extends model
 	private $order  = 'ordering';
 	private $dir    = 'ASC';
 	private $rows   = 'SELECT COUNT(i.id) FROM `#_blocks` AS i';
-	private $sql    = 'SELECT * FROM `#_blocks` AS i';
+	private $sql    = 'SELECT i.*, p.title AS page FROM `#_blocks` AS i INNER JOIN `#_pages` AS p ON i.pageId = p.id';
 
 	public function getList($tag = '')
 	{		
