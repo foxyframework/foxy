@@ -86,7 +86,15 @@ class languages extends model
 	*/
 	public function saveLanguage()
 	{
-		$result = database::insertRow($this->table, $_POST);
+		$id = application::getVar('id', 0, 'post', 'int');
+
+		if($id == 0) {
+			database::query('SELECT MAX(ordering)+1 FROM '.$this->table);
+			$_POST['ordering'] = database::loadResult();	
+			$result = database::insertRow($this->table, $_POST);
+		} else {
+			$result = database::updateRow($this->table, $_POST, $this->key, $id);
+		}
 
 		if($result) {
 			application::setMessage(language::get('FOXY_ITEM_SAVE_SUCCESS'), 'success');

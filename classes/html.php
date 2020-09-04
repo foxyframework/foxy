@@ -881,7 +881,7 @@ class Html
                 $html .= "<label for='".$field[0]->id."' class='form-label'>".language::get($field[0]->label)."</label>";
                 $html .= "<div class='input-group mb-3'>";
                 $default != '' ? $value = "value='$default'" : $value = "";
-                $html .= "<input type='text' id='".$field[0]->id."' $value class='form-control' aria-describedby='button-addon2'>";
+                $html .= "<input type='text' name='".$field[0]->id."' id='".$field[0]->id."' $value class='form-control' aria-describedby='button-addon2'>";
                 $content = addslashes("<img width='200' src='document.getElementById("+$field[0]->id+").src;'>");
                 $html .= "<button data-toggle='popover' title=Preview' data-html='true' data-content='' data-placement='left' class='btn btn-outline-secondary' type='button'>Preview</button>";
                 $html .= "<button class='btn btn-outline-secondary' type='button' id='button-addon2' data-toggle='modal' data-target='#".$uniqid."Modal'>Select</button>";

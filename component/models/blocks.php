@@ -85,17 +85,52 @@ class blocks extends model
 	 * @return object 
 	*/
 	public function saveBlock()
-	{		
-		$result = database::insertRow($this->table, $_POST);
+	{
+		$id = application::getVar('id', 0, 'post', 'int');
 
-		if($result) {
-			application::setMessage(language::get('FOXY_ITEM_SAVE_SUCCESS'), 'success');
-		} else {
-			application::setMessage(language::get('FOXY_ITEM_ERROR_ERROR'), 'danger');
+        if($id == 0) {
+          database::query('SELECT MAX(ordering)+1 FROM '.$this->table);
+          $_POST['ordering'] = database::loadResult();	
+          $result = database::insertRow($this->table, $_POST);
+        } else {
+          $result = database::updateRow($this->table, $_POST, $this->key, $id);
         }
-        
-        $link = config::$site.'/index.php?view='.$this->view.'&layout=admin';
+    
+        if($result) {
+          application::setMessage(language::get('FOXY_ITEM_SAVE_SUCCESS'), 'success');
+        } else {
+          application::setMessage(language::get('FOXY_ITEM_ERROR_ERROR'), 'danger');
+        }
+            
+        $link = config::$site.'/index.php?view='.$this->view.'&layout=admin&id='.$id;
+    
+        application::redirect($link);
+	}
 
+	/**
+	 * Method to remove and item by id
+	 * @return object 
+	*/
+	public function saveBlockItem()
+	{
+		$id = application::getVar('id', 0, 'post', 'int');
+		unset($_POST['id']);
+		foreach ($_POST as $k => $v) {
+			$post[$k] = $v;
+		}
+
+		$params = json_encode($post);
+        
+        $result = database::updateField($this->table, 'params', $params, $this->key, $id);
+    
+        if($result) {
+          application::setMessage(language::get('FOXY_ITEM_SAVE_SUCCESS'), 'success');
+        } else {
+          application::setMessage(language::get('FOXY_ITEM_ERROR_ERROR'), 'danger');
+        }
+            
+        $link = config::$site.'/index.php?view='.$this->view.'&layout=admin&id='.$id;
+    
         application::redirect($link);
 	}
 

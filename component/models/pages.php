@@ -66,24 +66,25 @@ class pages extends model
     */
     public function savePage()
     {
-        $obj = new stdClass();
-        $obj->title         = application::getVar('title', '', 'post');
-        $obj->translation   = application::getVar('translation', '', 'post');
-        $obj->url           = application::getVar('url', '', 'post');
-        $obj->auth          = application::getVar('auth', 0, 'post', 'int');
-        $obj->type          = application::getVar('type', 0, 'post', 'int');
-        $obj->module        = application::getVar('module', '', 'post');
-        $obj->template      = application::getVar('template', '', 'post');
-        $obj->inMenu        = application::getVar('inMenu', '', 'post');
+        $id = application::getVar('id', 0, 'post', 'int');
 
-        $result = database::insertRow("#_menu", $obj);
-
-        if($result) {
-          application::setMessage(language::get('FOXY_MENU_SAVE_SUCCESS'), 'success');
+        if($id == 0) {
+          database::query('SELECT MAX(ordering)+1 FROM '.$this->table);
+          $_POST['ordering'] = database::loadResult();	
+          $result = database::insertRow($this->table, $_POST);
         } else {
-          application::setMessage(language::get('FOXY_MENU_SAVE_ERROR'), 'danger');
+          $result = database::updateRow($this->table, $_POST, $this->key, $id);
         }
-        application::redirect(config::$site.'/index.php?view=pages&layout=admin');
+    
+        if($result) {
+          application::setMessage(language::get('FOXY_ITEM_SAVE_SUCCESS'), 'success');
+        } else {
+          application::setMessage(language::get('FOXY_ITEM_ERROR_ERROR'), 'danger');
+        }
+            
+        $link = config::$site.'/index.php?view='.$this->view.'&layout=admin&id='.$id;
+    
+        application::redirect($link);
     }
 
     /**

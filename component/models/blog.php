@@ -124,17 +124,19 @@ class blog extends model
 	*/
 	public function saveItem()
 	{
-		$id     = application::getVar('id', 0, 'post', 'int');
+		$id = application::getVar('id', 0, 'post', 'int');
 
 		$_POST['category'] 		= 0;
 		$_POST['userid']   		= user::$id;
 		$_POST['author_link'] 	= '#';
-		$_POST['language'] 		= 'ca-es';
+		$_POST['language'] 		= $_POST['language'];
 		$_POST['status'] 		= 1;
 		if($_POST['alias'] == '') { $_POST['alias'] = $this->clean($_POST['title']); }
 
 		if($id == 0) {
 			$_POST['hits']  = 0;
+			database::query('SELECT MAX(ordering)+1 FROM '.$this->table);
+			$_POST['ordering'] = database::loadResult();	
 			$result = database::insertRow($this->table, $_POST);
 
 			$subject    = language::replace('FOXY_BLOG_NEW_ARTICLE_SUBJECT', config::$sitename);
