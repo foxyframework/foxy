@@ -194,6 +194,26 @@ class blog extends model
 	}
 
 	/**
+	 * Method to remove and item by id
+	 * @return object 
+	*/
+	public function status()
+	{
+		$id   	= application::getVar('id', '', 'get');
+
+		$result = database::query('UPDATE '.$this->table.' SET `status` = NOT `status` WHERE '.$this->key.' = '.$id);
+
+		if($result) {
+			$link = config::$site.'/index.php?view='.$this->view.'&layout=admin';
+			application::setMessage(language::get('FOXY_ITEM_STATUS_SUCCESS'), 'success');
+		} else {
+			$link = config::$site.'/index.php?view='.$this->view.'&layout=admin';
+			application::setMessage(language::get('FOXY_ITEM_STATUS_ERROR'), 'danger');
+		}
+        application::redirect($link);
+	}
+
+	/**
      * Method to elapse a date as a string
 	 * @param date $datetime the complete data of the article
 	 * @return string

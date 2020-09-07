@@ -40,7 +40,7 @@ CREATE TABLE `foxy_articles` (
   `publishDate` datetime NOT NULL,
   `author` varchar(50) NOT NULL,
   `author_link` varchar(150) NOT NULL,
-  `status` smallint(1) NOT NULL,
+  `status` smallint(1) NOT NULL DEFAULT 0,
   `language` varchar(50) NOT NULL,
   `hits` int(11) NOT NULL,
   `ordering` int(11) NOT NULL DEFAULT 0 AUTO_INCREMENT,
@@ -64,6 +64,7 @@ CREATE TABLE `foxy_pages` (
   `template` varchar(50) NOT NULL,
   `inMenu` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 no;1 yes',
   `ordering` int(11) NOT NULL DEFAULT 0 AUTO_INCREMENT,
+  `status` smallint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=7;
 
@@ -71,13 +72,13 @@ CREATE TABLE `foxy_pages` (
 -- Bolcament de dades per a la taula `foxy_pages`
 --
 
-INSERT INTO `foxy_pages` (`id`, `title`, `translation`, `url`, `auth`, `type`, `module`, `template`, `inMenu`, `ordering`) VALUES
-(1, 'Home', '', 'index.php?view=home', 0, 0, '', '', 1), 1,
-(2, 'About', '', 'index.php?view=about', 0, 0, '', '', 1, 2),
-(3, 'Blog', '', 'index.php?task=register.logout', 2, 0, '', '', 1, 3),
-(4, 'Contact', '', 'index.php?task=contact', 2, 0, '', '', 1, 4),
-(5, 'Login', '', 'index.php?view=register&layout=login', 1, 1, 'login', '', 1, 5),
-(6, 'Logout', '', 'index.php?task=register.logout', 2, 0, '', '', 1, 6);
+INSERT INTO `foxy_pages` (`id`, `title`, `translation`, `url`, `auth`, `type`, `module`, `template`, `inMenu`, `ordering`, `status`) VALUES
+(1, 'Home', '', 'index.php?view=home', 0, 0, '', '', 1, 1, 1),
+(2, 'About', '', 'index.php?view=about', 0, 0, '', '', 1, 2, 1),
+(3, 'Blog', '', 'index.php?task=register.logout', 2, 0, '', '', 1, 3, 1),
+(4, 'Contact', '', 'index.php?task=contact', 2, 0, '', '', 1, 4, 1),
+(5, 'Login', '', 'index.php?view=register&layout=login', 1, 1, 'login', '', 1, 5, 1),
+(6, 'Logout', '', 'index.php?task=register.logout', 2, 0, '', '', 1, 6, 1);
 
 
 -- --------------------------------------------------------
@@ -93,6 +94,7 @@ CREATE TABLE `foxy_blocks` (
   `pageId` int(11) NOT NULL,
   `language` varchar(5) NOT NULL DEFAULT 'en-gb',
   `ordering` int(11) NOT NULL DEFAULT 0 AUTO_INCREMENT,
+  `status` smallint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
 
@@ -100,9 +102,9 @@ CREATE TABLE `foxy_blocks` (
 -- Bolcament de dades per a la taula `foxy_blocs`
 --
 
-INSERT INTO `foxy_blocks` (`id`, `title`, `params`, `pageId`, `language`, `ordering`) VALUES
-(1, 'Jumbotron', '{"arg1":"FOXY PHP FRAMEWORK","arg2":"A small PHP Framework for rapid development of web application","arg3":"assets\/img\/icons\/icon264.png"}', 1, 'en-gb', 1),
-(2, 'Marketing', '{"arg1":"Light as a feather. Lightweight.","arg2":"Foxy weighs very little, the entire package once uploaded to your server is only 916Kb.","arg3":"assets\/img\/demo\/fox1.jpg","arg4":"Extend the code. Plugins.","arg5":"Foxy allows you to create the pages you want but also extend the functionality with small pieces of code called modules and plugins.", "arg6":"assets\/img\/demo\/fox2.jpg", "arg7":"Speak to the world. Internationalization.", "arg8":"Foxy allows you to create files with the translation of the text strings that you have in your application.", "arg9":"assets\/img\/demo\/fox3.jpg"}', 1, 'en-gb', 2);
+INSERT INTO `foxy_blocks` (`id`, `title`, `params`, `pageId`, `language`, `ordering`, `status`) VALUES
+(1, 'Jumbotron', '{"arg1":"FOXY PHP FRAMEWORK","arg2":"A small PHP Framework for rapid development of web application","arg3":"assets\/img\/icons\/icon264.png"}', 1, 'en-gb', 1, 1),
+(2, 'Marketing', '{"arg1":"Light as a feather. Lightweight.","arg2":"Foxy weighs very little, the entire package once uploaded to your server is only 916Kb.","arg3":"assets\/img\/demo\/fox1.jpg","arg4":"Extend the code. Plugins.","arg5":"Foxy allows you to create the pages you want but also extend the functionality with small pieces of code called modules and plugins.", "arg6":"assets\/img\/demo\/fox2.jpg", "arg7":"Speak to the world. Internationalization.", "arg8":"Foxy allows you to create files with the translation of the text strings that you have in your application.", "arg9":"assets\/img\/demo\/fox3.jpg"}', 1, 'en-gb', 2, 1);
 
 -- --------------------------------------------------------
 

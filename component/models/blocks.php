@@ -84,6 +84,26 @@ class blocks extends model
 	 * Method to remove and item by id
 	 * @return object 
 	*/
+	public function status()
+	{
+		$id   	= application::getVar('id', '', 'get');
+
+		$result = database::query('UPDATE'.$this->table.' SET SET `status` = NOT `status` WHERE '.$this->key.' = '.$id);
+
+		if($result) {
+			$link = config::$site.'/index.php?view='.$this->view.'&layout=admin';
+			application::setMessage(language::get('FOXY_ITEM_STATUS_SUCCESS'), 'success');
+		} else {
+			$link = config::$site.'/index.php?view='.$this->view.'&layout=admin';
+			application::setMessage(language::get('FOXY_ITEM_STATUS_ERROR'), 'danger');
+		}
+        application::redirect($link);
+	}
+
+	/**
+	 * Method to remove and item by id
+	 * @return object 
+	*/
 	public function saveBlock()
 	{
 		$id = application::getVar('id', 0, 'post', 'int');

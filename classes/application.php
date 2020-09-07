@@ -198,7 +198,7 @@ class Application
     public static function render($menuId)
     {
         $lang = application::getVar('lang', 'en-gb', 'cookie');
-        database::query('SELECT * FROM `#_blocks` WHERE pageId = '.$menuId.' AND language = '.database::quote($lang).' ORDER BY ordering DESC');
+        database::query('SELECT * FROM `#_blocks` WHERE pageId = '.$menuId.' AND language = '.database::quote($lang).' AND status = 1 ORDER BY ordering DESC');
         $rows = database::fetchObjectList();
 
         $html  = '';
