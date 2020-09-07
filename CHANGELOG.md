@@ -1,3 +1,16 @@
+## version 1.3.0
+
+* New admin template
+* Media manager
+* Field media to select images from a given folder
+* Language manager
+* Module language switcher
+* Datatable buttons in each row
+* New change status function 
+* Reorder datatable rows with drag & drop
+* Messages with bootstrap 5 toasts
+* New blocks system, reusable web components
+
 ## version 1.2.0
 
 * Refactor all classes as a static
