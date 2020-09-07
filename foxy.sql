@@ -61,7 +61,7 @@ CREATE TABLE `foxy_pages` (
   `auth` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 no login;1 login',
   `type` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 Link;1 modal',
   `module` varchar(150) NOT NULL,
-  `template` varchar(50) NOT NULL,
+  `template` varchar(50) NOT NULL DEFAULT '',
   `inMenu` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 no;1 yes',
   `ordering` int(11) NOT NULL DEFAULT 0,
   `status` smallint(1) NOT NULL DEFAULT 0,

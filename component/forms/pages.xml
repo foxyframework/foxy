@@ -18,13 +18,21 @@
       <disabled>false</disabled>
     </field>
     <field name="url">
-      <type>text</type>
+      <type>list</type>
       <name>url</name>
       <id>url</id>
-      <label>Url</label>
+      <label>Page type</label>
       <message></message>
-      <placeholder>Url</placeholder>
-      <disabled>false</disabled>
+      <option value="">FOXY_SELECT_AN_OPTION</option>
+      <option value="index.php?view=blog">Blog</option>
+      <option value="index.php?view=contact">Contact</option>
+      <option value="index.php?view=default">Default</option>
+      <option value="index.php?view=register&amp;layout=login">Login</option>
+      <option value="index.php?task=register.logout">Logout</option>
+      <option value="index.php?view=home">Home</option>
+      <option value="index.php?view=register&amp;layout=profile">Profile</option>
+      <option value="index.php?view=register">Register</option>
+      <option value="index.php?view=register&amp;layout=reset">Reset password</option>
     </field>
     <field name="auth">
       <type>list</type>

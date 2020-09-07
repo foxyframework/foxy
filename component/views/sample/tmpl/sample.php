@@ -11,4 +11,9 @@
 
 defined('_Foxy') or die ('restricted access');
 
-$model = application::getModel('admin');
+$model  = application::getModel('admin');
+$view   = application::getVar('view');
+$menuId = $model->getMenuId($view);
+?>
+
+<?= application::render($menuId); ?>

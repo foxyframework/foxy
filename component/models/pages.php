@@ -72,6 +72,17 @@ class pages extends model
           database::query('SELECT MAX(ordering)+1 FROM '.$this->table);
           $_POST['ordering'] = database::loadResult();	
           $result = database::insertRow($this->table, $_POST);
+          $lastId = database::lastId();
+          if(strpos($_POST['url'], 'default') !== false) { 
+            database::updateField($this->table, 'url', 'index.php?view='.strtolower($_POST['title']) , $this->key, $lastId);
+            //create new view folder
+            $path = FOXY_COMPONENT.DS.'views'.DS.strtolower($_POST['title']);
+            mkdir($path, 0755);
+            mkdir($path.DS.'tmpl', 0755);
+            copy(FOXY_COMPONENT.DS.'views'.DS.'sample'.DS.'view.php', $path.DS.'view.php');
+            copy(FOXY_COMPONENT.DS.'views'.DS.'sample'.DS.'tmpl'.DS.'sample.php', $path.DS.'tmpl'.DS.'sample.php');
+            rename($path.DS.'tmpl'.DS.'sample.php', $path.DS.'tmpl'.DS.strtolower($_POST['title']).'.php');
+          }
         } else {
           $result = database::updateRow($this->table, $_POST, $this->key, $id);
         }

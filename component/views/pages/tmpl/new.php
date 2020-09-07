@@ -25,7 +25,7 @@ $form = FOXY_COMPONENT.DS.'forms'.DS.'pages.xml';
             <form method="post" action="<?= config::$site; ?>index.php?task=pages.savePage">
               <?= html::getTextField($form, 'title'); ?>
               <?= html::getTextField($form, 'translation'); ?>
-              <?= html::getTextField($form, 'url'); ?>
+              <?= html::getListField($form, 'url'); ?>
               <?= html::getListField($form, 'auth'); ?>
               <?= html::getListField($form, 'type'); ?>
               <?= html::getTextField($form, 'module'); ?>

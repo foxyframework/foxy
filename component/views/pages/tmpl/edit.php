@@ -28,7 +28,7 @@ $form = FOXY_COMPONENT.DS.'forms'.DS.'pages.xml';
               <input type="hidden" name="id" value="<?= $id; ?>">
               <?= html::getTextField($form, 'title', $item->title); ?>
               <?= html::getTextField($form, 'translation', $item->translation); ?>
-              <?= html::getTextField($form, 'url', $item->url); ?>
+              <?= html::getListField($form, 'url', $item->url); ?>
               <?= html::getListField($form, 'auth', $item->auth); ?>
               <?= html::getListField($form, 'type', $item->type); ?>
               <?= html::getTextField($form, 'module', $item->module); ?>
