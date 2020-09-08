@@ -9,8 +9,6 @@
  *
 */
 
-//$view = application::getVar('view');
-
 ?>
 
 <section class="container marketing">
