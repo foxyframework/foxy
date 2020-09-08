@@ -17,6 +17,7 @@ defined('_Foxy') or die ('restricted access');
 	<?php
 		$fields = ['title', 'author', 'publishDate'];
 		$columns = ['Title', 'Author', 'Publish Date'];
+		$buttons = ['delete', 'edit', 'order', 'status', 'params'];
 	?>
-	<?= html::renderTable('datatable', 'id', $model->getList(), $fields, $columns); ?>
+	<?= html::renderTable('datatable', 'id', $model->getList(), $fields, $columns, $buttons); ?>
 </section>

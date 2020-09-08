@@ -18,6 +18,7 @@ $model 	= application::getModel('pages');
 	<?php
 		$fields = ['id', 'title', 'translaton', 'url', 'auth', 'type', 'module', 'inMenu' => array('field' => 'inMenu', 'format' => 'bool')];
 		$columns = ['Id', 'Title', 'Translation', 'Url', 'Auth', 'Type', 'Module', 'Menu'];
+		$buttons = ['delete', 'edit', 'order', 'status', 'params'];
 	?>
-	<?= html::renderTable('datatable', 'id', $model->getList(), $fields, $columns); ?>
+	<?= html::renderTable('datatable', 'id', $model->getList(), $fields, $columns, $buttons); ?>
 </section>
