@@ -18,14 +18,4 @@
         <page>languages</page>
         <layout>new</layout>
     </button>
-    <button name="btn_strings">
-        <id>btn_strings</id>
-        <class>btn_strings</class>
-        <label>Strings</label>
-        <icon>fa-edit</icon>
-        <modal>true</modal>
-        <modal_title>New Post</modal_title>
-        <page>languages</page>
-        <layout>strings</layout>
-    </button>
 </form>
