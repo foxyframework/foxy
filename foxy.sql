@@ -172,6 +172,21 @@ INSERT INTO `foxy_settings` (`id`, `show_register`, `login_redirect`, `debug`, `
 -- --------------------------------------------------------
 
 --
+-- Estructura de la taula `foxy_redirects`
+--
+
+CREATE TABLE `foxy_redirects` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `old_url` varchar(150) NOT NULL DEFAULT '',
+  `new_url` varchar(150) NOT NULL DEFAULT '',
+  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 unpublished;1 published',
+  `ordering` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de la taula `foxy_usergroups`
 --
 

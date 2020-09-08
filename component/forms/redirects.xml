@@ -1,0 +1,18 @@
+<form>
+    <field name="old_url">
+        <type>text</type>
+        <name>old_url</name>
+        <id>old_url</id>
+        <label>FOXY_REDIRECTS_OLD_URL_LABEL</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <required>true</required>
+    </field>
+    <field name="new_url">
+        <type>text</type>
+        <name>new_url</name>
+        <id>new_url</id>
+        <label>FOXY_REDIRECTS_NEW_URL_LABEL</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <required>true</required>
+    </field>
+</form>

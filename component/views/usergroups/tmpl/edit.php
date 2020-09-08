@@ -10,7 +10,9 @@
 */
 
 defined('_Foxy') or die ('restricted access');
-$form = FOXY_COMPONENT.DS.'forms'.DS.'languages.xml';
+$id   = application::getVar('id', 0, 'post');
+$item = application::getModel('usergroups')->getItemById();
+$form = FOXY_COMPONENT.DS.'forms'.DS.'usergroups.xml';
 ?>
 
 <section class="forms">
@@ -19,10 +21,10 @@ $form = FOXY_COMPONENT.DS.'forms'.DS.'languages.xml';
     	<div class="row my-4">
       		<div class="col-lg-12">
  
-                <form name="languagesForm" id="languagesForm" method="post" action="index.php?task=languages.saveLanguage">			
-                    <?= html::getTextField($form, 'title'); ?>
-                    <?= html::getTextField($form, 'code'); ?>
-                    <?= html::getListField($form, 'status'); ?>
+                <form name="adminForm" id="adminForm" method="post" action="index.php?task=usergroups.saveGroup">	
+                    <input type="hidden" name="id" value="<?= $id; ?>">		
+                    <?= html::getTextField($form, 'usergroup', $item->usergroup); ?>
+                    <?= html::getListField($form, 'status', $item->status); ?>
                     <div class="form-group">
                         <input type="submit" value="<?= language::get('FOXY_SAVE'); ?>" class="btn btn-primary">
                     </div>

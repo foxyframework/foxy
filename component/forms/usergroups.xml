@@ -1,0 +1,11 @@
+<form>
+    <field name="usergroup">
+      <type>usergroup</type>
+      <name>usergroup</name>
+      <id>usergroup</id>
+      <label>Name</label>
+      <message></message>
+      <placeholder>Name</placeholder>
+      <disabled>false</disabled>
+    </field>
+</form>

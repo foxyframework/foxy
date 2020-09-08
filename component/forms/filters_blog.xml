@@ -16,6 +16,6 @@
         <modal>true</modal>
         <modal_title>New Post</modal_title>
         <page>blog</page>
-        <layout>new</layout>
+        <layout>edit</layout>
     </button>
 </form>

@@ -1,11 +1,11 @@
 <form>
     <!-- Filters -->
-    <field name="title">
+    <field name="usergroup">
         <type>text</type>
-        <name>title</name>
-        <id>title</id>
-        <label></label>
-        <placeholder>Title</placeholder>
+        <name>usergroup</name>
+        <id>usergroup</id>
+        <label>Name</label>
+        <placeholder>Name</placeholder>
     </field>
     <!-- buttons -->
     <button name="btn_new">
@@ -15,7 +15,7 @@
         <icon>fa-plus</icon>
         <modal>true</modal>
         <modal_title>Edit</modal_title>
-        <page>users</page>
+        <page>usergroups</page>
         <layout>edit</layout>
     </button>
 </form>
