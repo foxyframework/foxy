@@ -31,18 +31,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `foxy_articles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userid` int(11) NOT NULL,
-  `title` varchar(150) NOT NULL,
-  `alias` varchar(150) NOT NULL,
-  `category` int(11) NOT NULL,
-  `tags` varchar(150) NOT NULL,
+  `userid` int(11) NOT NULL DEFAULT 0,
+  `title` varchar(150) NOT NULL DEFAULT '',
+  `alias` varchar(150) NOT NULL DEFAULT '',
+  `category` int(11) NOT NULL DEFAULT 0,
+  `tags` varchar(150) NOT NULL DEFAULT '',
   `fulltext` text NOT NULL,
-  `publishDate` datetime NOT NULL,
-  `author` varchar(50) NOT NULL,
-  `author_link` varchar(150) NOT NULL,
+  `publishDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `author` varchar(50) NOT NULL DEFAULT '',
+  `author_link` varchar(150) NOT NULL DEFAULT '#',
   `status` smallint(1) NOT NULL DEFAULT 0,
-  `language` varchar(50) NOT NULL,
-  `hits` int(11) NOT NULL,
+  `language` varchar(50) NOT NULL DEFAULT 'en-gb',
+  `hits` int(11) NOT NULL  DEFAULT 0,
   `ordering` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
@@ -55,12 +55,12 @@ CREATE TABLE `foxy_articles` (
 
 CREATE TABLE `foxy_pages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(150) NOT NULL,
-  `translation` varchar(150) NOT NULL,
-  `url` varchar(150) NOT NULL,
+  `title` varchar(150) NOT NULL DEFAULT '',
+  `translation` varchar(150) NOT NULL DEFAULT '',
+  `url` varchar(150) NOT NULL DEFAULT '',
   `auth` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 no login;1 login',
   `type` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 Link;1 modal',
-  `module` varchar(150) NOT NULL,
+  `module` varchar(150) NOT NULL DEFAULT '',
   `template` varchar(50) NOT NULL DEFAULT '',
   `inMenu` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 no;1 yes',
   `ordering` int(11) NOT NULL DEFAULT 0,
@@ -90,9 +90,9 @@ INSERT INTO `foxy_pages` (`id`, `title`, `translation`, `url`, `auth`, `type`, `
 
 CREATE TABLE `foxy_blocks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(150) NOT NULL,
+  `title` varchar(150) NOT NULL DEFAULT '',
   `params` text NOT NULL DEFAULT = '',
-  `pageId` int(11) NOT NULL,
+  `pageId` int(11) NOT NULL DEFAULT 0,
   `language` varchar(5) NOT NULL DEFAULT 'en-gb',
   `ordering` int(11) NOT NULL DEFAULT 0,
   `status` smallint(1) NOT NULL DEFAULT 0,
@@ -116,8 +116,8 @@ INSERT INTO `foxy_blocks` (`id`, `title`, `params`, `pageId`, `language`, `order
 
 CREATE TABLE `foxy_languages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(150) NOT NULL,
-  `code` varchar(10) NOT NULL,
+  `title` varchar(150) NOT NULL DEFAULT '',
+  `code` varchar(10) NOT NULL DEFAULT '',
   `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 unpublished;1 published',
   `ordering` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
@@ -141,9 +141,9 @@ INSERT INTO `foxy_languages` (`id`, `title`, `code`, `status`, `ordering`) VALUE
 
 CREATE TABLE `foxy_sessions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userid` int(11) NOT NULL,
-  `ssid` varchar(150) NOT NULL,
-  `lastvisitDate` datetime NOT NULL,
+  `userid` int(11) NOT NULL DEFAULT 0,
+  `ssid` varchar(150) NOT NULL DEFAULT '',
+  `lastvisitDate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
@@ -177,7 +177,7 @@ INSERT INTO `foxy_settings` (`id`, `show_register`, `login_redirect`, `debug`, `
 
 CREATE TABLE `foxy_usergroups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `usergroup` varchar(50) NOT NULL,
+  `usergroup` varchar(50) NOT NULL DEFAULT '',
   `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 unpublished;1 published',
   `ordering` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
@@ -200,21 +200,21 @@ INSERT INTO `foxy_usergroups` (`id`, `usergroup`, `status`, `ordering`) VALUES
 
 CREATE TABLE `foxy_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(150) NOT NULL,
-  `email` varchar(150) NOT NULL,
+  `username` varchar(100) NOT NULL DEFAULT '',
+  `password` varchar(150) NOT NULL DEFAULT '',
+  `email` varchar(150) NOT NULL DEFAULT '',
   `registerDate` datetime NOT NULL,
   `lastvisitDate` datetime NOT NULL,
-  `level` smallint(1) NOT NULL,
-  `language` varchar(50) NOT NULL,
-  `token` varchar(150) NOT NULL,
+  `level` smallint(1) NOT NULL DEFAULT 0,
+  `language` varchar(50) NOT NULL DEFAULT 'en-gb',
+  `token` varchar(150) NOT NULL DEFAULT '',
   `block` smallint(1) NOT NULL DEFAULT 1,
   `image` varchar(150) NOT NULL DEFAULT 'nouser.png',
-  `cargo` varchar(150) NOT NULL,
+  `cargo` varchar(150) NOT NULL DEFAULT '',
   `bio` text NOT NULL,
-  `address` varchar(150) NOT NULL,
-  `template` varchar(50) NOT NULL,
-  `apikey` varchar(150) NOT NULL,
+  `address` varchar(150) NOT NULL DEFAULT '',
+  `template` varchar(50) NOT NULL DEFAULT '',
+  `apikey` varchar(150) NOT NULL DEFAULT '',
   `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 unpublished;1 published',
   `ordering` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
