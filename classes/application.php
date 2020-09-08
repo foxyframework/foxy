@@ -208,23 +208,14 @@ class Application
             foreach($rows as $row) {
 
                 $params = json_decode($row->params);
-                $blockpath = FOXY_BASE.DS.'blocks'.DS.strtolower($row->title).DS.strtolower($row->title).'.html';
+                $blockpath = FOXY_BASE.DS.'blocks'.DS.strtolower($row->title).DS.strtolower($row->title).'.php';
                 
                 if(file_exists($blockpath)) {
-                    $block = file_get_contents($blockpath);
-                }
-
-                //get page params
-                $config   = FOXY_COMPONENT.DS.'views'.DS.$view.DS.'params.json';
-                $cfg      = json_decode(file_get_contents($path));
-                        
-                if(file_exists($config)) {
-                    $cfg->fluid == 0 ? $container = 'container' : $container = 'container-fluid';
-                    $block = str_replace('{container}', $container, $block);
-                }
-                  
-                foreach($params as $k => $v) {
-                    $block = str_replace('{'.$k.'}', $v, $block);
+                    $ch = curl_init(config::$site.'blocks'.DS.strtolower($row->title).DS.strtolower($row->title).'.php');
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+                    $block = curl_exec($ch);
+                    curl_close($ch);
                 }
 
                 $html .= $block;
