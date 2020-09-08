@@ -18,14 +18,4 @@
         <page>blog</page>
         <layout>new</layout>
     </button>
-    <button name="btn_params">
-        <id>btn_params</id>
-        <class>btn_params</class>
-        <label>Settings</label>
-        <icon>fa-cog</icon>
-        <modal>true</modal>
-        <modal_title>Settings</modal_title>
-        <page>blog</page>
-        <layout>params</layout>
-    </button>
 </form>
