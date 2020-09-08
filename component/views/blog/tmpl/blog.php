@@ -15,7 +15,6 @@ $model = application::getModel();
 $tag   = application::getVar('tag', '', 'get');
 $page  = application::getVar('page', 1, 'get');
 $items = $model->getList();
-$params = $model->getParams('blog');
 ?>
 
 <!-- Main Content -->
@@ -26,13 +25,26 @@ $params = $model->getParams('blog');
 
 			<?php if(count($items)) : ?>
 			<?php foreach($items as $item) : ?>
+			<?php $params = json_decode($item->params); ?>
 			<div class="blog-post">
 				<a href="<?= url::genUrl('index.php?view=blog&layout=item&id='.$item->id.'&slug='.$item->alias); ?>">
 					<h2 class="blog-post-title"><?= $item->title; ?></h2>
 				</a>
-				<p class="blog-post-meta"><?= language::get('FOXY_BLOG_CREATED_BY'); ?>
-					<a href="<?= $item->author_link; ?>" target="_blank"><?= $item->author; ?></a>
-					&dot; <?= date('j F Y', strtotime($item->publishDate)); ?> &dot;  <?= language::get('FOXY_BLOG_HITS'); ?> <?= $item->hits; ?> &dot; <?= language::get('FOXY_BLOG_TAGS'); ?> <?= $model->renderTags($item->tags); ?></p>
+				<p class="blog-post-meta">
+					<?php if($params->show_author == 1) : ?>
+					<?= language::get('FOXY_BLOG_CREATED_BY'); ?>
+					<a href="<?= $item->author_link; ?>" target="_blank"><?= $item->author; ?></a>&dot; 
+					<?php endif; ?>
+					<?php if($params->show_date == 1) : ?>
+					<?= date('j F Y', strtotime($item->publishDate)); ?> &dot;  
+					<?php endif; ?>
+					<?php if($params->show_hits == 1) : ?>
+					<?= language::get('FOXY_BLOG_HITS'); ?> <?= $item->hits; ?> &dot; 
+					<?php endif; ?>
+					<?php if($params->show_tags == 1) : ?>
+					<?= language::get('FOXY_BLOG_TAGS'); ?> <?= $model->renderTags($item->tags); ?>
+					<?php endif; ?>
+
 			    </p>
 							
 				<?= $model->trimText($item->fulltext, 500); ?>

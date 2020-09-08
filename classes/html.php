@@ -65,13 +65,14 @@ class Html
             }
             $html .= '<td>';
             $html .= '<a href="index.php?task='.$view.'.removeItem&id='.$d->{$key}.'" class="btn btn-danger"><i class="fa fa-trash"></i></a>&nbsp;';
-            $html .= '<a href="#" data-view="'.$view.'" data-id="'.$d->{$key}.'" class="btn btn-success editable"><i class="fa fa-edit"></i></a>&nbsp;';
+            $html .= '<a href="#" data-view="'.$view.'" data-layout="edit" data-id="'.$d->{$key}.'" class="btn btn-success editable"><i class="fa fa-edit"></i></a>&nbsp;';
             $html .= '<a href="#" data-id="'.$d->{$key}.'" data-view="'.$view.'" data-ordering="'.$d->ordering.'" class="btn btn-info handle"><i class="fa fa-bars"></i></a>&nbsp;';
             if($d->status == 0) {
-                $html .= '<a href="index.php?task='.$view.'.status&id='.$d->{$key}.'" data-id="'.$d->{$key}.'" data-view="'.$view.'" class="btn btn-success"><i class="fas fa-check-circle"></i></a>';
+                $html .= '<a href="index.php?task='.$view.'.status&id='.$d->{$key}.'" data-view="'.$view.'" class="btn btn-success"><i class="fas fa-check-circle"></i></a>&nbsp;';
             } else {
-                $html .= '<a href="index.php?task='.$view.'.status&id='.$d->{$key}.'" data-id="'.$d->{$key}.'" data-id="'.$d->{$key}.'" data-view="'.$view.'" class="btn btn-danger"><i class="fas fa-times-circle"></i></i></a>';
+                $html .= '<a href="index.php?task='.$view.'.status&id='.$d->{$key}.'" data-id="'.$d->{$key}.'" data-view="'.$view.'" class="btn btn-danger"><i class="fas fa-times-circle"></i></i></a>&nbsp;';
             }
+            $html .= '<a href="#" data-id="'.$d->{$key}.'" data-view="'.$view.'" data-layout="params" class="btn btn-warning editable"><i class="fas fa-cog"></i></i></a>';
             
             $html .= '</td>';
             $html .= '</tr>';

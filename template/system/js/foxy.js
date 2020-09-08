@@ -155,7 +155,8 @@ document.addEventListener("DOMContentLoaded", function() {
 			evt.preventDefault();
 			let id   = evt.currentTarget.dataset.id;
 			let view = evt.currentTarget.dataset.view;
-			load(domain+'?view='+view+'&layout=edit&id='+id+'&mode=raw', 'POST', 'mbody');
+			let layout = evt.currentTarget.dataset.layout;
+			load(domain+'?view='+view+'&layout='+layout+'&id='+id+'&mode=raw', 'POST', 'mbody');
 			if(document.getElementById('editor')) { const editor = CKEDITOR.replaceAll( 'editor' ); }
 			var myModal = new bootstrap.Modal(document.getElementById('editable'));
 			myModal.show();

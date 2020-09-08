@@ -33,42 +33,6 @@ class model
     }
 
     /**
-     * Mthod to save the view params
-     * @access public
-     * @return void
-    */
-    public function saveParams()
-	{
-        $view = application::getVar('view');
-        $json = array();
-
-        foreach($_POST as $k => $v) {
-            $json[$k] = $v;
-        }
-
-        $fp = fopen(FOXY_COMPONENT.DS.'views'.DS.$view.DS.'params.json', 'w');
-        fwrite($fp, json_encode($json));
-        fclose($fp);  
-        
-        application::redirect('index.php?view='.$view.'&layout=admin', language::get('FOXY_SUCCESS_SAVE_PARAMS'), 'success');
-    }
-
-    /**
-     * Method to get the view params
-     * @param string $view The view name
-     * @access public
-     * @return object
-    */
-    public function getParams($view)
-	{
-        $path = FOXY_COMPONENT.DS.'views'.DS.$view.DS.'params.json';
-        if(file_exists($path)) {
-            $json = json_decode(file_get_contents($path));
-            return $json; 
-        }
-    }
-
-    /**
      * Method to set the lang cookie
      * @param string $name The cookie name
      * @param string $value The cookie value

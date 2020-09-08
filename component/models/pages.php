@@ -99,6 +99,41 @@ class pages extends model
     }
 
     /**
+     * Mthod to save the view params
+     * @access public
+     * @return void
+    */
+    public function saveParams()
+	  {
+      $id = application::getVar('id');
+      $view = application::getVar('view');
+      $json = array();
+
+      unset($_POST['view'], $_POST['id']);
+
+      foreach($_POST as $k => $v) {
+          $json[$k] = $v;
+      }
+
+		  $params = json_encode($json);  
+		  database::updateField($this->table, 'params', $params, $this->key, $id);
+        
+      application::redirect('index.php?view='.$view.'&layout=admin', language::get('FOXY_SUCCESS_SAVE_PARAMS'), 'success');
+    }
+
+    /**
+     * Method to get the view params
+     * @param string $view The view name
+     * @access public
+     * @return object
+    */
+    public function getParams($id)
+	  {
+      database::query("SELECT params FROM $this->table WHERE $this->key = ".(int)$id);
+      return json_encode(database::loadResult());
+    }
+
+    /**
 	 * Method to remove and item by id
 	 * @return object 
 	*/

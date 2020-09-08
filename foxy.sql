@@ -74,12 +74,12 @@ CREATE TABLE `foxy_pages` (
 --
 
 INSERT INTO `foxy_pages` (`id`, `title`, `translation`, `url`, `auth`, `type`, `module`, `template`, `inMenu`, `ordering`, `status`, `params`) VALUES
-(1, 'Home', '', 'index.php?view=home', 0, 0, '', '', 1, 1, 1, ''),
-(2, 'About', '', 'index.php?view=about', 0, 0, '', '', 1, 2, 1, ''),
-(3, 'Blog', '', 'index.php?task=register.logout', 2, 0, '', '', 1, 3, 1, ''),
-(4, 'Contact', '', 'index.php?task=contact', 2, 0, '', '', 1, 4, 1, ''),
-(5, 'Login', '', 'index.php?view=register&layout=login', 1, 1, 'login', '', 1, 5, 1, ''),
-(6, 'Logout', '', 'index.php?task=register.logout', 2, 0, '', '', 1, 6, 1, '');
+(1, 'Home', '', 'index.php?view=home', 0, 0, '', '', 1, 1, 1, '{"show_author":"1","show_date":"1","show_hits":"1","show_tags":"1"}'),
+(2, 'About', '', 'index.php?view=about', 0, 0, '', '', 1, 2, 1, '{"show_author":"1","show_date":"1","show_hits":"1","show_tags":"1"}'),
+(3, 'Blog', '', 'index.php?task=register.logout', 2, 0, '', '', 1, 3, 1, '{"show_author":"1","show_date":"1","show_hits":"1","show_tags":"1"}'),
+(4, 'Contact', '', 'index.php?task=contact', 2, 0, '', '', 1, 4, 1, '{"show_author":"1","show_date":"1","show_hits":"1","show_tags":"1"}'),
+(5, 'Login', '', 'index.php?view=register&layout=login', 1, 1, 'login', '', 1, 5, 1, '{"show_author":"1","show_date":"1","show_hits":"1","show_tags":"1"}'),
+(6, 'Logout', '', 'index.php?task=register.logout', 2, 0, '', '', 1, 6, 1, '{"show_author":"1","show_date":"1","show_hits":"1","show_tags":"1"}');
 
 
 -- --------------------------------------------------------

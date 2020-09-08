@@ -88,7 +88,7 @@ class blocks extends model
 	{
 		$id   	= application::getVar('id', '', 'get');
 
-		$result = database::query('UPDATE'.$this->table.' SET SET `status` = NOT `status` WHERE '.$this->key.' = '.$id);
+		$result = database::query('UPDATE '.$this->table.' SET `status` = NOT `status` WHERE '.$this->key.' = '.$id);
 
 		if($result) {
 			$link = config::$site.'/index.php?view='.$this->view.'&layout=admin';

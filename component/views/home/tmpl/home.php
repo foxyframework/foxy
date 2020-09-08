@@ -11,7 +11,6 @@
 
 defined('_Foxy') or die ('restricted access');
 $model  = application::getModel('admin');
-$params = $model->getParams('home');
 $menuId = $model->getMenuId('home');
 ?>
 

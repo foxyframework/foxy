@@ -1,0 +1,21 @@
+<form>
+    <field name="fluid">
+      <type>radio</type>
+      <name>fluid</name>
+      <id>fluid</id>
+      <label>Fluid layout</label>
+      <message></message>
+      <option value="0">FOXY_NO</option>
+      <option value="1">FOXY_YES</option>
+      <disabled>false</disabled>
+    </field>
+    <field name="redirect">
+      <type>text</type>
+      <name>redirect</name>
+      <id>redirect</id>
+      <label>Redirect</label>
+      <message></message>
+      <placeholder>Redirect url if user is not authenticated (set auth to authenticated)</placeholder>
+      <disabled>false</disabled>
+    </field>
+</form>

@@ -1,0 +1,46 @@
+<form>
+    <field name="show_author">
+        <type>list</type>
+        <name>show_author</name>
+        <id>show_author</id>
+        <label>Show Author</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <default>1</default>
+        <option value="">FOXY_SELECT_AN_OPTION</option>
+        <option value="0">FOXY_NO</option>
+        <option value="1">FOXY_YES</option>
+    </field>
+    <field name="show_date">
+        <type>list</type>
+        <name>show_date</name>
+        <id>show_date</id>
+        <label>Show Date</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <default>1</default>
+        <option value="">FOXY_SELECT_AN_OPTION</option>
+        <option value="0">FOXY_NO</option>
+        <option value="1">FOXY_YES</option>
+    </field>
+    <field name="show_hits">
+        <type>list</type>
+        <name>show_hits</name>
+        <id>show_hits</id>
+        <label>Show Hits</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <default>1</default>
+        <option value="">FOXY_SELECT_AN_OPTION</option>
+        <option value="0">FOXY_NO</option>
+        <option value="1">FOXY_YES</option>
+    </field>
+    <field name="show_tags">
+        <type>list</type>
+        <name>show_tags</name>
+        <id>show_tags</id>
+        <label>Show Tags</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <default>1</default>
+        <option value="">FOXY_SELECT_AN_OPTION</option>
+        <option value="0">FOXY_NO</option>
+        <option value="1">FOXY_YES</option>
+    </field>
+</form>

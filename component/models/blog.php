@@ -20,8 +20,8 @@ class blog extends model
 	private $key    = 'id';
 	private $order  = 'ordering';
 	private $dir    = 'DESC';
-	private $rows   = 'SELECT COUNT(i.id) FROM `#_articles` AS i WHERE status = 1';
-	private $sql    = 'SELECT * FROM `#_articles` AS i WHERE status = 1';
+	private $rows   = 'SELECT COUNT(i.id) FROM `#_articles` AS i WHERE i.status = 1';
+	private $sql    = 'SELECT * FROM `#_articles` AS i WHERE i.status = 1';
 
 	public function getList($tag = '')
 	{		
@@ -39,7 +39,7 @@ class blog extends model
         $count_rows = database::loadResult();
 		
 		if($tag != '') {
-			$this->sql .= ' AND (FIND_IN_SET('.database::quote($tag).', tags) > 0)';
+			$this->sql .= ' AND (FIND_IN_SET('.database::quote($tag).', i.tags) > 0)';
 		}
 		
 		$this->sql .= ' ORDER BY '.$this->order.' DESC LIMIT '.$offset.', '.$no_of_records_per_page;
@@ -194,6 +194,42 @@ class blog extends model
 	}
 
 	/**
+     * Mthod to save the view params
+     * @access public
+     * @return void
+    */
+    public function saveParams()
+	{
+		$id = application::getVar('id');
+		$view = application::getVar('view');
+		$json = array();
+		
+		unset($_POST['view'], $_POST['id']);
+
+        foreach($_POST as $k => $v) {
+            $json[$k] = $v;
+        }
+
+		$params = json_encode($json);  
+		database::updateField($this->table, 'params', $params, $this->key, $id);
+        
+        application::redirect('index.php?view='.$view.'&layout=admin', language::get('FOXY_SUCCESS_SAVE_PARAMS'), 'success');
+    }
+
+    /**
+     * Method to get the view params
+     * @param string $view The view name
+     * @access public
+     * @return object
+    */
+    public function getParams($id)
+	{
+		database::query('SELECT params FROM '.$this->table.' WHERE '.$this->key.' = '.(int)$id);
+		$result = database::loadResult();
+		return json_decode($result);
+    }
+
+	/**
 	 * Method to remove and item by id
 	 * @return object 
 	*/
@@ -254,7 +290,7 @@ class blog extends model
 	*/
 	public function getFeed()
 	{
-	    database::query('SELECT * FROM #_articles WHERE status = 1 ORDER BY id DESC');
+	    database::query('SELECT * FROM '.$this->table.' WHERE status = 1 ORDER BY id DESC');
 
 		$rows = database::fetchObjectList();
 
