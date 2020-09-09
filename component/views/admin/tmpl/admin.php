@@ -45,7 +45,7 @@ $form = FOXY_COMPONENT.DS.'forms'.DS.'admin.xml';
       <div class="col-lg-7">
         <div class="row">
           <?php foreach($model->getAdminViews() as $view) : ?>
-          <div class="col-2">
+          <div class="col-3 pb-2">
             <a href="index.php?view=<?= $view; ?>&layout=admin">
             <div class="card">
               <div class="card-body text-center">
