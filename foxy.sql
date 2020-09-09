@@ -132,6 +132,36 @@ INSERT INTO `foxy_languages` (`id`, `title`, `code`, `status`, `ordering`) VALUE
 (2, 'Spanish', 'es-es', 0, 2),
 (3, 'Catalan', 'ca-es', 0, 3);
 
+-- --------------------------------------------------------
+
+
+--
+-- Estructura de la taula `foxy_extensions`
+--
+
+CREATE TABLE `foxy_extensions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(50) NOT NULL DEFAULT '',
+  `folder` varchar(50) NOT NULL DEFAULT '',
+  `name` varchar(50) NOT NULL DEFAULT '',
+  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 unpublished;1 published',
+  `ordering` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=8;
+
+--
+-- Bolcament de dades per a la taula `foxy_extensions`
+--
+
+INSERT INTO `foxy_extensions` (`id`, `type`, `folder`, `name`, `status`, `ordering`) VALUES
+(1, 'module', '', 'breadcrumbs', 1, 1),
+(2, 'module', '', 'language', 1, 2),
+(3, 'module', '', 'login', 1, 3),
+(4, 'module', '', 'topmenu', 1, 4),
+(5, 'plugin', 'onLogin', 'foxylogin', 1, 5),
+(6, 'plugin', 'onLogin', 'gauthenticate', 0, 6),
+(7, 'plugin', 'onRender', 'redirect', 1, 7);
+
 
 -- --------------------------------------------------------
 

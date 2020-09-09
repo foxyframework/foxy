@@ -11,7 +11,7 @@
 
 defined('_Foxy') or die ('restricted access');
 
-abstract class onLogin {
+abstract class foxylogin {
 	
 	public static function execute($args) {
 		

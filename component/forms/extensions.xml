@@ -1,0 +1,37 @@
+<form>
+    <field name="type">
+        <type>text</type>
+        <name>type</name>
+        <id>type</id>
+        <label>FOXY_EXTENSIONS_TYPE_LABEL</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <required>true</required>
+    </field>
+    <field name="folder">
+        <type>text</type>
+        <name>folder</name>
+        <id>folder</id>
+        <label>FOXY_EXTENSIONS_FOLDER_LABEL</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <required>true</required>
+    </field>
+    <field name="name">
+        <type>text</type>
+        <name>name</name>
+        <id>name</id>
+        <label>FOXY_EXTENSIONS_NAME_LABEL</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <required>true</required>
+    </field>
+    <field name="status">
+        <type>list</type>
+        <name>status</name>
+        <id>status</id>
+        <label>FOXY_EXTENSIONS_STATUS_LABEL</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <required>true</required>
+        <option value="">FOXY_SELECT_AN_OPTION</option>
+        <option value="0">Inactive</option>
+        <option value="1">Active</option>
+    </field>
+</form>

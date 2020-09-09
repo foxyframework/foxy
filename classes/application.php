@@ -180,13 +180,19 @@ class Application
     */
     public static function trigger($type, $args=array())
     {
-    	$path = FOXY_PLUGINS.DS.$type.DS.$type.'.php';
+        database::query('SELECT * FROM `#_extensions` WHERE folder = '.database::quote($type).' AND status = 1');
+        $rows = database::fetchObjectList();
+        
+        foreach($rows as $row) {
+            $plugin = $row->name;
+            $path = FOXY_PLUGINS.DS.$row->folder.DS.$plugin.DS.$plugin.'.php';
 
-  		if (file_exists($path))
-  		{
-  			include_once $path;
-  			$type::execute($args);
-  		}
+            if(file_exists($path))
+            {
+                include $path;
+                $plugin::execute($args);
+            }
+        }
     }
 
     /**
