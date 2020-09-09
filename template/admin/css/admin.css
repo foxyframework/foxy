@@ -5,17 +5,20 @@
     color: #fff;
 }
 
-.bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
+.card, 
+.card-header:first-child {
+  border-radius: 0;
+}
 
-  @media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-      font-size: 3.5rem;
-    }
-  }
+.card-header {
+  padding: .8rem 1rem;
+  margin-bottom: 0;
+  background-color: #343a40;
+  border: none;
+  color: #fff;
+}
+
+#adminForm legend {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+}

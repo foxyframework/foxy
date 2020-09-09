@@ -11,12 +11,15 @@
 
 defined('_Foxy') or die ('restricted access');
 
+//check if is an admin page and user is authenticated... 
+if(!user::getAuth()) {
+    $url = config::$site.'index.php?view=admin&layout=login&return='.base64_encode(config::$site.'index.php?view=admin');
+    application::redirect($url, 'You are not allowed to view this resource', 'info');
+    return false;
+}
+
 $model = application::getModel('languages');
 
-if(application::getVar('layout') == 'admin') {
-
-    if(!user::getAuth()) { application::redirect('index.php?view=home'); }
-    application::addScript(config::$site.'/bower_components/vanilla-datatables/dist/vanilla-dataTables.min.js');
-    application::addStyleSheet(config::$site.'/bower_components/vanilla-datatables/dist/vanilla-dataTables.min.css');
-    application::addScript(config::$site.'/bower_components/table-dragger/dist/table-dragger.min.js');
-}
+application::addScript(config::$site.'/bower_components/vanilla-datatables/dist/vanilla-dataTables.min.js');
+application::addStyleSheet(config::$site.'/bower_components/vanilla-datatables/dist/vanilla-dataTables.min.css');
+application::addScript(config::$site.'/bower_components/table-dragger/dist/table-dragger.min.js');

@@ -60,7 +60,7 @@ $view  = application::getVar('view');
         <div class="position-sticky pt-3">
             <ul class="nav flex-column">
             <li class="nav-item">
-        <a class="nav-link <?php if($view == 'admin') : ?>active<?php endif; ?>" href="index.php?view=admin" aria-expanded="false">
+              <a class="nav-link <?php if($view == 'admin') : ?>active<?php endif; ?>" href="index.php?view=admin" aria-expanded="false">
                 <span>Dashboard</span>
               </a>
             </li>

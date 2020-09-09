@@ -185,10 +185,7 @@ CREATE TABLE `foxy_sessions` (
 
 CREATE TABLE `foxy_settings` (
   `id` int(1) NOT NULL AUTO_INCREMENT,
-  `show_register` tinyint(1) NOT NULL DEFAULT 0,
-  `login_redirect` varchar(150) NOT NULL DEFAULT 'index.php?view=home',
-  `debug` tinyint(1) NOT NULL DEFAULT 0,
-  `offline` tinyint(1) NOT NULL DEFAULT 0,
+  `params` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=2;
 
@@ -196,8 +193,8 @@ CREATE TABLE `foxy_settings` (
 -- Bolcament de dades per a la taula `foxy_settings`
 --
 
-INSERT INTO `foxy_settings` (`id`, `show_register`, `login_redirect`, `debug`, `offline`) VALUES
-(1, 0, 'index.php?view=home', 0, 0);
+INSERT INTO `foxy_settings` (`id`, `params`) VALUES
+(1, '');
 
 -- --------------------------------------------------------
 
