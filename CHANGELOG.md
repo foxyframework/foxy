@@ -10,6 +10,10 @@
 * Reorder datatable rows with drag & drop
 * Messages with bootstrap 5 toasts
 * New blocks system, reusable web components
+* New extensions manager
+* Multiple plugins loaded by folder name
+* Usergroups manager
+* 301 redirects manager
 
 ## version 1.2.0
 
