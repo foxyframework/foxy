@@ -17,6 +17,17 @@
   	?>
     <link rel="canonical" href="<?= url::selfUrl(); ?>">
 
+    <?php if(config::$analytics != '') : ?>
+    <!-- Google Analytics -->
+    <script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', '<?= config::$analytics; ?>', 'auto');
+    ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+    <?php endif; ?>
+
     <?php if(config::$recaptcha == 1 && application::getVar('view', 'home') == 'contact') : ?>
     <script src="https://www.google.com/recaptcha/api.js?render=<?= config::$public_key; ?>"></script>
     <script>

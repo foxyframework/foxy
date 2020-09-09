@@ -38,4 +38,5 @@ class Config {
 	public static $recaptcha   = 0;
 	public static $public_key  = '';
 	public static $secretKey   = '';
+	public static $analytics   = '';
 }
