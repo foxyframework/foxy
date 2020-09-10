@@ -147,7 +147,7 @@ CREATE TABLE `foxy_extensions` (
   `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0 unpublished;1 published',
   `ordering` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=9;
 
 --
 -- Bolcament de dades per a la taula `foxy_extensions`
@@ -160,7 +160,8 @@ INSERT INTO `foxy_extensions` (`id`, `type`, `folder`, `name`, `status`, `orderi
 (4, 'module', '', 'topmenu', 1, 4),
 (5, 'plugin', 'onLogin', 'foxylogin', 1, 5),
 (6, 'plugin', 'onLogin', 'gauthenticate', 0, 6),
-(7, 'plugin', 'onRender', 'redirect', 1, 7);
+(7, 'plugin', 'onRender', 'redirect', 1, 7),
+(8, 'plugin', 'onAfterBlogPost', 'addthis', 1, 8);
 
 
 -- --------------------------------------------------------
