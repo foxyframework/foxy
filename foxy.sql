@@ -194,7 +194,7 @@ CREATE TABLE `foxy_settings` (
 --
 
 INSERT INTO `foxy_settings` (`id`, `params`) VALUES
-(1, '');
+(1, '{"show_register":"0","login_redirect":"index.php?view=home","debug":"1","offline":"0","pagination":"10","admin_mails":"0","recaptcha":"0","public_key":"","secret_key":"","analytics":""}');
 
 -- --------------------------------------------------------
 
