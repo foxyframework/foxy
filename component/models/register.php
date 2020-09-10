@@ -231,7 +231,7 @@ class register extends model
             if(isset($_GET['token'])) {
                 $result = database::updateField('#_users', 'block', 0, 'token', $_GET['token']);
                 if($result) {
-                    if(config::$admin_mails == 1) {
+                    if(settings::get('admin_mails', 0) == 1) {
                         $subject = "Nuevo registro en $sitename";
                         $body    = "Nuevo registro en $sitename, Un nuevo usuario se ha registrado en $sitename.";
                         $this->sendMail(config::$email, config::$email, $subject, $body);

@@ -18,10 +18,10 @@ class Settings {
 	 * @param string $name The var name
 	 * @param mixed $value The default value if empty
     */
-	public static function get($name, $value) {
+	public static function get($name, $default='') {
 
 		database::query('SELECT params FROM `#_settings` WHERE id = 1');
-        $row = json_decode(database::fetchObject());
+        $row = json_decode(database::loadResult());
 
         if($row->{$name} == '') { 
             return $default;

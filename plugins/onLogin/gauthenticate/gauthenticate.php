@@ -23,6 +23,8 @@ abstract class gauthenticate {
             $redirect   = application::getVar('return', '', 'post', 'string');
             $token      = application::getVar('token', '', 'post', 'string');
 
+            $login_redirect = settings::get('login_redirect');
+
             //si un campo esta vacio abortamos...
             if($email == "" || $password == "") {
                 application::setMessage(language::get('FOXY_ALL_FIELDS_ARE_MANDATORY'), 'danger');
@@ -65,7 +67,7 @@ abstract class gauthenticate {
 
                     database::updateField('#_users', 'lastvisitDate',  application::getVar('lastvisitDate'), 'id', $tmpId);
                     application::setMessage(language::replace('FOXY_LOGIN_SUCCESS_MSG',  user::$username), 'success');
-                    $redirect == '' ? $authUrl = config::$site.config::$login_redirect : $authUrl = base64_decode($redirect);
+                    $redirect == '' ? $authUrl = config::$site.$login_redirect : $authUrl = base64_decode($redirect);
                     application::redirect($authUrl);
                     return true;
 

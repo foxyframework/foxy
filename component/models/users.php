@@ -31,7 +31,7 @@ class users extends model
             $page = 1;
         }
         
-        $no_of_records_per_page = config::$pagination;
+        $no_of_records_per_page = settings::get('pagination', 20);
         
         $offset = ($page-1) * $no_of_records_per_page;
         

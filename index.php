@@ -31,7 +31,7 @@ if(!isset($_COOKIE['lang'])) { setcookie('lang', 'en-gb'); }
 //print_r(get_declared_classes());
 
 //set error level
-if(config::$debug == 1) {
+if(settings::get('debug') == 1) {
 	ini_set('display_errors', 1);
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);

@@ -20,10 +20,12 @@ abstract class foxylogin {
         $redirect = application::getVar('return', '', 'post', 'string');
         $token    = application::getVar('token', '', 'post', 'string');
 
+        $login_redirect = settings::get('login_redirect');
+
         //si un campo esta vacio abortamos...
         if($email == "" || $password == "") {
             application::setMessage(language::get('Rellena todos los campos por favor'), 'danger');
-            application::redirect(config::$site.config::$login_redirect);
+            application::redirect(config::$site.$login_redirect);
             return false;
         }
 
@@ -40,7 +42,7 @@ abstract class foxylogin {
 
                 database::updateField('#_users', 'lastvisitDate',  application::getVar('lastvisitDate'), 'id', $id);
                 application::setMessage(language::replace('FOXY_LOGIN_SUCCESS_MSG',  $user->username), 'success');
-                $redirect == '' ? $authUrl = config::$site.config::$login_redirect : $authUrl = base64_decode($redirect);
+                $redirect == '' ? $authUrl = config::$site.$login_redirect : $authUrl = base64_decode($redirect);
                 application::redirect($authUrl);
                 return true;
 

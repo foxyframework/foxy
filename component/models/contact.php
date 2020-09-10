@@ -19,9 +19,9 @@ class contact extends model
 
         $token   = $_POST['g-recaptcha-response'];
 
-        if(config::$recaptcha == 1) {
+        if(settings::get('recaptcha') == 1) {
             $ip 		    = $_SERVER['REMOTE_ADDR'];
-		    $response	    = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".config::$secretKey."&response=".$token."&remoteip=".$ip);
+		    $response	    = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".settings::get('secret_key')."&response=".$token."&remoteip=".$ip);
 		    $responseKeys   = json_decode($response, true);
         }
 
@@ -33,7 +33,7 @@ class contact extends model
         $subject = language::replace('FOXY_CONTACT_SUBJECT', config::$sitename);
         $body    = language::replace('FOXY_CONTACT_BODY', $name, $phone, $email, $message);
 
-        if(config::$recaptcha == 0 || $responseKeys['score'] >= 0.5) {
+        if(settings::get('recaptcha') == 0 || $responseKeys['score'] >= 0.5) {
 
             $send = $this->sendMail(config::$email, config::$sitename, $subject, $body);
         }

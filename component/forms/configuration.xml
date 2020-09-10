@@ -1,0 +1,97 @@
+<form>
+    <field name="show_register">
+      <type>list</type>
+      <name>show_register</name>
+      <id>show_register</id>
+      <label>Show register</label>
+      <message>FOXY_INVALID_FIELD</message>
+      <option value="0">FOXY_NO</option>
+      <option value="1">FOXY_YES</option>
+      <disabled>false</disabled>
+    </field>
+    <field name="debug">
+      <type>list</type>
+      <name>debug</name>
+      <id>debug</id>
+      <label>Debug</label>
+      <message>FOXY_INVALID_FIELD</message>
+      <option value="0">FOXY_NO</option>
+      <option value="1">FOXY_YES</option>
+      <disabled>false</disabled>
+    </field>
+    <field name="offline">
+      <type>list</type>
+      <name>offline</name>
+      <id>offline</id>
+      <label>Site offline</label>
+      <message>FOXY_INVALID_FIELD</message>
+      <option value="0">FOXY_NO</option>
+      <option value="1">FOXY_YES</option>
+      <disabled>false</disabled>
+    </field>
+    <field name="login_redirect">
+      <type>text</type>
+      <name>login_redirect</name>
+      <id>login_redirect</id>
+      <label>Login redirect</label>
+      <message>FOXY_INVALID_FIELD</message>
+      <placeholder></placeholder>
+      <disabled>false</disabled>
+    </field>
+    <field name="pagination">
+      <type>text</type>
+      <name>pagination</name>
+      <id>pagination</id>
+      <label>Pagination</label>
+      <message>FOXY_INVALID_FIELD</message>
+      <default>20</default>
+      <disabled>false</disabled>
+    </field>
+    <field name="admin_mails">
+      <type>list</type>
+      <name>admin_mails</name>
+      <id>admin_mails</id>
+      <label>Admin mails</label>
+      <message>FOXY_INVALID_FIELD</message>
+      <option value="0">FOXY_NO</option>
+      <option value="1">FOXY_YES</option>
+      <disabled>false</disabled>
+    </field>
+    <field name="recaptcha">
+      <type>list</type>
+      <name>recaptcha</name>
+      <id>recaptcha</id>
+      <label>reCaptcha</label>
+      <message>FOXY_INVALID_FIELD</message>
+      <option value="0">FOXY_NO</option>
+      <option value="1">FOXY_YES</option>
+      <disabled>false</disabled>
+    </field>
+    <field name="public_key">
+      <type>text</type>
+      <name>public_key</name>
+      <id>public_key</id>
+      <label>reCaptcha Public Key</label>
+      <message>FOXY_INVALID_FIELD</message>
+      <default></default>
+      <disabled>false</disabled>
+    </field>
+    <field name="secret_key">
+      <type>text</type>
+      <name>secret_key</name>
+      <id>secret_key</id>
+      <label>reCaptcha Secret Key</label>
+      <message>FOXY_INVALID_FIELD</message>
+      <default></default>
+      <disabled>false</disabled>
+    </field>
+    <field name="analytics">
+      <type>text</type>
+      <name>analytics</name>
+      <id>analytics</id>
+      <label>Analytics tracking ID</label>
+      <message>FOXY_INVALID_FIELD</message>
+      <default></default>
+      <disabled>false</disabled>
+    </field>
+</form>

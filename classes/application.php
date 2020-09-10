@@ -341,7 +341,7 @@ class Application
         self::$view     = application::getVar('view', 'home', 'get', 'string');
         self::$layout   = application::getVar('layout', null, 'get', 'string');
 
-        if(config::$offline == 1 && (!user::getAuth() && user::$level > 1)) { return 'offline.php'; }
+        if(settings::get('offline') == 1 && (!user::getAuth() && user::$level > 1)) { return 'offline.php'; }
 
         //check permissions and redirect if not authenticated...
         $path   = FOXY_COMPONENT.DS.'views'.DS.self::$view.DS.'params.json';

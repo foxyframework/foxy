@@ -12,7 +12,7 @@
 defined('_Foxy') or die ('restricted access');
 
 //if user is logged or register isn't allowed in config...
-if(user::getAuth() || config::$show_register == 0) {
+if(user::getAuth() || settings::get('show_register') == 0) {
   application::redirect(config::$site.'/index.php?view=home');
 }
 

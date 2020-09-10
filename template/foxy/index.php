@@ -17,21 +17,21 @@
   	?>
     <link rel="canonical" href="<?= url::selfUrl(); ?>">
 
-    <?php if(config::$analytics != '') : ?>
+    <?php if(settings::get('analytics') != '') : ?>
     <!-- Google Analytics -->
     <script>
     window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-    ga('create', '<?= config::$analytics; ?>', 'auto');
+    ga('create', '<?= settings::get('analytics'); ?>', 'auto');
     ga('send', 'pageview');
     </script>
     <script async src='https://www.google-analytics.com/analytics.js'></script>
     <!-- End Google Analytics -->
     <?php endif; ?>
 
-    <?php if(config::$recaptcha == 1 && application::getVar('view', 'home') == 'contact') : ?>
-    <script src="https://www.google.com/recaptcha/api.js?render=<?= config::$public_key; ?>"></script>
+    <?php if(settings::get('recaptcha', 0) == 1 && application::getVar('view', 'home') == 'contact') : ?>
+    <script src="https://www.google.com/recaptcha/api.js?render=<?= settings::get('public_key'); ?>"></script>
     <script>
-    grecaptcha.ready(function(){grecaptcha.execute('<?= config::$public_key; ?>',{action: "contact"}).then(function(token){ document.getElementById('g-recaptcha-response').value = token; });});
+    grecaptcha.ready(function(){grecaptcha.execute('<?= settings::get('public_key'); ?>',{action: "contact"}).then(function(token){ document.getElementById('g-recaptcha-response').value = token; });});
     </script>
     <?php endif; ?>
 
