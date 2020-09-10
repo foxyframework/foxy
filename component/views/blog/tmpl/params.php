@@ -29,6 +29,7 @@ $params = $model->getParams($id);
                     <?= html::getListField($params_form, 'show_date', $params->show_date); ?>
                     <?= html::getListField($params_form, 'show_hits', $params->show_hits); ?>
                     <?= html::getListField($params_form, 'show_tags', $params->show_tags); ?>
+                    <?= html::getListField($params_form, 'show_readmore', $params->show_readmore); ?>
                     <div class="form-group">
                         <input type="submit" value="Guardar" class="btn btn-primary">
                     </div>

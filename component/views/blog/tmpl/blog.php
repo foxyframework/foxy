@@ -48,6 +48,7 @@ $items = $model->getList();
 			    </p>
 							
 				<?= $model->trimText($item->fulltext, 500); ?>
+				<?php if($params->show_readmore == 1) : ?><p><a href="<?= url::genUrl('index.php?view=blog&layout=item&id='.$item->id.'&slug='.$item->alias); ?>"><?= language::get('FOXY_BLOG_READMORE'); ?></a></p><?php endif; ?>
 				<hr>						
 						
 			<?php endforeach; ?>

@@ -43,4 +43,15 @@
         <option value="0">FOXY_NO</option>
         <option value="1">FOXY_YES</option>
     </field>
+    <field name="show_readmore">
+        <type>list</type>
+        <name>show_readmore</name>
+        <id>show_readmore</id>
+        <label>Show Readmore</label>
+        <message>FOXY_INVALID_FIELD</message>
+        <default>1</default>
+        <option value="">FOXY_SELECT_AN_OPTION</option>
+        <option value="0">FOXY_NO</option>
+        <option value="1">FOXY_YES</option>
+    </field>
 </form>
