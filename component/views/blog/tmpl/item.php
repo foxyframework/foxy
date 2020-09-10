@@ -43,8 +43,12 @@ $params = json_decode($item->params);
 				  <?php endif; ?>
 				</span>
 
+				<?php application::trigger('onBeforeBlogPost', $item); ?>
+
 				<!-- Post Content -->
 				<?= $item->fulltext; ?>
+
+				<?php application::trigger('onAfterBlogPost', $item); ?>
 
 			</div>
         </div>
