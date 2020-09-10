@@ -341,16 +341,17 @@ class Application
         self::$view     = application::getVar('view', 'home', 'get', 'string');
         self::$layout   = application::getVar('layout', null, 'get', 'string');
 
-        if(settings::get('offline') == 1 && (!user::getAuth() && user::$level > 1)) { return 'offline.php'; }
+        //redirect to offline page if active and not an administrator
+        if(settings::get('offline') == 1 && (self::$view != 'admin' || self::$layout != 'admin') && (!user::getAuth() && user::$level > 1)) { 
+            return FOXY_TEMPLATES.DS.'system'.DS.'offline.php';
+        }
 
         //check permissions and redirect if not authenticated...
-        $path   = FOXY_COMPONENT.DS.'views'.DS.self::$view.DS.'params.json';
-        $params = json_decode(file_get_contents($path));
-        if(file_exists($path)) {
-            if($params->auth == 1 && !user::getAuth()) {
-                self::redirect($params->redirect);
-                return false;
-            }
+        database::query('SELECT params FROM `#_pages` WHERE title = '.database::quote($view));
+        $params = json_decode(database::loadResult());
+        if($params->auth == 1 && !user::getAuth()) {
+            self::redirect($params->redirect);
+            return false;
         }
 
         if(self::$task != null) {
@@ -374,7 +375,7 @@ class Application
                 return $path;
             }  else {
                 http_response_code(404);
-                return 'error.php';
+                return FOXY_TEMPLATES.DS.'system'.DS.'error.php';
             }
 
         }
@@ -425,13 +426,16 @@ class Application
     */
     public static function getView()
     { 
-        self::$view = application::getVar('view', 'home', 'get', 'string');
+        self::$view   = application::getVar('view', 'home', 'get', 'string');
         self::$layout = application::getVar('layout', '', 'get', 'string');
 
         $path = FOXY_COMPONENT.DS.'views'.DS.self::$view.DS.'view.php';
 
         if (is_file($path)) {
         	return $path;
+        } else {
+            http_response_code(404);
+            return FFOXY_TEMPLATES.DS.'system'.DS.'error.php';
         }
     }
 
@@ -454,7 +458,9 @@ class Application
 
   		// Check if the layout path was found.
   		if (!is_file($path)) {
-  			throw new RuntimeException('Layout Path Not Found');
+            http_response_code(404);
+            include(FOXY_TEMPLATES.DS.'system'.DS.'error.php');
+            die();
         }
           
         if(count($args) > 0) {
@@ -493,7 +499,7 @@ class Application
             return $path;
         }  else {
             http_response_code(404);
-            return 'error.php';
+            include(FOXY_BASE.DS.'template'.DS.'system'.DS.'error.php');
         }
     }
 
