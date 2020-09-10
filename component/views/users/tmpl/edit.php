@@ -12,7 +12,7 @@
 
 defined('_Foxy') or die ('restricted access');
 
-$id   = application::getVar('id', 0, 'post');
+$id   = application::getVar('id', 0, 'get');
 $item = application::getModel('users')->getItemById();
 $form = FOXY_COMPONENT.DS.'forms'.DS.'users.xml';
 ?>

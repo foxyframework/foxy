@@ -22,3 +22,9 @@
   border-bottom: 1px solid #ccc;
   margin-bottom: 20px;
 }
+
+th {
+  background: #343a40;
+  color: #fff;
+  padding: 10px;
+}
