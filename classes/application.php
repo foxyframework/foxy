@@ -341,11 +341,6 @@ class Application
         self::$view     = application::getVar('view', 'home', 'get', 'string');
         self::$layout   = application::getVar('layout', null, 'get', 'string');
 
-        //redirect to offline page if active and not an administrator
-        if(settings::get('offline') == 1 && (self::$view != 'admin' || self::$layout != 'admin') && (!user::getAuth() && user::$level > 1)) { 
-            return FOXY_TEMPLATES.DS.'system'.DS.'offline.php';
-        }
-
         //check permissions and redirect if not authenticated...
         database::query('SELECT params FROM `#_pages` WHERE title = '.database::quote($view));
         $params = json_decode(database::loadResult());
@@ -429,13 +424,16 @@ class Application
         self::$view   = application::getVar('view', 'home', 'get', 'string');
         self::$layout = application::getVar('layout', '', 'get', 'string');
 
+        //redirect to offline page if active and not an administrator
+        if(settings::get('offline') == 1 && session::getVar('level') <> 1) { 
+            include(FOXY_TEMPLATES.DS.'system'.DS.'offline.php');
+            die();
+        }
+
         $path = FOXY_COMPONENT.DS.'views'.DS.self::$view.DS.'view.php';
 
         if (is_file($path)) {
-        	return $path;
-        } else {
-            http_response_code(404);
-            return FFOXY_TEMPLATES.DS.'system'.DS.'error.php';
+        	include($path);
         }
     }
 
@@ -496,7 +494,7 @@ class Application
             $path = FOXY_TEMPLATES.DS.$tmpl.DS.'index.php';
         }
         if (is_file($path)) {
-            return $path;
+            include($path);
         }  else {
             http_response_code(404);
             include(FOXY_BASE.DS.'template'.DS.'system'.DS.'error.php');

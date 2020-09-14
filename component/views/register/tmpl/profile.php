@@ -54,7 +54,7 @@ $(document).ready(function() {
       <div class="col-lg-4">
         <div class="card card-profile">
           <div style="background-image: url('template/nova/img/photos/paul-morris-116514-unsplash.jpg');" class="card-header"></div>
-          <div class="card-body text-center"><img src="https://secure.gravatar.com/avatar/<?= md5(user::$email); ?>?size=100" class="card-profile-img">
+          <div class="card-body text-center"><img src="https://secure.gravatar.com/avatar/<?= md5(session::getVar('email')); ?>?size=100" class="card-profile-img">
             <h3 class="mb-3"><?= user::$username; ?></h3>
             <p>Image from <a href="https://secure.gravatar.com" target="_blank">Gravatar.com</a></p>
           </div>
@@ -68,19 +68,19 @@ $(document).ready(function() {
               <div class="col-md-5">
                 <div class="form-group mb-4">
                   <label class="form-label">Cargo</label>
-                  <input type="text" placeholder="Cargo" name="cargo" value="<?= user::cargo; ?>" class="form-control">
+                  <input type="text" placeholder="Cargo" name="cargo" value="<?= session::getVar('cargo'); ?>" class="form-control">
                 </div>
               </div>
               <div class="col-sm-6 col-md-3">
                 <div class="form-group mb-4">
                   <label class="form-label">Username</label>
-                  <input type="text" placeholder="Username" value="<?= user::username; ?>" class="form-control" readonly="true">
+                  <input type="text" placeholder="Username" value="<?= session::getVar('username'); ?>" class="form-control" readonly="true">
                 </div>
               </div>
               <div class="col-sm-6 col-md-4">
                 <div class="form-group mb-4">
                   <label class="form-label">Email address</label>
-                  <input type="email" placeholder="Email" value="<?= user::email; ?>" name="email" class="form-control">
+                  <input type="email" placeholder="Email" value="<?= session::getVar('email'); ?>" name="email" class="form-control">
                 </div>
               </div>
               <div class="col-md-6 col-md-3">
@@ -92,18 +92,18 @@ $(document).ready(function() {
               <div class="col-md-6 col-md-4">
                 <div class="form-group mb-4">
                   <label class="form-label">Address</label>
-                  <input type="text" placeholder="Home Address" value="<?= user::address; ?>" name="address" class="form-control">
+                  <input type="text" placeholder="Home Address" value="<?= session::getVar('address'); ?>" name="address" class="form-control">
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group mb-0">
                   <label class="form-label">About Me</label>
-                  <textarea rows="5" name="bio" placeholder="Here can be your description" value="Mike" class="form-control"><?= user::bio; ?></textarea>
+                  <textarea rows="5" name="bio" placeholder="Here can be your description" value="" class="form-control"><?= session::getVar('bio'); ?></textarea>
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="input-group my-3">
-                  <input type="text" placeholder="APIKey" id="apikey" value="<?= user::apikey; ?>" name="apikey" class="form-control">
+                  <input type="text" placeholder="APIKey" id="apikey" value="<?= session::getVar('apikey'); ?>" name="apikey" class="form-control">
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" id="keygen">Generar</button>
                   </div>
@@ -113,7 +113,7 @@ $(document).ready(function() {
           </div>
           <div class="card-footer text-right">
             <button type="submit" class="btn btn-primary">Update Profile</button>
-            <button data-target="#myModal" class="btn btn-danger pr-2" data-toggle="modal" data-original-title="<?php echo language::get('CW_SETTINGS_DELETE_ACCOUNT'); ?>"><?php echo $lang->get('CW_SETTINGS_DELETE_ACCOUNT'); ?></button>
+            <button data-target="#myModal" class="btn btn-danger pr-2" data-toggle="modal" data-original-title="<?= language::get('FOXY_SETTINGS_DELETE_ACCOUNT'); ?>"><?= language::get('FOXY_SETTINGS_DELETE_ACCOUNT'); ?></button>
           </div>
         </form>
       </div>
@@ -135,7 +135,7 @@ $(document).ready(function() {
         </div>
         <div class="modal-footer">
             <button class="btn" data-dismiss="modal"><?= language::get('CW_CANCEL'); ?></button>
-            <button onclick="deleteAccount(<?= user::name; ?>,<?= config::$site; ?>)';" class="btn btn-danger" data-dismiss="modal"><?= language::get('CW_DELETE'); ?></button>
+            <button onclick="deleteAccount(<?= user::$name; ?>,<?= config::$site; ?>)';" class="btn btn-danger" data-dismiss="modal"><?= language::get('CW_DELETE'); ?></button>
         </div>
     </div>
   </div>

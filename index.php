@@ -38,7 +38,7 @@ if(settings::get('debug') == 1) {
 }
 
 //render application
-include(application::getView());
-include(application::getTemplate());
+application::getView();
+application::getTemplate();
 
 ?>

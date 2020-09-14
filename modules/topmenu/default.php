@@ -33,7 +33,7 @@ include_once('helper.php');
               <li><a <?php if($item->type == 1): ?>data-toggle="modal" data-target="#modal<?= $item->id; ?>"<?php endif; ?> class="text-light" href="<?= url::genUrl($item->url); ?>"><?= $title; ?></a></li>
               <?php endif; ?>
               <?php endforeach; ?>
-              <?php if(user::getAuth() && user::$level == 1) : ?>
+              <?php if(user::getAuth() && session::getVar('level') == 1) : ?>
               <li><a class="text-light" href="<?= url::genUrl('index.php?view=admin'); ?>" target="_blank">Admin</a></li>
               <?php endif; ?>
             </ul>

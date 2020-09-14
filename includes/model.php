@@ -82,7 +82,7 @@ class model
     */
     function isAdmin() {
 
-        if(user::$level == 1) { return true; }
+        if(session::getVar('level') == 1) { return true; }
 
         return false;
     }

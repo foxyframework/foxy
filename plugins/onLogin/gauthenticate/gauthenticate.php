@@ -66,7 +66,7 @@ abstract class gauthenticate {
                     session::createSession();
 
                     database::updateField('#_users', 'lastvisitDate',  application::getVar('lastvisitDate'), 'id', $tmpId);
-                    application::setMessage(language::replace('FOXY_LOGIN_SUCCESS_MSG',  user::$username), 'success');
+                    application::setMessage(language::replace('FOXY_LOGIN_SUCCESS_MSG',  session::getVar('username')), 'success');
                     $redirect == '' ? $authUrl = config::$site.$login_redirect : $authUrl = base64_decode($redirect);
                     application::redirect($authUrl);
                     return true;

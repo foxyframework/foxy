@@ -15,7 +15,6 @@ class User
 {
     public static $id              = 0;
     public static $username        = "";
-    public static $password        = "";
     public static $registerDate    = "";
     public static $email           = "";
     public static $lastvisitDate   = "0000-00-00 00:00:00";
@@ -75,23 +74,22 @@ class User
     {
         $_SESSION['FOXY_userid'] = $id;
 
-        database::query('SELECT * FROM `#_users` WHERE id = '.$id);
-        $row = database::fetchObject();
+        $row = self::getUserObject($id);
 
-        self::$id              = $row->id;
-        self::$username        = $row->username;
-        self::$registerDate    = $row->registerDate;
-        self::$email           = $row->email;
-        self::$lastvisitDate   = $row->lastvisitDate;
-        self::$level           = $row->level;
-        self::$language        = $row->language;
-        self::$block           = $row->block;
-        self::$image           = $row->image;
-        self::$cargo           = $row->cargo;
-        self::$address         = $row->address;
-        self::$bio             = $row->bio;
-        self::$template        = $row->template;
-        self::$apikey          = $row->apikey;
+        session::setVar('id', $row->id);
+        session::setVar('username', $row->username);
+        session::setVar('registerDate', $row->registerDate);
+        session::setVar('email', $row->email);
+        session::setVar('lastvisitDate', $row->lastvisitDate);
+        session::setVar('level', $row->level);
+        session::setVar('language', $row->language);
+        session::setVar('block', $row->block);
+        session::setVar('image', $row->image);
+        session::setVar('cargo', $row->cargo);
+        session::setVar('address', $row->address);
+        session::setVar('bio', $row->bio);
+        session::setVar('token', $row->token);
+        session::setVar('apikey', $row->apikey);
     }
 
     /**

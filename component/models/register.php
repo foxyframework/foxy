@@ -112,9 +112,9 @@ class register extends model
 
             //send a confirmation to the user...
             $subject    = language::replace('FOXY_REGISTER_WELCOME_SUBJECT', config::$sitename);
-            $link       = config::$site.'/index.php?task=register.validate&token='.user::$token;
-            $body       = language::replace('FOXY_REGISTER_WELCOME_BODY', user::$username,  config::$sitename, $link);
-            $send       = $this->sendMail(user::$email, user::$email, $subject, $body);
+            $link       = config::$site.'/index.php?task=register.validate&token='.session::getVar('token');
+            $body       = language::replace('FOXY_REGISTER_WELCOME_BODY', session::getVar('username'),  config::$sitename, $link);
+            $send       = $this->sendMail(session::getVar('email'), session::getVar('email'), $subject, $body);
 
             if($send) {
                 application::setMessage(language::get('FOXY_REGISTER_RESET_SUCCESS_MSG'), 'success');
@@ -181,7 +181,7 @@ class register extends model
       $obj->cargo     = application::getVar('cargo');
       $obj->apikey    = application::getVar('apikey');
 
-      $result = database::updateRow("#_users", $obj, 'id', user::$id);
+      $result = database::updateRow("#_users", $obj, 'id', session::getVar('id'));
 
       if($result) {
         application::setMessage( language::get('FOXY_SETTINGS_SAVE_SUCCESS'), 'success');

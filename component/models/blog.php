@@ -127,7 +127,7 @@ class blog extends model
 		$id = application::getVar('id', 0, 'post', 'int');
 
 		$_POST['category'] 		= 0;
-		$_POST['userid']   		= user::$id;
+		$_POST['userid']   		= session::getVar('id');
 		$_POST['author_link'] 	= '#';
 		$_POST['language'] 		= $_POST['language'];
 		$_POST['status'] 		= 1;
