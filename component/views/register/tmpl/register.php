@@ -12,8 +12,8 @@
 defined('_Foxy') or die ('restricted access');
 
 //if user is logged or register isn't allowed in config...
-if(user::getAuth() || settings::get('show_register') == 0) {
-  application::redirect(config::$site.'/index.php?view=home');
+if(settings::get('show_register') == 0) {
+  application::redirect(url::genUrl('index.php?view=home'));
 }
 
 $form = FOXY_COMPONENT.DS.'forms'.DS.'register.xml';

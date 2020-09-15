@@ -151,6 +151,26 @@ class pages extends model
 			application::setMessage(language::get('FOXY_ITEM_STATUS_ERROR'), 'danger');
 		}
         application::redirect($link);
+  }
+  
+  /**
+	 * Method to remove and item by id
+	 * @return object 
+	*/
+	public function removeItem()
+	{
+		$id   	= application::getVar('id', '', 'get');
+
+		$result = database::query('DELETE FROM '.$this->table.' WHERE '.$this->key.' = '.$id);
+
+		if($result) {
+			$link = config::$site.'/index.php?view='.$this->view.'&layout=admin';
+			application::setMessage(language::get('FOXY_ITEM_REMOVE_SUCCESS'), 'success');
+		} else {
+			$link = config::$site.'/index.php?view='.$this->view.'&layout=admin';
+			application::setMessage(language::get('FOXY_ITEM_REMOVE_ERROR'), 'danger');
+		}
+        application::redirect($link);
 	}
 
     /**
