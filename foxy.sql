@@ -91,7 +91,7 @@ INSERT INTO `foxy_pages` (`id`, `title`, `translation`, `url`, `auth`, `type`, `
 CREATE TABLE `foxy_blocks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(150) NOT NULL DEFAULT '',
-  `params` text NOT NULL DEFAULT = '',
+  `params` text NOT NULL DEFAULT '',
   `pageId` int(11) NOT NULL DEFAULT 0,
   `language` varchar(5) NOT NULL DEFAULT 'en-gb',
   `ordering` int(11) NOT NULL DEFAULT 0,

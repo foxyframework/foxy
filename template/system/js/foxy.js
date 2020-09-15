@@ -163,23 +163,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		})
 	});
 
-	//click lang options create cookie
-	document.querySelectorAll('.lang').forEach(item => {
-		item.addEventListener('click', evt => {
-			evt.preventDefault();
-			let lang = evt.target.dataset.lang;
-			var xhttp;
-			xhttp= new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					window.location.reload();
-				}
-			};
-			xhttp.open('GET', domain+'?task=register.setCookie&lang='+lang+'&mode=raw', true);
-			xhttp.send();
-		})
-	});
-
 	document.querySelectorAll('.closeModal').forEach(item => {
 		item.addEventListener('click', evt => {
 			let id = evt.currentTarget.getAttribute('data-id');

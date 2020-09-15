@@ -423,9 +423,10 @@ class Application
     { 
         self::$view   = application::getVar('view', 'home', 'get', 'string');
         self::$layout = application::getVar('layout', '', 'get', 'string');
+        self::$task   = application::getVar('task', null, 'get', 'string');
 
         //redirect to offline page if active and not an administrator
-        if(settings::get('offline') == 1 && session::getVar('level') <> 1) { 
+        if(settings::get('offline') == 1 && (self::$view != 'admin' && self::$layout != 'admin' && self::$task == null) && session::getVar('level') <> 1) { 
             include(FOXY_TEMPLATES.DS.'system'.DS.'offline.php');
             die();
         }

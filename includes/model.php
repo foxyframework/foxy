@@ -41,8 +41,11 @@ class model
     */
     public function setCookie()
 	{
-        $value = application::getVar('lang', 'en-gb', 'get');
+        $value = application::getVar('lang', 'es-es', 'get');
+        $url   = application::getVar('return', '', 'get');
+        setcookie('lang', '', time() - 3600);
         setcookie('lang', $value);
+        application::redirect(base64_decode($url));
     }
 
     /**

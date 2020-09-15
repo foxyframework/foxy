@@ -19,7 +19,7 @@ $languages = languageHelper::getLanguages();
 
     <?php foreach($languages as $lang) : ?>
 
-        <div class="pr-2"><a href="#" class="lang"><img data-lang="<?= $lang->code; ?>" src="assets/img/flags/<?= $lang->code; ?>.gif" alt="<?= $lang->title; ?>"></a></div>
+        <div class="pr-2"><a href="index.php?task=register.setCookie&lang=<?= $lang->code; ?>&mode=raw&return=<?= base64_encode($view.'.html'); ?>" class="lang"><img data-lang="<?= $lang->code; ?>" src="assets/img/flags/<?= $lang->code; ?>.gif" alt="<?= $lang->title; ?>"></a></div>
 
     <?php endforeach; ?>
 
