@@ -134,7 +134,7 @@ class model
 
     public function getMenuId($view)
     {
-        database::query('SELECT id FROM `#_pages` WHERE title = '.database::quote($view));
+        database::query('SELECT id FROM `#_pages` WHERE LOWER(title) = '.database::quote($view));
         return database::loadResult();
     }
 
