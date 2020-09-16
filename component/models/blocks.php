@@ -139,7 +139,7 @@ class blocks extends model
 			$post[$k] = $v;
 		}
 
-		$params = json_encode($post);
+		$params = json_encode($post, JSON_UNESCAPED_UNICODE);
         
         $result = database::updateField($this->table, 'params', $params, $this->key, $id);
     
