@@ -25,7 +25,8 @@ require_once(FOXY_VENDOR.DS.'autoload.php');
 //trigger plugin onRender before the app is ready...
 application::trigger('onRender', array());
 
-if(!isset($_COOKIE['lang'])) { setcookie('lang', 'en-gb'); }
+$code = language::getActive();
+if(!isset($_COOKIE['lang'])) { setcookie('lang', $code[0]); }
 
 //print_r($_SESSION);
 //print_r(get_declared_classes());

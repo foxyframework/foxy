@@ -16,6 +16,16 @@ class Language
     public static $code = 'es-es';
 
     /**
+     * Method to get the language active
+     * @return string active language
+    */
+    public static function getActive()
+    {
+        database::query('SELECT code FROM `#_languages` WHERE status = 1 ORDER BY ordering DESC');
+        return database::fetchArray();
+    }
+
+    /**
      * Method to get a translatable string from the language file
      * @param string $text
      * @return string if success false if not

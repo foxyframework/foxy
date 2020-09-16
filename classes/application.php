@@ -203,10 +203,11 @@ class Application
     */
     public static function render($menuId)
     {
-        $lang = application::getVar('lang', 'en-gb', 'cookie');
+        $code = language::getActive();
+        $lang = application::getVar('lang', $code[0], 'cookie');
         database::query('SELECT * FROM `#_blocks` WHERE pageId = '.$menuId.' AND language = '.database::quote($lang).' AND status = 1 ORDER BY ordering DESC');
         $rows = database::fetchObjectList();
-
+        ob_start();
         $html  = '';
 
   		if (count($rows) > 0)
@@ -217,18 +218,18 @@ class Application
                 $blockpath = FOXY_BASE.DS.'blocks'.DS.strtolower($row->title).DS.strtolower($row->title).'.php';
                 
                 if(file_exists($blockpath)) {
-                    $ch = curl_init(config::$site.'blocks'.DS.strtolower($row->title).DS.strtolower($row->title).'.php');
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-                    $block = curl_exec($ch);
-                    curl_close($ch);
+                    foreach($params as $k => $v) {
+                        $_POST[$k] = $v;
+                    }
+                    include $blockpath;
+                    $html .= ob_get_contents();
                 }
 
                 $html .= $block;
 
             }
         }
-          
+        $html = ob_get_clean();  
         return $html;
     }
 
@@ -426,7 +427,7 @@ class Application
         self::$task   = application::getVar('task', null, 'get', 'string');
 
         //redirect to offline page if active and not an administrator
-        if(settings::get('offline') == 1 && (self::$view != 'admin' && self::$layout != 'admin' && self::$task == null) && session::getVar('level') <> 1) { 
+        if(settings::get('offline') == 1 && (self::$view != 'admin' && self::$layout != 'admin' && self::$task != null) && session::getVar('level') <> 1) { 
             include(FOXY_TEMPLATES.DS.'system'.DS.'offline.php');
             die();
         }
