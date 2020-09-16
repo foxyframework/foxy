@@ -13,7 +13,7 @@ defined('_Foxy') or die ('restricted access');
 
 class Language
 {
-    public static $code = 'en-gb';
+    public static $code = 'es-es';
 
     /**
      * Method to get a translatable string from the language file
