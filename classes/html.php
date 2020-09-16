@@ -55,7 +55,7 @@ class Html
                         if($k == 'field') { $field = $v; }
                         if($k == 'format' && $v == 'date') { $field = date('d-m-Y', strtotime($d->{$field})); }
                         if($k == 'format' && $v == 'price') { $field = number_format($d->{$field}, 2, '.', ',').'&euro;'; }
-                        if($k == 'format' && $v == 'bool') { if($d->{$field} == 1) { $field = language::get('FOXY_YES'); } else { $field = language('FOXY_NO'); } }
+                        if($k == 'format' && $v == 'bool') { if($d->{$field} == 1) { $field = language::get('FOXY_YES'); } else { $field = language::get('FOXY_NO'); } }
                         if($k == 'format' && $v == 'link') { $field = '<a href="'.url::genUrl('index.php?view='.$view.'&layout=admin&id='.$d->{$key}).'">'.$d->{$field}.'</a>'; }
                     }    
                 } else {
