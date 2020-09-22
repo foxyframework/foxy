@@ -1,4 +1,4 @@
-var domain   = location.origin+location.pathname;
+const domain     = location.origin+location.pathname;
 
 function setCookie(cname, cvalue, exdays) {
 	var d = new Date();
@@ -52,6 +52,24 @@ function getParameterByName(name) {
 	return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+// get first selected checkbox
+function getFirstSelectedCheckbox() {
+
+	return document.querySelector('.tableCheck:checked').getAttribute('data-id');
+}
+
+// get all selecteded checkboxes
+function getAllSelectedCheckboxes() {
+
+	const checkbox = document.querySelectorAll('.tableCheck:checked');
+	const items = [];
+	checkbox.forEach(item => {
+		items.push(item.dataset.id)
+	});
+
+	return items;
+}
+
 (function () {
 	'use strict'
   
@@ -94,6 +112,21 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 	}
 
+	//select all checkbox
+	if(document.getElementById('selectAll')) {
+		document.getElementById('selectAll').addEventListener("click",function(e) {
+			var checkboxes = document.getElementsByClassName('tableCheck');
+			
+			for (var i=0; i<checkboxes.length; i++)  {
+				if (checkboxes[i].checked == false)   {
+					checkboxes[i].checked = true;
+				} else {
+					checkboxes[i].checked = false;
+				}
+			}
+		});
+	}
+
 	//init dropzone to upload files
 	if(document.getElementById('upload')) {
 		let myDropzone = new Dropzone(".dropzone", { url: domain+"?task=media.upload&mode=raw"});
@@ -128,6 +161,50 @@ document.addEventListener("DOMContentLoaded", function() {
 			var myModal = new bootstrap.Modal(document.getElementById('editable'));
 			myModal.show();
 		})
-	});	 
+	});
+
+	document.querySelectorAll('.closeModal').forEach(item => {
+		item.addEventListener('click', evt => {
+			let id = evt.currentTarget.getAttribute('data-id');
+			var myModal = new bootstrap.Modal(document.getElementById(id));
+			myModal.hide();
+		})
+	});	
+	
+	//reorder tables system
+	if(document.getElementById('datatable')) {
+		var el = document.getElementById('datatable');
+		var dragger = tableDragger(el, {
+			mode: 'row',
+			dragHandler: '.handle',
+			onlyBody: true
+		});
+		dragger.on('drop',function(from, to) {
+
+			const id         = [];
+			const order      = [];
+
+			let view = el.rows[from].querySelector('.handle').dataset.view;
+
+			id.push(el.rows[from].querySelector('.handle').dataset.id);
+			id.push(el.rows[to].querySelector('.handle').dataset.id);
+			order.push(el.rows[from].querySelector('.handle').dataset.ordering);
+			order.push(el.rows[to].querySelector('.handle').dataset.ordering);
+
+			let ids = JSON.stringify(id);
+			let orders = JSON.stringify(order);
+
+			//call ajax
+			var xhttp;
+			xhttp= new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					//do nothing
+				}
+			};
+			xhttp.open('GET', domain+'?task='+view+'.reorder&id='+ids+'&order='+orders+'&mode=raw', true);
+			xhttp.send();
+		});	 
+	} 
 	  
 });
