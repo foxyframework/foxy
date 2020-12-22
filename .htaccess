@@ -1,6 +1,24 @@
 
 ## No directory listings
-IndexIgnore *
+<IfModule autoindex>
+  IndexIgnore *
+</IfModule>
+
+## Suppress mime type detection in browsers for unknown types
+<IfModule mod_headers.c>
+Header always set X-Content-Type-Options "nosniff"
+</IfModule>
+
+## Can be commented out if causes errors, see notes above.
+Options +FollowSymlinks
+Options -Indexes
+
+## Disable inline JavaScript when directly opening SVG files or embedding them with the object-tag
+<FilesMatch "\.svg$">
+  <IfModule mod_headers.c>
+    Header always set Content-Security-Policy "script-src 'none'"
+  </IfModule>
+</FilesMatch>
 
 ## Mod_rewrite in use.
 RewriteEngine On
@@ -11,7 +29,6 @@ RewriteEngine On
 ##
 
 # RewriteBase /
-
 
 # new rule to handle index.php?view=blog&layout=item&id=80&slug=example-post-title
 RewriteRule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)\.html$ index.php?view=$1&layout=$2&id=$3&slug=$4 [L]
@@ -26,8 +43,8 @@ RewriteRule ^([^/]*)/([^/]*)\.html$ index.php?view=$1&layout=$2 [L]
 RewriteRule ^([^/]*)\.html$ index.php?view=$1 [L]
 
 #Error handling
-ErrorDocument 400 /error.php?e=400
-ErrorDocument 401 /error.php?e=401
-ErrorDocument 403 /error.php?e=403
-ErrorDocument 404 /error.php?e=404
-ErrorDocument 500 /error.php?e=500
+ErrorDocument 400 /template/system/error.php?e=400
+ErrorDocument 401 /template/system/error.php?e=401
+ErrorDocument 403 /template/system/error.php?e=403
+ErrorDocument 404 /template/system/error.php?e=404
+ErrorDocument 500 /template/system/error.php?e=500
