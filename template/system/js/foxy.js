@@ -115,19 +115,5 @@ document.addEventListener("DOMContentLoaded", function() {
 			myModal.hide();
 		})
 	});
-
-	//click edit buttons
-	document.querySelectorAll('.editable').forEach(item => {
-		item.addEventListener('click', evt => {
-			evt.preventDefault();
-			let id   = evt.currentTarget.dataset.id;
-			let view = evt.currentTarget.dataset.view;
-			let layout = evt.currentTarget.dataset.layout;
-			load(domain+'?view='+view+'&layout='+layout+'&id='+id+'&mode=raw', 'POST', 'mbody');
-			if(document.getElementById('editor')) { const editor = CKEDITOR.replaceAll( 'editor' ); }
-			var myModal = new bootstrap.Modal(document.getElementById('editable'));
-			myModal.show();
-		})
-	});	 
 	  
 });

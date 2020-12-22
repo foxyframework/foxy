@@ -15,7 +15,7 @@ $view  = application::getVar('view');
     <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= config::$site; ?>template/admin/css/admin.css"> 
     <link rel="stylesheet" href="<?= config::$site; ?>template/system/css/foxy.css">
-    <script src="https://kit.fontawesome.com/0deb70caff.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" integrity="sha512-F5QTlBqZlvuBEs9LQPqc1iZv2UMxcVXezbHzomzS6Df4MZMClge/8+gXrKw2fl5ysdk4rWjR0vKS7NNkfymaBQ==" crossorigin="anonymous"></script>
 
     <?php
   	if(count(application::$metatags) > 0) :
