@@ -1,6 +1,7 @@
 {
     "name": "foxy php framework",
     "require": {
-        "sonata-project/google-authenticator": "2.2.0"
+        "sonata-project/google-authenticator": "2.2.0",
+        "scssphp/scssphp": "^1.3"
     }
 }

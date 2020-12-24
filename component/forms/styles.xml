@@ -1,0 +1,74 @@
+<form>
+    <field name="primary">
+        <type>color</type>
+        <name>primary</name>
+        <id>primary</id>
+        <label>Primary</label>
+        <message></message>
+        <placeholder>Primary color</placeholder>
+        <disabled>false</disabled>
+    </field>
+    <field name="secondary">
+        <type>color</type>
+        <name>secondary</name>
+        <id>secondary</id>
+        <label>Secondary</label>
+        <message></message>
+        <placeholder>Secondary color</placeholder>
+        <disabled>false</disabled>
+    </field>
+    <field name="success">
+        <type>color</type>
+        <name>success</name>
+        <id>success</id>
+        <label>Success</label>
+        <message></message>
+        <placeholder>Success color</placeholder>
+        <disabled>false</disabled>
+    </field>
+    <field name="info">
+        <type>color</type>
+        <name>info</name>
+        <id>info</id>
+        <label>Info</label>
+        <message></message>
+        <placeholder>Info color</placeholder>
+        <disabled>false</disabled>
+    </field>
+    <field name="warning">
+        <type>color</type>
+        <name>warning</name>
+        <id>warning</id>
+        <label>Warning</label>
+        <message></message>
+        <placeholder>Warning color</placeholder>
+        <disabled>false</disabled>
+    </field>
+    <field name="danger">
+        <type>color</type>
+        <name>danger</name>
+        <id>danger</id>
+        <label>Danger</label>
+        <message></message>
+        <placeholder>Danger color</placeholder>
+        <disabled>false</disabled>
+    </field>
+    <field name="light">
+        <type>color</type>
+        <name>light</name>
+        <id>light</id>
+        <label>Light</label>
+        <message></message>
+        <placeholder>Light color</placeholder>
+        <disabled>false</disabled>
+    </field>
+    <field name="dark">
+        <type>color</type>
+        <name>dark</name>
+        <id>dark</id>
+        <label>Dark</label>
+        <message></message>
+        <placeholder>Dark color</placeholder>
+        <disabled>false</disabled>
+    </field>
+</form>
