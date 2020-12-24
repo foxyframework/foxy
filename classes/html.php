@@ -55,7 +55,7 @@ class Html
                         if($k == 'field') { $field = $v; }
                         if($k == 'format' && $v == 'date') { $field = date('d-m-Y', strtotime($d->{$field})); }
                         if($k == 'format' && $v == 'price') { $field = number_format($d->{$field}, 2, '.', ',').'&euro;'; }
-                        if($k == 'format' && $v == 'bool') { if($d->{$field} == 1) { $field = language::get('FOXY_YES'); } else { $field = language::get('FOXY_NO'); } }
+                        if($k == 'format' && $v == 'bool') { if($d->{$field} == 1) { $field = language::get('FOXY_YES'); } else { $field = language('FOXY_NO'); } }
                         if($k == 'format' && $v == 'link') { $field = '<a href="'.url::genUrl('index.php?view='.$view.'&layout=admin&id='.$d->{$key}).'">'.$d->{$field}.'</a>'; }
                     }    
                 } else {
@@ -103,9 +103,7 @@ class Html
         $html .= '<div class="modal-content">';
         $html .= '<div class="modal-header">';
         $html .= '<h5 class="modal-title" id="editModalLabel">Edit</h5>';
-        $html .= '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
-        $html .= '<span aria-hidden="true">&times;</span>';
-        $html .= '</button>';
+        $html .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>';
         $html .= '</div>';
         $html .= '<div class="modal-body" id="mbody">';
         //$html .= application::renderView($view, 'edit', array('id' => $d->{$key}));
@@ -904,7 +902,7 @@ class Html
                 $html .= "<input type='text' name='".$field[0]->id."' id='".$field[0]->id."' $value class='form-control' aria-describedby='button-addon2'>";
                 $content = addslashes("<img width='200' src='document.getElementById("+$field[0]->id+").src;'>");
                 $html .= "<button data-toggle='popover' title=Preview' data-html='true' data-content='' data-placement='left' class='btn btn-outline-secondary' type='button'>Preview</button>";
-                $html .= "<button class='btn btn-outline-secondary' type='button' id='button-addon2' data-toggle='modal' data-target='#".$uniqid."Modal'>Select</button>";
+                $html .= "<button class='btn btn-outline-secondary' type='button' id='button-addon2' data-bs-toggle='modal' data-bs-target='#".$uniqid."Modal'>Select</button>";
                 $html .= "</div>";
 
                 $html .= "<div class='modal' id='".$uniqid."Modal' tabindex='-1'>";
@@ -912,8 +910,7 @@ class Html
                 $html .= "<div class='modal-content'>";
                 $html .= "<div class='modal-header'>";
                 $html .= "<h5 class='modal-title'>Select image</h5>";
-                $html .= "<button type='button' class='close closeModal' data-id='".$uniqid."Modal' aria-label='Close'>";
-                $html .= "<span aria-hidden='true'>&times;</span>";
+                $html .= "<button type='button' class='btn-close closeModal' data-bs-dismiss='".$uniqid."Modal' data-id='".$uniqid."Modal' aria-label='Close'>";
                 $html .= "</button>";
                 $html .= "</div>";
                 $html .= "<div class='modal-body'>";
