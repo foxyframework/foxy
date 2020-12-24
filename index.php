@@ -25,8 +25,17 @@ require_once(FOXY_VENDOR.DS.'autoload.php');
 //trigger plugin onRender before the app is ready...
 application::trigger('onRender', array());
 
-$code = language::getActive();
-if(!isset($_COOKIE['lang'])) { setcookie('lang', $code[0]); }
+if(!isset($_COOKIE['lang'])) { 
+	setcookie('lang', 'en-gb', array (
+		'expires' => time() + 60*60*24*30,
+		'path' => '/',
+		'domain' => config::$site, // leading dot for compatibility or use subdomain
+		'secure' => true,     // or false
+		'httponly' => true,    // or false
+		'samesite' => 'None' // None || Lax  || Strict
+		)
+	);
+}
 
 //print_r($_SESSION);
 //print_r(get_declared_classes());
