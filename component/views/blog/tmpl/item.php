@@ -26,7 +26,7 @@ $params = json_decode($item->params);
       <div class="row my-5">
         <div class="col-md-12">
 			<div class="blog-post">
-
+				<?= application::trigger('onBeforeBlogPost', $item); ?>
           		<h2 class="blog-post-title"><?= $item->title; ?></h2>
               	<span class="blog-post-meta">
 				  <?php if($params->show_author == 1) : ?>
@@ -42,8 +42,6 @@ $params = json_decode($item->params);
 				  <?= language::get('FOXY_BLOG_TAGS'); ?> <?= $model->renderTags($item->tags); ?>
 				  <?php endif; ?>
 				</span>
-
-				<?php application::trigger('onBeforeBlogPost', $item); ?>
 
 				<!-- Post Content -->
 				<?= $item->fulltext; ?>

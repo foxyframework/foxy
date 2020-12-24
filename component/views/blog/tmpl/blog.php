@@ -30,6 +30,7 @@ $items = $model->getList();
 				<a href="<?= url::genUrl('index.php?view=blog&layout=item&id='.$item->id.'&slug='.$item->alias); ?>">
 					<h2 class="blog-post-title"><?= $item->title; ?></h2>
 				</a>
+				<?= application::trigger('onBeforeBlogPost', $item); ?>
 				<p class="blog-post-meta">
 					<?php if($params->show_author == 1) : ?>
 					<?= language::get('FOXY_BLOG_CREATED_BY'); ?>
@@ -46,7 +47,7 @@ $items = $model->getList();
 					<?php endif; ?>
 
 			    </p>
-							
+				<?= application::trigger('onAfterBlogPost', $item); ?>			
 				<?= $model->trimText($item->fulltext, 500); ?>
 				<?php if($params->show_readmore == 1) : ?><p><a href="<?= url::genUrl('index.php?view=blog&layout=item&id='.$item->id.'&slug='.$item->alias); ?>"><?= language::get('FOXY_BLOG_READMORE'); ?></a></p><?php endif; ?>
 
