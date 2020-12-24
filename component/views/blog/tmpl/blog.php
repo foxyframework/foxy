@@ -34,13 +34,13 @@ $items = $model->getList();
 				<p class="blog-post-meta">
 					<?php if($params->show_author == 1) : ?>
 					<?= language::get('FOXY_BLOG_CREATED_BY'); ?>
-					<a href="<?= $item->author_link; ?>" target="_blank"><?= $item->author; ?></a>&dot; 
+					<a href="<?= $item->author_link; ?>" target="_blank"><?= $item->author; ?></a> &middot; 
 					<?php endif; ?>
 					<?php if($params->show_date == 1) : ?>
-					<?= date('j F Y', strtotime($item->publishDate)); ?> &dot;  
+					<?= date('j F Y', strtotime($item->publishDate)); ?> &middot;  
 					<?php endif; ?>
 					<?php if($params->show_hits == 1) : ?>
-					<?= language::get('FOXY_BLOG_HITS'); ?> <?= $item->hits; ?> &dot; 
+					<?= language::get('FOXY_BLOG_HITS'); ?> <?= $item->hits; ?> &middot; 
 					<?php endif; ?>
 					<?php if($params->show_tags == 1) : ?>
 					<?= language::get('FOXY_BLOG_TAGS'); ?> <?= $model->renderTags($item->tags); ?>

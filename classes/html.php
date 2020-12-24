@@ -188,7 +188,7 @@ class Html
                 $field[$i]->view == "" ? $view = "" : $view = "data-view='". $field[$i]->view. "'";
                 $color = isset($field[$i]->color) ? $field[$i]->color : 'success';
 
-                if($field[$i]->modal == true) { $modal = 'href="#" data-toggle="modal" data-target="#'. $field[$i]->id .'"'; } else { $modal = 'href="'. $field[$i]->href .'" id="'. $field[$i]->id .'"'; }
+                if($field[$i]->modal == true) { $modal = 'href="#" data-bs-toggle="modal" data-bs-target="#'. $field[$i]->id .'"'; } else { $modal = 'href="'. $field[$i]->href .'" id="'. $field[$i]->id .'"'; }
                 $html .= '&nbsp;<a '.$modal.' '.$view.'  class="btn btn-' . $color . ' ' . $field[$i]->class . '" >' . $icon . $field[$i]->label . '</a>';
                 if($field[$i]->modal == true) {
                     $html .= '<div class="modal fade" id="'. $field[$i]->id .'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">';
@@ -196,7 +196,7 @@ class Html
                     $html .= '<div class="modal-content">';
                     $html .= '<div class="modal-header">';
                     $html .= '<h5 class="modal-title" id="exampleModalLabel">'.$field[$i]->modal_title.'</h5>';
-                    $html .= '<button type="button" class="close" data-dismiss="modal" aria-label="Close">';
+                    $html .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">';
                     $html .= '<span aria-hidden="true">&times;</span>';
                     $html .= '</button>';
                     $html .= '</div>';
@@ -901,7 +901,7 @@ class Html
                 $default != '' ? $value = "value='$default'" : $value = "";
                 $html .= "<input type='text' name='".$field[0]->id."' id='".$field[0]->id."' $value class='form-control' aria-describedby='button-addon2'>";
                 $content = addslashes("<img width='200' src='document.getElementById("+$field[0]->id+").src;'>");
-                $html .= "<button data-toggle='popover' title=Preview' data-html='true' data-content='' data-placement='left' class='btn btn-outline-secondary' type='button'>Preview</button>";
+                $html .= "<button data-bs-toggle='popover' title=Preview' data-bs-html='true' data-bs-content='' data-bs-placement='left' class='btn btn-outline-secondary' type='button'>Preview</button>";
                 $html .= "<button class='btn btn-outline-secondary' type='button' id='button-addon2' data-bs-toggle='modal' data-bs-target='#".$uniqid."Modal'>Select</button>";
                 $html .= "</div>";
 
@@ -917,7 +917,7 @@ class Html
                 $html .= "<div class='d-flex flex-row'>";
 
                 foreach($ficheros as $fichero) {
-                    $html .= "<img class='img-selector' data-uniqid='".$uniqid."' data-id='".$field[0]->id."' src='assets/img/".$folder."/".$fichero."' alt='...'>";
+                    $html .= "<img class='img-selector' data-uniqid='".$uniqid."' data-id='".$field[0]->id."' src='assets/img/".$folder."/".$fichero."' style='max-width:20%' alt='...'>";
                 }
                  
                 $html .= "</div>";
