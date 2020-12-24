@@ -24,13 +24,13 @@ include_once('helper.php');
               <?php foreach(topmenuHelper::getItems() as $item) : ?>
               <?php $item->translation != '' ? $title = language::get($item->translation) : $title = $item->title; ?>
               <?php if($item->auth == 0) : ?>
-              <li><a <?php if($item->type == 1): ?>data-toggle="modal" data-target="#modal<?= $item->id; ?>"<?php endif; ?> class="text-light" href="<?= url::genUrl($item->url); ?>"><?= $title; ?></a></li>
+              <li><a <?php if($item->type == 1): ?>data-bs-toggle="modal" data-bs-target="#modal<?= $item->id; ?>"<?php endif; ?> class="text-light" href="<?= url::genUrl($item->url); ?>"><?= $title; ?></a></li>
               <?php endif; ?>
               <?php if($item->auth == 1 && !user::getAuth()) : ?>
-              <li><a <?php if($item->type == 1): ?>data-toggle="modal" data-target="#modal<?= $item->id; ?>"<?php endif; ?> class="text-light" href="<?= url::genUrl($item->url); ?>"><?= $title; ?></a></li>
+              <li><a <?php if($item->type == 1): ?>data-bs-toggle="modal" data-bs-target="#modal<?= $item->id; ?>"<?php endif; ?> class="text-light" href="<?= url::genUrl($item->url); ?>"><?= $title; ?></a></li>
               <?php endif; ?>
               <?php if($item->auth == 2 && user::getAuth()) : ?>
-              <li><a <?php if($item->type == 1): ?>data-toggle="modal" data-target="#modal<?= $item->id; ?>"<?php endif; ?> class="text-light" href="<?= url::genUrl($item->url); ?>"><?= $title; ?></a></li>
+              <li><a <?php if($item->type == 1): ?>data-bs-toggle="modal" data-bs-target="#modal<?= $item->id; ?>"<?php endif; ?> class="text-light" href="<?= url::genUrl($item->url); ?>"><?= $title; ?></a></li>
               <?php endif; ?>
               <?php endforeach; ?>
               <?php if(user::getAuth() && session::getVar('level') == 1) : ?>
@@ -68,9 +68,7 @@ include_once('helper.php');
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalLabel<?= $item->id; ?>"><?= $item->title; ?></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <?= application::getModule(''.$item->module.''); ?>
