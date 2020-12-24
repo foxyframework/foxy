@@ -197,7 +197,6 @@ class Html
                     $html .= '<div class="modal-header">';
                     $html .= '<h5 class="modal-title" id="exampleModalLabel">'.$field[$i]->modal_title.'</h5>';
                     $html .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">';
-                    $html .= '<span aria-hidden="true">&times;</span>';
                     $html .= '</button>';
                     $html .= '</div>';
                     $html .= '<div class="modal-body">';
