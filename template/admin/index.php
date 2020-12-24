@@ -92,7 +92,7 @@ $view  = application::getVar('view');
     <script src='<?= $script; ?>'></script>
     <?php endforeach;
     endif; ?>
-    <script src="<?= config::$site; ?>/template/system/js/admin.js"></script>
+    <script src="<?= config::$site; ?>/template/admin/js/admin.js"></script>
 
   </body>
 </html>
