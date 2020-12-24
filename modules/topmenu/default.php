@@ -19,7 +19,7 @@ include_once('helper.php');
       <div class="container">
         <div class="row">
           <div class="col-sm-8 col-md-7 py-4">
-            <h4 class="text-white">Menu</h4>
+            <h4 class="text-white"><?= language::get('FOXY_MENU_TITLE'); ?></h4>
             <ul class="list-unstyled">
               <?php foreach(topmenuHelper::getItems() as $item) : ?>
               <?php $item->translation != '' ? $title = language::get($item->translation) : $title = $item->title; ?>
@@ -39,7 +39,7 @@ include_once('helper.php');
             </ul>
           </div>
           <div class="col-sm-4 offset-md-1 py-4">
-            <h4 class="text-white">Contacto</h4>
+            <h4 class="text-white"><?= language::get('FOXY_MENU_CONTACT'); ?></h4>
             <ul class="list-unstyled">
               <li><a href="https://twitter.com/foxy_php" class="text-white" target="_blank"><i class="fab fa-twitter"></i> Follow on Twitter</a></li>
               <li><a href="#" class="text-white"><i class="fas fa-envelope"></i> Email me</a></li>
