@@ -74,46 +74,29 @@ function getParameterByName(name) {
 
 document.addEventListener("DOMContentLoaded", function() {
 
-	if(document.getElementById('editor')) { const editor = CKEDITOR.replaceAll( 'editor' ); }
-	if(document.getElementById('upload')) { Dropzone.autoDiscover = false; }
-
-	var media = document.getElementById("media");
-		if(typeof(media) != 'undefined' && media != null) {
-			var macy = Macy({
-				container: '#media',
-				trueOrder: false,
-				waitForImages: false,
-				margin: 24,
-				columns: 6,
-				breakAt: {
-					1200: 5,
-					940: 3,
-					520: 2,
-					400: 1
-			}
-		});
-	}
-
-	//init dropzone to upload files
-	if(document.getElementById('upload')) {
-		let myDropzone = new Dropzone(".dropzone", { url: domain+"?task=media.upload&mode=raw"});
-		myDropzone.on("complete", function (file) {
-			if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
-				macy.recalculate();
-			}
-		});
-	}
-
-	//click image in media field
-	document.querySelectorAll('.img-selector').forEach(item => {
+	//click lang options create cookie
+	document.querySelectorAll('.lang').forEach(item => {
 		item.addEventListener('click', evt => {
-			let src = evt.currentTarget.src;
-			let id = evt.currentTarget.getAttribute('data-id');
-			let uniqid = evt.currentTarget.getAttribute('data-uniqid');
-			document.getElementById(id).value = src;
-			var myModal = new bootstrap.Modal(document.getElementById(uniqid+'Modal'));
-			myModal.hide();
+			evt.preventDefault();
+			let lang = evt.target.dataset.lang;
+			var xhttp;
+			xhttp= new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					window.location.reload();
+				}
+			};
+			xhttp.open('GET', domain+'?task=register.setCookie&lang='+lang+'&mode=raw', true);
+			xhttp.send();
 		})
 	});
+
+	document.querySelectorAll('.closeModal').forEach(item => {
+		item.addEventListener('click', evt => {
+			let id = evt.currentTarget.getAttribute('data-id');
+			var myModal = new bootstrap.Modal(document.getElementById(id));
+			myModal.hide();
+		})
+	});		  
 	  
 });
